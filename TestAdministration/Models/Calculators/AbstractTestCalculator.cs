@@ -5,25 +5,36 @@ namespace TestAdministration.Models.Calculators;
 /// </summary>
 public abstract class AbstractTestCalculator : ITestCalculator
 {
-    public float SdScore(float value, int section, bool isMale, int age, bool isRightDominant)
+    public float SdScore(float value, int section, Patient patient)
     {
-        var norm = GetNorm(section, isMale, age, isRightDominant);
+        var norm = GetNorm(section, patient);
         return (value - norm.Average) / norm.Sd;
     }
 
-    public float NormDifference(float value, int section, bool isMale, int age, bool isRightDominant)
+    public float NormDifference(float value, int section, Patient patient)
     {
-        var norm = GetNorm(section, isMale, age, isRightDominant);
+        var norm = GetNorm(section, patient);
         return value - norm.Average;
+    }
+
+    public int Age(Patient patient)
+    {
+        var today = DateTime.Today;
+        var age = today.Year - patient.BirthDate.Year;
+        if (today.Month < patient.BirthDate.Month ||
+            (today.Month == patient.BirthDate.Month && today.Day < patient.BirthDate.Day))
+        {
+            age--;
+        }
+
+        return age;
     }
 
     /// <summary>
     /// Get corresponding norm values.
     /// </summary>
     /// <param name="section">Test's section number starting from zero.</param>
-    /// <param name="isMale">Is true if the patient is male.</param>
-    /// <param name="age">The patient's age.</param>
-    /// <param name="isRightDominant">Is true if the patient's dominant hand is right.</param>
+    /// <param name="patient">The tested patient.</param>
     /// <returns>A corresponding <c>TestNorm</c>.</returns>
-    protected abstract TestNorm GetNorm(int section, bool isMale, int age, bool isRightDominant);
+    protected abstract TestNorm GetNorm(int section, Patient patient);
 }

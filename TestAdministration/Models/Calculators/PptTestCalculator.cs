@@ -11,10 +11,10 @@ public class PptTestCalculator : AbstractTestCalculator
     private static readonly TestNorm SumNorm = new(4.04f, 47.76f);
     private static readonly TestNorm AssemblyNorm = new(5.89f, 39.30f);
 
-    protected override TestNorm GetNorm(int section, bool isMale, int age, bool isRightDominant) => section switch
+    protected override TestNorm GetNorm(int section, Patient patient) => section switch
     {
-        0 => isRightDominant ? RightHandNorm : LeftHandNorm,
-        1 => isRightDominant ? LeftHandNorm : RightHandNorm,
+        0 => patient.DominantHand == Hand.Right ? RightHandNorm : LeftHandNorm,
+        1 => patient.DominantHand == Hand.Right ? LeftHandNorm : RightHandNorm,
         2 => BothHandsNorm,
         3 => SumNorm,
         4 => AssemblyNorm,

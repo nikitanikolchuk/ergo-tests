@@ -69,7 +69,7 @@ public class NhptTestCalculator : AbstractTestCalculator
         { 75, new TestNorm(4.3f, 24.6f) }
     };
 
-    protected override TestNorm GetNorm(int section, bool isMale, int age, bool isRightDominant)
+    protected override TestNorm GetNorm(int section, Patient patient)
     {
         if (section != 0 && section != 1)
         {
@@ -80,11 +80,12 @@ public class NhptTestCalculator : AbstractTestCalculator
             );
         }
 
+        var age = Age(patient);
         ArgumentOutOfRangeException.ThrowIfLessThan(age, 20);
 
         var isDominant = section == 0;
         SortedDictionary<int, TestNorm> normDictionary;
-        if (isMale)
+        if (patient.IsMale)
         {
             normDictionary = isDominant ? MaleDominantNorms : MaleNonDominantNorms;
         }
