@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// <c>ITestBuilder</c> implementation for Purdue Pegboard Test.

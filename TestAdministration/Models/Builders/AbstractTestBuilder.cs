@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// Base implementation of <c>ITestBuilder</c> interface.

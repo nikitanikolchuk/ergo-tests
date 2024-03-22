@@ -1,4 +1,4 @@
-﻿namespace TestAdministration.Models;
+﻿namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// <c>ITestBuilder</c> implementation for Nine Hole Peg Test.

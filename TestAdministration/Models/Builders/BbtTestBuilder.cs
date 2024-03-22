@@ -1,4 +1,4 @@
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// <c>ITesBuilder</c> implementation for Box and Block Test.
