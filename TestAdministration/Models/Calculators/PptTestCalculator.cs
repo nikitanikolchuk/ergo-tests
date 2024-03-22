@@ -8,7 +8,7 @@ public class PptTestCalculator : AbstractTestCalculator
     private static readonly TestNorm RightHandNorm = new(1.79f, 17.15f);
     private static readonly TestNorm LeftHandNorm = new(1.70f, 16.01f);
     private static readonly TestNorm BothHandsNorm = new(1.55f, 13.79f);
-    private static readonly TestNorm SumNorm = new(4.04f, 47.76f);
+    private static readonly TestNorm TotalNorm = new(4.04f, 47.76f);
     private static readonly TestNorm AssemblyNorm = new(5.89f, 39.30f);
 
     protected override TestNorm GetNorm(int section, Patient patient) => section switch
@@ -16,7 +16,7 @@ public class PptTestCalculator : AbstractTestCalculator
         0 => patient.DominantHand == Hand.Right ? RightHandNorm : LeftHandNorm,
         1 => patient.DominantHand == Hand.Right ? LeftHandNorm : RightHandNorm,
         2 => BothHandsNorm,
-        3 => SumNorm,
+        3 => TotalNorm,
         4 => AssemblyNorm,
         _ => throw new ArgumentOutOfRangeException(
             nameof(section),
