@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using TestAdministration.Models.Calculators;
 
 namespace TestAdministration.Models.Builders;
 
@@ -7,8 +8,13 @@ namespace TestAdministration.Models.Builders;
 /// Additionally creates a test section that contains sums of
 /// values from first 3 sections.
 /// </summary>
-public class PptTestBuilder : AbstractTestBuilder
+public class PptTestBuilder(
+    ITestCalculator testCalculator,
+    Patient patient
+) : AbstractTestBuilder(testCalculator, patient)
 {
+    private const int TotalSection = 3;
+    
     protected override int SectionCount => 4;
     protected override int TrialCount => 3;
 
@@ -16,7 +22,7 @@ public class PptTestBuilder : AbstractTestBuilder
     {
         var sumTrials = trials.Take(SectionCount - 1).Aggregate(_trialSum);
         var totalTrials = new List<List<TestTrial>>(trials);
-        totalTrials.Insert(SectionCount - 1, sumTrials);
+        totalTrials.Insert(TotalSection, sumTrials);
 
         return base.BuildSections(totalTrials);
     }
@@ -37,7 +43,7 @@ public class PptTestBuilder : AbstractTestBuilder
             }
 
             var sum = trials[i].Value + second[i].Value ?? second[i].Value;
-            trials[i] = new TestTrial(sum, null);
+            trials[i] = BuildTrial(sum, null, TotalSection);
         }
 
         return trials;

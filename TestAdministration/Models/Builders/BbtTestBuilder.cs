@@ -1,9 +1,14 @@
+using TestAdministration.Models.Calculators;
+
 namespace TestAdministration.Models.Builders;
 
 /// <summary>
-/// <c>ITesBuilder</c> implementation for Box and Block Test.
+/// <c>ITestBuilder</c> implementation for Box and Block Test.
 /// </summary>
-public class BbtTestBuilder : AbstractTestBuilder
+public class BbtTestBuilder(
+    ITestCalculator testCalculator,
+    Patient patient
+) : AbstractTestBuilder(testCalculator, patient)
 {
     protected override int SectionCount => 2;
     protected override int TrialCount => 4;

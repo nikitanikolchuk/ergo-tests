@@ -1,11 +1,15 @@
 ﻿using System.Collections.Immutable;
+using TestAdministration.Models.Calculators;
 
 namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// Base implementation of <c>ITestBuilder</c> interface.
 /// </summary>
-public abstract class AbstractTestBuilder : ITestBuilder
+public abstract class AbstractTestBuilder(
+    ITestCalculator testCalculator,
+    Patient patient
+) : ITestBuilder
 {
     private string? _tester;
     private DateOnly? _date;
@@ -16,7 +20,7 @@ public abstract class AbstractTestBuilder : ITestBuilder
     public int CurrentSection => _trials.Count - 1;
     public int CurrentTrial => _trials.Last().Count;
     public bool IsFinished => _trials.Count == SectionCount && CurrentTrial == TrialCount;
-    
+
     /// <value>
     /// Number of sections to be added.
     /// </value>
@@ -63,7 +67,7 @@ public abstract class AbstractTestBuilder : ITestBuilder
             _trials.Add([]);
         }
 
-        var trial = new TestTrial(value, note);
+        var trial = BuildTrial(value, note, CurrentSection);
         _trials.Last().Add(trial);
 
         return this;
@@ -114,6 +118,45 @@ public abstract class AbstractTestBuilder : ITestBuilder
     /// <returns>An immutable list of <c>TestSection</c> objects.</returns>
     protected virtual ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials) =>
         trials.Select(trialList =>
-            new TestSection(trialList.ToImmutableList())
+            {
+                var values = trialList.Select(t => t.Value);
+                var sdScores = trialList.Select(t => t.SdScore);
+                var normDifferences = trialList.Select(t => t.NormDifference);
+
+                return new TestSection(
+                    _nullableAverage(values),
+                    _nullableAverage(sdScores),
+                    _nullableAverage(normDifferences),
+                    trialList.ToImmutableList()
+                );
+            }
         ).ToImmutableList();
+
+    /// <summary>
+    /// Creates a test trial from an added value. May be used by
+    /// child classes for additional sections.
+    /// </summary>
+    /// <param name="value">Trial's value.</param>
+    /// <param name="note">Trial's note.</param>
+    /// <param name="section">
+    /// Section number starting from 0.
+    /// Used for calculating comparison values.
+    /// </param>
+    /// <returns>A new TestTrial.</returns>
+    protected TestTrial BuildTrial(float? value, string? note, int section)
+    {
+        float? sdScore = value.HasValue
+            ? testCalculator.SdScore(value.Value, section, patient)
+            : null;
+        float? normDifference = value.HasValue
+            ? testCalculator.NormDifference(value.Value, section, patient)
+            : null;
+        return new TestTrial(value, sdScore, normDifference, note);
+    }
+
+    private static float? _nullableAverage(IEnumerable<float?> values)
+    {
+        var nonNullValues = values.Where(v => v.HasValue).ToList();
+        return nonNullValues.Count > 0 ? nonNullValues.Average() : null;
+    }
 }
