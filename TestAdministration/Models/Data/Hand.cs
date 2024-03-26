@@ -1,4 +1,4 @@
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Data;
 
 /// <summary>
 /// An enum for specifying patients' dominant or pathological hands.

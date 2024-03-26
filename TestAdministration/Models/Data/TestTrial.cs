@@ -1,4 +1,4 @@
-﻿namespace TestAdministration.Models;
+﻿namespace TestAdministration.Models.Data;
 
 /// <summary>
 /// An immutable class for storing a single test value with an

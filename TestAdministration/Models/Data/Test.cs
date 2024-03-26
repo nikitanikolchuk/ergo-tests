@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Data;
 
 /// <summary>
 /// An immutable class representing a single test entry.

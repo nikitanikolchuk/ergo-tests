@@ -1,4 +1,4 @@
-namespace TestAdministration.Models;
+namespace TestAdministration.Models.Data;
 
 /// <summary>
 /// An immutable class representing a Patient.

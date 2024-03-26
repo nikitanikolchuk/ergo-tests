@@ -1,4 +1,6 @@
-﻿namespace TestAdministration.Models.Builders;
+﻿using TestAdministration.Models.Data;
+
+namespace TestAdministration.Models.Builders;
 
 /// <summary>
 /// An interface for step-by-step addition of test values.
