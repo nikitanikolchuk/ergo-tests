@@ -6,7 +6,7 @@ namespace TestAdministration.Models.Builders;
 /// <c>ITestBuilder</c> implementation for Box and Block Test.
 /// </summary>
 public class BbtTestBuilder(
-    ITestCalculator testCalculator,
+    TestCalculator testCalculator,
     Patient patient
 ) : AbstractTestBuilder(testCalculator, patient)
 {

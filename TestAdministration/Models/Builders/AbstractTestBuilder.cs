@@ -7,7 +7,7 @@ namespace TestAdministration.Models.Builders;
 /// Base implementation of <c>ITestBuilder</c> interface.
 /// </summary>
 public abstract class AbstractTestBuilder(
-    ITestCalculator testCalculator,
+    TestCalculator testCalculator,
     Patient patient
 ) : ITestBuilder
 {

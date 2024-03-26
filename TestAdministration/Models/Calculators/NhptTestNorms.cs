@@ -1,9 +1,9 @@
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// <c>ITestCalculator</c> implementation for Nine Hole Peg Test.
+/// <c>ITestNorms</c> implementation for Nine Hole Peg Test.
 /// </summary>
-public class NhptTestCalculator : AbstractTestCalculator
+public class NhptTestNorms : ITestNorms
 {
     private static readonly SortedDictionary<int, TestNorm> MaleDominantNorms = new()
     {
@@ -69,7 +69,7 @@ public class NhptTestCalculator : AbstractTestCalculator
         { 75, new TestNorm(4.3f, 24.6f) }
     };
 
-    protected override TestNorm GetNorm(int section, Patient patient)
+    public TestNorm Get(int section, Patient patient, int age)
     {
         if (section != 0 && section != 1)
         {
@@ -80,7 +80,6 @@ public class NhptTestCalculator : AbstractTestCalculator
             );
         }
 
-        var age = Age(patient);
         ArgumentOutOfRangeException.ThrowIfLessThan(age, 20);
 
         var isDominant = section == 0;

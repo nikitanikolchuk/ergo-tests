@@ -9,7 +9,7 @@ namespace TestAdministration.Models.Builders;
 /// values from first 3 sections.
 /// </summary>
 public class PptTestBuilder(
-    ITestCalculator testCalculator,
+    TestCalculator testCalculator,
     Patient patient
 ) : AbstractTestBuilder(testCalculator, patient)
 {

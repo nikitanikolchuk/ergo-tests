@@ -1,9 +1,9 @@
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// <c>ITestCalculator</c> implementation for Purdue Pegboard Test.
+/// <c>ITestNorms</c> implementation for Purdue Pegboard Test.
 /// </summary>
-public class PptTestCalculator : AbstractTestCalculator
+public class PptTestNorms : ITestNorms
 {
     private static readonly TestNorm RightHandNorm = new(1.79f, 17.15f);
     private static readonly TestNorm LeftHandNorm = new(1.70f, 16.01f);
@@ -11,7 +11,7 @@ public class PptTestCalculator : AbstractTestCalculator
     private static readonly TestNorm TotalNorm = new(4.04f, 47.76f);
     private static readonly TestNorm AssemblyNorm = new(5.89f, 39.30f);
 
-    protected override TestNorm GetNorm(int section, Patient patient) => section switch
+    public TestNorm Get(int section, Patient patient, int age) => section switch
     {
         0 => patient.DominantHand == Hand.Right ? RightHandNorm : LeftHandNorm,
         1 => patient.DominantHand == Hand.Right ? LeftHandNorm : RightHandNorm,

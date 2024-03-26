@@ -6,7 +6,7 @@ namespace TestAdministration.Models.Builders;
 /// <c>ITestBuilder</c> implementation for Nine Hole Peg Test.
 /// </summary>
 public class NhptTestBuilder(
-    ITestCalculator testCalculator,
+    TestCalculator testCalculator,
     Patient patient
 ) : AbstractTestBuilder(testCalculator, patient)
 {
