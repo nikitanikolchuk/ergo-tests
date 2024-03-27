@@ -5,22 +5,22 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Builders;
 
 /// <summary>
-/// <c>ITestBuilder</c> implementation for Purdue Pegboard Test.
+/// <c>ITestSectionBuilder</c> implementation for Purdue Pegboard Test.
 /// Additionally creates a test section that contains sums of
 /// values from first 3 sections.
 /// </summary>
-public class PptTestBuilder(
+public class PptTestSectionBuilder(
     TestCalculator testCalculator,
     Patient patient
-) : AbstractTestBuilder(testCalculator, patient)
+) : AbstractTestSectionBuilder(testCalculator, patient)
 {
     private const int TotalSection = 3;
 
-    protected override TestType Type => TestType.Ppt;
-    protected override int SectionCount => 4;
-    protected override int TrialCount => 3;
+    public override TestType Type => TestType.Ppt;
+    public override int SectionCount => 4;
+    public override int TrialCount => 3;
 
-    protected override ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials)
+    public override ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials)
     {
         var sumTrials = trials.Take(SectionCount - 1).Aggregate(_trialSum);
         var totalTrials = new List<List<TestTrial>>(trials);
