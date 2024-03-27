@@ -11,6 +11,7 @@ public class BbtTestBuilder(
     Patient patient
 ) : AbstractTestBuilder(testCalculator, patient)
 {
+    protected override TestType Type => TestType.Bbt;
     protected override int SectionCount => 2;
     protected override int TrialCount => 4;
 }

@@ -22,6 +22,11 @@ public abstract class AbstractTestBuilder(
     public int CurrentTrial => _trials.Last().Count;
     public bool IsFinished => _trials.Count == SectionCount && CurrentTrial == TrialCount;
 
+    /// <summary>
+    /// The test's type.
+    /// </summary>
+    protected abstract TestType Type { get; }
+
     /// <value>
     /// Number of sections to be added.
     /// </value>
@@ -104,6 +109,7 @@ public abstract class AbstractTestBuilder(
         var sections = BuildSections(_trials);
 
         return new Test(
+            Type,
             _tester,
             _date.Value,
             _startTime.Value,

@@ -11,6 +11,7 @@ namespace TestAdministration.Models.Data;
 /// <param name="EndTime">Test's end time.</param>
 /// <param name="Sections">An immutable list of test sections.</param>
 public record Test(
+    TestType Type,
     string Tester,
     DateOnly Date,
     TimeOnly StartTime,

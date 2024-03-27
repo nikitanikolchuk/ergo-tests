@@ -11,6 +11,7 @@ public class NhptTestBuilder(
     Patient patient
 ) : AbstractTestBuilder(testCalculator, patient)
 {
+    protected override TestType Type => TestType.Nhpt;
     protected override int SectionCount => 2;
     protected override int TrialCount => 4;
 }

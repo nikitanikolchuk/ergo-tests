@@ -15,7 +15,8 @@ public class PptTestBuilder(
 ) : AbstractTestBuilder(testCalculator, patient)
 {
     private const int TotalSection = 3;
-    
+
+    protected override TestType Type => TestType.Ppt;
     protected override int SectionCount => 4;
     protected override int TrialCount => 3;
 
