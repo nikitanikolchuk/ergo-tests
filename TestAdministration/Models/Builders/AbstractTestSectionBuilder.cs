@@ -18,10 +18,10 @@ public abstract class AbstractTestSectionBuilder(
 
     public TestTrial BuildTrial(float? value, string? note, int section, Patient patient)
     {
-        float? sdScore = value.HasValue
+        float? sdScore = value != null
             ? testCalculator.SdScore(value.Value, section, patient)
             : null;
-        float? normDifference = value.HasValue
+        float? normDifference = value != null
             ? testCalculator.NormDifference(value.Value, section, patient)
             : null;
         return new TestTrial(value, sdScore, normDifference, note);
@@ -45,7 +45,7 @@ public abstract class AbstractTestSectionBuilder(
 
     private static float? _nullableAverage(IEnumerable<float?> values)
     {
-        var nonNullValues = values.Where(v => v.HasValue).ToList();
+        var nonNullValues = values.Where(v => v != null).ToList();
         return nonNullValues.Count > 0 ? nonNullValues.Average() : null;
     }
 }

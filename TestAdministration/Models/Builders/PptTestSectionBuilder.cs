@@ -40,7 +40,7 @@ public class PptTestSectionBuilder(
         var trials = new List<TestTrial>(first);
         for (var i = 0; i < TrialCount; i++)
         {
-            if (!second[i].Value.HasValue)
+            if (second[i].Value == null)
             {
                 continue;
             }

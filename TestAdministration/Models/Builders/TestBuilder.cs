@@ -90,17 +90,17 @@ public class TestBuilder(
             throw new InvalidOperationException("Tester's name was not set or is empty");
         }
 
-        if (!_date.HasValue)
+        if (_date == null)
         {
             throw new InvalidOperationException("Test date was not set");
         }
 
-        if (!_startTime.HasValue)
+        if (_startTime == null)
         {
             throw new InvalidOperationException("Test start time was not set");
         }
 
-        if (!_endTime.HasValue)
+        if (_endTime == null)
         {
             throw new InvalidOperationException("Test end time was not set");
         }
