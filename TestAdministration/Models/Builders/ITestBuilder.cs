@@ -23,6 +23,13 @@ public interface ITestBuilder
     bool IsFinished { get; }
 
     /// <summary>
+    /// Sets the tested patient for calculating comparison values.
+    /// </summary>
+    /// <param name="patient">The tested patient.</param>
+    /// <returns>The updated builder instance.</returns>
+    ITestBuilder SetPatient(Patient patient);
+
+    /// <summary>
     /// Sets tester's name.
     /// </summary>
     /// <param name="tester">The tester's name.</param>

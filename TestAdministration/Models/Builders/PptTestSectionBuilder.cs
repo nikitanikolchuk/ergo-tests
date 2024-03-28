@@ -10,9 +10,8 @@ namespace TestAdministration.Models.Builders;
 /// values from first 3 sections.
 /// </summary>
 public class PptTestSectionBuilder(
-    TestCalculator testCalculator,
-    Patient patient
-) : AbstractTestSectionBuilder(testCalculator, patient)
+    TestCalculator testCalculator
+) : AbstractTestSectionBuilder(testCalculator)
 {
     private const int TotalSection = 3;
 
@@ -20,16 +19,18 @@ public class PptTestSectionBuilder(
     public override int SectionCount => 4;
     public override int TrialCount => 3;
 
-    public override ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials)
+    public override ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials, Patient patient)
     {
-        var sumTrials = trials.Take(SectionCount - 1).Aggregate(_trialSum);
+        var sumTrials = trials
+            .Take(SectionCount - 1)
+            .Aggregate((l1, l2) => _trialSum(l1, l2, patient));
         var totalTrials = new List<List<TestTrial>>(trials);
         totalTrials.Insert(TotalSection, sumTrials);
 
-        return base.BuildSections(totalTrials);
+        return base.BuildSections(totalTrials, patient);
     }
 
-    private List<TestTrial> _trialSum(List<TestTrial> first, List<TestTrial> second)
+    private List<TestTrial> _trialSum(List<TestTrial> first, List<TestTrial> second, Patient patient)
     {
         if (first.Count != TrialCount || second.Count != TrialCount)
         {
@@ -45,7 +46,7 @@ public class PptTestSectionBuilder(
             }
 
             var sum = trials[i].Value + second[i].Value ?? second[i].Value;
-            trials[i] = BuildTrial(sum, null, TotalSection);
+            trials[i] = BuildTrial(sum, null, TotalSection, patient);
         }
 
         return trials;

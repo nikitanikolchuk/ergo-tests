@@ -11,6 +11,7 @@ public class TestBuilder(
     ITestSectionBuilder sectionBuilder
 ) : ITestBuilder
 {
+    private Patient? _patient;
     private string? _tester;
     private DateOnly? _date;
     private TimeOnly? _startTime;
@@ -23,6 +24,12 @@ public class TestBuilder(
     public bool IsFinished =>
         _trials.Count == sectionBuilder.SectionCount &&
         CurrentTrial == sectionBuilder.TrialCount;
+
+    public ITestBuilder SetPatient(Patient patient)
+    {
+        _patient = patient;
+        return this;
+    }
 
     public ITestBuilder SetTester(string tester)
     {
@@ -50,6 +57,11 @@ public class TestBuilder(
 
     public ITestBuilder AddValue(float? value, string? note)
     {
+        if (_patient == null)
+        {
+            throw new InvalidOperationException("The tested patient was not set");
+        }
+
         if (IsFinished)
         {
             throw new InvalidOperationException("All test values were already set");
@@ -60,7 +72,7 @@ public class TestBuilder(
             _trials.Add([]);
         }
 
-        var trial = sectionBuilder.BuildTrial(value, note, CurrentSection);
+        var trial = sectionBuilder.BuildTrial(value, note, CurrentSection, _patient);
         _trials.Last().Add(trial);
 
         return this;
@@ -68,6 +80,11 @@ public class TestBuilder(
 
     public Test Build()
     {
+        if (_patient == null)
+        {
+            throw new InvalidOperationException("The tested patient was not set");
+        }
+
         if (string.IsNullOrWhiteSpace(_tester))
         {
             throw new InvalidOperationException("Tester's name was not set or is empty");
@@ -93,7 +110,7 @@ public class TestBuilder(
             AddValue(null, null);
         }
 
-        var sections = sectionBuilder.BuildSections(_trials);
+        var sections = sectionBuilder.BuildSections(_trials, _patient);
 
         return new Test(
             sectionBuilder.Type,

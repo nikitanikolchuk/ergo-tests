@@ -8,17 +8,15 @@ namespace TestAdministration.Models.Builders;
 /// Base implementation of <c>ITestSectionBuilder</c> interface.
 /// </summary>
 /// <param name="testCalculator">A calculator for norm comparisons.</param>
-/// <param name="patient">The patient used for calculations.</param>
 public abstract class AbstractTestSectionBuilder(
-    TestCalculator testCalculator,
-    Patient patient
+    TestCalculator testCalculator
 ) : ITestSectionBuilder
 {
     public abstract TestType Type { get; }
     public abstract int SectionCount { get; }
     public abstract int TrialCount { get; }
 
-    public TestTrial BuildTrial(float? value, string? note, int section)
+    public TestTrial BuildTrial(float? value, string? note, int section, Patient patient)
     {
         float? sdScore = value.HasValue
             ? testCalculator.SdScore(value.Value, section, patient)
@@ -29,7 +27,7 @@ public abstract class AbstractTestSectionBuilder(
         return new TestTrial(value, sdScore, normDifference, note);
     }
 
-    public virtual ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials) =>
+    public virtual ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials, Patient patient) =>
         trials.Select(trialList =>
             {
                 var values = trialList.Select(t => t.Value);

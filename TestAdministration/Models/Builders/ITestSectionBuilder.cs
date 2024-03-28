@@ -33,13 +33,15 @@ public interface ITestSectionBuilder
     /// Section number starting from 0.
     /// Used for calculating comparison values.
     /// </param>
+    /// <param name="patient">The patient for calculating comparison values.</param>
     /// <returns>A new TestTrial.</returns>
-    TestTrial BuildTrial(float? value, string? note, int section);
+    TestTrial BuildTrial(float? value, string? note, int section, Patient patient);
 
     /// <summary>
     /// Creates test sections from added values.
     /// </summary>
     /// <param name="trials">2D list of added test values.</param>
+    /// <param name="patient">The patient for calculating comparison values.</param>
     /// <returns>An immutable list of <c>TestSection</c> objects.</returns>
-    ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials);
+    ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials, Patient patient);
 }

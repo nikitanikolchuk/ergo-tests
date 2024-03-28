@@ -7,9 +7,8 @@ namespace TestAdministration.Models.Builders;
 /// <c>ITestSectionBuilder</c> implementation for Box and Block Test.
 /// </summary>
 public class BbtTestSectionBuilder(
-    TestCalculator testCalculator,
-    Patient patient
-) : AbstractTestSectionBuilder(testCalculator, patient)
+    TestCalculator testCalculator
+) : AbstractTestSectionBuilder(testCalculator)
 {
     public override TestType Type => TestType.Bbt;
     public override int SectionCount => 2;
