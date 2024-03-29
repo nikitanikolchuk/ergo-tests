@@ -5,7 +5,7 @@ namespace TestAdministration.Models.Calculators;
 /// <summary>
 /// <c>ITestNorms</c> implementation for Nine Hole Peg Test.
 /// </summary>
-public class NhptTestNorms : ITestNorms
+public class NhptTestNormProvider : ITestNormProvider
 {
     private static readonly SortedDictionary<int, TestNorm> MaleDominantNorms = new()
     {

@@ -7,8 +7,8 @@ namespace TestAdministration.Models.Builders;
 /// <c>ITestSectionBuilder</c> implementation for Nine Hole Peg Test.
 /// </summary>
 public class NhptTestSectionBuilder(
-    TestCalculator testCalculator
-) : AbstractTestSectionBuilder(testCalculator)
+    ITestCalculator<NhptTestNormProvider> testCalculator
+) : AbstractTestSectionBuilder<NhptTestNormProvider>(testCalculator)
 {
     public override TestType Type => TestType.Nhpt;
     public override int SectionCount => 2;

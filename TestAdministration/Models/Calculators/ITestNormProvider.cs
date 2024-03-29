@@ -3,9 +3,9 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// An interface for a read only collection of test norms.
+/// An interface for getting test specific norms.
 /// </summary>
-public interface ITestNorms
+public interface ITestNormProvider
 {
     /// <summary>
     /// Get corresponding norm values.

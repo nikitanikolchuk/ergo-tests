@@ -10,8 +10,8 @@ namespace TestAdministration.Models.Builders;
 /// values from first 3 sections.
 /// </summary>
 public class PptTestSectionBuilder(
-    TestCalculator testCalculator
-) : AbstractTestSectionBuilder(testCalculator)
+    ITestCalculator<PptTestNormProvider> testCalculator
+) : AbstractTestSectionBuilder<PptTestNormProvider>(testCalculator)
 {
     private const int TotalSection = 3;
 

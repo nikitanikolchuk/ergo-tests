@@ -5,7 +5,7 @@ namespace TestAdministration.Models.Calculators;
 /// <summary>
 /// <c>ITestNorms</c> implementation for Box and Block Test.
 /// </summary>
-public class BbtTestNorms : ITestNorms
+public class BbtTestNormProvider : ITestNormProvider
 {
     private static readonly SortedDictionary<int, TestNorm> MaleDominantNorms = new()
     {

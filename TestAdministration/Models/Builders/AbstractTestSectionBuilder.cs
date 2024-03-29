@@ -8,9 +8,9 @@ namespace TestAdministration.Models.Builders;
 /// Base implementation of <c>ITestSectionBuilder</c> interface.
 /// </summary>
 /// <param name="testCalculator">A calculator for norm comparisons.</param>
-public abstract class AbstractTestSectionBuilder(
-    TestCalculator testCalculator
-) : ITestSectionBuilder
+public abstract class AbstractTestSectionBuilder<T>(
+    ITestCalculator<T> testCalculator
+) : ITestSectionBuilder where T : ITestNormProvider
 {
     public abstract TestType Type { get; }
     public abstract int SectionCount { get; }

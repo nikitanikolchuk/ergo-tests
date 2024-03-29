@@ -5,7 +5,7 @@ namespace TestAdministration.Models.Calculators;
 /// <summary>
 /// <c>ITestNorms</c> implementation for Purdue Pegboard Test.
 /// </summary>
-public class PptTestNorms : ITestNorms
+public class PptTestNormProvider : ITestNormProvider
 {
     private static readonly TestNorm RightHandNorm = new(1.79f, 17.15f);
     private static readonly TestNorm LeftHandNorm = new(1.70f, 16.01f);

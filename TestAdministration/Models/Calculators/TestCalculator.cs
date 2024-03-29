@@ -3,41 +3,25 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// An interface for calculating values used in tests.
+/// An implementation of <c>ITestCalculator</c>.
 /// </summary>
-public class TestCalculator(ITestNorms norms)
+public class TestCalculator<T>(
+    T normProvider
+) : ITestCalculator<T> where T : ITestNormProvider
 {
-    /// <summary>
-    /// Calculates Standard Deviation Score for a test value.
-    /// </summary>
-    /// <param name="value">The measured test value.</param>
-    /// <param name="section">Test's section number starting from zero.</param>
-    /// <param name="patient">The tested patient.</param>
-    /// <returns>The calculated Standard Deviation Score.</returns>
     public float SdScore(float value, int section, Patient patient)
     {
-        var norm = norms.Get(section, patient, Age(patient));
+        var norm = normProvider.Get(section, patient, _age(patient));
         return (value - norm.Average) / norm.Sd;
     }
 
-    /// <summary>
-    /// Calculates difference between a measured value and
-    /// corresponding average value.
-    /// </summary>
-    /// <param name="value">The measured test value.</param>
-    /// <param name="section">Test's section number starting from zero.</param>
-    /// <param name="patient">The tested patient.</param>
-    /// <returns>The calculated difference between values.</returns>
     public float NormDifference(float value, int section, Patient patient)
     {
-        var norm = norms.Get(section, patient, Age(patient));
+        var norm = normProvider.Get(section, patient, _age(patient));
         return value - norm.Average;
     }
 
-    /// <summary>
-    /// Calculates a patient's age using current date.
-    /// </summary>
-    public static int Age(Patient patient)
+    private static int _age(Patient patient)
     {
         var today = DateTime.Today;
         var age = today.Year - patient.BirthDate.Year;
