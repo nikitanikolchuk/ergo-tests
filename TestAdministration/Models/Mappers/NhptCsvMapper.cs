@@ -24,22 +24,23 @@ public sealed class NhptCsvMapper : ClassMap<Test>
 
     public NhptCsvMapper()
     {
-        Map(t => t.Tester).Name("Testujici");
-        Map(t => t.Date).Name("Datum").Convert(args =>
-            args.Value.Date.ToString(DateFormat)
-        );
-        Map(t => t.StartTime).Name("Cas_zahajeni").Convert(args =>
-            args.Value.StartTime.ToString(TimeFormat)
-        );
-        Map(t => t.EndTime).Name("Cas_zakonceni").Convert(args =>
-            args.Value.StartTime.ToString(TimeFormat)
-        );
+        Map(t => t.Tester)
+            .Name("Testujici");
+        Map(t => t.Date)
+            .Name("Datum")
+            .Convert(args => args.Value.Date.ToString(DateFormat));
+        Map(t => t.StartTime)
+            .Name("Cas_zahajeni")
+            .Convert(args => args.Value.StartTime.ToString(TimeFormat));
+        Map(t => t.EndTime)
+            .Name("Cas_zakonceni")
+            .Convert(args => args.Value.StartTime.ToString(TimeFormat));
 
         _mapSections();
 
-        Map(t => t.Sections, false).Name("Poznamky").Convert(args =>
-            _createNotes(args.Value)
-        );
+        Map(t => t.Sections, false)
+            .Name("Poznamky")
+            .Convert(args => _createNotes(args.Value));
     }
 
     private static string _createNotes(Test test) =>
@@ -103,27 +104,32 @@ public sealed class NhptCsvMapper : ClassMap<Test>
         string namePostfix
     )
     {
-        _mapValue($"{namePrefix}_zkus{namePostfix}", t =>
-            trialValueSelector(t.Sections[section].Trials[0])
+        _mapValue(
+            $"{namePrefix}_zkus{namePostfix}", 
+            t => trialValueSelector(t.Sections[section].Trials[0])
         );
-        _mapValue($"{namePrefix}_1_pokus{namePostfix}", t =>
-            trialValueSelector(t.Sections[section].Trials[1])
+        _mapValue(
+            $"{namePrefix}_1_pokus{namePostfix}",
+            t => trialValueSelector(t.Sections[section].Trials[1])
         );
-        _mapValue($"{namePrefix}_2_pokus{namePostfix}", t =>
-            trialValueSelector(t.Sections[section].Trials[2])
+        _mapValue(
+            $"{namePrefix}_2_pokus{namePostfix}",
+            t => trialValueSelector(t.Sections[section].Trials[2])
         );
-        _mapValue($"{namePrefix}_3_pokus{namePostfix}", t =>
-            trialValueSelector(t.Sections[section].Trials[3])
+        _mapValue(
+            $"{namePrefix}_3_pokus{namePostfix}", 
+            t => trialValueSelector(t.Sections[section].Trials[3])
         );
-        _mapValue($"{namePrefix}_prumer{namePostfix}", t =>
-            averageValueSelector(t.Sections[section])
+        _mapValue(
+            $"{namePrefix}_prumer{namePostfix}",
+            t => averageValueSelector(t.Sections[section])
         );
     }
 
     private void _mapValue(string name, Func<Test, float?> valueSelector)
     {
-        Map(m => m.Sections, false).Name(name).Convert(args =>
-            FormatValue(valueSelector(args.Value))
-        );
+        Map(m => m.Sections, false)
+            .Name(name)
+            .Convert(args => FormatValue(valueSelector(args.Value)));
     }
 }

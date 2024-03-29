@@ -12,19 +12,20 @@ public sealed class PatientCsvMapper : ClassMap<Patient>
 {
     public PatientCsvMapper()
     {
-        Map(p => p.Id).Name("Rodne_cislo");
-        Map(p => p.IsMale).Name("Pohlavi").Convert(args =>
-            args.Value.IsMale ? "m" : "ž"
-        );
-        Map(p => p.BirthDate).Name("Datum_narozeni").Convert(args =>
-            args.Value.BirthDate.ToString(DateFormat)
-        );
-        Map(p => p.DominantHand).Name("Dominantni_HK").Convert(args =>
-            _handString(args.Value.DominantHand)
-        );
-        Map(p => p.PathologicalHand).Name("HK_s_patologii").Convert(args =>
-            _handString(args.Value.PathologicalHand)
-        );
+        Map(p => p.Id)
+            .Name("Rodne_cislo");
+        Map(p => p.IsMale)
+            .Name("Pohlavi")
+            .Convert(args => args.Value.IsMale ? "m" : "ž");
+        Map(p => p.BirthDate)
+            .Name("Datum_narozeni")
+            .Convert(args => args.Value.BirthDate.ToString(DateFormat));
+        Map(p => p.DominantHand)
+            .Name("Dominantni_HK")
+            .Convert(args => _handString(args.Value.DominantHand));
+        Map(p => p.PathologicalHand)
+            .Name("HK_s_patologii")
+            .Convert(args => _handString(args.Value.PathologicalHand));
     }
 
     private static string _handString(Hand hand) => hand switch
