@@ -4,17 +4,18 @@ using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
 using TestAdministration.Models.Data;
-using TestAdministration.Models.Mappers;
 
 namespace TestAdministration.Models.Exporters;
 
 /// <summary>
 /// An implementation of <c>ICsvExporter</c> for local storage.
 /// </summary>
-/// <param name="mapper">Test specific CSV mapper for <c>Test</c> objects.</param>
+/// <param name="patientMapper">CSV mapper for <c>Test</c> objects.</param>
+/// <param name="testMapper">Test specific CSV mapper for <c>Test</c> objects.</param>
 /// <param name="path">The path for application-wide test results directory.</param>
 public class LocalCsvExporter(
-    ClassMap<Test> mapper,
+    ClassMap<Patient> patientMapper,
+    ClassMap<Test> testMapper,
     string path
 ) : ICsvExporter
 {
@@ -43,21 +44,20 @@ public class LocalCsvExporter(
         return $"{surname}_{name}";
     }
 
-    private static void _exportPatient(Patient patient, string filePath)
+    private void _exportPatient(Patient patient, string filePath)
     {
         using var stream = File.Open(filePath, FileMode.CreateNew);
         using var writer = new StreamWriter(stream, new UTF8Encoding(true));
 
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            Delimiter = Delimiter
+            Delimiter = Delimiter,
+            HasHeaderRecord = true
         };
         using var csvWriter = new CsvWriter(writer, config);
+        csvWriter.Context.RegisterClassMap(patientMapper);
 
-        var record = PatientCsvMapper.ToCsvRecord(patient);
-        csvWriter.WriteHeader(typeof(PatientCsvRecord));
-        csvWriter.NextRecord();
-        csvWriter.WriteRecord(record);
+        csvWriter.WriteRecords([patient]);
     }
 
     private void _exportTest(Test test, string filePath)
@@ -72,7 +72,7 @@ public class LocalCsvExporter(
             HasHeaderRecord = !fileExisted
         };
         using var csvWriter = new CsvWriter(writer, config);
-        csvWriter.Context.RegisterClassMap(mapper);
+        csvWriter.Context.RegisterClassMap(testMapper);
 
         csvWriter.WriteRecords([test]);
     }

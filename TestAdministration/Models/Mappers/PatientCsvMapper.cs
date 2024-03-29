@@ -1,27 +1,31 @@
 using System.ComponentModel;
+using CsvHelper.Configuration;
 using TestAdministration.Models.Data;
 using static TestAdministration.Models.Mappers.CsvMapperConfiguration;
 
 namespace TestAdministration.Models.Mappers;
 
 /// <summary>
-/// A static class for mapping <c>Patient</c> objects to CSV records.
+/// <c>ClassMap</c> implementation for <c>Patient</c> objects.
 /// </summary>
-public static class PatientCsvMapper
+public sealed class PatientCsvMapper : ClassMap<Patient>
 {
-    /// <summary>
-    /// Maps <c>Patient</c> object to a CSV record and converts
-    /// all values to strings.
-    /// </summary>
-    /// <param name="patient">The patient data to convert.</param>
-    /// <returns>A CSV record containing the patient's data.</returns>
-    public static PatientCsvRecord ToCsvRecord(Patient patient) => new(
-        patient.Id,
-        patient.IsMale ? "m" : "ž",
-        patient.BirthDate.ToString(DateFormat),
-        _handString(patient.DominantHand),
-        _handString(patient.PathologicalHand)
-    );
+    public PatientCsvMapper()
+    {
+        Map(p => p.Id).Name("Rodne_cislo");
+        Map(p => p.IsMale).Name("Pohlavi").Convert(args =>
+            args.Value.IsMale ? "m" : "ž"
+        );
+        Map(p => p.BirthDate).Name("Datum_narozeni").Convert(args =>
+            args.Value.BirthDate.ToString(DateFormat)
+        );
+        Map(p => p.DominantHand).Name("Dominantni_HK").Convert(args =>
+            _handString(args.Value.DominantHand)
+        );
+        Map(p => p.PathologicalHand).Name("HK_s_patologii").Convert(args =>
+            _handString(args.Value.PathologicalHand)
+        );
+    }
 
     private static string _handString(Hand hand) => hand switch
     {
