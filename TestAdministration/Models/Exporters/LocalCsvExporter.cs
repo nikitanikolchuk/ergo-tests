@@ -11,11 +11,15 @@ namespace TestAdministration.Models.Exporters;
 /// <summary>
 /// An implementation of <c>ICsvExporter</c> for local storage.
 /// </summary>
+/// <param name="mapper">Test specific CSV mapper for <c>Test</c> objects.</param>
 /// <param name="path">The path for application-wide test results directory.</param>
 public class LocalCsvExporter(
+    ClassMap<Test> mapper,
     string path
 ) : ICsvExporter
 {
+    private const string Delimiter = ";";
+
     public void Export(Patient patient, Test test)
     {
         var patientDirectory = Path.Combine(path, _directoryName(patient));
@@ -46,7 +50,7 @@ public class LocalCsvExporter(
 
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            Delimiter = ";",
+            Delimiter = Delimiter
         };
         using var csvWriter = new CsvWriter(writer, config);
 
@@ -56,8 +60,20 @@ public class LocalCsvExporter(
         csvWriter.WriteRecord(record);
     }
 
-    private static void _exportTest(Test test, string filePath)
+    private void _exportTest(Test test, string filePath)
     {
-        throw new NotImplementedException();
+        var fileExisted = File.Exists(filePath);
+        using var stream = File.Open(filePath, FileMode.Append);
+        using var writer = new StreamWriter(stream, new UTF8Encoding(true));
+
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            Delimiter = Delimiter,
+            HasHeaderRecord = !fileExisted
+        };
+        using var csvWriter = new CsvWriter(writer, config);
+        csvWriter.Context.RegisterClassMap(mapper);
+
+        csvWriter.WriteRecords([test]);
     }
 }

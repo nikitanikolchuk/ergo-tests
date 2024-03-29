@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace TestAdministration.Models.Mappers;
 
 /// <summary>
@@ -6,4 +8,12 @@ namespace TestAdministration.Models.Mappers;
 public static class CsvMapperConfiguration
 {
     public const string DateFormat = "dd.MM.yyyy";
+    public const string TimeFormat = "HH:mm";
+
+    private const string FloatFormat = "0.##";
+
+    public static string FormatValue(float? value) =>
+        value != null
+            ? value.Value.ToString(FloatFormat, CultureInfo.GetCultureInfo("cz"))
+            : "";
 }
