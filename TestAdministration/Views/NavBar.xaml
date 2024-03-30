@@ -1,0 +1,22 @@
+<UserControl x:Class="TestAdministration.Views.NavBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="1080">
+    <DockPanel LastChildFill="False">
+        <Button DockPanel.Dock="Top" Height="40">Testování</Button>
+        <Button DockPanel.Dock="Top" Height="40">Devítikolíkový test</Button>
+        <Button DockPanel.Dock="Top" Height="40">Purdue Pegboard Test</Button>
+        <Button DockPanel.Dock="Top" Height="40">Box and Block Test</Button>
+        <Button DockPanel.Dock="Top" Height="40">Výsledky</Button>
+        <Button DockPanel.Dock="Top" Height="40">Manuály</Button>
+        <Button DockPanel.Dock="Top" Height="40">Textové manuály</Button>
+        <Button DockPanel.Dock="Top" Height="40">Videomanuály</Button>
+        <Button DockPanel.Dock="Bottom" Height="40">Odhlášení</Button>
+        <Button DockPanel.Dock="Bottom" Height="40">Nastavení</Button>
+        <Button DockPanel.Dock="Bottom" Height="40">Návod k použití</Button>
+    </DockPanel>
+</UserControl>
