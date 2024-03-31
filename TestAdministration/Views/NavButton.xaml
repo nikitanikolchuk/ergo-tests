@@ -12,5 +12,9 @@
                 Binding Text,
                 RelativeSource={RelativeSource AncestorType=views:NavButton}
             }"
+            Command="{
+                Binding Command,
+                RelativeSource={RelativeSource AncestorType=views:NavButton}
+            }"
             Click="OnClick" />
 </UserControl>

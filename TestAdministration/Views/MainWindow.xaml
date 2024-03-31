@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:TestAdministration.Views"
+        xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
         Title="Administrace testů"
         Width="800"
         Height="450"
         WindowState="Maximized"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         d:DesignWidth="1920"
         d:DesignHeight="1080">
     <Grid>

@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:TestAdministration.Views"
+             xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
              d:DesignWidth="300"
              d:DesignHeight="1080">
     <DockPanel LastChildFill="False">
@@ -15,11 +17,15 @@
                 <views:NavButton Text="Box and Block Test" />
             </StackPanel>
         </views:NavSection>
-        <views:NavButton DockPanel.Dock="Top" Text="Výsledky" />
+        <views:NavButton DockPanel.Dock="Top"
+                         Text="Výsledky"
+                         Command="{Binding ResultsButtonCommand}" />
         <views:NavSection DockPanel.Dock="Top" Text="Manuály">
             <StackPanel>
-                <views:NavButton Text="Textové manuály" Click="OnTextManualsClick" />
-                <views:NavButton Text="Videomanuály" Click="OnVideoManualsClick" />
+                <views:NavButton Text="Textové manuály"
+                                 Command="{Binding TextManualsButtonCommand}" />
+                <views:NavButton Text="Videomanuály"
+                                 Command="{Binding VideoManualsButtonCommand}" />
             </StackPanel>
         </views:NavSection>
         <views:NavButton DockPanel.Dock="Bottom" Text="Odhlášení" />
