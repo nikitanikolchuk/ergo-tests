@@ -10,20 +10,20 @@
     <DockPanel LastChildFill="False">
         <views:NavSection DockPanel.Dock="Top" Text="Testování">
             <StackPanel>
-                <Button Height="40" Content="Devítikolíkový test" />
-                <Button Height="40" Content="Purdue Pegboard Test" />
-                <Button Height="40" Content="Box and Block Test" />
+                <views:NavButton Text="Devítikolíkový test" />
+                <views:NavButton Text="Purdue Pegboard Test" />
+                <views:NavButton Text="Box and Block Test" />
             </StackPanel>
         </views:NavSection>
-        <Button DockPanel.Dock="Top" Height="40" Content="Výsledky" />
+        <views:NavButton DockPanel.Dock="Top" Text="Výsledky" />
         <views:NavSection DockPanel.Dock="Top" Text="Manuály">
             <StackPanel>
-                <Button Height="40" Content="Textové manuály" />
-                <Button Height="40" Content="Videomanuály" />
+                <views:NavButton Text="Textové manuály" />
+                <views:NavButton Text="Videomanuály" />
             </StackPanel>
         </views:NavSection>
-        <Button DockPanel.Dock="Bottom" Height="40" Content="Odhlášení" />
-        <Button DockPanel.Dock="Bottom" Height="40" Content="Nastavení" />
-        <Button DockPanel.Dock="Bottom" Height="40" Content="Návod k použití" />
+        <views:NavButton DockPanel.Dock="Bottom" Text="Odhlášení" />
+        <views:NavButton DockPanel.Dock="Bottom" Text="Nastavení" />
+        <views:NavButton DockPanel.Dock="Bottom" Text="Návod k použití" />
     </DockPanel>
 </UserControl>

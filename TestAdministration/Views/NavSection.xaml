@@ -14,12 +14,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="views:NavSection">
                         <StackPanel Orientation="Vertical">
-                            <Button Height="40"
-                                    Content="{
-                                        Binding Text,
-                                        RelativeSource={RelativeSource TemplatedParent}
-                                    }"
-                                    Click="OnClick" />
+                            <views:NavButton 
+                                Text="{
+                                    Binding Text,
+                                    RelativeSource={RelativeSource TemplatedParent}
+                                }"
+                                Click="OnClick" />
                             <ContentPresenter
                                 Visibility="{
                                     Binding IsExpanded,
