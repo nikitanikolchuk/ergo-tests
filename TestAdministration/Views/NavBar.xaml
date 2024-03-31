@@ -18,8 +18,8 @@
         <views:NavButton DockPanel.Dock="Top" Text="Výsledky" />
         <views:NavSection DockPanel.Dock="Top" Text="Manuály">
             <StackPanel>
-                <views:NavButton Text="Textové manuály" />
-                <views:NavButton Text="Videomanuály" />
+                <views:NavButton Text="Textové manuály" Click="OnTextManualsClick" />
+                <views:NavButton Text="Videomanuály" Click="OnVideoManualsClick" />
             </StackPanel>
         </views:NavSection>
         <views:NavButton DockPanel.Dock="Bottom" Text="Odhlášení" />
