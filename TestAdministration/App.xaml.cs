@@ -1,6 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
 using TestAdministration.ViewModels;
-using TestAdministration.Views;
 
 namespace TestAdministration;
 
@@ -9,15 +8,15 @@ namespace TestAdministration;
 /// </summary>
 public partial class App
 {
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
+    public static IServiceProvider ServiceProvider { get; private set; }
 
-        var mainViewModel = new MainViewModel();
-        var mainWindow = new MainWindow
-        {
-            DataContext = mainViewModel
-        };
-        mainWindow.Show();
+    static App()
+    {
+        var services = _configureServices();
+        ServiceProvider = services.BuildServiceProvider();
     }
+
+    private static IServiceCollection _configureServices() =>
+        new ServiceCollection()
+            .AddSingleton<MainViewModel>();
 }

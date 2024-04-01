@@ -9,6 +9,10 @@
         Width="800"
         Height="450"
         WindowState="Maximized"
+        DataContext="{
+            Binding MainViewModel,
+            Source={StaticResource ViewModelLocator}
+        }"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         d:DesignWidth="1920"
