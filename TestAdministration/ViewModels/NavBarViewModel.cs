@@ -18,6 +18,15 @@ public class NavBarViewModel : ViewModelBase
         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
         ?? throw new ArgumentException("Can't get exe directory");
 
+    // TODO: replace with actual tester's name
+    private readonly string _currentTesterName = "Jan";
+
+    // TODO: replace with actual tester's surname
+    private readonly string _currentTesterSurname = "Novák";
+
+    public string CurrentTester => $"{_currentTesterName} {_currentTesterSurname}";
+    public string CurrentTesterInitials => $"{_currentTesterName[0]}{_currentTesterSurname[0]}";
+
     public ICommand ResultsButtonCommand => new RelayCommand(_ => _onResultsClick());
     public ICommand TextManualsButtonCommand => new RelayCommand(_ => _onTextManualsClick());
     public ICommand VideoManualsButtonCommand => new RelayCommand(_ => _onVideoManualsClick());

@@ -13,7 +13,41 @@
              d:DataContext="{d:DesignInstance viewModels:NavBarViewModel}"
              d:DesignWidth="300"
              d:DesignHeight="1080">
+    <UserControl.Resources>
+        <Style x:Key="NameCircle" TargetType="Ellipse">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="Fill" Value="#18000000" />
+            <Setter Property="Stroke" Value="#0F000000" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <Style x:Key="Divider" TargetType="Border">
+            <Setter Property="Height" Value="1" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#15000000" />
+        </Style>
+    </UserControl.Resources>
+
     <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Margin="16,10">
+            <Grid Margin="0,0,16,0">
+                <Canvas Width="48" Height="48">
+                    <Ellipse Style="{StaticResource NameCircle}" />
+                </Canvas>
+
+                <TextBlock Style="{StaticResource Subtitle}"
+                           Text="{Binding CurrentTesterInitials}" />
+            </Grid>
+
+            <TextBlock Style="{StaticResource BodyStrong}"
+                       Text="{Binding CurrentTester}" />
+        </StackPanel>
+
+        <Border DockPanel.Dock="Top" Style="{StaticResource Divider}" />
+
         <views:NavSection DockPanel.Dock="Top"
                           Icon=""
                           Text="Testování">
@@ -67,5 +101,7 @@
         <views:NavButton DockPanel.Dock="Bottom"
                          OverlayIcon=""
                          Text="Návod k použití" />
+
+        <Border DockPanel.Dock="Bottom" Style="{StaticResource Divider}" />
     </DockPanel>
 </UserControl>
