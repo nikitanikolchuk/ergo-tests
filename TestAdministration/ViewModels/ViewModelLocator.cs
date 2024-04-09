@@ -8,6 +8,7 @@ namespace TestAdministration.ViewModels;
 public class ViewModelLocator
 {
     public static MainViewModel MainViewModel => _getViewModel<MainViewModel>();
+    public static NavBarViewModel NavBarViewModel => _getViewModel<NavBarViewModel>();
 
     private static T _getViewModel<T>() =>
         App.ServiceProvider.GetService<T>()

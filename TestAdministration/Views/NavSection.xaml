@@ -20,6 +20,7 @@
                                     RelativeSource={RelativeSource TemplatedParent}
                                 }"
                                 Click="OnClick" />
+                            
                             <ContentPresenter
                                 Visibility="{
                                     Binding IsExpanded,

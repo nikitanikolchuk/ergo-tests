@@ -18,5 +18,6 @@ public partial class App
 
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
-            .AddSingleton<MainViewModel>();
+            .AddSingleton<MainViewModel>()
+            .AddSingleton<NavBarViewModel>();
 }

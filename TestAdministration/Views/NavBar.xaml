@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:TestAdministration.Views"
              xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+             DataContext="{
+                 Binding NavBarViewModel,
+                 Source={StaticResource ViewModelLocator}
+             }"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+             d:DataContext="{d:DesignInstance viewModels:NavBarViewModel}"
              d:DesignWidth="300"
              d:DesignHeight="1080">
     <DockPanel LastChildFill="False">
@@ -17,17 +21,21 @@
                 <views:NavButton Text="Box and Block Test" />
             </StackPanel>
         </views:NavSection>
+
         <views:NavButton DockPanel.Dock="Top"
                          Text="Výsledky"
                          Command="{Binding ResultsButtonCommand}" />
+
         <views:NavSection DockPanel.Dock="Top" Text="Manuály">
             <StackPanel>
                 <views:NavButton Text="Textové manuály"
                                  Command="{Binding TextManualsButtonCommand}" />
+
                 <views:NavButton Text="Videomanuály"
                                  Command="{Binding VideoManualsButtonCommand}" />
             </StackPanel>
         </views:NavSection>
+
         <views:NavButton DockPanel.Dock="Bottom" Text="Odhlášení" />
         <views:NavButton DockPanel.Dock="Bottom" Text="Nastavení" />
         <views:NavButton DockPanel.Dock="Bottom" Text="Návod k použití" />
