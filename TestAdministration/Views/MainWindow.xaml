@@ -16,5 +16,5 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         d:DesignWidth="1920"
         d:DesignHeight="1080">
-    <Frame Source="LoginPage.xaml" />
+    <ContentControl Content="{Binding ScreenScreenViewModel}" />
 </Window>

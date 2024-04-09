@@ -36,7 +36,13 @@
             </StackPanel>
         </views:NavSection>
 
-        <views:NavButton DockPanel.Dock="Bottom" Text="Odhlášení" />
+        <views:NavButton DockPanel.Dock="Bottom"
+                         Text="Odhlášení"
+                         Command="{
+                            Binding MainViewModel.DisplayLoginScreenCommand,
+                            Source={StaticResource ViewModelLocator}
+                         }" />
+
         <views:NavButton DockPanel.Dock="Bottom" Text="Nastavení" />
         <views:NavButton DockPanel.Dock="Bottom" Text="Návod k použití" />
     </DockPanel>

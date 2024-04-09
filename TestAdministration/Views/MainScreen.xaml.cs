@@ -1,8 +1,8 @@
 namespace TestAdministration.Views;
 
-public partial class LoginPage
+public partial class MainScreen
 {
-    public LoginPage()
+    public MainScreen()
     {
         InitializeComponent();
     }

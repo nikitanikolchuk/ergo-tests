@@ -19,5 +19,7 @@ public partial class App
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
             .AddSingleton<MainViewModel>()
+            .AddSingleton<LoginScreenViewModel>()
+            .AddSingleton<MainScreenViewModel>()
             .AddSingleton<NavBarViewModel>();
 }
