@@ -17,5 +17,5 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         d:DesignWidth="1920"
         d:DesignHeight="1080">
-    <ContentControl Content="{Binding ScreenScreenViewModel}" />
+    <ContentControl Content="{Binding ScreenViewModel}" />
 </Window>

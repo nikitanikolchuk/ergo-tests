@@ -6,27 +6,27 @@ namespace TestAdministration.ViewModels;
 /// The main application viewmodel.
 /// </summary>
 public class MainViewModel(
-    LoginScreenViewModel loginScreenScreenViewModel,
+    LoginScreenViewModel loginScreenViewModel,
     MainScreenViewModel mainScreenViewModel
 ) : ViewModelBase
 {
-    private ViewModelBase _screenScreenViewModel = loginScreenScreenViewModel;
+    private ViewModelBase _screenViewModel = loginScreenViewModel;
 
     /// <summary>
     /// View model with an associated view that fills the whole
     /// main window. 
     /// </summary>
-    public ViewModelBase ScreenScreenViewModel
+    public ViewModelBase ScreenViewModel
     {
-        get => _screenScreenViewModel;
+        get => _screenViewModel;
         private set
         {
-            if (_screenScreenViewModel == value)
+            if (_screenViewModel == value)
             {
                 return;
             }
 
-            _screenScreenViewModel = value;
+            _screenViewModel = value;
             OnPropertyChanged();
         }
     }
@@ -37,7 +37,7 @@ public class MainViewModel(
     public ICommand DisplayMainScreenCommand =>
         new RelayCommand(
             _ => _displayMainScreen(),
-            _ => ScreenScreenViewModel is not MainScreenViewModel
+            _ => ScreenViewModel is not MainScreenViewModel
         );
 
     /// <summary>
@@ -46,20 +46,20 @@ public class MainViewModel(
     public ICommand DisplayLoginScreenCommand =>
         new RelayCommand(
             _ => _displayLoginScreen(),
-            _ => ScreenScreenViewModel is not LoginScreenViewModel
+            _ => ScreenViewModel is not LoginScreenViewModel
         );
 
     private void _displayMainScreen()
     {
         // TODO: add login logic
         
-        ScreenScreenViewModel = mainScreenViewModel;
+        ScreenViewModel = mainScreenViewModel;
     }
 
     private void _displayLoginScreen()
     {
         // TODO: add logout logic
         
-        ScreenScreenViewModel = loginScreenScreenViewModel;
+        ScreenViewModel = loginScreenViewModel;
     }
 }
