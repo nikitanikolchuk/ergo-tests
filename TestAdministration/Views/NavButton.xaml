@@ -7,14 +7,140 @@
              mc:Ignorable="d"
              d:DesignWidth="300"
              d:DesignHeight="40">
-    <Button Height="40"
-            Content="{
-                Binding Text,
-                RelativeSource={RelativeSource AncestorType=views:NavButton}
-            }"
-            Command="{
-                Binding Command,
-                RelativeSource={RelativeSource AncestorType=views:NavButton}
-            }"
-            Click="OnClick" />
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+        <Style x:Key="Base" TargetType="Border">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+
+        <Style x:Key="Selector" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="Width" Value="3" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="RadiusX" Value="1" />
+            <Setter Property="RadiusY" Value="1" />
+        </Style>
+
+        <Style x:Key="Icon"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource FontIcon}">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style x:Key="Chevron"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource FontIcon}">
+            <Setter Property="FontSize" Value="12" />
+
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{
+                        Binding IsExpandable,
+                        RelativeSource={RelativeSource AncestorType=views:NavButton}
+                    }"
+                    Value="True">
+                    <Setter Property="Text" Value="" />
+                </DataTrigger>
+
+                <DataTrigger
+                    Binding="{
+                        Binding IsExpanded,
+                        RelativeSource={RelativeSource AncestorType=views:NavButton}
+                    }"
+                    Value="True">
+                    <Setter Property="Text" Value="" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Background" Value="Transparent" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Margin="4,3"
+                                    Style="{StaticResource Base}"
+                                    Background="{TemplateBinding Background}" />
+                            <Canvas>
+                                <Rectangle Canvas.Left="4"
+                                           Canvas.Top="12"
+                                           x:Name="Selector"
+                                           Style="{StaticResource Selector}" />
+                            </Canvas>
+                            <ContentPresenter />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="#0A000000" />
+                            </Trigger>
+
+                            <DataTrigger
+                                Binding="{
+                                    Binding IsSelected,
+                                    RelativeSource={RelativeSource AncestorType=views:NavButton}
+                                }"
+                                Value="True">
+                                <Setter Property="Background" Value="#0A000000" />
+                                <Setter TargetName="Selector" Property="Fill" Value="#005FB8" />
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Button
+        Style="{StaticResource NavButton}"
+        Command="{
+            Binding Command,
+            RelativeSource={RelativeSource AncestorType=views:NavButton}
+        }"
+        Click="OnClick">
+        <DockPanel LastChildFill="False">
+            <Separator DockPanel.Dock="Left"
+                       Width="16"
+                       Opacity="0" />
+
+            <Separator DockPanel.Dock="Left"
+                       Width="32"
+                       Opacity="0"
+                       Visibility="{
+                           Binding IsIndented,
+                           RelativeSource={RelativeSource AncestorType=views:NavButton},
+                           Converter={StaticResource VisibilityConverter}
+                       }" />
+
+            <TextBlock DockPanel.Dock="Left"
+                       Style="{StaticResource Icon}"
+                       Text="{
+                           Binding Icon,
+                           RelativeSource={RelativeSource AncestorType=views:NavButton}
+                       }" />
+
+            <Separator DockPanel.Dock="Left"
+                       Width="16"
+                       Opacity="0" />
+
+            <TextBlock DockPanel.Dock="Left"
+                       Style="{StaticResource Body}"
+                       HorizontalAlignment="Left"
+                       Text="{
+                           Binding Text,
+                           RelativeSource={RelativeSource AncestorType=views:NavButton}
+                       }" />
+
+            <TextBlock DockPanel.Dock="Right"
+                       Margin="0,0,18,0"
+                       Style="{StaticResource Chevron}" />
+        </DockPanel>
+    </Button>
 </UserControl>

@@ -14,36 +14,50 @@
              d:DesignWidth="300"
              d:DesignHeight="1080">
     <DockPanel LastChildFill="False">
-        <views:NavSection DockPanel.Dock="Top" Text="Testování">
+        <views:NavSection DockPanel.Dock="Top"
+                          Icon=""
+                          Text="Testování">
             <StackPanel>
-                <views:NavButton Text="Devítikolíkový test" />
-                <views:NavButton Text="Purdue Pegboard Test" />
-                <views:NavButton Text="Box and Block Test" />
+                <!-- TODO: numbered icons -->
+                <views:NavButton IsIndented="True" Text="Devítikolíkový test" />
+                <views:NavButton IsIndented="True" Text="Purdue Pegboard Test" />
+                <views:NavButton IsIndented="True" Text="Box and Block Test" />
             </StackPanel>
         </views:NavSection>
 
         <views:NavButton DockPanel.Dock="Top"
+                         Icon=""
                          Text="Výsledky"
                          Command="{Binding ResultsButtonCommand}" />
 
-        <views:NavSection DockPanel.Dock="Top" Text="Manuály">
+        <views:NavSection DockPanel.Dock="Top"
+                          Icon=""
+                          Text="Manuály">
             <StackPanel>
-                <views:NavButton Text="Textové manuály"
+                <views:NavButton Icon=""
+                                 IsIndented="True"
+                                 Text="Textové manuály"
                                  Command="{Binding TextManualsButtonCommand}" />
 
-                <views:NavButton Text="Videomanuály"
+                <views:NavButton Icon=""
+                                 IsIndented="True"
+                                 Text="Videomanuály"
                                  Command="{Binding VideoManualsButtonCommand}" />
             </StackPanel>
         </views:NavSection>
 
         <views:NavButton DockPanel.Dock="Bottom"
+                         Icon=""
                          Text="Odhlášení"
                          Command="{
                             Binding MainViewModel.DisplayLoginScreenCommand,
                             Source={StaticResource ViewModelLocator}
                          }" />
 
-        <views:NavButton DockPanel.Dock="Bottom" Text="Nastavení" />
+        <views:NavButton DockPanel.Dock="Bottom"
+                         Icon=""
+                         Text="Nastavení" />
+        <!-- TODO: overlay icon -->
         <views:NavButton DockPanel.Dock="Bottom" Text="Návod k použití" />
     </DockPanel>
 </UserControl>

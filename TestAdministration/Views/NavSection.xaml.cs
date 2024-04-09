@@ -4,6 +4,14 @@ namespace TestAdministration.Views;
 
 public partial class NavSection
 {
+    private static readonly DependencyProperty IconProperty =
+        DependencyProperty.Register(
+            nameof(Icon),
+            typeof(string),
+            typeof(NavSection),
+            new PropertyMetadata("\uea3a")
+        );
+    
     private static readonly DependencyProperty TextProperty =
         DependencyProperty.Register(
             nameof(Text),
@@ -25,6 +33,12 @@ public partial class NavSection
         InitializeComponent();
     }
 
+    public string Icon
+    {
+        get => (string)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+    
     public string Text
     {
         get => (string)GetValue(TextProperty);

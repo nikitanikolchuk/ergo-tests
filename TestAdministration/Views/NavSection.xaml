@@ -14,20 +14,28 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="views:NavSection">
                         <StackPanel Orientation="Vertical">
-                            <views:NavButton 
+                            <views:NavButton
+                                Icon="{
+                                    Binding Icon,
+                                    RelativeSource={RelativeSource TemplatedParent}
+                                }"
                                 Text="{
                                     Binding Text,
                                     RelativeSource={RelativeSource TemplatedParent}
                                 }"
+                                IsExpandable="True"
+                                IsExpanded="{
+                                    Binding IsExpanded,
+                                    RelativeSource={RelativeSource TemplatedParent}
+                                }"
                                 Click="OnClick" />
-                            
+
                             <ContentPresenter
                                 Visibility="{
                                     Binding IsExpanded,
                                     RelativeSource={RelativeSource TemplatedParent},
                                     Converter={StaticResource VisibilityConverter}
-                                }"
-                                Content="{TemplateBinding Content}" />
+                                }" />
                         </StackPanel>
                     </ControlTemplate>
                 </Setter.Value>
