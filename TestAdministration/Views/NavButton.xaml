@@ -119,12 +119,25 @@
                            Converter={StaticResource VisibilityConverter}
                        }" />
 
-            <TextBlock DockPanel.Dock="Left"
-                       Style="{StaticResource Icon}"
-                       Text="{
-                           Binding Icon,
-                           RelativeSource={RelativeSource AncestorType=views:NavButton}
-                       }" />
+            <Grid DockPanel.Dock="Left">
+                <TextBlock Style="{StaticResource Icon}"
+                           Text="{
+                               Binding Icon,
+                               RelativeSource={RelativeSource AncestorType=views:NavButton}
+                           }" />
+                <TextBlock Style="{StaticResource Body}"
+                           FontWeight="SemiBold"
+                           FontSize="10"
+                           Text="{
+                               Binding OverlaySymbol,
+                               RelativeSource={RelativeSource AncestorType=views:NavButton}
+                           }" />
+                <TextBlock Style="{StaticResource Icon}"
+                           Text="{
+                               Binding OverlayIcon,
+                               RelativeSource={RelativeSource AncestorType=views:NavButton}
+                           }" />
+            </Grid>
 
             <Separator DockPanel.Dock="Left"
                        Width="16"
@@ -135,6 +148,10 @@
                        HorizontalAlignment="Left"
                        Text="{
                            Binding Text,
+                           RelativeSource={RelativeSource AncestorType=views:NavButton}
+                       }"
+                       Foreground="{
+                           Binding TextColor,
                            RelativeSource={RelativeSource AncestorType=views:NavButton}
                        }" />
 

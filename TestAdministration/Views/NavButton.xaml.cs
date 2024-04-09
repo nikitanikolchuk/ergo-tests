@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace TestAdministration.Views;
 
@@ -15,12 +16,36 @@ public partial class NavButton
             new PropertyMetadata("\uea3a")
         );
 
+    private static readonly DependencyProperty OverlaySymbolProperty =
+        DependencyProperty.Register(
+            nameof(OverlaySymbol),
+            typeof(string),
+            typeof(NavButton),
+            new PropertyMetadata(string.Empty)
+        );
+
+    private static readonly DependencyProperty OverlayIconProperty =
+        DependencyProperty.Register(
+            nameof(OverlayIcon),
+            typeof(string),
+            typeof(NavButton),
+            new PropertyMetadata(string.Empty)
+        );
+
     private static readonly DependencyProperty TextProperty =
         DependencyProperty.Register(
             nameof(Text),
             typeof(string),
             typeof(NavButton),
             new PropertyMetadata(string.Empty)
+        );
+
+    private static readonly DependencyProperty TextColorProperty =
+        DependencyProperty.Register(
+            nameof(TextColor),
+            typeof(Brush),
+            typeof(NavButton),
+            new PropertyMetadata(new BrushConverter().ConvertFromString("#E5000000"))
         );
 
     private static readonly DependencyProperty IsExpandableProperty =
@@ -30,7 +55,7 @@ public partial class NavButton
             typeof(NavButton),
             new PropertyMetadata(false)
         );
-    
+
     private static readonly DependencyProperty IsExpandedProperty =
         DependencyProperty.Register(
             nameof(IsExpanded),
@@ -74,10 +99,28 @@ public partial class NavButton
         set => SetValue(IconProperty, value);
     }
 
+    public string OverlaySymbol
+    {
+        get => (string)GetValue(OverlaySymbolProperty);
+        set => SetValue(OverlaySymbolProperty, value);
+    }
+
+    public string OverlayIcon
+    {
+        get => (string)GetValue(OverlayIconProperty);
+        set => SetValue(OverlayIconProperty, value);
+    }
+
     public string Text
     {
         get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
+    }
+
+    public Brush TextColor
+    {
+        get => (Brush)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
     }
 
     public bool IsExpandable
@@ -85,7 +128,7 @@ public partial class NavButton
         get => (bool)GetValue(IsExpandableProperty);
         set => SetValue(IsExpandableProperty, value);
     }
-    
+
     public bool IsExpanded
     {
         get => (bool)GetValue(IsExpandedProperty);

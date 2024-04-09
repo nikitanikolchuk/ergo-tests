@@ -18,10 +18,15 @@
                           Icon=""
                           Text="Testování">
             <StackPanel>
-                <!-- TODO: numbered icons -->
-                <views:NavButton IsIndented="True" Text="Devítikolíkový test" />
-                <views:NavButton IsIndented="True" Text="Purdue Pegboard Test" />
-                <views:NavButton IsIndented="True" Text="Box and Block Test" />
+                <views:NavButton IsIndented="True"
+                                 OverlaySymbol="1"
+                                 Text="Devítikolíkový test" />
+                <views:NavButton IsIndented="True"
+                                 OverlaySymbol="2"
+                                 Text="Purdue Pegboard Test" />
+                <views:NavButton IsIndented="True"
+                                 OverlaySymbol="3"
+                                 Text="Box and Block Test" />
             </StackPanel>
         </views:NavSection>
 
@@ -49,6 +54,7 @@
         <views:NavButton DockPanel.Dock="Bottom"
                          Icon=""
                          Text="Odhlášení"
+                         TextColor="#C42B1C"
                          Command="{
                             Binding MainViewModel.DisplayLoginScreenCommand,
                             Source={StaticResource ViewModelLocator}
@@ -57,7 +63,9 @@
         <views:NavButton DockPanel.Dock="Bottom"
                          Icon=""
                          Text="Nastavení" />
-        <!-- TODO: overlay icon -->
-        <views:NavButton DockPanel.Dock="Bottom" Text="Návod k použití" />
+
+        <views:NavButton DockPanel.Dock="Bottom"
+                         OverlayIcon=""
+                         Text="Návod k použití" />
     </DockPanel>
 </UserControl>
