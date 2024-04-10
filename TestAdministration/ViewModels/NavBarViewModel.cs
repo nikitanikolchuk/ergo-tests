@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace TestAdministration.ViewModels;
@@ -8,41 +9,56 @@ namespace TestAdministration.ViewModels;
 /// <summary>
 /// View model for main navigation panel.
 /// </summary>
-public class NavBarViewModel : ViewModelBase
+public partial class NavBarViewModel : ViewModelBase
 {
     private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
     private const string VideoManualsLink = "https://kurzy.lf1.cuni.cz/";
+
+    [GeneratedRegex(@"\s+")]
+    private static partial Regex WhitespaceRegex();
 
     // TODO: replace with actual path
     private readonly string _dataPath =
         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
         ?? throw new ArgumentException("Can't get exe directory");
 
-    // TODO: replace with actual tester's name
-    private readonly string _currentTesterName = "Jan";
+    // TODO: replace with actual tester
+    public string CurrentTester => "Jan Novák";
 
-    // TODO: replace with actual tester's surname
-    private readonly string _currentTesterSurname = "Novák";
-
-    public string CurrentTester => $"{_currentTesterName} {_currentTesterSurname}";
-    public string CurrentTesterInitials => $"{_currentTesterName[0]}{_currentTesterSurname[0]}";
-
-    public ICommand ResultsButtonCommand => new RelayCommand(_ => _onResultsClick());
-    public ICommand TextManualsButtonCommand => new RelayCommand(_ => _onTextManualsClick());
-    public ICommand VideoManualsButtonCommand => new RelayCommand(_ => _onVideoManualsClick());
-
-    private void _onResultsClick()
+    public string CurrentTesterInitials
     {
-        Process.Start("explorer.exe", _dataPath);
+        get
+        {
+            if (string.IsNullOrWhiteSpace(CurrentTester))
+            {
+                return "";
+            }
+
+            var names = WhitespaceRegex()
+                .Replace(CurrentTester, " ")
+                .Trim()
+                .Split(" ");
+
+            if (names.Length == 1)
+            {
+                return names[0].Length == 1
+                    ? names[0][..1]
+                    : names[0][..2];
+            }
+
+            return $"{names[0][0]}{names[1][0]}";
+        }
     }
 
-    private static void _onTextManualsClick()
-    {
-        Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true });
-    }
+    public ICommand ResultsButtonCommand => new RelayCommand(_ =>
+        Process.Start("explorer.exe", _dataPath)
+    );
 
-    private static void _onVideoManualsClick()
-    {
-        Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true });
-    }
+    public ICommand TextManualsButtonCommand => new RelayCommand(_ =>
+        Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true })
+    );
+
+    public ICommand VideoManualsButtonCommand => new RelayCommand(_ =>
+        Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
+    );
 }
