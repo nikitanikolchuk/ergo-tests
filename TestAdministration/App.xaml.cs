@@ -21,5 +21,6 @@ public partial class App
             .AddSingleton<MainViewModel>()
             .AddSingleton<LoginScreenViewModel>()
             .AddSingleton<MainScreenViewModel>()
-            .AddSingleton<NavBarViewModel>();
+            .AddSingleton<NavBarViewModel>()
+            .AddSingleton<InitContentViewModel>();
 }

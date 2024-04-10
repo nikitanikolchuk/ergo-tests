@@ -10,14 +10,18 @@
                  Source={StaticResource ViewModelLocator}
              }"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+             d:DataContext="{d:DesignInstance viewModels:MainScreenViewModel}"
              d:DesignWidth="1920"
              d:DesignHeight="1080">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <views:NavBar Grid.Column="0" />
+        
+        <ContentControl Grid.Column="1"
+                        Content="{Binding ContentViewModel}" />
     </Grid>
 </UserControl>
