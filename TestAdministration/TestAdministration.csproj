@@ -9,20 +9,28 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CsvHelper" Version="31.0.2" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5" />
+        <PackageReference Include="CsvHelper" Version="31.0.2"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5"/>
+        <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Views\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="Views\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Resources\Images\InitScreen.jpg" />
+        <Resource Include="Resources\Images\InitScreen.jpg"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Page Update="Properties\DesignTimeResources.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+            <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+        </Page>
+    </ItemGroup>
 </Project>
