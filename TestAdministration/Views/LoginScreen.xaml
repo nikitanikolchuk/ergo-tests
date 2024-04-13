@@ -89,7 +89,7 @@
                 Padding="32"
                 CornerRadius="4"
                 BorderThickness="1"
-                BorderBrush="{StaticResource MainBorderBrush}">
+                BorderBrush="{StaticResource LightBorderBrush}">
             <StackPanel>
                 <TextBlock Margin="0,0,0,32"
                            Style="{StaticResource Subtitle}"
@@ -101,7 +101,8 @@
 
                 <Button Margin="0,0,0,8"
                         Style="{StaticResource StandardButton}"
-                        Content="Změnit adresář" />
+                        Content="Změnit adresář"
+                        Command="{Binding OpenSharePointConfigWindow}" />
 
                 <Button Margin="0,0,0,32"
                         Style="{StaticResource AccentButton}"
