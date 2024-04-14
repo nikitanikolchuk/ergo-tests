@@ -67,6 +67,12 @@
                 <Setter Property="FontSize" Value="40" />
             </Style>
 
+            <Style x:Key="TitleLargeTextBlockStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{ui:StaticResource BaseTextBlockStyle}">
+                <Setter Property="FontSize" Value="40" />
+            </Style>
+
             <Style x:Key="Subtitle"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource BaseTextStyle}">
@@ -77,6 +83,12 @@
             <Style x:Key="BodyLarge"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource BaseTextStyle}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <Style x:Key="BodyLargeTextBlockStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{ui:StaticResource BodyTextBlockStyle}">
                 <Setter Property="FontSize" Value="18" />
             </Style>
 
@@ -93,11 +105,16 @@
                 <Setter Property="FontSize" Value="14" />
             </Style>
 
+
             <Style x:Key="FontIcon" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
                 <Setter Property="FontSize" Value="64" />
+            </Style>
+
+            <Style TargetType="ui:FontIcon">
+                <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
             </Style>
 
             <Style x:Key="InnerStandardTextBox" TargetType="TextBox">
