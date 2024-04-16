@@ -6,7 +6,12 @@ namespace TestAdministration.ViewModels;
 
 public class LoginScreenViewModel : ViewModelBase
 {
-    public ICommand OpenSharePointConfigWindow => new RelayCommand(_ =>
+    public static ICommand OpenSharePointConfigWindow => new RelayCommand(_ =>
+    {
+        // TODO
+    });
+
+    public static ICommand OpenLocalConfigWindow => new RelayCommand(_ =>
     {
         var window = new LocalConfigWindow
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TestAdministration.Models.Services;
 using TestAdministration.ViewModels;
 
 namespace TestAdministration;
@@ -18,8 +19,10 @@ public partial class App
 
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
+            .AddSingleton<LocalStorageService>()
             .AddSingleton<MainViewModel>()
             .AddSingleton<LoginScreenViewModel>()
+            .AddTransient<LocalConfigWindowViewModel>()
             .AddSingleton<MainScreenViewModel>()
             .AddSingleton<InitContentViewModel>();
 }

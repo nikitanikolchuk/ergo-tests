@@ -157,7 +157,8 @@
                 </ComboBox>
 
                 <ui:Button Margin="0,0,0,8"
-                           Content="Změnit adresář" />
+                           Content="Změnit adresář"
+                           Command="{Binding OpenLocalConfigWindow}" />
 
                 <ui:Button Appearance="Primary"
                            Content="Přihlásit se"
