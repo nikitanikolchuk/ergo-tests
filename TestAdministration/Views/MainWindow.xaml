@@ -1,20 +1,28 @@
-﻿<Window x:Class="TestAdministration.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-        Title="Administrace testů"
-        WindowState="Maximized"
-        ui:WindowHelper.UseModernWindowStyle="True"
-        DataContext="{
-            Binding MainViewModel,
-            Source={StaticResource ViewModelLocator}
-        }"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        d:DesignWidth="1920"
-        d:DesignHeight="1080">
-    <ContentControl Content="{Binding ScreenViewModel}" />
-</Window>
+﻿<ui:FluentWindow x:Class="TestAdministration.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+                 Width="1100"
+                 Height="840"
+                 WindowStartupLocation="CenterScreen"
+                 DataContext="{
+                     Binding MainViewModel,
+                     Source={StaticResource ViewModelLocator}
+                 }"
+                 mc:Ignorable="d"
+                 d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+                 d:DesignWidth="1920"
+                 d:DesignHeight="1080">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="Administrace testů" />
+        <ContentControl Grid.Row="1" Content="{Binding ScreenViewModel}" />
+    </Grid>
+</ui:FluentWindow>
