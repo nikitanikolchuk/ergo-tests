@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:TestAdministration.Views"
              xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              DataContext="{
                  Binding MainScreenViewModel,
                  Source={StaticResource ViewModelLocator}
@@ -13,15 +13,107 @@
              d:DataContext="{d:DesignInstance viewModels:MainScreenViewModel}"
              d:DesignWidth="1920"
              d:DesignHeight="1080">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <UserControl.Resources>
+        <Style x:Key="NameCircleStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="Fill" Value="{StaticResource ControlAltFillColorQuarternaryBrush}" />
+            <Setter Property="Stroke" Value="{StaticResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
 
-        <views:NavBar Grid.Column="0" />
-        
-        <ContentControl Grid.Column="1"
-                        Content="{Binding ContentViewModel}" />
-    </Grid>
+        <Style x:Key="NameCircleGridStyle" TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{
+                        Binding IsPaneOpen,
+                        RelativeSource={RelativeSource AncestorType=ui:NavigationView}                        
+                    }"
+                    Value="False">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <ui:NavigationView IsBackButtonVisible="Collapsed" PaneTitle="Navigace">
+        <ui:NavigationView.PaneHeader>
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal"
+                        Margin="12,0">
+                <Grid Margin="0,0,16,0" Style="{StaticResource NameCircleGridStyle}">
+                    <Canvas Width="48" Height="48">
+                        <Ellipse Style="{StaticResource NameCircleStyle}" />
+                    </Canvas>
+
+                    <ui:TextBlock FontTypography="Subtitle"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Text="{Binding CurrentTesterInitials}" />
+                </Grid>
+
+                <ui:TextBlock FontTypography="BodyStrong"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Text="{Binding CurrentTester}" />
+            </StackPanel>
+        </ui:NavigationView.PaneHeader>
+
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItemSeparator />
+
+            <ui:NavigationViewItem Icon="{ui:SymbolIcon Pen24}"
+                                   IsExpanded="True"
+                                   Content="Testování">
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Icon="{ui:SymbolIcon NumberCircle124}" Content="Devítikolíkový Test" />
+                    <!-- TODO: replace icons -->
+                    <ui:NavigationViewItem Icon="{ui:SymbolIcon Circle24}" Content="Purdue Pegboard Test" />
+                    <ui:NavigationViewItem Icon="{ui:SymbolIcon Circle24}" Content="Box and Block Test" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+
+            <ui:NavigationViewItem Icon="{ui:SymbolIcon Folder24}"
+                                   Content="Výsledky"
+                                   Command="{Binding ResultsButtonCommand}" />
+
+            <ui:NavigationViewItem Icon="{ui:SymbolIcon BookOpen24}"
+                                   IsExpanded="True"
+                                   Content="Manuály">
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Icon="{ui:SymbolIcon DocumentPdf24}"
+                                           Content="Textové manuály"
+                                           Command="{Binding TextManualsButtonCommand}" />
+
+                    <ui:NavigationViewItem Icon="{ui:SymbolIcon Video24}"
+                                           Content="Videomanuály"
+                                           Command="{Binding VideoManualsButtonCommand}" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.MenuItems>
+
+        <ui:NavigationView.FooterMenuItems>
+            <ui:NavigationViewItemSeparator />
+
+            <ui:NavigationViewItem Icon="{ui:SymbolIcon QuestionCircle24}"
+                                   Content="Návod k použití" />
+
+            <ui:NavigationViewItem Icon="{ui:SymbolIcon Settings24}"
+                                   Content="Nastavení" />
+
+            <ui:NavigationViewItem Content="Odhlášení"
+                                   Command="{
+                                       Binding MainViewModel.DisplayLoginScreenCommand,
+                                       Source={StaticResource ViewModelLocator}
+                                   }">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="24" />
+                </ui:NavigationViewItem.Icon>
+
+                <ui:NavigationViewItem.Foreground>
+                    <SolidColorBrush Color="{StaticResource SystemFillColorCritical}" />
+                </ui:NavigationViewItem.Foreground>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.FooterMenuItems>
+    </ui:NavigationView>
 </UserControl>
