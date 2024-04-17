@@ -43,13 +43,13 @@ public class LocalStorageService
         }
     }
 
-    public ImmutableList<string> LocalTesters
+    public ImmutableList<string> LocalUsers
     {
-        get => _readData().LocalTesters;
+        get => _readData().LocalUsers;
         set
         {
             var data = _readData();
-            data.LocalTesters = value;
+            data.LocalUsers = value;
             _writeData(data);
         }
     }

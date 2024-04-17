@@ -9,5 +9,5 @@ public class LocalStorageData
 {
     public string SharePointTestDataPath { get; set; } = "";
     public string LocalTestDataPath { get; set; } = "";
-    public ImmutableList<string> LocalTesters { get; set; } = [];
+    public ImmutableList<string> LocalUsers { get; set; } = [];
 }

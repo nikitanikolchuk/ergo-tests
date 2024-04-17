@@ -248,11 +248,9 @@
                 <ComboBox
                     Margin="0,0,0,8"
                     HorizontalAlignment="Center"
-                    MinWidth="200">
-
-                    <ComboBoxItem Content="Testující" />
-                    <!-- TODO -->
-                </ComboBox>
+                    MinWidth="200"
+                    ItemsSource="{Binding Users}"
+                    SelectedValue="{Binding CurrentUser}" />
 
                 <ui:Button
                     Margin="0,0,0,8"

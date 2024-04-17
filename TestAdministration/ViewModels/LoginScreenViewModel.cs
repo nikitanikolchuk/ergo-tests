@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Windows.Input;
 using Microsoft.Win32;
 using TestAdministration.Models.Services;
@@ -11,6 +12,7 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public class LoginScreenViewModel(
     LocalStorageService localStorageService,
+    UserService userService,
     IContentDialogService contentDialogService
 ) : ViewModelBase
 {
@@ -77,6 +79,36 @@ public class LoginScreenViewModel(
             // TODO: add validation
 
             _newLocalTestDataPath = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ImmutableList<string> Users
+    {
+        get => localStorageService.LocalUsers;
+        private set
+        {
+            if (localStorageService.LocalUsers == value)
+            {
+                return;
+            }
+
+            localStorageService.LocalUsers = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string? CurrentUser
+    {
+        get => userService.CurrentUser;
+        set
+        {
+            if (userService.CurrentUser == value)
+            {
+                return;
+            }
+
+            userService.CurrentUser = value;
             OnPropertyChanged();
         }
     }

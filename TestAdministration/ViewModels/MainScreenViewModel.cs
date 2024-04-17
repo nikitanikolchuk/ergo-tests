@@ -3,13 +3,16 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using TestAdministration.Models.Services;
 
 namespace TestAdministration.ViewModels;
 
 /// <summary>
 /// The ViewModel that handles navigation after logging in.
 /// </summary>
-public partial class MainScreenViewModel : ViewModelBase
+public partial class MainScreenViewModel(
+    UserService userService
+) : ViewModelBase
 {
     private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
     private const string VideoManualsLink = "https://kurzy.lf1.cuni.cz/";
@@ -22,20 +25,19 @@ public partial class MainScreenViewModel : ViewModelBase
         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
         ?? throw new ArgumentException("Can't get exe directory");
 
-    // TODO: replace with actual tester
-    public string CurrentTester => "Jan Novák";
+    public string CurrentUser => userService.CurrentUser ?? "";
 
-    public string CurrentTesterInitials
+    public string CurrentUserInitials
     {
         get
         {
-            if (string.IsNullOrWhiteSpace(CurrentTester))
+            if (string.IsNullOrWhiteSpace(CurrentUser))
             {
                 return "";
             }
 
             var names = WhitespaceRegex()
-                .Replace(CurrentTester, " ")
+                .Replace(CurrentUser, " ")
                 .Trim()
                 .Split(" ");
 

@@ -55,14 +55,14 @@
                         FontTypography="Subtitle"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Text="{Binding CurrentTesterInitials}" />
+                        Text="{Binding CurrentUserInitials}" />
                 </Grid>
 
                 <ui:TextBlock
                     FontTypography="BodyStrong"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Text="{Binding CurrentTester}" />
+                    Text="{Binding CurrentUser}" />
             </StackPanel>
         </ui:NavigationView.PaneHeader>
 
