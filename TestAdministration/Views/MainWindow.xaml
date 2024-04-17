@@ -9,20 +9,23 @@
                  Height="840"
                  WindowStartupLocation="CenterScreen"
                  DataContext="{
-                     Binding MainViewModel,
+                     Binding MainWindowViewModel,
                      Source={StaticResource ViewModelLocator}
                  }"
                  mc:Ignorable="d"
-                 d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+                 d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
                  d:DesignWidth="1920"
                  d:DesignHeight="1080">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="Administrace testů" />
-        <ContentControl Grid.Row="1" Content="{Binding ScreenViewModel}" />
+            <ui:TitleBar Grid.Row="0" Title="Administrace testů" />
+            <ContentControl Grid.Row="1" Content="{Binding ScreenViewModel}" />
+        </Grid>
+        <ContentPresenter x:Name="RootContentDialog" />
     </Grid>
 </ui:FluentWindow>

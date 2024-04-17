@@ -1,16 +1,20 @@
 using System.Windows.Input;
+using Wpf.Ui;
 
 namespace TestAdministration.ViewModels;
 
 /// <summary>
 /// The main application viewmodel.
 /// </summary>
-public class MainViewModel(
+public class MainWindowViewModel(
+    IContentDialogService contentDialogService,
     LoginScreenViewModel loginScreenViewModel,
     MainScreenViewModel mainScreenViewModel
 ) : ViewModelBase
 {
     private ViewModelBase _screenViewModel = loginScreenViewModel;
+
+    public IContentDialogService ContentDialogService => contentDialogService;
 
     /// <summary>
     /// View model with an associated view that fills the whole
@@ -52,14 +56,14 @@ public class MainViewModel(
     private void _displayMainScreen()
     {
         // TODO: add login logic
-        
+
         ScreenViewModel = mainScreenViewModel;
     }
 
     private void _displayLoginScreen()
     {
         // TODO: add logout logic
-        
+
         ScreenViewModel = loginScreenViewModel;
     }
 }

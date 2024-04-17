@@ -14,7 +14,7 @@
 
             <viewModels:ViewModelLocator x:Key="ViewModelLocator" />
 
-            <DataTemplate DataType="{x:Type viewModels:MainViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:MainWindowViewModel}">
                 <views:MainWindow />
             </DataTemplate>
 

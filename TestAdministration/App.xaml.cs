@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TestAdministration.Models.Services;
 using TestAdministration.ViewModels;
+using Wpf.Ui;
 
 namespace TestAdministration;
 
@@ -20,7 +21,8 @@ public partial class App
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
             .AddSingleton<LocalStorageService>()
-            .AddSingleton<MainViewModel>()
+            .AddSingleton<IContentDialogService, ContentDialogService>()
+            .AddSingleton<MainWindowViewModel>()
             .AddSingleton<LoginScreenViewModel>()
             .AddTransient<LocalConfigWindowViewModel>()
             .AddSingleton<MainScreenViewModel>()
