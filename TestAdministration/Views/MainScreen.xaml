@@ -1,18 +1,20 @@
-<UserControl x:Class="TestAdministration.Views.MainScreen"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             DataContext="{
-                 Binding MainScreenViewModel,
-                 Source={StaticResource ViewModelLocator}
-             }"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:MainScreenViewModel}"
-             d:DesignWidth="1920"
-             d:DesignHeight="1080">
+<UserControl
+    x:Class="TestAdministration.Views.MainScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    DataContext="{
+        Binding MainScreenViewModel,
+        Source={StaticResource ViewModelLocator}
+    }"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:MainScreenViewModel}"
+    d:DesignWidth="1920"
+    d:DesignHeight="1080">
+
     <UserControl.Resources>
         <Style x:Key="NameCircleStyle" TargetType="Ellipse">
             <Setter Property="Width" Value="48" />
@@ -30,6 +32,7 @@
                         RelativeSource={RelativeSource AncestorType=ui:NavigationView}                        
                     }"
                     Value="False">
+
                     <Setter Property="Visibility" Value="Hidden" />
                 </DataTrigger>
             </Style.Triggers>
@@ -38,33 +41,39 @@
 
     <ui:NavigationView IsBackButtonVisible="Collapsed" PaneTitle="Navigace">
         <ui:NavigationView.PaneHeader>
-            <StackPanel DockPanel.Dock="Top"
-                        Orientation="Horizontal"
-                        Margin="12,0">
+            <StackPanel
+                DockPanel.Dock="Top"
+                Orientation="Horizontal"
+                Margin="12,0">
+
                 <Grid Margin="0,0,16,0" Style="{StaticResource NameCircleGridStyle}">
                     <Canvas Width="48" Height="48">
                         <Ellipse Style="{StaticResource NameCircleStyle}" />
                     </Canvas>
 
-                    <ui:TextBlock FontTypography="Subtitle"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Text="{Binding CurrentTesterInitials}" />
+                    <ui:TextBlock
+                        FontTypography="Subtitle"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="{Binding CurrentTesterInitials}" />
                 </Grid>
 
-                <ui:TextBlock FontTypography="BodyStrong"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              Text="{Binding CurrentTester}" />
+                <ui:TextBlock
+                    FontTypography="BodyStrong"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="{Binding CurrentTester}" />
             </StackPanel>
         </ui:NavigationView.PaneHeader>
 
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItemSeparator />
 
-            <ui:NavigationViewItem Icon="{ui:SymbolIcon Pen24}"
-                                   IsExpanded="True"
-                                   Content="Testování">
+            <ui:NavigationViewItem
+                Icon="{ui:SymbolIcon Pen24}"
+                IsExpanded="True"
+                Content="Testování">
+
                 <ui:NavigationViewItem.MenuItems>
                     <ui:NavigationViewItem Icon="{ui:SymbolIcon NumberCircle124}" Content="Devítikolíkový Test" />
                     <!-- TODO: replace icons -->
@@ -73,21 +82,26 @@
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
 
-            <ui:NavigationViewItem Icon="{ui:SymbolIcon Folder24}"
-                                   Content="Výsledky"
-                                   Command="{Binding ResultsButtonCommand}" />
+            <ui:NavigationViewItem
+                Icon="{ui:SymbolIcon Folder24}"
+                Content="Výsledky"
+                Command="{Binding ResultsButtonCommand}" />
 
-            <ui:NavigationViewItem Icon="{ui:SymbolIcon BookOpen24}"
-                                   IsExpanded="True"
-                                   Content="Manuály">
+            <ui:NavigationViewItem
+                Icon="{ui:SymbolIcon BookOpen24}"
+                IsExpanded="True"
+                Content="Manuály">
+
                 <ui:NavigationViewItem.MenuItems>
-                    <ui:NavigationViewItem Icon="{ui:SymbolIcon DocumentPdf24}"
-                                           Content="Textové manuály"
-                                           Command="{Binding TextManualsButtonCommand}" />
+                    <ui:NavigationViewItem
+                        Icon="{ui:SymbolIcon DocumentPdf24}"
+                        Content="Textové manuály"
+                        Command="{Binding TextManualsButtonCommand}" />
 
-                    <ui:NavigationViewItem Icon="{ui:SymbolIcon Video24}"
-                                           Content="Videomanuály"
-                                           Command="{Binding VideoManualsButtonCommand}" />
+                    <ui:NavigationViewItem
+                        Icon="{ui:SymbolIcon Video24}"
+                        Content="Videomanuály"
+                        Command="{Binding VideoManualsButtonCommand}" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
         </ui:NavigationView.MenuItems>
@@ -95,17 +109,21 @@
         <ui:NavigationView.FooterMenuItems>
             <ui:NavigationViewItemSeparator />
 
-            <ui:NavigationViewItem Icon="{ui:SymbolIcon QuestionCircle24}"
-                                   Content="Návod k použití" />
+            <ui:NavigationViewItem
+                Icon="{ui:SymbolIcon QuestionCircle24}"
+                Content="Návod k použití" />
 
-            <ui:NavigationViewItem Icon="{ui:SymbolIcon Settings24}"
-                                   Content="Nastavení" />
+            <ui:NavigationViewItem
+                Icon="{ui:SymbolIcon Settings24}"
+                Content="Nastavení" />
 
-            <ui:NavigationViewItem Content="Odhlášení"
-                                   Command="{
-                                       Binding MainViewModel.DisplayLoginScreenCommand,
-                                       Source={StaticResource ViewModelLocator}
-                                   }">
+            <ui:NavigationViewItem
+                Content="Odhlášení"
+                Command="{
+                    Binding MainWindowViewModel.DisplayLoginScreenCommand,
+                    Source={StaticResource ViewModelLocator}
+                }">
+
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="ArrowExit20" FontSize="24" />
                 </ui:NavigationViewItem.Icon>

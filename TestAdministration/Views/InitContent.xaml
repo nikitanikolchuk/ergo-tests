@@ -1,22 +1,26 @@
-<UserControl x:Class="TestAdministration.Views.InitContent"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"
-             d:DesignWidth="1600"
-             d:DesignHeight="1048">
-    <StackPanel VerticalAlignment="Center">
-        <Image Margin="0,0,0,32"
-               Height="600"
-               Source="/Resources/Images/InitScreen.jpg" />
+<UserControl
+    x:Class="TestAdministration.Views.InitContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignWidth="1600"
+    d:DesignHeight="1048">
 
-        <ui:TextBlock Width="600"
-                      FontTypography="TitleLarge"
-                      FontWeight="SemiBold"
-                      TextWrapping="Wrap"
-                      TextAlignment="Center"
-                      Text="Aplikace pro administraci testů manuální zručnosti" />
+    <StackPanel VerticalAlignment="Center">
+        <Image
+            Margin="0,0,0,32"
+            Height="600"
+            Source="/Resources/Images/InitScreen.jpg" />
+
+        <ui:TextBlock
+            Width="600"
+            FontTypography="TitleLarge"
+            FontWeight="SemiBold"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            Text="Aplikace pro administraci testů manuální zručnosti" />
     </StackPanel>
 </UserControl>

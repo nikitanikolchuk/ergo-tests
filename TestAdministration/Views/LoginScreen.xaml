@@ -1,34 +1,41 @@
-<UserControl x:Class="TestAdministration.Views.LoginScreen"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             HorizontalAlignment="Stretch"
-             VerticalAlignment="Stretch"
-             DataContext="{
-                 Binding LoginScreenViewModel,
-                 Source={StaticResource ViewModelLocator}
-             }">
+<UserControl
+    x:Class="TestAdministration.Views.LoginScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    DataContext="{
+        Binding LoginScreenViewModel,
+        Source={StaticResource ViewModelLocator}
+    }">
+
     <UserControl.Resources>
-        <ui:ContentDialog x:Key="SharePointConfigDialog"
-                          Title="Změna SharePoint adresáře"
-                          PrimaryButtonText="Potvrdit"
-                          CloseButtonText="Zrušit"
-                          DataContext="{
-                              Binding LoginScreenViewModel,
-                              Source={StaticResource ViewModelLocator}
-                          }">
+        <ui:ContentDialog
+            x:Key="SharePointConfigDialog"
+            Title="Změna SharePoint adresáře"
+            PrimaryButtonText="Potvrdit"
+            CloseButtonText="Zrušit"
+            DataContext="{
+                Binding LoginScreenViewModel,
+                Source={StaticResource ViewModelLocator}
+            }">
+
             <StackPanel>
-                <ui:TextBlock Margin="0,0,0,12"
-                              FontTypography="Body"
-                              Text="Aktuální adresář" />
+                <ui:TextBlock
+                    Margin="0,0,0,12"
+                    FontTypography="Body"
+                    Text="Aktuální adresář" />
 
-                <ui:TextBox Margin="0,0,0,16"
-                            IsReadOnly="True"
-                            Text="{Binding SharePointTestDataPath}" />
+                <ui:TextBox
+                    Margin="0,0,0,16"
+                    IsReadOnly="True"
+                    Text="{Binding SharePointTestDataPath}" />
 
-                <ui:TextBlock Margin="0,0,0,12"
-                              FontTypography="Body"
-                              Text="Nový adresář" />
+                <ui:TextBlock
+                    Margin="0,0,0,12"
+                    FontTypography="Body"
+                    Text="Nový adresář" />
 
                 <ui:TextBox Text="{Binding NewSharePointTestDataPath}" />
 
@@ -36,26 +43,31 @@
             </StackPanel>
         </ui:ContentDialog>
 
-        <ui:ContentDialog x:Key="LocalConfigDialog"
-                          Title="Změna lokálního adresáře"
-                          PrimaryButtonText="Potvrdit"
-                          CloseButtonText="Zrušit"
-                          DataContext="{
-                              Binding LoginScreenViewModel,
-                              Source={StaticResource ViewModelLocator}
-                          }">
+        <ui:ContentDialog
+            x:Key="LocalConfigDialog"
+            Title="Změna lokálního adresáře"
+            PrimaryButtonText="Potvrdit"
+            CloseButtonText="Zrušit"
+            DataContext="{
+                Binding LoginScreenViewModel,
+                Source={StaticResource ViewModelLocator}
+            }">
+
             <StackPanel>
-                <ui:TextBlock Margin="0,0,0,12"
-                              FontTypography="Body"
-                              Text="Aktuální adresář" />
+                <ui:TextBlock
+                    Margin="0,0,0,12"
+                    FontTypography="Body"
+                    Text="Aktuální adresář" />
 
-                <ui:TextBox Margin="0,0,0,16"
-                            IsReadOnly="True"
-                            Text="{Binding LocalTestDataPath}" />
+                <ui:TextBox
+                    Margin="0,0,0,16"
+                    IsReadOnly="True"
+                    Text="{Binding LocalTestDataPath}" />
 
-                <ui:TextBlock Margin="0,0,0,12"
-                              FontTypography="Body"
-                              Text="Nový adresář" />
+                <ui:TextBlock
+                    Margin="0,0,0,12"
+                    FontTypography="Body"
+                    Text="Nový adresář" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -63,14 +75,16 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ui:TextBox Grid.Column="0"
-                                Margin="0,0,16,0"
-                                Text="{Binding NewLocalTestDataPath}" />
+                    <ui:TextBox
+                        Grid.Column="0"
+                        Margin="0,0,16,0"
+                        Text="{Binding NewLocalTestDataPath}" />
 
-                    <ui:Button Grid.Column="1"
-                               Width="120"
-                               Content="Vybrat"
-                               Command="{Binding OnOpenDirectoryCommand}" />
+                    <ui:Button
+                        Grid.Column="1"
+                        Width="120"
+                        Content="Vybrat"
+                        Command="{Binding OnOpenDirectoryCommand}" />
                 </Grid>
 
                 <Border Width="600" />
@@ -144,44 +158,52 @@
     </UserControl.Resources>
 
     <StackPanel VerticalAlignment="Center">
-        <ui:TextBlock Margin="0,0,0,16"
-                      HorizontalAlignment="Center"
-                      FontTypography="TitleLarge"
-                      FontWeight="SemiBold"
-                      Text="Přihlášení" />
+        <ui:TextBlock
+            Margin="0,0,0,16"
+            HorizontalAlignment="Center"
+            FontTypography="TitleLarge"
+            FontWeight="SemiBold"
+            Text="Přihlášení" />
 
-        <ui:TextBlock Margin="0,0,0,16"
-                      HorizontalAlignment="Center"
-                      FontTypography="Subtitle"
-                      Text="Vyberte si místo pro ukládání dat" />
+        <ui:TextBlock
+            Margin="0,0,0,16"
+            HorizontalAlignment="Center"
+            FontTypography="Subtitle"
+            Text="Vyberte si místo pro ukládání dat" />
 
-        <Border Width="600"
-                Padding="32"
-                CornerRadius="4"
-                BorderThickness="1"
-                BorderBrush="{StaticResource ControlElevationBorderBrush}">
+        <Border
+            Width="600"
+            Padding="32"
+            CornerRadius="4"
+            BorderThickness="1"
+            BorderBrush="{StaticResource ControlElevationBorderBrush}">
+
             <StackPanel>
-                <ui:TextBlock Margin="0,0,0,32"
-                              FontTypography="Subtitle"
-                              HorizontalAlignment="Center"
-                              Text="SharePoint" />
+                <ui:TextBlock
+                    Margin="0,0,0,32"
+                    FontTypography="Subtitle"
+                    HorizontalAlignment="Center"
+                    Text="SharePoint" />
 
-                <Image Margin="0,0,0,32"
-                       Height="64"
-                       Source="{StaticResource SharePointIcon}" />
+                <Image
+                    Margin="0,0,0,32"
+                    Height="64"
+                    Source="{StaticResource SharePointIcon}" />
 
-                <ui:Button Margin="0,0,0,8"
-                           Content="Změnit adresář"
-                           Command="{Binding OnOpenSharePointConfigDialogCommand}"
-                           CommandParameter="{StaticResource SharePointConfigDialog}" />
+                <ui:Button
+                    Margin="0,0,0,8"
+                    Content="Změnit adresář"
+                    Command="{Binding OnOpenSharePointConfigDialogCommand}"
+                    CommandParameter="{StaticResource SharePointConfigDialog}" />
 
-                <ui:Button Margin="0,0,0,32"
-                           Appearance="Primary"
-                           Content="Přihlásit se"
-                           Command="{
-                               Binding MainWindowViewModel.DisplayMainScreenCommand,
-                               Source={StaticResource ViewModelLocator}
-                           }" />
+                <ui:Button
+                    Margin="0,0,0,32"
+                    Appearance="Primary"
+                    Content="Přihlásit se"
+                    Command="{
+                        Binding MainWindowViewModel.DisplayMainScreenCommand,
+                        Source={StaticResource ViewModelLocator}
+                    }" />
 
                 <Grid Margin="0,0,0,32">
                     <Grid.ColumnDefinitions>
@@ -190,52 +212,61 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0"
-                            Height="1"
-                            BorderThickness="1"
-                            BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
+                    <Border
+                        Grid.Column="0"
+                        Height="1"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
 
-                    <ui:TextBlock Grid.Column="1"
-                                  FontTypography="Body"
-                                  FontSize="18"
-                                  Margin="32,0"
-                                  Text="nebo" />
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        FontTypography="Body"
+                        FontSize="18"
+                        Margin="32,0"
+                        Text="nebo" />
 
-                    <Border Grid.Column="2"
-                            Height="1"
-                            BorderThickness="1"
-                            BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
+                    <Border
+                        Grid.Column="2"
+                        Height="1"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
                 </Grid>
 
-                <ui:TextBlock Margin="0,0,0,32"
-                              FontTypography="Subtitle"
-                              HorizontalAlignment="Center"
-                              FontWeight="SemiBold"
-                              Text="Lokální úložiště" />
+                <ui:TextBlock
+                    Margin="0,0,0,32"
+                    FontTypography="Subtitle"
+                    HorizontalAlignment="Center"
+                    FontWeight="SemiBold"
+                    Text="Lokální úložiště" />
 
-                <ui:FontIcon Margin="0,0,0,32"
-                             FontFamily="Segoe Fluent Icons"
-                             FontSize="64"
-                             Glyph="" />
+                <ui:FontIcon
+                    Margin="0,0,0,32"
+                    FontFamily="Segoe Fluent Icons"
+                    FontSize="64"
+                    Glyph="" />
 
-                <ComboBox Margin="0,0,0,8"
-                          HorizontalAlignment="Center"
-                          MinWidth="200">
+                <ComboBox
+                    Margin="0,0,0,8"
+                    HorizontalAlignment="Center"
+                    MinWidth="200">
+
                     <ComboBoxItem Content="Testující" />
                     <!-- TODO -->
                 </ComboBox>
 
-                <ui:Button Margin="0,0,0,8"
-                           Content="Změnit adresář"
-                           Command="{Binding OnOpenLocalConfigDialogCommand}"
-                           CommandParameter="{StaticResource LocalConfigDialog}" />
+                <ui:Button
+                    Margin="0,0,0,8"
+                    Content="Změnit adresář"
+                    Command="{Binding OnOpenLocalConfigDialogCommand}"
+                    CommandParameter="{StaticResource LocalConfigDialog}" />
 
-                <ui:Button Appearance="Primary"
-                           Content="Přihlásit se"
-                           Command="{
-                               Binding MainWindowViewModel.DisplayMainScreenCommand,
-                               Source={StaticResource ViewModelLocator}
-                           }" />
+                <ui:Button
+                    Appearance="Primary"
+                    Content="Přihlásit se"
+                    Command="{
+                        Binding MainWindowViewModel.DisplayMainScreenCommand,
+                        Source={StaticResource ViewModelLocator}
+                    }" />
             </StackPanel>
         </Border>
     </StackPanel>
