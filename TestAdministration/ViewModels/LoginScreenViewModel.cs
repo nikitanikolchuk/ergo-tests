@@ -18,6 +18,8 @@ public class LoginScreenViewModel(
 {
     private string _newSharePointTestDataPath = string.Empty;
     private string _newLocalTestDataPath = string.Empty;
+    private string _newUser = string.Empty;
+    private string _userToDelete = string.Empty;
 
     public string SharePointTestDataPath
     {
@@ -113,9 +115,41 @@ public class LoginScreenViewModel(
         }
     }
 
+    public string NewUser
+    {
+        get => _newUser;
+        set
+        {
+            if (_newUser == value)
+            {
+                return;
+            }
+
+            _newUser = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string UserToDelete
+    {
+        get => _userToDelete;
+        set
+        {
+            if (_userToDelete == value)
+            {
+                return;
+            }
+
+            _userToDelete = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand OnOpenSharePointConfigDialogCommand => new RelayCommand(_onOpenSharePointConfigDialog);
     public ICommand OnOpenLocalConfigDialogCommand => new RelayCommand(_onOpenLocalConfigDialog);
     public ICommand OnOpenDirectoryCommand => new RelayCommand(_onOpenDirectory);
+    public ICommand OnOpenAddUserDialogCommand => new RelayCommand(_onOpenAddUserDialog);
+    public ICommand OnOpemDeleteUserDialogCommand => new RelayCommand(_onOpenDeleteUserDialog);
 
     private async void _onOpenSharePointConfigDialog(object? obj)
     {
@@ -169,5 +203,39 @@ public class LoginScreenViewModel(
         }
 
         NewLocalTestDataPath = openFolderDialog.FolderNames.First();
+    }
+
+    private async void _onOpenAddUserDialog(object? obj)
+    {
+        if (obj is not ContentDialog content)
+        {
+            throw new ArgumentException("Command parameter is not a ContentDialog");
+        }
+
+        var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
+
+        if (result == ContentDialogResult.Primary)
+        {
+            Users = Users.Add(NewUser);
+        }
+
+        NewUser = string.Empty;
+    }
+
+    private async void _onOpenDeleteUserDialog(object? obj)
+    {
+        if (obj is not ContentDialog content)
+        {
+            throw new ArgumentException("Command parameter is not a ContentDialog");
+        }
+
+        var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
+
+        if (result == ContentDialogResult.Primary)
+        {
+            Users = Users.Remove(UserToDelete);
+        }
+
+        UserToDelete = string.Empty;
     }
 }

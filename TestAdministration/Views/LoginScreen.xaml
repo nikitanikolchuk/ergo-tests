@@ -91,6 +91,46 @@
             </StackPanel>
         </ui:ContentDialog>
 
+        <ui:ContentDialog
+            x:Key="AddUserDialog"
+            Title="Přidání uživatele"
+            PrimaryButtonText="Potvrdit"
+            CloseButtonText="Zrušit"
+            DataContext="{
+                Binding LoginScreenViewModel,
+                Source={StaticResource ViewModelLocator}
+            }">
+
+            <StackPanel>
+                <ui:TextBlock Margin="0,0,0,12" Text="Jméno a/nebo příjmení" />
+                <ui:TextBox Text="{Binding NewUser}" />
+                <Border Width="600" />
+            </StackPanel>
+        </ui:ContentDialog>
+
+        <ui:ContentDialog
+            x:Key="DeleteUserDialog"
+            Title="Přidání uživatele"
+            PrimaryButtonText="Potvrdit"
+            CloseButtonText="Zrušit"
+            DataContext="{
+                Binding LoginScreenViewModel,
+                Source={StaticResource ViewModelLocator}
+            }">
+
+            <StackPanel>
+                <ui:TextBlock Margin="0,0,0,12" Text="Uživatelský účet, který bude smazán" />
+
+                <ComboBox
+                    Margin="0,0,0,8"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Users}"
+                    SelectedValue="{Binding UserToDelete}" />
+
+                <Border Width="600" />
+            </StackPanel>
+        </ui:ContentDialog>
+
         <Style TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Width" Value="200" />
@@ -252,11 +292,35 @@
                     ItemsSource="{Binding Users}"
                     SelectedValue="{Binding CurrentUser}" />
 
-                <ui:Button
+                <ui:DropDownButton
                     Margin="0,0,0,8"
-                    Content="Změnit adresář"
-                    Command="{Binding OnOpenLocalConfigDialogCommand}"
-                    CommandParameter="{StaticResource LocalConfigDialog}" />
+                    HorizontalAlignment="Center"
+                    Width="200"
+                    Icon="{ui:SymbolIcon Settings24}"
+                    Content="Nastavení">
+
+                    <ui:DropDownButton.Flyout>
+                        <ContextMenu>
+                            <ui:MenuItem
+                                Icon="{ui:SymbolIcon Folder24}"
+                                Header="Změnit adresář"
+                                Command="{Binding OnOpenLocalConfigDialogCommand}"
+                                CommandParameter="{StaticResource LocalConfigDialog}" />
+
+                            <ui:MenuItem
+                                Icon="{ui:SymbolIcon Add24}"
+                                Header="Přidat uživatele"
+                                Command="{Binding OnOpenAddUserDialogCommand}"
+                                CommandParameter="{StaticResource AddUserDialog}" />
+
+                            <ui:MenuItem
+                                Icon="{ui:SymbolIcon Delete24}"
+                                Header="Odstranit uživatele"
+                                Command="{Binding OnOpemDeleteUserDialogCommand}"
+                                CommandParameter="{StaticResource DeleteUserDialog}" />
+                        </ContextMenu>
+                    </ui:DropDownButton.Flyout>
+                </ui:DropDownButton>
 
                 <ui:Button
                     Appearance="Primary"
