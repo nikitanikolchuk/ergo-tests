@@ -24,7 +24,6 @@ public partial class App
             .AddSingleton<IContentDialogService, ContentDialogService>()
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<LoginScreenViewModel>()
-            .AddTransient<LocalConfigWindowViewModel>()
             .AddSingleton<MainScreenViewModel>()
             .AddSingleton<InitContentViewModel>();
 }

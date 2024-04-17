@@ -9,7 +9,6 @@ public class ViewModelLocator
 {
     public static MainWindowViewModel MainWindowViewModel => _getViewModel<MainWindowViewModel>();
     public static LoginScreenViewModel LoginScreenViewModel => _getViewModel<LoginScreenViewModel>();
-    public static LocalConfigWindowViewModel LocalConfigWindowViewModel => _getViewModel<LocalConfigWindowViewModel>();
     public static MainScreenViewModel MainScreenViewModel => _getViewModel<MainScreenViewModel>();
 
     private static T _getViewModel<T>() =>

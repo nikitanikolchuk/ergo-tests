@@ -9,6 +9,74 @@
                  Source={StaticResource ViewModelLocator}
              }">
     <UserControl.Resources>
+        <ui:ContentDialog x:Key="SharePointConfigDialog"
+                          Title="Změna SharePoint adresáře"
+                          PrimaryButtonText="Potvrdit"
+                          CloseButtonText="Zrušit"
+                          DataContext="{
+                              Binding LoginScreenViewModel,
+                              Source={StaticResource ViewModelLocator}
+                          }">
+            <StackPanel>
+                <ui:TextBlock Margin="0,0,0,12"
+                              FontTypography="Body"
+                              Text="Aktuální adresář" />
+
+                <ui:TextBox Margin="0,0,0,16"
+                            IsReadOnly="True"
+                            Text="{Binding SharePointTestDataPath}" />
+
+                <ui:TextBlock Margin="0,0,0,12"
+                              FontTypography="Body"
+                              Text="Nový adresář" />
+
+                <ui:TextBox Text="{Binding NewSharePointTestDataPath}" />
+
+                <Border Width="600" />
+            </StackPanel>
+        </ui:ContentDialog>
+
+        <ui:ContentDialog x:Key="LocalConfigDialog"
+                          Title="Změna lokálního adresáře"
+                          PrimaryButtonText="Potvrdit"
+                          CloseButtonText="Zrušit"
+                          DataContext="{
+                              Binding LoginScreenViewModel,
+                              Source={StaticResource ViewModelLocator}
+                          }">
+            <StackPanel>
+                <ui:TextBlock Margin="0,0,0,12"
+                              FontTypography="Body"
+                              Text="Aktuální adresář" />
+
+                <ui:TextBox Margin="0,0,0,16"
+                            IsReadOnly="True"
+                            Text="{Binding LocalTestDataPath}" />
+
+                <ui:TextBlock Margin="0,0,0,12"
+                              FontTypography="Body"
+                              Text="Nový adresář" />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ui:TextBox Grid.Column="0"
+                                Margin="0,0,16,0"
+                                Text="{Binding NewLocalTestDataPath}" />
+
+                    <ui:Button Grid.Column="1"
+                               Width="120"
+                               Content="Vybrat"
+                               Command="{Binding OnOpenDirectoryCommand}" />
+                </Grid>
+
+                <Border Width="600" />
+            </StackPanel>
+        </ui:ContentDialog>
+
         <Style TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Width" Value="200" />
@@ -104,13 +172,14 @@
 
                 <ui:Button Margin="0,0,0,8"
                            Content="Změnit adresář"
-                           Command="{Binding OpenSharePointConfigWindow}" />
+                           Command="{Binding OnOpenSharePointConfigDialogCommand}"
+                           CommandParameter="{StaticResource SharePointConfigDialog}" />
 
                 <ui:Button Margin="0,0,0,32"
                            Appearance="Primary"
                            Content="Přihlásit se"
                            Command="{
-                               Binding MainViewModel.DisplayMainScreenCommand,
+                               Binding MainWindowViewModel.DisplayMainScreenCommand,
                                Source={StaticResource ViewModelLocator}
                            }" />
 
@@ -158,12 +227,13 @@
 
                 <ui:Button Margin="0,0,0,8"
                            Content="Změnit adresář"
-                           Command="{Binding OpenLocalConfigWindow}" />
+                           Command="{Binding OnOpenLocalConfigDialogCommand}"
+                           CommandParameter="{StaticResource LocalConfigDialog}" />
 
                 <ui:Button Appearance="Primary"
                            Content="Přihlásit se"
                            Command="{
-                               Binding MainViewModel.DisplayMainScreenCommand,
+                               Binding MainWindowViewModel.DisplayMainScreenCommand,
                                Source={StaticResource ViewModelLocator}
                            }" />
             </StackPanel>
