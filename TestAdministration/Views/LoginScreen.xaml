@@ -111,7 +111,7 @@
 
         <ui:ContentDialog
             x:Key="DeleteUserDialog"
-            Title="Přidání uživatele"
+            Title="Odstranění uživatele"
             PrimaryButtonText="Potvrdit"
             CloseButtonText="Zrušit"
             DataContext="{
@@ -120,7 +120,7 @@
             }">
 
             <StackPanel>
-                <ui:TextBlock Margin="0,0,0,12" Text="Uživatelský účet, který bude smazán" />
+                <ui:TextBlock Margin="0,0,0,12" Text="Uživatelský účet, který bude odstraněn" />
 
                 <ComboBox
                     Margin="0,0,0,8"
