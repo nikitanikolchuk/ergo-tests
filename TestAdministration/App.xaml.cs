@@ -20,7 +20,7 @@ public partial class App
 
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
-            .AddSingleton<LocalStorageService>()
+            .AddSingleton<ConfigurationService>()
             .AddSingleton<UserService>()
             .AddSingleton<IContentDialogService, ContentDialogService>()
             .AddSingleton<MainWindowViewModel>()

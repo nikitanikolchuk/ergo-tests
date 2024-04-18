@@ -5,7 +5,7 @@ namespace TestAdministration.Models.Data;
 /// <summary>
 /// A class for JSON serialization.
 /// </summary>
-public class LocalStorageData
+public class ConfigurationData
 {
     public string SharePointTestDataPath { get; set; } = "";
     public string LocalTestDataPath { get; set; } = "";

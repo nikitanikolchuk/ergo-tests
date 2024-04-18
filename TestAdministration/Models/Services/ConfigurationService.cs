@@ -10,7 +10,7 @@ namespace TestAdministration.Models.Services;
 /// A class for storing application configuration data in a
 /// data.json file located in the same directory as the .exe file.
 /// </summary>
-public class LocalStorageService
+public class ConfigurationService
 {
     private const string FileName = "data.json";
 
@@ -62,19 +62,19 @@ public class LocalStorageService
         return Path.Combine(exeDirectoryPath, FileName);
     }
 
-    private LocalStorageData _readData()
+    private ConfigurationData _readData()
     {
         if (!File.Exists(_filePath))
         {
-            _writeData(new LocalStorageData());
+            _writeData(new ConfigurationData());
         }
 
         using var fileStream = File.OpenRead(_filePath);
-        return JsonSerializer.Deserialize<LocalStorageData>(fileStream)
-               ?? new LocalStorageData();
+        return JsonSerializer.Deserialize<ConfigurationData>(fileStream)
+               ?? new ConfigurationData();
     }
 
-    private void _writeData(LocalStorageData data)
+    private void _writeData(ConfigurationData data)
     {
         using var fileStream = File.Create(_filePath);
         JsonSerializer.Serialize(fileStream, data, JsonSerializerOptions);

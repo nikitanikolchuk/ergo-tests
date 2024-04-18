@@ -12,7 +12,7 @@ namespace TestAdministration.ViewModels;
 /// A ViewModel for user and test data storage configuration.
 /// </summary>
 public class LoginScreenViewModel(
-    LocalStorageService localStorageService,
+    ConfigurationService configurationService,
     UserService userService,
     IContentDialogService contentDialogService
 ) : ViewModelBase
@@ -24,15 +24,15 @@ public class LoginScreenViewModel(
 
     public string SharePointTestDataPath
     {
-        get => localStorageService.SharePointTestDataPath;
+        get => configurationService.SharePointTestDataPath;
         set
         {
-            if (localStorageService.SharePointTestDataPath == value)
+            if (configurationService.SharePointTestDataPath == value)
             {
                 return;
             }
 
-            localStorageService.SharePointTestDataPath = value;
+            configurationService.SharePointTestDataPath = value;
             OnPropertyChanged();
         }
     }
@@ -56,15 +56,15 @@ public class LoginScreenViewModel(
 
     public string LocalTestDataPath
     {
-        get => localStorageService.LocalTestDataPath;
+        get => configurationService.LocalTestDataPath;
         set
         {
-            if (localStorageService.LocalTestDataPath == value)
+            if (configurationService.LocalTestDataPath == value)
             {
                 return;
             }
 
-            localStorageService.LocalTestDataPath = value;
+            configurationService.LocalTestDataPath = value;
             OnPropertyChanged();
         }
     }
@@ -86,15 +86,15 @@ public class LoginScreenViewModel(
 
     public ImmutableList<string> Users
     {
-        get => localStorageService.LocalUsers;
+        get => configurationService.LocalUsers;
         private set
         {
-            if (localStorageService.LocalUsers == value)
+            if (configurationService.LocalUsers == value)
             {
                 return;
             }
 
-            localStorageService.LocalUsers = value;
+            configurationService.LocalUsers = value;
             OnPropertyChanged();
         }
     }
