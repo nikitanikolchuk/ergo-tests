@@ -317,7 +317,7 @@
                             <ui:MenuItem
                                 Icon="{ui:SymbolIcon Delete24}"
                                 Header="Odstranit uživatele"
-                                Command="{Binding OnOpemDeleteUserDialogCommand}"
+                                Command="{Binding OnOpenDeleteUserDialogCommand}"
                                 CommandParameter="{StaticResource DeleteUserDialog}" />
                         </ContextMenu>
                     </ui:DropDownButton.Flyout>

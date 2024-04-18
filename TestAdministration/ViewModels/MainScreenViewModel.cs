@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Services;
+using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
 
@@ -52,15 +53,15 @@ public partial class MainScreenViewModel(
         }
     }
 
-    public ICommand ResultsButtonCommand => new RelayCommand(_ =>
+    public ICommand ResultsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start("explorer.exe", _dataPath)
     );
 
-    public ICommand TextManualsButtonCommand => new RelayCommand(_ =>
+    public ICommand TextManualsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true })
     );
 
-    public ICommand VideoManualsButtonCommand => new RelayCommand(_ =>
+    public ICommand VideoManualsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
     );
 }

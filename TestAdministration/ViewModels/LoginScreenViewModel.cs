@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using TestAdministration.Models.Services;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
 
@@ -143,17 +144,26 @@ public class LoginScreenViewModel(
         }
     }
 
-    public ICommand OnOpenSharePointConfigDialogCommand => new RelayCommand(_onOpenSharePointConfigDialog);
-    public ICommand OnOpenLocalConfigDialogCommand => new RelayCommand(_onOpenLocalConfigDialog);
-    public ICommand OnOpenDirectoryCommand => new RelayCommand(_onOpenDirectory);
-    public ICommand OnOpenAddUserDialogCommand => new RelayCommand(_onOpenAddUserDialog);
-    public ICommand OnOpemDeleteUserDialogCommand => new RelayCommand(_onOpenDeleteUserDialog);
+    public ICommand OnOpenSharePointConfigDialogCommand =>
+        new RelayCommand<ContentDialog>(_onOpenSharePointConfigDialog);
 
-    private async void _onOpenSharePointConfigDialog(object? obj)
+    public ICommand OnOpenLocalConfigDialogCommand =>
+        new RelayCommand<ContentDialog>(_onOpenLocalConfigDialog);
+
+    public ICommand OnOpenDirectoryCommand =>
+        new RelayCommand<object?>(_ => _onOpenDirectory());
+
+    public ICommand OnOpenAddUserDialogCommand =>
+        new RelayCommand<ContentDialog>(_onOpenAddUserDialog);
+
+    public ICommand OnOpenDeleteUserDialogCommand =>
+        new RelayCommand<ContentDialog>(_onOpenDeleteUserDialog);
+
+    private async void _onOpenSharePointConfigDialog(ContentDialog? content)
     {
-        if (obj is not ContentDialog content)
+        if (content is null)
         {
-            throw new ArgumentException("Command parameter is not a ContentDialog");
+            throw new ArgumentException("Content is null");
         }
 
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
@@ -166,11 +176,11 @@ public class LoginScreenViewModel(
         NewSharePointTestDataPath = string.Empty;
     }
 
-    private async void _onOpenLocalConfigDialog(object? obj)
+    private async void _onOpenLocalConfigDialog(ContentDialog? content)
     {
-        if (obj is not ContentDialog content)
+        if (content is null)
         {
-            throw new ArgumentException("Command parameter is not a ContentDialog");
+            throw new ArgumentException("Content is null");
         }
 
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
@@ -183,7 +193,7 @@ public class LoginScreenViewModel(
         NewLocalTestDataPath = string.Empty;
     }
 
-    private void _onOpenDirectory(object? obj)
+    private void _onOpenDirectory()
     {
         OpenFolderDialog openFolderDialog = new()
         {
@@ -203,11 +213,11 @@ public class LoginScreenViewModel(
         NewLocalTestDataPath = openFolderDialog.FolderNames.First();
     }
 
-    private async void _onOpenAddUserDialog(object? obj)
+    private async void _onOpenAddUserDialog(ContentDialog? content)
     {
-        if (obj is not ContentDialog content)
+        if (content is null)
         {
-            throw new ArgumentException("Command parameter is not a ContentDialog");
+            throw new ArgumentException("Content is null");
         }
 
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
@@ -220,11 +230,11 @@ public class LoginScreenViewModel(
         NewUser = string.Empty;
     }
 
-    private async void _onOpenDeleteUserDialog(object? obj)
+    private async void _onOpenDeleteUserDialog(ContentDialog? content)
     {
-        if (obj is not ContentDialog content)
+        if (content is null)
         {
-            throw new ArgumentException("Command parameter is not a ContentDialog");
+            throw new ArgumentException("Content is null");
         }
 
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
