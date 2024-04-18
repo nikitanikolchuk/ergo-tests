@@ -6,7 +6,7 @@ using static TestAdministration.Models.Mappers.CsvMapperConfiguration;
 namespace TestAdministration.Models.Mappers;
 
 /// <summary>
-/// <c>ClassMap</c> implementation for Nine Hole Peg Test.
+/// <see cref="ClassMap{Test}"/> implementation for Nine Hole Peg Test.
 /// </summary>
 public sealed class NhptCsvMapper : ClassMap<Test>
 {
@@ -33,7 +33,7 @@ public sealed class NhptCsvMapper : ClassMap<Test>
             .Name("Cas_zahajeni")
             .Convert(args => args.Value.StartTime.ToString(TimeFormat));
         Map(t => t.EndTime)
-            .Name("Cas_zakonceni")
+            .Name("Cas_ukonceni")
             .Convert(args => args.Value.StartTime.ToString(TimeFormat));
 
         _mapSections();
@@ -46,7 +46,7 @@ public sealed class NhptCsvMapper : ClassMap<Test>
     private static string _createNotes(Test test) =>
         test.Sections
             .SelectMany(s => s.Trials.Select(t => t.Note))
-            .Select((note, i) => note != null ? $"{NoteNames[i]}: {note}" : "")
+            .Select((note, i) => !string.IsNullOrWhiteSpace(note) ? $"{NoteNames[i]}: {note}" : "")
             .Where(note => note != "")
             .Aggregate((i, j) => i + '\n' + j);
 
@@ -105,7 +105,7 @@ public sealed class NhptCsvMapper : ClassMap<Test>
     )
     {
         _mapValue(
-            $"{namePrefix}_zkus{namePostfix}", 
+            $"{namePrefix}_zkus{namePostfix}",
             t => trialValueSelector(t.Sections[section].Trials[0])
         );
         _mapValue(
@@ -117,7 +117,7 @@ public sealed class NhptCsvMapper : ClassMap<Test>
             t => trialValueSelector(t.Sections[section].Trials[2])
         );
         _mapValue(
-            $"{namePrefix}_3_pokus{namePostfix}", 
+            $"{namePrefix}_3_pokus{namePostfix}",
             t => trialValueSelector(t.Sections[section].Trials[3])
         );
         _mapValue(

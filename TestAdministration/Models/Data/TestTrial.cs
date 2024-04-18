@@ -14,7 +14,7 @@ public record TestTrial(
     float? Value,
     float? SdScore,
     float? NormDifference,
-    string? Note
+    string Note
 )
 {
     public virtual bool Equals(TestTrial? other)

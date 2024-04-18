@@ -5,7 +5,7 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Builders;
 
 /// <summary>
-/// Base implementation of <c>ITestSectionBuilder</c> interface.
+/// Base implementation of <see cref="ITestSectionBuilder"/> interface.
 /// </summary>
 /// <param name="testCalculator">A calculator for norm comparisons.</param>
 public abstract class AbstractTestSectionBuilder<T>(
@@ -16,12 +16,12 @@ public abstract class AbstractTestSectionBuilder<T>(
     public abstract int SectionCount { get; }
     public abstract int TrialCount { get; }
 
-    public TestTrial BuildTrial(float? value, string? note, int section, Patient patient)
+    public TestTrial BuildTrial(float? value, string note, int section, Patient patient)
     {
-        float? sdScore = value != null
+        var sdScore = value != null
             ? testCalculator.SdScore(value.Value, section, patient)
             : null;
-        float? normDifference = value != null
+        var normDifference = value != null
             ? testCalculator.NormDifference(value.Value, section, patient)
             : null;
         return new TestTrial(value, sdScore, normDifference, note);

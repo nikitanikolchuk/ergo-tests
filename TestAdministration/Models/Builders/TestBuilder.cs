@@ -55,7 +55,7 @@ public class TestBuilder(
         return this;
     }
 
-    public ITestBuilder AddValue(float? value, string? note)
+    public ITestBuilder AddValue(float? value, string note)
     {
         if (_patient == null)
         {
@@ -107,7 +107,7 @@ public class TestBuilder(
 
         while (!IsFinished)
         {
-            AddValue(null, null);
+            AddValue(null, string.Empty);
         }
 
         var sections = sectionBuilder.BuildSections(_trials, _patient);

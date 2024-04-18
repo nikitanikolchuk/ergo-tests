@@ -5,8 +5,8 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Builders;
 
 /// <summary>
-/// <c>ITestSectionBuilder</c> implementation for Purdue Pegboard Test.
-/// Additionally creates a test section that contains sums of
+/// <see cref="ITestSectionBuilder"/> implementation for Purdue Pegboard Test.
+/// Additionally, creates a test section that contains sums of
 /// values from first 3 sections.
 /// </summary>
 public class PptTestSectionBuilder(
@@ -46,7 +46,7 @@ public class PptTestSectionBuilder(
             }
 
             var sum = trials[i].Value + second[i].Value ?? second[i].Value;
-            trials[i] = BuildTrial(sum, null, TotalSection, patient);
+            trials[i] = BuildTrial(sum, string.Empty, TotalSection, patient);
         }
 
         return trials;

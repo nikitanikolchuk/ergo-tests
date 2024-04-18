@@ -35,7 +35,7 @@ public interface ITestSectionBuilder
     /// </param>
     /// <param name="patient">The patient for calculating comparison values.</param>
     /// <returns>A new TestTrial.</returns>
-    TestTrial BuildTrial(float? value, string? note, int section, Patient patient);
+    TestTrial BuildTrial(float? value, string note, int section, Patient patient);
 
     /// <summary>
     /// Creates test sections from added values.

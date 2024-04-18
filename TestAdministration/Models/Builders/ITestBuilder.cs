@@ -65,7 +65,7 @@ public interface ITestBuilder
     /// <param name="note">The current trial's note.</param>
     /// <returns>The updated builder instance.</returns>
     /// <exception cref="InvalidOperationException">Thrown if <c>IsFinished</c> is true.</exception>
-    ITestBuilder AddValue(float? value, string? note);
+    ITestBuilder AddValue(float? value, string note);
 
     /// <summary>
     /// Creates a <c>Test</c> instance using previously set values.
