@@ -120,7 +120,7 @@
             <ui:NavigationViewItem
                 Content="Odhlášení"
                 Command="{
-                    Binding MainWindowViewModel.DisplayLoginScreenCommand,
+                    Binding MainWindowViewModel.OnDisplayLoginScreenCommand,
                     Source={StaticResource ViewModelLocator}
                 }">
 

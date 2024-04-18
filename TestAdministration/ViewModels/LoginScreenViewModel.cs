@@ -78,8 +78,6 @@ public class LoginScreenViewModel(
                 return;
             }
 
-            // TODO: add validation
-
             _newLocalTestDataPath = value;
             OnPropertyChanged();
         }

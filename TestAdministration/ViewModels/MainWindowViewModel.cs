@@ -1,5 +1,7 @@
 using System.Windows.Input;
 using Wpf.Ui;
+using Wpf.Ui.Controls;
+using static System.String;
 
 namespace TestAdministration.ViewModels;
 
@@ -35,32 +37,59 @@ public class MainWindowViewModel(
         }
     }
 
-    /// <summary>
-    /// Displays main screen using chosen login credentials.
-    /// </summary>
-    public ICommand DisplayMainScreenCommand =>
-        new RelayCommand(
-            _ => _displayMainScreen(),
-            _ => ScreenViewModel is not MainScreenViewModel
-        );
+    public ICommand OnDisplaySharePointMainScreenCommand => new RelayCommand(
+        _ => _onDisplaySharePointMainScreen()
+    );
 
-    /// <summary>
-    /// Logs out the current user and displays initial login page. 
-    /// </summary>
-    public ICommand DisplayLoginScreenCommand =>
-        new RelayCommand(
-            _ => _displayLoginScreen(),
-            _ => ScreenViewModel is not LoginScreenViewModel
-        );
+    public ICommand OnDisplayLocalMainScreenCommand => new RelayCommand(
+        _ => _onDisplayLocalMainScreen()
+    );
 
-    private void _displayMainScreen()
+    public ICommand OnDisplayLoginScreenCommand => new RelayCommand(
+        _ => _onDisplayLoginScreen()
+    );
+
+    private void _onDisplaySharePointMainScreen()
     {
-        // TODO: add login logic
+        // TODO: add validation
 
         ScreenViewModel = mainScreenViewModel;
     }
 
-    private void _displayLoginScreen()
+    private async void _onDisplayLocalMainScreen()
+    {
+        if (loginScreenViewModel.CurrentUser is null)
+        {
+            var messageBox = new MessageBox
+            {
+                Title = "Chyba",
+                Content = "Nevybral(a) jste uživatelský účet",
+                CloseButtonText = "Zavřít"
+            };
+
+            await messageBox.ShowDialogAsync();
+            return;
+        }
+
+        if (loginScreenViewModel.LocalTestDataPath == Empty)
+        {
+            var messageBox = new MessageBox
+            {
+                Title = "Chyba",
+                Content = "Nevybral(a) jste adresář pro uložení dat",
+                CloseButtonText = "Zavřít"
+            };
+
+            await messageBox.ShowDialogAsync();
+            return;
+        }
+
+        // TODO: add storage choice
+
+        ScreenViewModel = mainScreenViewModel;
+    }
+
+    private void _onDisplayLoginScreen()
     {
         // TODO: add logout logic
 

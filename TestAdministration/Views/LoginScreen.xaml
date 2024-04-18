@@ -78,6 +78,7 @@
                     <ui:TextBox
                         Grid.Column="0"
                         Margin="0,0,16,0"
+                        IsReadOnly="True"
                         Text="{Binding NewLocalTestDataPath}" />
 
                     <ui:Button
@@ -241,7 +242,7 @@
                     Appearance="Primary"
                     Content="Přihlásit se"
                     Command="{
-                        Binding MainWindowViewModel.DisplayMainScreenCommand,
+                        Binding MainWindowViewModel.OnDisplaySharePointMainScreenCommand,
                         Source={StaticResource ViewModelLocator}
                     }" />
 
@@ -326,7 +327,7 @@
                     Appearance="Primary"
                     Content="Přihlásit se"
                     Command="{
-                        Binding MainWindowViewModel.DisplayMainScreenCommand,
+                        Binding MainWindowViewModel.OnDisplayLocalMainScreenCommand,
                         Source={StaticResource ViewModelLocator}
                     }" />
             </StackPanel>
