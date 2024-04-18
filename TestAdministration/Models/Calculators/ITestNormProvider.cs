@@ -1,5 +1,3 @@
-using TestAdministration.Models.Data;
-
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
@@ -8,11 +6,15 @@ namespace TestAdministration.Models.Calculators;
 public interface ITestNormProvider
 {
     /// <summary>
-    /// Get corresponding norm values.
+    /// Defines if the resulting value should be multiplied by -1.
     /// </summary>
-    /// <param name="section">Test's section number starting from zero.</param>
-    /// <param name="patient">The tested patient.</param>
-    /// <param name="age">Current patient's age.</param>
-    /// <returns>A corresponding <c>TestNorm</c>.</returns>
-    public TestNorm Get(int section, Patient patient, int age);
+    public bool IsInverted { get; }
+
+    /// <summary>
+    /// Returns a sorted dictionary where keys are lower bounds for
+    /// age categories and values are corresponding norms.
+    /// </summary>
+    /// <param name="section">Test section number starting from zero.</param>
+    /// <param name="isMale">The patient's gender.</param>
+    public SortedDictionary<int, TestNorm> GetNormDictionary(int section, bool isMale);
 }

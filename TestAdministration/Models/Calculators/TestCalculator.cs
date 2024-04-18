@@ -3,24 +3,38 @@ using TestAdministration.Models.Utils;
 
 namespace TestAdministration.Models.Calculators;
 
-/// <summary>
-/// An implementation of <c>ITestCalculator</c>.
-/// </summary>
 public class TestCalculator<T>(
     IDateProvider dateProvider,
     T normProvider
 ) : ITestCalculator<T> where T : ITestNormProvider
 {
-    public float SdScore(float value, int section, Patient patient)
+    private const int MinAge = 20;
+
+    public float? SdScore(float value, int section, Patient patient)
     {
-        var norm = normProvider.Get(section, patient, _age(patient));
-        return (value - norm.Average) / norm.Sd;
+        var norm = _getNorm(section, patient);
+        var sdScore = (value - norm?.Average) / norm?.Sd;
+        return normProvider.IsInverted ? -sdScore : sdScore;
     }
 
-    public float NormDifference(float value, int section, Patient patient)
+    public float? NormDifference(float value, int section, Patient patient)
     {
-        var norm = normProvider.Get(section, patient, _age(patient));
-        return value - norm.Average;
+        var norm = _getNorm(section, patient);
+        var normDifference = value - norm?.Average;
+        return normProvider.IsInverted ? -normDifference : normDifference;
+    }
+
+    private TestNorm? _getNorm(int section, Patient patient)
+    {
+        var age = _age(patient);
+        if (age < MinAge)
+        {
+            return null;
+        }
+
+        return normProvider.GetNormDictionary(section, patient.IsMale)
+            .Last(keyValuePair => keyValuePair.Key <= age)
+            .Value;
     }
 
     private int _age(Patient patient)

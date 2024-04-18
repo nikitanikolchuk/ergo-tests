@@ -1,12 +1,23 @@
-using TestAdministration.Models.Data;
-
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// <c>ITestNorms</c> implementation for Nine Hole Peg Test.
+/// <see cref="ITestNormProvider"/> implementation for Nine Hole Peg Test.
 /// </summary>
 public class NhptTestNormProvider : ITestNormProvider
 {
+    public bool IsInverted => true;
+
+    public SortedDictionary<int, TestNorm> GetNormDictionary(int section, bool isMale) => section switch
+    {
+        0 => isMale ? MaleDominantNorms : FemaleDominantNorms,
+        1 => isMale ? MaleNonDominantNorms : FemaleNonDominantNorms,
+        _ => throw new ArgumentOutOfRangeException(
+            nameof(section),
+            section,
+            "NHPT section number not in range 0..1"
+        )
+    };
+
     private static readonly SortedDictionary<int, TestNorm> MaleDominantNorms = new()
     {
         [20] = new TestNorm(1.9f, 16.1f),
@@ -70,31 +81,4 @@ public class NhptTestNormProvider : ITestNormProvider
         [70] = new TestNorm(2.7f, 22.0f),
         [75] = new TestNorm(4.3f, 24.6f)
     };
-
-    public TestNorm Get(int section, Patient patient, int age)
-    {
-        if (section != 0 && section != 1)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(section),
-                section,
-                "NHPT section number not in range 0..1"
-            );
-        }
-
-        ArgumentOutOfRangeException.ThrowIfLessThan(age, 20);
-
-        var isDominant = section == 0;
-        SortedDictionary<int, TestNorm> normDictionary;
-        if (patient.IsMale)
-        {
-            normDictionary = isDominant ? MaleDominantNorms : MaleNonDominantNorms;
-        }
-        else
-        {
-            normDictionary = isDominant ? FemaleDominantNorms : FemaleNonDominantNorms;
-        }
-
-        return normDictionary.Last(kvp => kvp.Key <= age).Value;
-    }
 }

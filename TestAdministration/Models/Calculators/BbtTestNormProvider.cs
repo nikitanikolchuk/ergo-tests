@@ -1,12 +1,23 @@
-using TestAdministration.Models.Data;
-
 namespace TestAdministration.Models.Calculators;
 
 /// <summary>
-/// <c>ITestNorms</c> implementation for Box and Block Test.
+/// <see cref="ITestNormProvider"/> implementation for Box and Block Test.
 /// </summary>
 public class BbtTestNormProvider : ITestNormProvider
 {
+    public bool IsInverted => false;
+
+    public SortedDictionary<int, TestNorm> GetNormDictionary(int section, bool isMale) => section switch
+    {
+        0 => isMale ? MaleDominantNorms : FemaleDominantNorms,
+        1 => isMale ? MaleNonDominantNorms : FemaleNonDominantNorms,
+        _ => throw new ArgumentOutOfRangeException(
+            nameof(section),
+            section,
+            "BBT section number not in range 0..1"
+        )
+    };
+
     private static readonly SortedDictionary<int, TestNorm> MaleDominantNorms = new()
     {
         [20] = new TestNorm(8.8f, 88.2f),
@@ -70,31 +81,4 @@ public class BbtTestNormProvider : ITestNormProvider
         [70] = new TestNorm(7.0f, 68.3f),
         [75] = new TestNorm(7.4f, 63.6f)
     };
-
-    public TestNorm Get(int section, Patient patient, int age)
-    {
-        if (section != 0 && section != 1)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(section),
-                section,
-                "BBT section number not in range 0..1"
-            );
-        }
-
-        ArgumentOutOfRangeException.ThrowIfLessThan(age, 20);
-
-        var isDominant = section == 0;
-        SortedDictionary<int, TestNorm> normDictionary;
-        if (patient.IsMale)
-        {
-            normDictionary = isDominant ? MaleDominantNorms : MaleNonDominantNorms;
-        }
-        else
-        {
-            normDictionary = isDominant ? FemaleDominantNorms : FemaleNonDominantNorms;
-        }
-
-        return normDictionary.Last(kvp => kvp.Key <= age).Value;
-    }
 }
