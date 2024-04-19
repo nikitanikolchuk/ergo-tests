@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:views="clr-namespace:TestAdministration.Views"
-    StartupUri="Views/MainWindow.xaml">
+    xmlns:views="clr-namespace:TestAdministration.Views">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -13,12 +12,6 @@
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
             </ResourceDictionary.MergedDictionaries>
-
-            <viewModels:ViewModelLocator x:Key="ViewModelLocator" />
-
-            <DataTemplate DataType="{x:Type viewModels:MainWindowViewModel}">
-                <views:MainWindow />
-            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
                 <views:LoginScreen />

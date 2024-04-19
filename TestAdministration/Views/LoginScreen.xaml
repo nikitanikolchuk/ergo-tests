@@ -3,23 +3,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    xmlns:views="clr-namespace:TestAdministration.Views"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
-    DataContext="{
-        Binding LoginScreenViewModel,
-        Source={StaticResource ViewModelLocator}
-    }">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:LoginScreenViewModel}">
 
     <UserControl.Resources>
         <ui:ContentDialog
             x:Key="SharePointConfigDialog"
             Title="Změna SharePoint adresáře"
             PrimaryButtonText="Potvrdit"
-            CloseButtonText="Zrušit"
-            DataContext="{
-                Binding LoginScreenViewModel,
-                Source={StaticResource ViewModelLocator}
-            }">
+            CloseButtonText="Zrušit">
 
             <StackPanel>
                 <ui:TextBlock
@@ -47,11 +45,7 @@
             x:Key="LocalConfigDialog"
             Title="Změna lokálního adresáře"
             PrimaryButtonText="Potvrdit"
-            CloseButtonText="Zrušit"
-            DataContext="{
-                Binding LoginScreenViewModel,
-                Source={StaticResource ViewModelLocator}
-            }">
+            CloseButtonText="Zrušit">
 
             <StackPanel>
                 <ui:TextBlock
@@ -96,11 +90,7 @@
             x:Key="AddUserDialog"
             Title="Přidání uživatele"
             PrimaryButtonText="Potvrdit"
-            CloseButtonText="Zrušit"
-            DataContext="{
-                Binding LoginScreenViewModel,
-                Source={StaticResource ViewModelLocator}
-            }">
+            CloseButtonText="Zrušit">
 
             <StackPanel>
                 <ui:TextBlock Margin="0,0,0,12" Text="Jméno a/nebo příjmení" />
@@ -113,11 +103,7 @@
             x:Key="DeleteUserDialog"
             Title="Odstranění uživatele"
             PrimaryButtonText="Potvrdit"
-            CloseButtonText="Zrušit"
-            DataContext="{
-                Binding LoginScreenViewModel,
-                Source={StaticResource ViewModelLocator}
-            }">
+            CloseButtonText="Zrušit">
 
             <StackPanel>
                 <ui:TextBlock Margin="0,0,0,12" Text="Uživatelský účet, který bude odstraněn" />
@@ -241,10 +227,12 @@
                     Margin="0,0,0,32"
                     Appearance="Primary"
                     Content="Přihlásit se"
-                    Command="{
-                        Binding MainWindowViewModel.OnDisplaySharePointMainScreenCommand,
-                        Source={StaticResource ViewModelLocator}
-                    }" />
+                    DataContext="{
+                        Binding DataContext,
+                        RelativeSource={RelativeSource AncestorType=views:MainWindow}
+                    }"
+                    d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+                    Command="{Binding OnDisplaySharePointMainScreenCommand}" />
 
                 <Grid Margin="0,0,0,32">
                     <Grid.ColumnDefinitions>
@@ -326,10 +314,12 @@
                 <ui:Button
                     Appearance="Primary"
                     Content="Přihlásit se"
-                    Command="{
-                        Binding MainWindowViewModel.OnDisplayLocalMainScreenCommand,
-                        Source={StaticResource ViewModelLocator}
-                    }" />
+                    DataContext="{
+                        Binding DataContext,
+                        RelativeSource={RelativeSource AncestorType=views:MainWindow}
+                    }"
+                    d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+                    Command="{Binding OnDisplayLocalMainScreenCommand}" />
             </StackPanel>
         </Border>
     </StackPanel>

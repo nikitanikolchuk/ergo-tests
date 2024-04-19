@@ -9,10 +9,6 @@
     Width="1100"
     Height="840"
     WindowStartupLocation="CenterScreen"
-    DataContext="{
-        Binding MainWindowViewModel,
-        Source={StaticResource ViewModelLocator}
-    }"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     d:DesignWidth="1920"

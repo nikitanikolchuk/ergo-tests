@@ -166,6 +166,7 @@ public class LoginScreenViewModel(
             throw new ArgumentException("Content is null");
         }
 
+        content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
         if (result == ContentDialogResult.Primary)
@@ -183,6 +184,7 @@ public class LoginScreenViewModel(
             throw new ArgumentException("Content is null");
         }
 
+        content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
         if (result == ContentDialogResult.Primary)
@@ -220,6 +222,7 @@ public class LoginScreenViewModel(
             throw new ArgumentException("Content is null");
         }
 
+        content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
         if (result == ContentDialogResult.Primary)
@@ -237,6 +240,7 @@ public class LoginScreenViewModel(
             throw new ArgumentException("Content is null");
         }
 
+        content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
         if (result == ContentDialogResult.Primary)

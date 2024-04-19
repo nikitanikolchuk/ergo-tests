@@ -4,10 +4,11 @@ namespace TestAdministration.Views;
 
 public partial class MainWindow
 {
-    public MainWindow()
+    public MainWindow(MainWindowViewModel mainWindowViewModel)
     {
         InitializeComponent();
 
-        ((MainWindowViewModel)DataContext).ContentDialogService.SetDialogHost(RootContentDialog);
+        mainWindowViewModel.ContentDialogService.SetDialogHost(RootContentDialog);
+        DataContext = mainWindowViewModel;
     }
 }

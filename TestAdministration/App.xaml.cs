@@ -1,21 +1,26 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using TestAdministration.Models.Services;
 using TestAdministration.ViewModels;
+using TestAdministration.Views;
 using Wpf.Ui;
 
 namespace TestAdministration;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App
 {
-    public static IServiceProvider ServiceProvider { get; private set; }
-
-    static App()
+    protected override void OnStartup(StartupEventArgs e)
     {
-        var services = _configureServices();
-        ServiceProvider = services.BuildServiceProvider();
+        base.OnStartup(e);
+
+        var serviceProvider = _configureServices().BuildServiceProvider();
+        var mainWindowViewModel = serviceProvider.GetService<MainWindowViewModel>()
+                                  ?? throw new InvalidOperationException(
+                                      $"Missing {typeof(MainWindowViewModel)} service");
+        var mainWindow = new MainWindow(mainWindowViewModel);
+
+        MainWindow = mainWindow;
+        MainWindow.Show();
     }
 
     private static IServiceCollection _configureServices() =>
