@@ -1,29 +1,30 @@
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Mappers;
+using TestAdministration.Models.Services;
 
 namespace TestAdministration.Models.Exporters;
 
 /// <summary>
-/// An implementation of <c>ICsvExporter</c> for local storage.
+/// An implementation of <see cref="ICsvExporter"/> for local storage.
 /// </summary>
-/// <param name="patientMapper">CSV mapper for <c>Test</c> objects.</param>
-/// <param name="testMapper">Test specific CSV mapper for <c>Test</c> objects.</param>
-/// <param name="path">The path for application-wide test results directory.</param>
+// TODO: add PPT and BBT mappers
 public class LocalCsvExporter(
+    ConfigurationService configurationService,
     ClassMap<Patient> patientMapper,
-    ClassMap<Test> testMapper,
-    string path
+    NhptCsvMapper nhptMapper
 ) : ICsvExporter
 {
     private const string Delimiter = ";";
 
     public void Export(Patient patient, Test test)
     {
-        var patientDirectory = Path.Combine(path, _directoryName(patient));
+        var patientDirectory = Path.Combine(configurationService.LocalTestDataPath, _directoryName(patient));
         Directory.CreateDirectory(patientDirectory);
 
         var patientPath = Path.Combine(patientDirectory, "Pacient.csv");
@@ -72,8 +73,21 @@ public class LocalCsvExporter(
             HasHeaderRecord = !fileExisted
         };
         using var csvWriter = new CsvWriter(writer, config);
+        var testMapper = _getMapper(test);
         csvWriter.Context.RegisterClassMap(testMapper);
 
         csvWriter.WriteRecords([test]);
     }
+
+    private ClassMap<Test> _getMapper(Test test) => test.Type switch
+    {
+        TestType.Nhpt => nhptMapper,
+        TestType.Ppt => throw new NotImplementedException(),
+        TestType.Bbt => throw new NotImplementedException(),
+        _ => throw new InvalidEnumArgumentException(
+            nameof(test.Type),
+            Convert.ToInt32(test.Type),
+            typeof(TestType)
+        )
+    };
 }
