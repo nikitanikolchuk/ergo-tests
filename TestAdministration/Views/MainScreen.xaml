@@ -132,5 +132,9 @@
                 </ui:NavigationViewItem.Foreground>
             </ui:NavigationViewItem>
         </ui:NavigationView.FooterMenuItems>
+
+        <ui:NavigationView.ContentOverlay>
+            <ContentPresenter Content="{Binding CurrentViewModel}" />
+        </ui:NavigationView.ContentOverlay>
     </ui:NavigationView>
 </UserControl>

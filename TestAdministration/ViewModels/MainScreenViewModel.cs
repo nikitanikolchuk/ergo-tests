@@ -12,7 +12,8 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public partial class MainScreenViewModel(
     UserService userService,
-    ITestStorage testStorage
+    ITestStorage testStorage,
+    InitContentViewModel initContentViewModel
 ) : ViewModelBase
 {
     private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
@@ -47,6 +48,8 @@ public partial class MainScreenViewModel(
             return $"{names[0][0]}{names[1][0]}";
         }
     }
+
+    public ViewModelBase CurrentViewModel => initContentViewModel;
 
     public ICommand ResultsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start("explorer.exe", testStorage.DataPath)
