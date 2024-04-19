@@ -1,9 +1,8 @@
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Services;
+using TestAdministration.Models.Storages;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
@@ -12,7 +11,8 @@ namespace TestAdministration.ViewModels;
 /// The ViewModel that handles navigation after logging in.
 /// </summary>
 public partial class MainScreenViewModel(
-    UserService userService
+    UserService userService,
+    ITestStorage testStorage
 ) : ViewModelBase
 {
     private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
@@ -20,11 +20,6 @@ public partial class MainScreenViewModel(
 
     [GeneratedRegex(@"\s+")]
     private static partial Regex WhitespaceRegex();
-
-    // TODO: replace with actual path
-    private readonly string _dataPath =
-        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-        ?? throw new ArgumentException("Can't get exe directory");
 
     public string CurrentUser => userService.CurrentUser ?? "";
 
@@ -54,7 +49,7 @@ public partial class MainScreenViewModel(
     }
 
     public ICommand ResultsButtonCommand => new RelayCommand<object?>(_ =>
-        Process.Start("explorer.exe", _dataPath)
+        Process.Start("explorer.exe", testStorage.DataPath)
     );
 
     public ICommand TextManualsButtonCommand => new RelayCommand<object?>(_ =>
