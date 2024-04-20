@@ -39,6 +39,6 @@ public class TestStorage(
         var surname = parts[1];
         var id = parts[2];
 
-        return new PatientDirectoryInfo(name, surname, id);
+        return new PatientDirectoryInfo(id, name, surname);
     }
 }
