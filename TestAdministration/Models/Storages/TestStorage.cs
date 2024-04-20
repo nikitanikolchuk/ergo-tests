@@ -35,8 +35,8 @@ public class TestStorage(
             return null;
         }
 
-        var name = parts[0];
-        var surname = parts[1];
+        var surname = parts[0];
+        var name = parts[1];
         var id = parts[2];
 
         return new PatientDirectoryInfo(id, name, surname);
