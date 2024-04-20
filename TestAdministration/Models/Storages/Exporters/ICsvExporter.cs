@@ -8,11 +8,16 @@ namespace TestAdministration.Models.Storages.Exporters;
 public interface ICsvExporter
 {
     /// <summary>
+    /// Exports the patient's personal data into the Pacient.csv
+    /// file inside the patient's directory if it does not
+    /// already exist.
+    /// </summary>
+    void Export(Patient patient);
+
+    /// <summary>
     /// Exports test data to a CSV file inside the patient's
     /// directory. Creates corresponding Patient.csv and
     /// [TEST_TYPE].csv files if not present.
     /// </summary>
-    /// <param name="patient">The tested patient.</param>
-    /// <param name="test">The test data.</param>
     void Export(Patient patient, Test test);
 }

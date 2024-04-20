@@ -25,6 +25,8 @@ public class TestStorage(
     public Test? GetLastTestByPatientId(TestType testType, string patientId) =>
         csvImporter.GetLastTestByPatientId(testType, patientId);
 
+    public void AddPatient(Patient patient) => csvExporter.Export(patient);
+
     public void AddTest(Patient patient, Test test) => csvExporter.Export(patient, test);
 
     private static PatientDirectoryInfo? _patientDirectoryInfoFromName(string directoryName)

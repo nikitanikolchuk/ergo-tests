@@ -32,6 +32,11 @@ public interface ITestStorage
     public Test? GetLastTestByPatientId(TestType testType, string patientId);
 
     /// <summary>
+    /// Saves patient data into the patient's directory.
+    /// </summary>
+    public void AddPatient(Patient patient);
+    
+    /// <summary>
     /// Saves test data into the patient's directory. Additionally
     /// saves patient info if not present. 
     /// </summary>

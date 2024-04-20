@@ -20,14 +20,27 @@ public class LocalCsvExporter(
     NhptCsvMapper nhptMapper
 ) : ICsvExporter
 {
+    private const string PatientFileName = "Pacient.csv";
     private const string Delimiter = ";";
+
+    public void Export(Patient patient)
+    {
+        var patientDirectory = Path.Combine(configurationService.LocalTestDataPath, _directoryName(patient));
+        Directory.CreateDirectory(patientDirectory);
+
+        var patientPath = Path.Combine(patientDirectory, PatientFileName);
+        if (!File.Exists(patientPath))
+        {
+            _exportPatient(patient, patientPath);
+        }
+    }
 
     public void Export(Patient patient, Test test)
     {
         var patientDirectory = Path.Combine(configurationService.LocalTestDataPath, _directoryName(patient));
         Directory.CreateDirectory(patientDirectory);
 
-        var patientPath = Path.Combine(patientDirectory, "Pacient.csv");
+        var patientPath = Path.Combine(patientDirectory, PatientFileName);
         if (!File.Exists(patientPath))
         {
             _exportPatient(patient, patientPath);
@@ -42,7 +55,8 @@ public class LocalCsvExporter(
     {
         var surname = patient.Surname.ToUpper().Replace(" ", "-");
         var name = patient.Name.ToUpper().Replace(" ", "-");
-        return $"{surname}_{name}";
+        var id = patient.Id.Replace(" ", "-");
+        return $"{surname}_{name}_{id}";
     }
 
     private void _exportPatient(Patient patient, string filePath)
