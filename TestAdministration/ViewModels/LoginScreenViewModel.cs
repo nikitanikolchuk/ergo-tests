@@ -27,11 +27,6 @@ public class LoginScreenViewModel(
         get => configurationService.SharePointTestDataPath;
         set
         {
-            if (configurationService.SharePointTestDataPath == value)
-            {
-                return;
-            }
-
             configurationService.SharePointTestDataPath = value;
             OnPropertyChanged();
         }
@@ -42,11 +37,6 @@ public class LoginScreenViewModel(
         get => _newSharePointTestDataPath;
         set
         {
-            if (_newSharePointTestDataPath == value)
-            {
-                return;
-            }
-
             // TODO: add validation
 
             _newSharePointTestDataPath = value;
@@ -59,11 +49,6 @@ public class LoginScreenViewModel(
         get => configurationService.LocalTestDataPath;
         set
         {
-            if (configurationService.LocalTestDataPath == value)
-            {
-                return;
-            }
-
             configurationService.LocalTestDataPath = value;
             OnPropertyChanged();
         }
@@ -74,11 +59,6 @@ public class LoginScreenViewModel(
         get => _newLocalTestDataPath;
         set
         {
-            if (_newLocalTestDataPath == value)
-            {
-                return;
-            }
-
             _newLocalTestDataPath = value;
             OnPropertyChanged();
         }
@@ -89,11 +69,6 @@ public class LoginScreenViewModel(
         get => configurationService.LocalUsers;
         private set
         {
-            if (configurationService.LocalUsers == value)
-            {
-                return;
-            }
-
             configurationService.LocalUsers = value;
             OnPropertyChanged();
         }
@@ -104,11 +79,6 @@ public class LoginScreenViewModel(
         get => userService.CurrentUser;
         set
         {
-            if (userService.CurrentUser == value)
-            {
-                return;
-            }
-
             userService.CurrentUser = value;
             OnPropertyChanged();
         }
@@ -119,11 +89,6 @@ public class LoginScreenViewModel(
         get => _newUser;
         set
         {
-            if (_newUser == value)
-            {
-                return;
-            }
-
             _newUser = value;
             OnPropertyChanged();
         }
@@ -134,11 +99,6 @@ public class LoginScreenViewModel(
         get => _userToDelete;
         set
         {
-            if (_userToDelete == value)
-            {
-                return;
-            }
-
             _userToDelete = value;
             OnPropertyChanged();
         }

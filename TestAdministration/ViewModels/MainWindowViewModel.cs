@@ -29,11 +29,6 @@ public class MainWindowViewModel(
         get => _screenViewModel;
         private set
         {
-            if (_screenViewModel == value)
-            {
-                return;
-            }
-
             _screenViewModel = value;
             OnPropertyChanged();
         }
