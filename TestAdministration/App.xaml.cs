@@ -21,9 +21,12 @@ public partial class App
         base.OnStartup(e);
 
         var serviceProvider = _configureServices().BuildServiceProvider();
-        var mainWindowViewModel = serviceProvider.GetService<MainWindowViewModel>()
-                                  ?? throw new InvalidOperationException(
-                                      $"Missing {typeof(MainWindowViewModel)} service");
+        var mainWindowViewModel = serviceProvider.GetService<MainWindowViewModel>();
+        if (mainWindowViewModel is null)
+        {
+            throw new InvalidOperationException($"Missing {typeof(MainWindowViewModel)} service");
+        }
+
         var mainWindow = new MainWindow(mainWindowViewModel);
 
         MainWindow = mainWindow;
@@ -44,5 +47,6 @@ public partial class App
             .AddSingleton<LocalCsvExporter>()
             .AddSingleton<ClassMap<Patient>, PatientCsvMapper>()
             .AddSingleton<NhptCsvMapper>()
-            .AddSingleton<InitContentViewModel>();
+            .AddSingleton<InitContentViewModel>()
+            .AddSingleton<TestingViewModelFactory>();
 }

@@ -203,7 +203,7 @@
             Padding="32"
             CornerRadius="4"
             BorderThickness="1"
-            BorderBrush="{StaticResource ControlElevationBorderBrush}">
+            BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
             <StackPanel>
                 <ui:TextBlock
@@ -245,7 +245,7 @@
                         Grid.Column="0"
                         Height="1"
                         BorderThickness="1"
-                        BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
+                        BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}" />
 
                     <ui:TextBlock
                         Grid.Column="1"
@@ -258,7 +258,7 @@
                         Grid.Column="2"
                         Height="1"
                         BorderThickness="1"
-                        BorderBrush="{StaticResource DividerStrokeColorDefaultBrush}" />
+                        BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}" />
                 </Grid>
 
                 <ui:TextBlock

@@ -37,8 +37,8 @@ public class TestStorage(
             return null;
         }
 
-        var surname = parts[0];
-        var name = parts[1];
+        var surname = parts[0].Replace('-', ' ');
+        var name = parts[1].Replace('-', ' ');
         var id = parts[2];
 
         return new PatientDirectoryInfo(id, name, surname);

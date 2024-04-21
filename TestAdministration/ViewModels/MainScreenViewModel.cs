@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using Wpf.Ui.Input;
@@ -13,7 +14,8 @@ namespace TestAdministration.ViewModels;
 public partial class MainScreenViewModel(
     UserService userService,
     ITestStorage testStorage,
-    InitContentViewModel initContentViewModel
+    InitContentViewModel initContentViewModel,
+    TestingViewModelFactory testingViewModelFactory
 ) : ViewModelBase
 {
     private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
@@ -21,6 +23,9 @@ public partial class MainScreenViewModel(
 
     [GeneratedRegex(@"\s+")]
     private static partial Regex WhitespaceRegex();
+
+    private string _contentHeader = string.Empty;
+    private ViewModelBase _currentViewModel = initContentViewModel;
 
     public string CurrentUser => userService.CurrentUser ?? "";
 
@@ -49,17 +54,51 @@ public partial class MainScreenViewModel(
         }
     }
 
-    public ViewModelBase CurrentViewModel => initContentViewModel;
+    public string ContentHeader
+    {
+        get => _contentHeader;
+        private set
+        {
+            _contentHeader = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ViewModelBase CurrentViewModel
+    {
+        get => _currentViewModel;
+        private set
+        {
+            _currentViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ICommand OnStartTestingCommand => new RelayCommand<TestType>(_onStartTesting);
 
     public ICommand ResultsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start("explorer.exe", testStorage.DataPath)
     );
 
-    public ICommand TextManualsButtonCommand => new RelayCommand<object?>(_ =>
+    public static ICommand TextManualsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true })
     );
 
-    public ICommand VideoManualsButtonCommand => new RelayCommand<object?>(_ =>
+    public static ICommand VideoManualsButtonCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
     );
+
+    private void _onStartTesting(TestType testType)
+    {
+        ContentHeader = testType switch
+        {
+            TestType.Nhpt => "Devítikolíkový Test",
+            TestType.Ppt => "Purdue Pegboard Test",
+            TestType.Bbt => "Box and Block Test",
+            _ => string.Empty
+        };
+
+        var testingViewModel = testingViewModelFactory.Create(testStorage, testType);
+        CurrentViewModel = testingViewModel;
+    }
 }

@@ -11,12 +11,18 @@ namespace TestAdministration.ViewModels;
 public class MainScreenViewModelFactory(
     UserService userService,
     TestStorageFactory testStorageFactory,
-    InitContentViewModel initContentViewModel
+    InitContentViewModel initContentViewModel,
+    TestingViewModelFactory testingViewModelFactory
 )
 {
     public MainScreenViewModel Create(StorageType storageType)
     {
         var testStorage = testStorageFactory.Create(storageType);
-        return new MainScreenViewModel(userService, testStorage, initContentViewModel);
+        return new MainScreenViewModel(
+            userService,
+            testStorage,
+            initContentViewModel,
+            testingViewModelFactory
+        );
     }
 }

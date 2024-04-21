@@ -24,6 +24,18 @@
             <DataTemplate DataType="{x:Type viewModels:InitContentViewModel}">
                 <views:InitContent />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:TestingViewModel}">
+                <views:Testing />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:PatientChoiceViewModel}">
+                <views:PatientChoice />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:NewPatientViewModel}">
+                <views:NewPatient />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

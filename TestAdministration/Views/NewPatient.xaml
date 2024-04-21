@@ -1,0 +1,132 @@
+<UserControl
+    x:Class="TestAdministration.Views.NewPatient"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:NewPatientViewModel}">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Nový pacient" />
+
+        <Border
+            Padding="32,16"
+            CornerRadius="4"
+            Background="{DynamicResource ControlSolidFillColorDefaultBrush}"
+            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+            BorderThickness="1">
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,16,0,64">
+                    <StackPanel Margin="0,0,32,0">
+                        <ui:TextBlock Margin="0,0,0,12" Text="Jméno" />
+
+                        <ui:TextBox
+                            Width="296"
+                            PlaceholderText="Text"
+                            Text="{
+                                Binding Name,
+                                UpdateSourceTrigger=PropertyChanged
+                            }" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <ui:TextBlock Margin="0,0,0,12" Text="Příjmení" />
+
+                        <ui:TextBox
+                            Width="296"
+                            PlaceholderText="Text"
+                            Text="{
+                                Binding Surname,
+                                UpdateSourceTrigger=PropertyChanged
+                            }" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,64">
+                    <StackPanel Margin="0,0,32,0">
+                        <ui:TextBlock Margin="0,0,0,12" Text="Rodné číslo bez lomítka (nebo ekvivalent)" />
+
+                        <ui:TextBox
+                            Width="296"
+                            PlaceholderText="Text"
+                            Text="{
+                                Binding Id,
+                                UpdateSourceTrigger=PropertyChanged
+                            }" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <ui:TextBlock Margin="0,0,0,12" Text="Pohlaví" />
+
+                        <ComboBox
+                            MinWidth="296"
+                            ItemsSource="{Binding GenderVariants}"
+                            SelectedValue="{Binding Gender}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,48">
+                    <StackPanel Margin="0,0,32,0">
+                        <ui:TextBlock Margin="0,0,0,12" Text="Datum narození" />
+
+                        <DatePicker
+                            x:Name="DatePicker"
+                            Width="296"
+                            SelectedDateFormat="Short"
+                            SelectedDate="{Binding BirthDate}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,32,0">
+                        <ui:TextBlock Margin="0,0,0,12" Text="Dominantní HK" />
+
+                        <ComboBox
+                            MinWidth="132"
+                            ItemsSource="{Binding DominantHandVariants}"
+                            SelectedValue="{Binding DominantHand}" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <ui:TextBlock Margin="0,0,0,12" Text="HK s patologií" />
+
+                        <ComboBox
+                            MinWidth="132"
+                            ItemsSource="{Binding PathologicalHandVariants}"
+                            SelectedValue="{Binding PathologicalHand}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                    <ui:Button
+                        Margin="0,0,32,0"
+                        Width="120"
+                        Appearance="Primary"
+                        Content="Uložit"
+                        Command="{
+                            Binding DataContext.OnAddPatient,
+                            RelativeSource={RelativeSource AncestorType=views:Testing}
+                        }"
+                        CommandParameter="{Binding AddPatient}" />
+
+                    <ui:Button
+                        Width="120"
+                        Content="Zrušit"
+                        DataContext="{
+                            Binding DataContext,
+                            RelativeSource={RelativeSource AncestorType=views:Testing}
+                        }"
+                        d:DataContext="{d:DesignInstance viewModels:TestingViewModel}"
+                        Command="{Binding OnOpenPatientChoice}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
