@@ -7,6 +7,8 @@ namespace TestAdministration.Models.Storages.Mappers;
 /// </summary>
 public static class CsvMapperConfiguration
 {
+    public const string Delimiter = ";";
+    public const string Culture = "cs";
     public const string DateFormat = "dd.MM.yyyy";
     public const string TimeFormat = "HH:mm";
 

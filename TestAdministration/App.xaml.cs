@@ -1,7 +1,5 @@
 ﻿using System.Windows;
-using CsvHelper.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using TestAdministration.Models.Storages.Exporters;
@@ -45,7 +43,7 @@ public partial class App
             .AddSingleton<LocalFileSystem>()
             .AddSingleton<LocalCsvImporter>()
             .AddSingleton<LocalCsvExporter>()
-            .AddSingleton<ClassMap<Patient>, PatientCsvMapper>()
+            .AddSingleton<PatientCsvConverter>()
             .AddSingleton<NhptCsvMapper>()
             .AddSingleton<InitContentViewModel>()
             .AddSingleton<TestingViewModelFactory>();

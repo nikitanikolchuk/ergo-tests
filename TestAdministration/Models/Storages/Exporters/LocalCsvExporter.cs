@@ -5,7 +5,7 @@ using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
 using TestAdministration.Models.Data;
-using TestAdministration.Models.Services;
+using TestAdministration.Models.Storages.FileSystems;
 using TestAdministration.Models.Storages.Mappers;
 
 namespace TestAdministration.Models.Storages.Exporters;
@@ -15,8 +15,8 @@ namespace TestAdministration.Models.Storages.Exporters;
 /// </summary>
 // TODO: add PPT and BBT mappers
 public class LocalCsvExporter(
-    ConfigurationService configurationService,
-    ClassMap<Patient> patientMapper,
+    LocalFileSystem fileSystem,
+    PatientCsvConverter patientCsvConverter,
     NhptCsvMapper nhptMapper
 ) : ICsvExporter
 {
@@ -25,7 +25,7 @@ public class LocalCsvExporter(
 
     public void Export(Patient patient)
     {
-        var patientDirectory = Path.Combine(configurationService.LocalTestDataPath, _directoryName(patient));
+        var patientDirectory = Path.Combine(fileSystem.TestDataPath, _directoryName(patient));
         Directory.CreateDirectory(patientDirectory);
 
         var patientPath = Path.Combine(patientDirectory, PatientFileName);
@@ -37,7 +37,7 @@ public class LocalCsvExporter(
 
     public void Export(Patient patient, Test test)
     {
-        var patientDirectory = Path.Combine(configurationService.LocalTestDataPath, _directoryName(patient));
+        var patientDirectory = Path.Combine(fileSystem.TestDataPath, _directoryName(patient));
         Directory.CreateDirectory(patientDirectory);
 
         var patientPath = Path.Combine(patientDirectory, PatientFileName);
@@ -64,15 +64,11 @@ public class LocalCsvExporter(
         using var stream = File.Open(filePath, FileMode.CreateNew);
         using var writer = new StreamWriter(stream, new UTF8Encoding(true));
 
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            Delimiter = Delimiter,
-            HasHeaderRecord = true
-        };
+        var config = CsvConfiguration.FromAttributes<PatientCsvRecord>();
         using var csvWriter = new CsvWriter(writer, config);
-        csvWriter.Context.RegisterClassMap(patientMapper);
+        var record = patientCsvConverter.ToRecord(patient);
 
-        csvWriter.WriteRecords([patient]);
+        csvWriter.WriteRecords([record]);
     }
 
     private void _exportTest(Test test, string filePath)
