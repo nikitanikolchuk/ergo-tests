@@ -1,14 +1,16 @@
-<UserControl x:Class="TestAdministration.Views.PatientChoice"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-             xmlns:views="clr-namespace:TestAdministration.Views"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+<UserControl
+    x:Class="TestAdministration.Views.PatientChoice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}"
+    d:DesignHeight="300" d:DesignWidth="300">
+
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
@@ -26,11 +28,16 @@
                 UpdateSourceTrigger=PropertyChanged
             }" />
 
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         <ui:ListView
+            MaxHeight="360"
             BorderThickness="1,0"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
             ItemsSource="{Binding Patients}"
-            SelectedItem="{Binding SelectedPatient}">
+            SelectedItem="{
+                Binding DataContext.SelectedPatient,
+                RelativeSource={RelativeSource AncestorType=views:Testing}
+            }">
 
             <ui:ListView.View>
                 <ui:GridView>

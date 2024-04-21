@@ -15,7 +15,7 @@ public class TestStorage(
 
     public string DataPath => fileSystem.TestDataPath;
 
-    public IEnumerable<PatientDirectoryInfo> GetAllPatientsShort() =>
+    public IEnumerable<PatientDirectoryInfo> GetAllPatientDirectoryInfos() =>
         fileSystem.GetSubdirectoryNames()
             .Select(_patientDirectoryInfoFromName)
             .OfType<PatientDirectoryInfo>();
