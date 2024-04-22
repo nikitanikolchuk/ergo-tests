@@ -1,6 +1,8 @@
 using System.Windows.Input;
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
+using TestAdministration.Models.TestBuilders;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
@@ -10,13 +12,14 @@ namespace TestAdministration.ViewModels;
 /// A view model for choosing patients and conducting tests.
 /// </summary>
 public class TestingViewModel(
+    UserService userService,
+    ITestBuilderFactory testBuilderFactory,
     ITestStorage testStorage,
     TestType testType
 ) : ViewModelBase
 {
     private ViewModelBase _currentViewModel = new PatientChoiceViewModel(testStorage);
     private PatientDirectoryInfo? _currentPatientDirectoryInfo;
-    private Patient? _currentPatient;
 
     public ViewModelBase CurrentViewModel
     {
@@ -39,18 +42,10 @@ public class TestingViewModel(
 
             if (value is null)
             {
-                _currentPatient = null;
                 return;
             }
 
-            var patient = testStorage.GetPatientById(value.Id);
-            if (patient is null)
-            {
-                _alertInvalidPatientFile();
-                return;
-            }
-
-            CurrentViewModel = new TestConductionViewModel();
+            _onStartTesting(value.Id);
         }
     }
 
@@ -64,6 +59,19 @@ public class TestingViewModel(
 
     // ReSharper disable once UnusedMember.Global
     public ICommand OnAddPatient => new RelayCommand<Func<bool>>(_onAddPatient);
+
+    private static async void _alertInvalidPatientFile()
+    {
+        var messageBox = new MessageBox
+        {
+            Title = "Chyba",
+            Content = "Nesprávný formát souboru s osobními údaji pacienta nebo chybějící soubor. " +
+                      "Otevřete návod k použití pro více informace",
+            CloseButtonText = "Zavřít"
+        };
+
+        await messageBox.ShowDialogAsync();
+    }
 
     private void _onAddPatient(Func<bool>? addPatient)
     {
@@ -79,16 +87,17 @@ public class TestingViewModel(
         }
     }
 
-    private static async void _alertInvalidPatientFile()
+    private void _onStartTesting(string patientId)
     {
-        var messageBox = new MessageBox
+        var patient = testStorage.GetPatientById(patientId);
+        if (patient is null)
         {
-            Title = "Chyba",
-            Content = "Nesprávný formát souboru s osobními údaji pacienta nebo chybějící soubor. " +
-                      "Otevřete návod k použití pro více informace",
-            CloseButtonText = "Zavřít"
-        };
+            _alertInvalidPatientFile();
+            return;
+        }
 
-        await messageBox.ShowDialogAsync();
+        var testBuilder = testBuilderFactory.Create(testType);
+        var tester = userService.CurrentUser ?? string.Empty;
+        CurrentViewModel = new TestConductionViewModel(testBuilder, tester, patient);
     }
 }

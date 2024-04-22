@@ -6,6 +6,9 @@ using TestAdministration.Models.Storages.Exporters;
 using TestAdministration.Models.Storages.FileSystems;
 using TestAdministration.Models.Storages.Importers;
 using TestAdministration.Models.Storages.Mappers;
+using TestAdministration.Models.TestBuilders;
+using TestAdministration.Models.TestBuilders.Calculators;
+using TestAdministration.Models.Utils;
 using TestAdministration.ViewModels;
 using TestAdministration.Views;
 using Wpf.Ui;
@@ -46,5 +49,16 @@ public partial class App
             .AddSingleton<PatientCsvConverter>()
             .AddSingleton<NhptCsvMapper>()
             .AddSingleton<InitContentViewModel>()
-            .AddSingleton<TestingViewModelFactory>();
+            .AddSingleton<TestingViewModelFactory>()
+            .AddSingleton<ITestBuilderFactory, TestBuilderFactory>()
+            .AddSingleton<NhptTestSectionBuilder>()
+            .AddSingleton<PptTestSectionBuilder>()
+            .AddSingleton<BbtTestSectionBuilder>()
+            .AddSingleton<ITestCalculator<NhptTestNormProvider>, TestCalculator<NhptTestNormProvider>>()
+            .AddSingleton<ITestCalculator<PptTestNormProvider>, TestCalculator<PptTestNormProvider>>()
+            .AddSingleton<ITestCalculator<BbtTestNormProvider>, TestCalculator<BbtTestNormProvider>>()
+            .AddSingleton<IDateProvider, DateProvider>()
+            .AddSingleton<NhptTestNormProvider>()
+            .AddSingleton<PptTestNormProvider>()
+            .AddSingleton<BbtTestNormProvider>();
 }
