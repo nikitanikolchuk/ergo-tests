@@ -43,12 +43,14 @@ public sealed class NhptCsvMapper : ClassMap<Test>
             .Convert(args => _createNotes(args.Value));
     }
 
-    private static string _createNotes(Test test) =>
-        test.Sections
+    private static string _createNotes(Test test)
+    {
+        var notes = test.Sections
             .SelectMany(s => s.Trials.Select(t => t.Note))
             .Select((note, i) => !string.IsNullOrWhiteSpace(note) ? $"{NoteNames[i]}: {note}" : "")
-            .Where(note => note != "")
-            .Aggregate((i, j) => i + '\n' + j);
+            .Where(note => note != "");
+        return string.Join('\n', notes);
+    }
 
     private void _mapSections()
     {

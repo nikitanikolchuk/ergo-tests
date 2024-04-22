@@ -4,7 +4,7 @@ using TestAdministration.Models.Utils;
 namespace TestAdministration.Models.TestBuilders.Calculators;
 
 public class TestCalculator<T>(
-    IDateProvider dateProvider,
+    IDateTimeProvider dateTimeProvider,
     T normProvider
 ) : ITestCalculator<T> where T : ITestNormProvider
 {
@@ -39,7 +39,7 @@ public class TestCalculator<T>(
 
     private int _age(Patient patient)
     {
-        var today = dateProvider.Today;
+        var today = dateTimeProvider.Today;
         var age = today.Year - patient.BirthDate.Year;
         if (today.Month < patient.BirthDate.Month ||
             (today.Month == patient.BirthDate.Month && today.Day < patient.BirthDate.Day))

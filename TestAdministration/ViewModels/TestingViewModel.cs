@@ -3,6 +3,7 @@ using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using TestAdministration.Models.TestBuilders;
+using TestAdministration.Models.Utils;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
@@ -15,11 +16,13 @@ public class TestingViewModel(
     UserService userService,
     ITestBuilderFactory testBuilderFactory,
     ITestStorage testStorage,
+    IDateTimeProvider dateTimeProvider,
     TestType testType
 ) : ViewModelBase
 {
     private ViewModelBase _currentViewModel = new PatientChoiceViewModel(testStorage);
     private PatientDirectoryInfo? _currentPatientDirectoryInfo;
+    private Patient? _currentPatient;
 
     public ViewModelBase CurrentViewModel
     {
@@ -96,8 +99,29 @@ public class TestingViewModel(
             return;
         }
 
+        _currentPatient = patient;
         var testBuilder = testBuilderFactory.Create(testType);
         var tester = userService.CurrentUser ?? string.Empty;
-        CurrentViewModel = new TestConductionViewModel(testBuilder, tester, patient);
+        CurrentViewModel = new TestConductionViewModel(
+            testBuilder,
+            dateTimeProvider,
+            tester,
+            patient,
+            _onSaveTest
+        );
+    }
+
+    private void _onSaveTest(Test test)
+    {
+        if (_currentPatient is null)
+        {
+            throw new InvalidOperationException("Save test used without a chosen patient");
+        }
+
+        testStorage.AddTest(_currentPatient, test);
+        SelectedPatient = null;
+        _currentPatient = null;
+        // TODO: replace with result page
+        CurrentViewModel = new PatientChoiceViewModel(testStorage);
     }
 }

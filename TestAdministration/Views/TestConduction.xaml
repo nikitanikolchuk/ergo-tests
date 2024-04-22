@@ -129,7 +129,10 @@
                                     Content="Anulovat pokus"
                                     Command="{Binding OnIncrementAnnulations}"/>
 
-                                <ui:Button Width="136" Content="Ukončit testování" />
+                                <ui:Button
+                                    Width="136"
+                                    Content="Ukončit testování"
+                                    Command="{Binding OnFinishTesting}"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

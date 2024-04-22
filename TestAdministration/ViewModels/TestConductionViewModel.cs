@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.TestBuilders;
+using TestAdministration.Models.Utils;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
@@ -20,16 +21,27 @@ public partial class TestConductionViewModel : ViewModelBase
     private static partial Regex FloatRegex();
 
     private readonly TestBuilder _testBuilder;
+    private readonly IDateTimeProvider _dateTimeProvider;
+    private readonly Action<Test> _saveTest;
     private float? _currentValue;
     private string _currentValueString = string.Empty;
     private int _annulationCount;
     private string _currentNote = string.Empty;
 
-    public TestConductionViewModel(TestBuilder testBuilder, string tester, Patient patient)
+    public TestConductionViewModel(
+        TestBuilder testBuilder,
+        IDateTimeProvider dateTimeProvider,
+        string tester,
+        Patient patient,
+        Action<Test> saveTest)
     {
+        _dateTimeProvider = dateTimeProvider;
         _testBuilder = testBuilder;
         _testBuilder.SetTester(tester);
         _testBuilder.SetPatient(patient);
+        _testBuilder.SetDate(_dateTimeProvider.Today);
+        _testBuilder.SetStartTime(_dateTimeProvider.Now);
+        _saveTest = saveTest;
     }
 
     public string CurrentValue
@@ -88,6 +100,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     public ICommand OnIncrementAnnulations => new RelayCommand<object?>(_ => _onIncrementAnnulations());
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
+    public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
     private void _onIncrementAnnulations()
     {
@@ -108,6 +121,16 @@ public partial class TestConductionViewModel : ViewModelBase
         CurrentNote = string.Empty;
         AnnulationCount = 0;
 
-        // TODO: add test saving
+        if (_testBuilder.IsFinished)
+        {
+            _onFinishTesting();
+        }
+    }
+
+    private void _onFinishTesting()
+    {
+        _testBuilder.SetEndTime(_dateTimeProvider.Now);
+        var test = _testBuilder.Build();
+        _saveTest(test);
     }
 }
