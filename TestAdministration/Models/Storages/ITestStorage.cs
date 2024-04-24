@@ -3,7 +3,7 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.Models.Storages;
 
 /// <summary>
-/// An interface for importing/exporting test data. Abstracts
+/// A facade for importing/exporting test data. Abstracts
 /// CSV file creation for different storage types. 
 /// </summary>
 public interface ITestStorage

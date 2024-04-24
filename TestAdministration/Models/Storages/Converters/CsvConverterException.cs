@@ -1,4 +1,4 @@
-namespace TestAdministration.Models.Storages.Mappers;
+namespace TestAdministration.Models.Storages.Converters;
 
 /// <summary>
 /// A class for custom exceptions caused by invalid CSV file

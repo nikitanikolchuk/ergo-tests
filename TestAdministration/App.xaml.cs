@@ -2,10 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
+using TestAdministration.Models.Storages.Converters;
 using TestAdministration.Models.Storages.Exporters;
 using TestAdministration.Models.Storages.FileSystems;
 using TestAdministration.Models.Storages.Importers;
-using TestAdministration.Models.Storages.Mappers;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.TestBuilders.Calculators;
 using TestAdministration.Models.Utils;
@@ -47,7 +47,6 @@ public partial class App
             .AddSingleton<LocalCsvImporter>()
             .AddSingleton<LocalCsvExporter>()
             .AddSingleton<PatientCsvConverter>()
-            .AddSingleton<NhptCsvMapper>()
             .AddSingleton<InitContentViewModel>()
             .AddSingleton<TestingViewModelFactory>()
             .AddSingleton<ITestBuilderFactory, TestBuilderFactory>()
@@ -60,5 +59,8 @@ public partial class App
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
             .AddSingleton<NhptTestNormProvider>()
             .AddSingleton<PptTestNormProvider>()
-            .AddSingleton<BbtTestNormProvider>();
+            .AddSingleton<BbtTestNormProvider>()
+            .AddSingleton<NhptCsvConverter>()
+            .AddSingleton<PptCsvConverter>()
+            .AddSingleton<BbtCsvConverter>();
 }

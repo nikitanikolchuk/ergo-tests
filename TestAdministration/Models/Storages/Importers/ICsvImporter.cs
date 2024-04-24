@@ -11,11 +11,11 @@ public interface ICsvImporter
     /// Gets the patient from Patient.csv by ID specified in the
     /// corresponding directory's name.
     /// </summary>
-    public Patient? GetPatientById(string id);
+    public Patient? ImportPatientById(string id);
 
     /// <summary>
     /// Gets last test results from the [TEST_TYPE].csv by ID
     /// specified in the corresponding directory's name. 
     /// </summary>
-    public Test? GetLastTestByPatientId(TestType testType, string patientId);
+    public Test? ImportTestByPatientId(TestType testType, string patientId);
 }

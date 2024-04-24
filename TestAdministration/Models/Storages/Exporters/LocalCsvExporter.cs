@@ -1,27 +1,27 @@
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Storages.Converters;
 using TestAdministration.Models.Storages.FileSystems;
-using TestAdministration.Models.Storages.Mappers;
+using TestAdministration.Models.Storages.Records;
 
 namespace TestAdministration.Models.Storages.Exporters;
 
 /// <summary>
 /// An implementation of <see cref="ICsvExporter"/> for local storage.
 /// </summary>
-// TODO: add PPT and BBT mappers
 public class LocalCsvExporter(
     LocalFileSystem fileSystem,
-    PatientCsvConverter patientCsvConverter,
-    NhptCsvMapper nhptMapper
+    PatientCsvConverter patientConverter,
+    NhptCsvConverter nhptConverter,
+    PptCsvConverter pptConverter,
+    BbtCsvConverter bbtConverter
 ) : ICsvExporter
 {
     private const string PatientFileName = "Pacient.csv";
-    private const string Delimiter = ";";
 
     public void Export(Patient patient)
     {
@@ -66,7 +66,7 @@ public class LocalCsvExporter(
 
         var config = CsvConfiguration.FromAttributes<PatientCsvRecord>();
         using var csvWriter = new CsvWriter(writer, config);
-        var record = patientCsvConverter.ToRecord(patient);
+        var record = patientConverter.ToRecord(patient);
 
         csvWriter.WriteRecords([record]);
     }
@@ -77,27 +77,47 @@ public class LocalCsvExporter(
         using var stream = File.Open(filePath, FileMode.Append);
         using var writer = new StreamWriter(stream, new UTF8Encoding(true));
 
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            Delimiter = Delimiter,
-            HasHeaderRecord = !fileExisted
-        };
+        var config = _getConfig(test.Type);
+        config.HasHeaderRecord = !fileExisted;
         using var csvWriter = new CsvWriter(writer, config);
-        var testMapper = _getMapper(test);
-        csvWriter.Context.RegisterClassMap(testMapper);
 
-        csvWriter.WriteRecords([test]);
+        _writeRecord(csvWriter, test);
     }
 
-    private ClassMap<Test> _getMapper(Test test) => test.Type switch
+    private static CsvConfiguration _getConfig(TestType testType) => testType switch
     {
-        TestType.Nhpt => nhptMapper,
-        TestType.Ppt => throw new NotImplementedException(),
-        TestType.Bbt => throw new NotImplementedException(),
+        TestType.Nhpt => CsvConfiguration.FromAttributes<NhptCsvRecord>(),
+        TestType.Ppt => CsvConfiguration.FromAttributes<PptCsvRecord>(),
+        TestType.Bbt => CsvConfiguration.FromAttributes<BbtCsvRecord>(),
         _ => throw new InvalidEnumArgumentException(
-            nameof(test.Type),
-            Convert.ToInt32(test.Type),
+            nameof(testType),
+            Convert.ToInt32(testType),
             typeof(TestType)
         )
     };
+
+    private void _writeRecord(CsvWriter csvWriter, Test test)
+    {
+        switch (test.Type)
+        {
+            case TestType.Nhpt:
+                var nhptRecord = nhptConverter.ToRecord(test);
+                csvWriter.WriteRecords([nhptRecord]);
+                break;
+            case TestType.Ppt:
+                var pptRecord = pptConverter.ToRecord(test);
+                csvWriter.WriteRecords([pptRecord]);
+                break;
+            case TestType.Bbt:
+                var bbtRecord = bbtConverter.ToRecord(test);
+                csvWriter.WriteRecords([bbtRecord]);
+                break;
+            default:
+                throw new InvalidEnumArgumentException(
+                    nameof(test.Type),
+                    Convert.ToInt32(test.Type),
+                    typeof(TestType)
+                );
+        }
+    }
 }

@@ -3,13 +3,14 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Storages.Converters;
 
-namespace TestAdministration.Models.Storages.Mappers;
+namespace TestAdministration.Models.Storages.Records;
 
 /// <summary>
-/// A class for CSV conversion of <see cref="Hand"/> enum.
+/// A class for string conversion of <see cref="Hand"/> enum.
 /// </summary>
-public class HandCsvConverter : ITypeConverter
+public class HandCsvStringConverter : ITypeConverter
 {
     private const string Left = "levá";
     private const string Right = "pravá";
@@ -19,7 +20,7 @@ public class HandCsvConverter : ITypeConverter
     {
         if (value is not Hand hand)
         {
-            throw new ArgumentException("HandCsvConverter used not for Hand enum");
+            throw new ArgumentException("HandCsvStringConverter used not for Hand enum");
         }
 
         return hand switch
