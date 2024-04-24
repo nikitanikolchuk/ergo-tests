@@ -40,6 +40,10 @@
             <DataTemplate DataType="{x:Type viewModels:TestConductionViewModel}">
                 <views:TestConduction />
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModels:NhptRulesViewModel}">
+                <views:NhptRules />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

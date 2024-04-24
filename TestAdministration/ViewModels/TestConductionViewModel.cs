@@ -20,13 +20,14 @@ public partial class TestConductionViewModel : ViewModelBase
     [GeneratedRegex(@"^(?!0\d)\d+,?\d*$")]
     private static partial Regex FloatRegex();
 
-    private readonly TestBuilder _testBuilder;
+    private readonly ITestBuilder _testBuilder;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly Action<Test> _saveTest;
     private float? _currentValue;
     private string _currentValueString = string.Empty;
     private int _annulationCount;
     private string _currentNote = string.Empty;
+    private ViewModelBase? _currentRulesViewModel;
 
     public TestConductionViewModel(
         TestBuilder testBuilder,
@@ -36,12 +37,14 @@ public partial class TestConductionViewModel : ViewModelBase
         Action<Test> saveTest)
     {
         _dateTimeProvider = dateTimeProvider;
-        _testBuilder = testBuilder;
-        _testBuilder.SetTester(tester);
-        _testBuilder.SetPatient(patient);
-        _testBuilder.SetDate(_dateTimeProvider.Today);
-        _testBuilder.SetStartTime(_dateTimeProvider.Now);
+        _testBuilder = testBuilder
+            .SetTester(tester)
+            .SetPatient(patient)
+            .SetDate(_dateTimeProvider.Today)
+            .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
+        // TODO: replace with a choice
+        _currentRulesViewModel = new NhptRulesViewModel();
     }
 
     public string CurrentValue
@@ -85,6 +88,7 @@ public partial class TestConductionViewModel : ViewModelBase
         {
             _annulationCount = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(IsValueReadOnly));
         }
     }
 
@@ -96,6 +100,22 @@ public partial class TestConductionViewModel : ViewModelBase
             _currentNote = value;
             OnPropertyChanged();
         }
+    }
+
+    public ViewModelBase? CurrentRulesViewModel
+    {
+        get => _currentRulesViewModel;
+        set
+        {
+            _currentRulesViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+
+    // ReSharper disable once UnusedMember.Global
+    public string SelectedRule
+    {
+        set => CurrentNote += value;
     }
 
     public ICommand OnIncrementAnnulations => new RelayCommand<object?>(_ => _onIncrementAnnulations());
@@ -111,7 +131,6 @@ public partial class TestConductionViewModel : ViewModelBase
 
         AnnulationCount++;
         CurrentValue = string.Empty;
-        OnPropertyChanged(nameof(IsValueReadOnly));
     }
 
     private void _onAddValue()

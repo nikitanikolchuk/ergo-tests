@@ -1,0 +1,61 @@
+<UserControl
+    x:Class="TestAdministration.Views.NhptRules"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:NhptRulesViewModel}">
+
+    <UserControl.Resources>
+        <views:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
+
+        <DataTemplate x:Key="RuleItemTemplate" DataType="system:String">
+            <ui:TextBlock
+                Text="{Binding}"
+                TextWrapping="Wrap"
+                Width="{
+                    Binding ActualWidth,
+                    Converter={StaticResource TestRuleWidthConverter},
+                    RelativeSource={RelativeSource AncestorType=ui:ListView}
+                }" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Pokus musí být ihned přerušen a anulován, pokud:" />
+
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+        <ui:ListView
+            Margin="0,0,0,16"
+            ItemsSource="{Binding AnnulationRules}"
+            ItemTemplate="{StaticResource RuleItemTemplate}"
+            SelectedItem="{
+                Binding DataContext.SelectedRule,
+                Mode=OneWayToSource,
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
+            }" />
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Pokus může být dokončen, pokud:" />
+
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+        <ui:ListView
+            ItemsSource="{Binding ContinuationRules}"
+            ItemTemplate="{StaticResource RuleItemTemplate}"
+            SelectedItem="{
+                Binding DataContext.SelectedRule,
+                Mode=OneWayToSource,
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
+            }" />
+    </StackPanel>
+</UserControl>
