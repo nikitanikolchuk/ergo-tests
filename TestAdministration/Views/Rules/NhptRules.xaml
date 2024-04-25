@@ -1,28 +1,28 @@
 <UserControl
-    x:Class="TestAdministration.Views.NhptRules"
+    x:Class="TestAdministration.Views.Rules.NhptRules"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:views="clr-namespace:TestAdministration.Views"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance viewModels:NhptRulesViewModel}">
+    d:DataContext="{d:DesignInstance viewModelRules:NhptRulesViewModel}">
 
     <UserControl.Resources>
         <views:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
 
-        <DataTemplate x:Key="RuleItemTemplate" DataType="system:String">
+        <DataTemplate x:Key="TestRuleItemTemplate" DataType="system:String">
             <ui:TextBlock
                 Text="{Binding}"
                 TextWrapping="Wrap"
                 Width="{
-                    Binding ActualWidth,
-                    Converter={StaticResource TestRuleWidthConverter},
-                    RelativeSource={RelativeSource AncestorType=ui:ListView}
-                }" />
+                Binding ActualWidth,
+                Converter={StaticResource TestRuleWidthConverter},
+                RelativeSource={RelativeSource AncestorType=ui:ListView}
+            }" />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -36,7 +36,7 @@
         <ui:ListView
             Margin="0,0,0,16"
             ItemsSource="{Binding AnnulationRules}"
-            ItemTemplate="{StaticResource RuleItemTemplate}"
+            ItemTemplate="{StaticResource TestRuleItemTemplate}"
             SelectedItem="{
                 Binding DataContext.SelectedRule,
                 Mode=OneWayToSource,
@@ -51,7 +51,7 @@
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         <ui:ListView
             ItemsSource="{Binding ContinuationRules}"
-            ItemTemplate="{StaticResource RuleItemTemplate}"
+            ItemTemplate="{StaticResource TestRuleItemTemplate}"
             SelectedItem="{
                 Binding DataContext.SelectedRule,
                 Mode=OneWayToSource,

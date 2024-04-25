@@ -224,7 +224,7 @@
                 BorderThickness="1"
                 BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
-                <ui:DynamicScrollViewer Content="{Binding CurrentRulesViewModel}" />
+                <ui:DynamicScrollViewer Content="{Binding RulesViewModel}" />
             </Border>
         </Grid>
     </Border>

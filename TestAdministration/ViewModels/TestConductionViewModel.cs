@@ -27,13 +27,13 @@ public partial class TestConductionViewModel : ViewModelBase
     private string _currentValueString = string.Empty;
     private int _annulationCount;
     private string _currentNote = string.Empty;
-    private ViewModelBase? _currentRulesViewModel;
 
     public TestConductionViewModel(
         TestBuilder testBuilder,
         IDateTimeProvider dateTimeProvider,
         string tester,
         Patient patient,
+        ViewModelBase rulesViewModel,
         Action<Test> saveTest)
     {
         _dateTimeProvider = dateTimeProvider;
@@ -43,8 +43,7 @@ public partial class TestConductionViewModel : ViewModelBase
             .SetDate(_dateTimeProvider.Today)
             .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
-        // TODO: replace with a choice
-        _currentRulesViewModel = new NhptRulesViewModel();
+        RulesViewModel = rulesViewModel;
     }
 
     public string CurrentValue
@@ -102,15 +101,7 @@ public partial class TestConductionViewModel : ViewModelBase
         }
     }
 
-    public ViewModelBase? CurrentRulesViewModel
-    {
-        get => _currentRulesViewModel;
-        set
-        {
-            _currentRulesViewModel = value;
-            OnPropertyChanged();
-        }
-    }
+    public ViewModelBase RulesViewModel { get; }
 
     // ReSharper disable once UnusedMember.Global
     public string SelectedRule

@@ -8,8 +8,11 @@
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     xmlns:views="clr-namespace:TestAdministration.Views"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}"
-    d:DesignHeight="300" d:DesignWidth="300">
+    d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}">
+
+    <UserControl.Resources>
+        <views:TableRowWidthConverter x:Key="PptRuleRowWidthConverter" />
+    </UserControl.Resources>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <ui:TextBlock
@@ -27,6 +30,7 @@
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         <ui:ListView
+            MaxWidth="800"
             MaxHeight="360"
             BorderThickness="1,0"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
@@ -38,20 +42,32 @@
 
             <ui:ListView.View>
                 <ui:GridView>
-                    <GridViewColumn
-                        Width="267"
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource PptRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
                         DisplayMemberBinding="{Binding Surname}"
                         Header="Příjmení" />
 
-                    <GridViewColumn
-                        Width="267"
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource PptRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
                         DisplayMemberBinding="{Binding Name}"
                         Header="Jméno" />
 
-                    <GridViewColumn
-                        Width="266"
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource PptRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
                         DisplayMemberBinding="{Binding Id}"
-                        Header="ID" />
+                        Header="Rodné číslo" />
                 </ui:GridView>
             </ui:ListView.View>
         </ui:ListView>

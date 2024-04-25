@@ -1,0 +1,178 @@
+<UserControl
+    x:Class="TestAdministration.Views.Rules.PptRules"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelRules:PptRulesViewModel}">
+
+    <UserControl.Resources>
+        <views:TableRowWidthConverter x:Key="TestRuleRowWidthConverter" />
+        <viewRules:PptRuleRowConverter x:Key="TestRuleRowConverter" />
+
+        <DataTemplate x:Key="TestRuleRowSituationTemplate" DataType="viewModelRules:PptRuleRow">
+            <ui:TextBlock Text="{Binding Situation}" TextWrapping="Wrap" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="TestRuleRowSolutionTemplate" DataType="viewModelRules:PptRuleRow">
+            <ui:TextBlock Text="{Binding Solution}" TextWrapping="Wrap" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="TestRuleRowScoringTemplate" DataType="viewModelRules:PptRuleRow">
+            <ui:TextBlock Text="{Binding Scoring}" TextWrapping="Wrap" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Všechny subtesty:" />
+
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+        <ui:ListView
+            Margin="0,0,0,16"
+            BorderBrush="Transparent"
+            ItemsSource="{Binding CommonRules}"
+            SelectedItem="{
+                Binding DataContext.SelectedRule,
+                Mode=OneWayToSource,
+                Converter={StaticResource TestRuleRowConverter},
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
+            }">
+
+            <ui:ListView.View>
+                <ui:GridView>
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
+                        Header="Situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
+                        Header="Řešení situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
+                        Header="Vyhodnocení situace" />
+                </ui:GridView>
+            </ui:ListView.View>
+        </ui:ListView>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Subtest „Obě ruce“:" />
+
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+        <ui:ListView
+            Margin="0,0,0,16"
+            BorderBrush="Transparent"
+            ItemsSource="{Binding BothHandsRules}"
+            SelectedItem="{
+                Binding DataContext.SelectedRule,
+                Mode=OneWayToSource,
+                Converter={StaticResource TestRuleRowConverter},
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
+            }">
+
+            <ui:ListView.View>
+                <ui:GridView>
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
+                        Header="Situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
+                        Header="Řešení situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
+                        Header="Vyhodnocení situace" />
+                </ui:GridView>
+            </ui:ListView.View>
+        </ui:ListView>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Text="Subtest „Kompletování“:" />
+
+        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+        <ui:ListView
+            BorderBrush="Transparent"
+            ItemsSource="{Binding AssemblyRules}"
+            SelectedItem="{
+                Binding DataContext.SelectedRule,
+                Mode=OneWayToSource,
+                Converter={StaticResource TestRuleRowConverter},
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
+            }">
+
+            <ui:ListView.View>
+                <ui:GridView>
+                    <ui:GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
+                        Header="Situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
+                        Header="Řešení situace" />
+
+                    <GridViewColumn
+                        Width="{
+                            Binding ActualWidth,
+                            Converter={StaticResource TestRuleRowWidthConverter},
+                            RelativeSource={RelativeSource AncestorType=ui:ListView}
+                        }"
+                        CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
+                        Header="Vyhodnocení situace" />
+                </ui:GridView>
+            </ui:ListView.View>
+        </ui:ListView>
+    </StackPanel>
+</UserControl>

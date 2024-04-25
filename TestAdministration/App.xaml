@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:views="clr-namespace:TestAdministration.Views">
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    xmlns:rules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:rules1="clr-namespace:TestAdministration.Views.Rules">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -36,13 +38,21 @@
             <DataTemplate DataType="{x:Type viewModels:NewPatientViewModel}">
                 <views:NewPatient />
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModels:TestConductionViewModel}">
                 <views:TestConduction />
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewModels:NhptRulesViewModel}">
-                <views:NhptRules />
+
+            <DataTemplate DataType="{x:Type rules:NhptRulesViewModel}">
+                <rules1:NhptRules />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type rules:PptRulesViewModel}">
+                <rules1:PptRules />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type rules:BbtRulesViewModel}">
+                <rules1:BbtRules />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

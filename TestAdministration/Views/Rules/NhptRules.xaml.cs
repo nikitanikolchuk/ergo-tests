@@ -1,4 +1,4 @@
-namespace TestAdministration.Views;
+namespace TestAdministration.Views.Rules;
 
 public partial class NhptRules
 {
