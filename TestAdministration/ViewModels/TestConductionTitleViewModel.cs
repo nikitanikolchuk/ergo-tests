@@ -29,6 +29,7 @@ public class TestConductionTitleViewModel(
         3 => "Kompletování",
         _ => throw new ArgumentOutOfRangeException(
             nameof(section),
+            section,
             "Input section number not in range 0..3"
         )
     };

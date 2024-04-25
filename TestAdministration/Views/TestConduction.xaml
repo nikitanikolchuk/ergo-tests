@@ -77,11 +77,10 @@
                         Grid.Column="0"
                         Text="Výsledek" />
 
-                    <!-- TODO: replace placeholder text -->
                     <ui:TextBox
                         Grid.Row="4"
                         Grid.Column="0"
-                        PlaceholderText="Sekundy"
+                        PlaceholderText="{Binding ValuePlaceholderText}"
                         IsReadOnly="{Binding IsValueReadOnly}"
                         Text="{
                             Binding CurrentValue,

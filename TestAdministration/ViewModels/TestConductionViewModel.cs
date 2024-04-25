@@ -50,6 +50,7 @@ public partial class TestConductionViewModel : ViewModelBase
     }
 
     public TestConductionTitleViewModel TitleViewModel { get; }
+    public string ValuePlaceholderText => _getValuePlaceholderText(_testBuilder.Type, _testBuilder.CurrentSection);
 
     public string CurrentValue
     {
@@ -130,6 +131,31 @@ public partial class TestConductionViewModel : ViewModelBase
         )
     };
 
+    private static string _getValuePlaceholderText(TestType testType, int section) => testType switch
+    {
+        TestType.Nhpt => "Čas v sekundách",
+        TestType.Ppt => _getPptValuePlaceholderText(section),
+        TestType.Bbt => "Počet kostek",
+        _ => throw new InvalidEnumArgumentException(
+            nameof(testType),
+            Convert.ToInt32(testType),
+            typeof(TestType)
+        )
+    };
+
+    private static string _getPptValuePlaceholderText(int section) => section switch
+    {
+        0 => "Počet kolíků",
+        1 => "Počet kolíků",
+        2 => "Počet párů kolíků",
+        3 => "Počet součástek",
+        _ => throw new ArgumentOutOfRangeException(
+            nameof(section),
+            section,
+            "PPT input section number not in range 0..3"
+        )
+    };
+
     private void _onIncrementAnnulations()
     {
         if (AnnulationCount >= MaxAnnulations)
@@ -144,8 +170,10 @@ public partial class TestConductionViewModel : ViewModelBase
     private void _onAddValue()
     {
         _testBuilder.AddValue(_currentValue, CurrentNote);
+
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
+        OnPropertyChanged(nameof(ValuePlaceholderText));
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;
         AnnulationCount = 0;
