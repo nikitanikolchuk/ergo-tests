@@ -24,14 +24,14 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <!-- TODO: add section value -->
                 <ui:TextBlock
                     Margin="0,0,0,8"
                     FontTypography="TitleLarge"
-                    Text="Sekce" />
+                    Text="{Binding TitleViewModel.CurrentSection}" />
 
-                <!-- TODO: add trial value -->
-                <ui:TextBlock FontTypography="TitleLarge" Text="Pokus" />
+                <ui:TextBlock
+                    FontTypography="TitleLarge"
+                    Text="{Binding TitleViewModel.CurrentTrial}" />
             </StackPanel>
 
             <Border

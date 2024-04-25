@@ -7,6 +7,11 @@ namespace TestAdministration.Models.TestBuilders;
 /// </summary>
 public interface ITestBuilder
 {
+    /// <summary>
+    /// Type of the constructed test.
+    /// </summary>
+    TestType Type { get; }
+
     /// <value>
     /// Number of current test section starting from 0.
     /// </value>

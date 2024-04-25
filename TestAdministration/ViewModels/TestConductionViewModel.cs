@@ -1,9 +1,11 @@
+using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
+using TestAdministration.ViewModels.Rules;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
@@ -29,22 +31,25 @@ public partial class TestConductionViewModel : ViewModelBase
     private string _currentNote = string.Empty;
 
     public TestConductionViewModel(
-        TestBuilder testBuilder,
+        ITestBuilderFactory testBuilderFactory,
         IDateTimeProvider dateTimeProvider,
         string tester,
         Patient patient,
-        ViewModelBase rulesViewModel,
+        TestType testType,
         Action<Test> saveTest)
     {
         _dateTimeProvider = dateTimeProvider;
-        _testBuilder = testBuilder
+        _testBuilder = testBuilderFactory.Create(testType)
             .SetTester(tester)
             .SetPatient(patient)
             .SetDate(_dateTimeProvider.Today)
             .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
-        RulesViewModel = rulesViewModel;
+        TitleViewModel = new TestConductionTitleViewModel(_testBuilder, patient.DominantHand);
+        RulesViewModel = _getRulesViewModel(testType);
     }
+
+    public TestConductionTitleViewModel TitleViewModel { get; }
 
     public string CurrentValue
     {
@@ -113,6 +118,18 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
+    private static ViewModelBase _getRulesViewModel(TestType testType) => testType switch
+    {
+        TestType.Nhpt => new NhptRulesViewModel(),
+        TestType.Ppt => new PptRulesViewModel(),
+        TestType.Bbt => new BbtRulesViewModel(),
+        _ => throw new InvalidEnumArgumentException(
+            nameof(testType),
+            Convert.ToInt32(testType),
+            typeof(TestType)
+        )
+    };
+
     private void _onIncrementAnnulations()
     {
         if (AnnulationCount >= MaxAnnulations)
@@ -127,6 +144,8 @@ public partial class TestConductionViewModel : ViewModelBase
     private void _onAddValue()
     {
         _testBuilder.AddValue(_currentValue, CurrentNote);
+        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
+        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;
         AnnulationCount = 0;

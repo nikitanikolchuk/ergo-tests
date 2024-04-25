@@ -18,6 +18,7 @@ public class TestBuilder(
     private TimeOnly? _endTime;
     private readonly List<List<TestTrial>> _trials = [[]];
 
+    public TestType Type => sectionBuilder.Type;
     public int CurrentSection => _trials.Count - 1;
     public int CurrentTrial => _trials.Last().Count;
 
@@ -67,13 +68,13 @@ public class TestBuilder(
             throw new InvalidOperationException("All test values were already set");
         }
 
-        if (CurrentTrial == sectionBuilder.TrialCount)
+        var trial = sectionBuilder.BuildTrial(value, note, CurrentSection, _patient);
+        _trials.Last().Add(trial);
+
+        if (!IsFinished && CurrentTrial == sectionBuilder.TrialCount)
         {
             _trials.Add([]);
         }
-
-        var trial = sectionBuilder.BuildTrial(value, note, CurrentSection, _patient);
-        _trials.Last().Add(trial);
 
         return this;
     }
@@ -85,9 +86,9 @@ public class TestBuilder(
             throw new InvalidOperationException("The tested patient was not set");
         }
 
-        if (string.IsNullOrWhiteSpace(_tester))
+        if (_tester == null)
         {
-            throw new InvalidOperationException("Tester's name was not set or is empty");
+            throw new InvalidOperationException("Tester's name was not set");
         }
 
         if (_date == null)

@@ -1,11 +1,9 @@
-using System.ComponentModel;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
-using TestAdministration.ViewModels.Rules;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
@@ -78,18 +76,6 @@ public class TestingViewModel(
         await messageBox.ShowDialogAsync();
     }
 
-    private static ViewModelBase _getRulesViewModel(TestType testType) => testType switch
-    {
-        TestType.Nhpt => new NhptRulesViewModel(),
-        TestType.Ppt => new PptRulesViewModel(),
-        TestType.Bbt => new BbtRulesViewModel(),
-        _ => throw new InvalidEnumArgumentException(
-            nameof(testType),
-            Convert.ToInt32(testType),
-            typeof(TestType)
-        )
-    };
-
     private void _onAddPatient(Func<bool>? addPatient)
     {
         if (addPatient == null)
@@ -114,15 +100,13 @@ public class TestingViewModel(
         }
 
         _currentPatient = patient;
-        var testBuilder = testBuilderFactory.Create(testType);
         var tester = userService.CurrentUser ?? string.Empty;
-        var rulesViewModel = _getRulesViewModel(testType);
         CurrentViewModel = new TestConductionViewModel(
-            testBuilder,
+            testBuilderFactory,
             dateTimeProvider,
             tester,
             patient,
-            rulesViewModel,
+            testType,
             _onSaveTest
         );
     }
