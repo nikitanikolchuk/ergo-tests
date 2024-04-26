@@ -8,11 +8,12 @@
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
     xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
+    xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModelRules:PptRulesViewModel}">
 
     <UserControl.Resources>
-        <views:TableRowWidthConverter x:Key="TestRuleRowWidthConverter" />
+        <converters:TableRowWidthConverter x:Key="TestRuleRowWidthConverter" />
         <viewRules:PptRuleRowConverter x:Key="TestRuleRowConverter" />
 
         <DataTemplate x:Key="TestRuleRowSituationTemplate" DataType="viewModelRules:PptRuleRow">

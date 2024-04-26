@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace TestAdministration.Views;
+namespace TestAdministration.Views.Converters;
 
 /// <summary>
 /// A converter for increasing the bound value by amount

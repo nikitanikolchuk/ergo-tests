@@ -8,11 +8,12 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
     xmlns:views="clr-namespace:TestAdministration.Views"
+    xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModelRules:NhptRulesViewModel}">
 
     <UserControl.Resources>
-        <views:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
+        <converters:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
 
         <DataTemplate x:Key="TestRuleItemTemplate" DataType="system:String">
             <ui:TextBlock

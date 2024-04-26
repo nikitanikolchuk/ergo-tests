@@ -8,7 +8,8 @@
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
     xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
-    xmlns:dynamicBinding="clr-namespace:TestAdministration.Views.DynamicBinding">
+    xmlns:dynamicBinding="clr-namespace:TestAdministration.Views.DynamicBinding"
+    xmlns:converters="clr-namespace:TestAdministration.Views.Converters">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -64,7 +65,7 @@
             <system:Double x:Key="BaseFontSize">14</system:Double>
             <system:Double x:Key="ControlContentThemeFontSize">14</system:Double>
             <dynamicBinding:BindingProxy x:Key="FontSizeProxy" Value="{DynamicResource BaseFontSize}" />
-            <views:AdditionConverter x:Key="AdditionConverter" />
+            <converters:AdditionConverter x:Key="AdditionConverter" />
 
             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter

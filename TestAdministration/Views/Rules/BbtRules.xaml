@@ -7,12 +7,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
-    xmlns:viewRules="clr-namespace:TestAdministration.Views"
+    xmlns:views="clr-namespace:TestAdministration.Views"
+    xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModelRules:BbtRulesViewModel}">
 
     <UserControl.Resources>
-        <viewRules:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
+        <converters:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
 
         <DataTemplate x:Key="TestRuleItemTemplate" DataType="system:String">
             <ui:TextBlock
@@ -41,7 +42,7 @@
             SelectedItem="{
                 Binding DataContext.SelectedRule,
                 Mode=OneWayToSource,
-                RelativeSource={RelativeSource AncestorType=viewRules:TestConduction}
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
             }" />
 
         <ui:TextBlock
@@ -58,7 +59,7 @@
             SelectedItem="{
                 Binding DataContext.SelectedRule,
                 Mode=OneWayToSource,
-                RelativeSource={RelativeSource AncestorType=viewRules:TestConduction}
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
             }" />
 
         <ui:TextBlock
@@ -74,7 +75,7 @@
             SelectedItem="{
                 Binding DataContext.SelectedRule,
                 Mode=OneWayToSource,
-                RelativeSource={RelativeSource AncestorType=viewRules:TestConduction}
+                RelativeSource={RelativeSource AncestorType=views:TestConduction}
             }" />
     </StackPanel>
 </UserControl>

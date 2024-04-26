@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace TestAdministration.Views;
+namespace TestAdministration.Views.Converters;
 
 /// <summary>
 /// A class for specifying width of a table cell that is slightly
