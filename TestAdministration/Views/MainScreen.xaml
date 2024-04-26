@@ -37,7 +37,7 @@
         </Style>
     </UserControl.Resources>
 
-    <ui:NavigationView IsBackButtonVisible="Collapsed" PaneTitle="Navigace">
+    <ui:NavigationView IsBackButtonVisible="Collapsed">
         <ui:NavigationView.PaneHeader>
             <StackPanel
                 DockPanel.Dock="Top"

@@ -27,10 +27,12 @@
                 <ui:TextBlock
                     Margin="0,0,0,8"
                     FontTypography="TitleLarge"
+                    Foreground="{DynamicResource TextControlForeground}"
                     Text="{Binding TitleViewModel.CurrentSection}" />
 
                 <ui:TextBlock
                     FontTypography="TitleLarge"
+                    Foreground="{DynamicResource TextControlForeground}"
                     Text="{Binding TitleViewModel.CurrentTrial}" />
             </StackPanel>
 
@@ -75,6 +77,7 @@
                     <ui:TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
+                        Foreground="{DynamicResource TextControlForeground}"
                         Text="Výsledek" />
 
                     <ui:TextBox
@@ -90,6 +93,7 @@
                     <ui:TextBlock
                         Grid.Row="2"
                         Grid.Column="2"
+                        Foreground="{DynamicResource TextControlForeground}"
                         Text="Počet anulování" />
 
                     <ui:TextBox
@@ -101,6 +105,7 @@
                     <ui:TextBlock
                         Grid.Row="6"
                         Grid.Column="0"
+                        Foreground="{DynamicResource TextControlForeground}"
                         Text="Poznámky" />
 
                     <ui:TextBox
@@ -112,6 +117,7 @@
                     <ui:TextBlock
                         Grid.Row="6"
                         Grid.Column="2"
+                        Foreground="{DynamicResource TextControlForeground}"
                         Text="Nahrávání" />
 
                     <StackPanel
@@ -129,23 +135,27 @@
                         <ui:SymbolIcon
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
+                            Foreground="{DynamicResource TextControlForeground}"
                             FontSize="24"
                             Symbol="Pause24" />
 
                         <ui:TextBlock
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
+                            Foreground="{DynamicResource TextControlForeground}"
                             Text="Čas" />
 
                         <ui:SymbolIcon
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
                             FontSize="24"
+                            Foreground="{DynamicResource TextControlForeground}"
                             Symbol="MicOff24" />
 
                         <ui:SymbolIcon
                             VerticalAlignment="Center"
                             FontSize="24"
+                            Foreground="{DynamicResource TextControlForeground}"
                             Symbol="Video24" />
                     </StackPanel>
 
@@ -206,6 +216,7 @@
                 <ui:TextBlock
                     Margin="0,0,0,16"
                     FontTypography="TitleLarge"
+                    Foreground="{DynamicResource TextControlForeground}"
                     Text="Pravidla" />
 
                 <ui:InfoBar

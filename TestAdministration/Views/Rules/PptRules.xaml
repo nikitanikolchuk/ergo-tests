@@ -32,6 +32,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Všechny subtesty:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -81,6 +82,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Subtest „Obě ruce“:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -130,6 +132,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Subtest „Kompletování“:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->

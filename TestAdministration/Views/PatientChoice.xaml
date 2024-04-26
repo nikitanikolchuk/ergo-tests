@@ -18,6 +18,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Vyberte pacienta" />
 
         <ui:TextBox

@@ -19,6 +19,7 @@
             Width="600"
             FontTypography="TitleLarge"
             FontWeight="SemiBold"
+            Foreground="{DynamicResource TextControlForeground}"
             TextWrapping="Wrap"
             TextAlignment="Center"
             Text="Aplikace pro administraci testů manuální zručnosti" />

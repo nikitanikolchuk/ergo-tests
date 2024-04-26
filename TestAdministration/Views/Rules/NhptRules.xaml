@@ -19,10 +19,10 @@
                 Text="{Binding}"
                 TextWrapping="Wrap"
                 Width="{
-                Binding ActualWidth,
-                Converter={StaticResource TestRuleWidthConverter},
-                RelativeSource={RelativeSource AncestorType=ui:ListView}
-            }" />
+                    Binding ActualWidth,
+                    Converter={StaticResource TestRuleWidthConverter},
+                    RelativeSource={RelativeSource AncestorType=ui:ListView}
+                }" />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -30,6 +30,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Pokus musí být ihned přerušen a anulován, pokud:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -46,6 +47,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Pokus může být dokončen, pokud:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->

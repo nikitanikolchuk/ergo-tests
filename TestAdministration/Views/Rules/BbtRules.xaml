@@ -19,10 +19,10 @@
                 Text="{Binding}"
                 TextWrapping="Wrap"
                 Width="{
-                Binding ActualWidth,
-                Converter={StaticResource TestRuleWidthConverter},
-                RelativeSource={RelativeSource AncestorType=ui:ListView}
-            }" />
+                    Binding ActualWidth,
+                    Converter={StaticResource TestRuleWidthConverter},
+                    RelativeSource={RelativeSource AncestorType=ui:ListView}
+                }" />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -30,6 +30,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Pokus musí být přerušen a anulován:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -46,6 +47,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Kostka se započítává:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -62,6 +64,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Kostka se nepočítá do celkového počtu přemístěných kostek:" />
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->

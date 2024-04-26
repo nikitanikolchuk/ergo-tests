@@ -14,6 +14,7 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
             Text="Nový pacient" />
 
         <Border
@@ -26,7 +27,10 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,16,0,64">
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock Margin="0,0,0,12" Text="Jméno" />
+                        <ui:TextBlock 
+                            Margin="0,0,0,12" 
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Jméno" />
 
                         <ui:TextBox
                             Width="296"
@@ -38,7 +42,10 @@
                     </StackPanel>
 
                     <StackPanel>
-                        <ui:TextBlock Margin="0,0,0,12" Text="Příjmení" />
+                        <ui:TextBlock 
+                            Margin="0,0,0,12" 
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Příjmení" />
 
                         <ui:TextBox
                             Width="296"
@@ -52,7 +59,10 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,64">
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock Margin="0,0,0,12" Text="Rodné číslo bez lomítka (nebo ekvivalent)" />
+                        <ui:TextBlock 
+                            Margin="0,0,0,12" 
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Rodné číslo bez lomítka (nebo ekvivalent)" />
 
                         <ui:TextBox
                             Width="296"
@@ -64,7 +74,10 @@
                     </StackPanel>
 
                     <StackPanel>
-                        <ui:TextBlock Margin="0,0,0,12" Text="Pohlaví" />
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Pohlaví" />
 
                         <ComboBox
                             MinWidth="296"
@@ -75,7 +88,10 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,48">
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock Margin="0,0,0,12" Text="Datum narození" />
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Datum narození" />
 
                         <DatePicker
                             x:Name="DatePicker"
@@ -85,7 +101,10 @@
                     </StackPanel>
 
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock Margin="0,0,0,12" Text="Dominantní HK" />
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Dominantní HK" />
 
                         <ComboBox
                             MinWidth="132"
@@ -94,7 +113,10 @@
                     </StackPanel>
 
                     <StackPanel>
-                        <ui:TextBlock Margin="0,0,0,12" Text="HK s patologií" />
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="HK s patologií" />
 
                         <ComboBox
                             MinWidth="132"
