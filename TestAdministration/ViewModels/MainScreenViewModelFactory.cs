@@ -12,6 +12,7 @@ public class MainScreenViewModelFactory(
     UserService userService,
     TestStorageFactory testStorageFactory,
     InitContentViewModel initContentViewModel,
+    SettingsViewModel settingsViewModel,
     TestingViewModelFactory testingViewModelFactory
 )
 {
@@ -22,6 +23,7 @@ public class MainScreenViewModelFactory(
             userService,
             testStorage,
             initContentViewModel,
+            settingsViewModel,
             testingViewModelFactory
         );
     }

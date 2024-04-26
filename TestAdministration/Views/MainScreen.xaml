@@ -108,7 +108,7 @@
             <ui:NavigationViewItem
                 Icon="{ui:SymbolIcon Folder24}"
                 Content="Výsledky"
-                Command="{Binding ResultsButtonCommand}" />
+                Command="{Binding OnOpenResultsCommand}" />
 
             <ui:NavigationViewItem
                 Icon="{ui:SymbolIcon BookOpen24}"
@@ -119,12 +119,12 @@
                     <ui:NavigationViewItem
                         Icon="{ui:SymbolIcon DocumentPdf24}"
                         Content="Textové manuály"
-                        Command="{Binding TextManualsButtonCommand}" />
+                        Command="{Binding OnOpenTextManualsCommand}" />
 
                     <ui:NavigationViewItem
                         Icon="{ui:SymbolIcon Video24}"
                         Content="Videomanuály"
-                        Command="{Binding VideoManualsButtonCommand}" />
+                        Command="{Binding OnOpenVideoManualsCommand}" />
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
         </ui:NavigationView.MenuItems>
@@ -138,7 +138,8 @@
 
             <ui:NavigationViewItem
                 Icon="{ui:SymbolIcon Settings24}"
-                Content="Nastavení" />
+                Content="Nastavení"
+                Command="{Binding OnOpenSettingsCommand}" />
 
             <ui:NavigationViewItem
                 Content="Odhlášení"

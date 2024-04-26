@@ -1,0 +1,50 @@
+<UserControl
+    x:Class="TestAdministration.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+
+    <Border
+        Margin="54,0"
+        HorizontalAlignment="Stretch"
+        MaxWidth="800"
+        VerticalAlignment="Center"
+        Padding="16"
+        CornerRadius="4"
+        BorderThickness="1"
+        BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+
+        <StackPanel>
+            <ui:InfoBar
+                Margin="0,0,0,32"
+                IsOpen="True"
+                IsClosable="False"
+                Message="Pro změnu úložiště výsledků se odhlaste" />
+
+            <ui:TextBlock
+                Margin="0,0,0,12"
+                Foreground="{DynamicResource TextControlForeground}"
+                Text="Velikost písma" />
+
+            <ComboBox
+                Margin="0,0,0,32"
+                ItemsSource="{Binding FontSizeVariants}"
+                SelectedValue="{Binding FontSize}" />
+
+            <ui:TextBlock
+                Margin="0,0,0,12"
+                Foreground="{DynamicResource TextControlForeground}"
+                Text="Tmavý režim" />
+
+            <ui:ToggleSwitch
+                OffContent="Vypnutý"
+                OnContent="Zapnutý"
+                IsChecked="{Binding IsDarkModeSet}" />
+        </StackPanel>
+    </Border>
+</UserControl>

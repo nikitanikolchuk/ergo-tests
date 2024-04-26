@@ -15,6 +15,7 @@ public partial class MainScreenViewModel(
     UserService userService,
     ITestStorage testStorage,
     InitContentViewModel initContentViewModel,
+    SettingsViewModel settingsViewModel,
     TestingViewModelFactory testingViewModelFactory
 ) : ViewModelBase
 {
@@ -76,16 +77,20 @@ public partial class MainScreenViewModel(
 
     public ICommand OnStartTestingCommand => new RelayCommand<TestType>(_onStartTesting);
 
-    public ICommand ResultsButtonCommand => new RelayCommand<object?>(_ =>
+    public ICommand OnOpenResultsCommand => new RelayCommand<object?>(_ =>
         Process.Start("explorer.exe", testStorage.DataPath)
     );
 
-    public static ICommand TextManualsButtonCommand => new RelayCommand<object?>(_ =>
+    public static ICommand OnOpenTextManualsCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true })
     );
 
-    public static ICommand VideoManualsButtonCommand => new RelayCommand<object?>(_ =>
+    public static ICommand OnOpenVideoManualsCommand => new RelayCommand<object?>(_ =>
         Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
+    );
+
+    public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ =>
+        CurrentViewModel = settingsViewModel
     );
 
     private void _onStartTesting(TestType testType)

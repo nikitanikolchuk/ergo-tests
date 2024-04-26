@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using TestAdministration.Models.Data;
+using Wpf.Ui.Appearance;
 
 namespace TestAdministration.Models.Services;
 
@@ -13,6 +14,7 @@ namespace TestAdministration.Models.Services;
 public class ConfigurationService
 {
     private const string FileName = "data.json";
+    private const int DefaultFontSize = 14;
 
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
@@ -50,6 +52,40 @@ public class ConfigurationService
         {
             var data = _readData();
             data.LocalUsers = value;
+            _writeData(data);
+        }
+    }
+
+    public ApplicationTheme ApplicationTheme
+    {
+        get
+        {
+            var themeString = _readData().ApplicationTheme;
+            return themeString == ApplicationTheme.Dark.ToString()
+                ? ApplicationTheme.Dark
+                : ApplicationTheme.Light;
+        }
+        set
+        {
+            var data = _readData();
+            data.ApplicationTheme = value.ToString();
+            _writeData(data);
+        }
+    }
+
+    public int FontSize
+    {
+        get
+        {
+            var sizeString = _readData().FontSize;
+            return int.TryParse(sizeString, out var size)
+                ? size
+                : DefaultFontSize;
+        }
+        set
+        {
+            var data = _readData();
+            data.FontSize = value.ToString();
             _writeData(data);
         }
     }

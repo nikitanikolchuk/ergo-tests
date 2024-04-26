@@ -59,7 +59,7 @@
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
                         Header="Situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -69,7 +69,7 @@
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
                         Header="Řešení situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -77,7 +77,7 @@
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
-                        Header="Vyhodnocení situace" />
+                        Header="Bodování" />
                 </ui:GridView>
             </ui:ListView.View>
         </ui:ListView>
@@ -112,7 +112,7 @@
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
                         Header="Situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -122,7 +122,7 @@
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
                         Header="Řešení situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -130,7 +130,7 @@
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
-                        Header="Vyhodnocení situace" />
+                        Header="Bodování" />
                 </ui:GridView>
             </ui:ListView.View>
         </ui:ListView>
@@ -164,7 +164,7 @@
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
                         Header="Situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -174,7 +174,7 @@
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
                         Header="Řešení situace" />
 
-                    <GridViewColumn
+                    <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
@@ -182,7 +182,7 @@
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
-                        Header="Vyhodnocení situace" />
+                        Header="Bodování" />
                 </ui:GridView>
             </ui:ListView.View>
         </ui:ListView>

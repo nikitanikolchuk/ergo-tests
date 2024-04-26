@@ -71,7 +71,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
-                        Height="400"
+                        Height="392"
                         VerticalScrollBarVisibility="Auto" />
 
                     <ui:TextBlock
