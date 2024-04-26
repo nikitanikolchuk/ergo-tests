@@ -53,6 +53,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
@@ -62,6 +63,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
@@ -71,6 +73,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
@@ -103,6 +106,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
@@ -112,6 +116,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
@@ -121,6 +126,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"
@@ -152,6 +158,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSituationTemplate}"
@@ -161,6 +168,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowSolutionTemplate}"
@@ -170,6 +178,7 @@
                         Width="{
                             Binding ActualWidth,
                             Converter={StaticResource TestRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         CellTemplate="{StaticResource TestRuleRowScoringTemplate}"

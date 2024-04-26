@@ -11,10 +11,15 @@
     d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}">
 
     <UserControl.Resources>
-        <views:TableRowWidthConverter x:Key="PptRuleRowWidthConverter" />
+        <views:TableRowWidthConverter x:Key="TableRuleRowWidthConverter" />
     </UserControl.Resources>
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel
+        Margin="54,0"
+        HorizontalAlignment="Stretch"
+        MaxWidth="800"
+        VerticalAlignment="Center">
+
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="Subtitle"
@@ -31,8 +36,7 @@
 
         <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         <ui:ListView
-            MaxWidth="800"
-            MaxHeight="360"
+            Height="360"
             BorderThickness="1,0"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
             ItemsSource="{Binding Patients}"
@@ -46,7 +50,8 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource PptRuleRowWidthConverter},
+                            Converter={StaticResource TableRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         DisplayMemberBinding="{Binding Surname}"
@@ -55,7 +60,8 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource PptRuleRowWidthConverter},
+                            Converter={StaticResource TableRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         DisplayMemberBinding="{Binding Name}"
@@ -64,7 +70,8 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource PptRuleRowWidthConverter},
+                            Converter={StaticResource TableRuleRowWidthConverter},
+                            ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
                         DisplayMemberBinding="{Binding Id}"

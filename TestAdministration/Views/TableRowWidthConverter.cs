@@ -11,14 +11,19 @@ namespace TestAdministration.Views;
 [ValueConversion(typeof(double), typeof(double))]
 public class TableRowWidthConverter : IValueConverter
 {
-    private const double Difference = 16;
-    private const double RowCount = 3;
+    private const double Difference = 30;
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        var cells = 1;
+        if (parameter is string cellCount)
+        {
+            _ = int.TryParse(cellCount, out cells);
+        }
+
         if (value is double width)
         {
-            return (width - Difference) / RowCount;
+            return (width - Difference) / cells;
         }
 
         return value;
@@ -26,9 +31,15 @@ public class TableRowWidthConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        var cells = 1;
+        if (parameter is string cellCount)
+        {
+            _ = int.TryParse(cellCount, out cells);
+        }
+
         if (value is double width)
         {
-            return width * RowCount;
+            return width * cells;
         }
 
         return value;
