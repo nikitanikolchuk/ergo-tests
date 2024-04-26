@@ -74,24 +74,34 @@
 
                 <ui:NavigationViewItem.MenuItems>
                     <ui:NavigationViewItem
-                        Icon="{ui:SymbolIcon NumberCircle124}"
                         Content="Devítikolíkový Test"
                         Command="{Binding OnStartTestingCommand}"
-                        CommandParameter="{x:Static data:TestType.Nhpt}" />
+                        CommandParameter="{x:Static data:TestType.Nhpt}">
 
-                    <!-- TODO: replace icon -->
+                        <ui:NavigationViewItem.Icon>
+                            <views:CircleFontIcon Glyph="1" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+
                     <ui:NavigationViewItem
-                        Icon="{ui:SymbolIcon Circle24}"
                         Content="Purdue Pegboard Test"
                         Command="{Binding OnStartTestingCommand}"
-                        CommandParameter="{x:Static data:TestType.Ppt}" />
+                        CommandParameter="{x:Static data:TestType.Ppt}">
 
-                    <!-- TODO: replace icon -->
+                        <ui:NavigationViewItem.Icon>
+                            <views:CircleFontIcon Glyph="2" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+
                     <ui:NavigationViewItem
-                        Icon="{ui:SymbolIcon Circle24}"
                         Content="Box and Block Test"
                         Command="{Binding OnStartTestingCommand}"
-                        CommandParameter="{x:Static data:TestType.Bbt}" />
+                        CommandParameter="{x:Static data:TestType.Bbt}">
+
+                        <ui:NavigationViewItem.Icon>
+                            <views:CircleFontIcon Glyph="3" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
                 </ui:NavigationViewItem.MenuItems>
             </ui:NavigationViewItem>
 
@@ -148,12 +158,12 @@
                 </ui:NavigationViewItem.Foreground>
             </ui:NavigationViewItem>
         </ui:NavigationView.FooterMenuItems>
-        
+
         <ui:NavigationView.Header>
-            <ui:TextBlock 
+            <ui:TextBlock
                 Margin="56,44,0,0"
                 FontTypography="Title"
-                Text="{Binding ContentHeader}"/>
+                Text="{Binding ContentHeader}" />
         </ui:NavigationView.Header>
 
         <ui:NavigationView.ContentOverlay>
