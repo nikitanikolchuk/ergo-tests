@@ -5,6 +5,10 @@ using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
+using TestAdministration.ViewModels.Instructions;
+using TestAdministration.ViewModels.Instructions.Bbt;
+using TestAdministration.ViewModels.Instructions.Nhpt;
+using TestAdministration.ViewModels.Instructions.Ppt;
 using TestAdministration.ViewModels.Rules;
 using Wpf.Ui.Input;
 
@@ -46,10 +50,12 @@ public partial class TestConductionViewModel : ViewModelBase
             .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
         TitleViewModel = new TestConductionTitleViewModel(_testBuilder, patient.DominantHand);
+        InstructionsViewModel = _getInstructionsViewModel(_testBuilder, patient.DominantHand);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
     public TestConductionTitleViewModel TitleViewModel { get; }
+    public IInstructionsViewModel InstructionsViewModel { get; }
     public string ValuePlaceholderText => _getValuePlaceholderText(_testBuilder.Type, _testBuilder.CurrentSection);
 
     public string CurrentValue
@@ -119,6 +125,19 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
+    private static IInstructionsViewModel _getInstructionsViewModel(ITestBuilder testBuilder, Hand dominantHand) =>
+        testBuilder.Type switch
+        {
+            TestType.Nhpt => new NhptInstructionsViewModel(testBuilder, dominantHand),
+            TestType.Ppt => new PptInstructionsViewModel(testBuilder, dominantHand),
+            TestType.Bbt => new BbtInstructionsViewModel(testBuilder, dominantHand),
+            _ => throw new InvalidEnumArgumentException(
+                nameof(testBuilder.Type),
+                Convert.ToInt32(testBuilder.Type),
+                typeof(TestType)
+            )
+        };
+
     private static ViewModelBase _getRulesViewModel(TestType testType) => testType switch
     {
         TestType.Nhpt => new NhptRulesViewModel(),
@@ -173,6 +192,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
+        InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
         OnPropertyChanged(nameof(ValuePlaceholderText));
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;

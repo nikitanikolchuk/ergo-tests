@@ -1,0 +1,92 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Ppt.PptInstructionsNonDominantHandFirst"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsPpt:PptInstructionsNonDominantHandFirstViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Začněte tím, že řeknete / přehrajete nahrávku a zároveň ukážete:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding PracticeOralInstruction}" />
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit alespoň tři kolíky.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté, co proband umístil tři nebo čtyři kolíky a je zřejmé, že zadání porozuměl, zapište si případné
+            poznámky a řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            “Stačí. Nyní vyndejte zkušební kolíky a vraťte je zpět do zásobníku nalevo.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding TrialOralInstruction}" />
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 30 sekund.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po uplynutí přesně 30 sekund, řekněte: „Stop!“.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Spočítejte množství správně umístěných kolíků levou rukou do otvorů a výsledek zaznamenejte do záznamového
+            formuláře do Skóre nedominantní ruky. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda.
+            Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak vyzvěte probanda / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding LastOralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

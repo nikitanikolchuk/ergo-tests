@@ -1,0 +1,12 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <Thickness x:Key="ShortMargin" Right="8" Bottom="8" />
+    <Thickness x:Key="LongMargin" Right="8" Bottom="32" />
+
+    <Style TargetType="ui:TextBlock" BasedOn="{StaticResource {x:Type ui:TextBlock}}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+</ResourceDictionary>

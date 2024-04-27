@@ -72,7 +72,8 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Height="392"
-                        VerticalScrollBarVisibility="Auto" />
+                        VerticalScrollBarVisibility="Auto"
+                        Content="{Binding InstructionsViewModel.CurrentViewModel}" />
 
                     <ui:TextBlock
                         Grid.Row="2"
@@ -128,7 +129,7 @@
                         <ui:SymbolIcon
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
-                            Foreground="#FA1811"
+                            Foreground="{DynamicResource SystemFillColorCriticalBrush}"
                             FontSize="32"
                             Symbol="Record32" />
 

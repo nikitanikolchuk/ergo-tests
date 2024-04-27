@@ -1,0 +1,131 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Ppt.PptInstructionsDominantHandFirst"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsPpt:PptInstructionsDominantHandFirstViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding TopText}" />
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Když je proband usazen a připraven začít, řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Tento test má ukázat, jak rychle a přesně umíte pracovat rukama. Před každým dílčím testem vám řeknu, co
+            máte dělat, a pak budete mít příležitost si to vyzkoušet. Je důležité, abyste přesně porozuměl/a tomu, co
+            máte dělat.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poznámka pro předvádění ukázek ve všech subtestech:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Ukázky provedení jednotlivých subtestů vždy ukazujte z místa, kde sedíte. Vše tedy budete provádět opačnou
+            rukou než proband (zrcadlově).
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Začněte tím, že řeknete / přehrajete nahrávku a zároveň ukážete:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding PracticeOralInstruction}" />
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            Pokud v průběhu testování kolík upustíte, nezastavujte a nesbírejte jej. Jednoduše pokračujte tím, že si ze
+            zásobníku vezmete další kolík. Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit alespoň tři
+            kolíky.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Opravte veškeré chyby provedené při umisťování kolíků a zodpovězte všechny dotazy.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté, co proband umístil tři nebo čtyři kolíky a je zřejmé, že zadání porozuměl, zapište si případné
+            poznámky a řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Stačí. Nyní vyndejte zkušební kolíky a vraťte je zpět do zásobníku vpravo.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding TrialOralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 30 sekund.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po uplynutí přesně 30 sekund, řekněte: „Stop!“.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Spočítejte množství správně umístěných kolíků pravou rukou do otvorů a výsledek zaznamenejte. Využívejte
+            prostor pro psaní poznámek z pozorování výkonu probanda. Stejným způsobem postupujte i u dalších pokusů
+            tohoto subtestu.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak vyzvěte probanda / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku vpravo.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

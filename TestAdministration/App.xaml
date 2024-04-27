@@ -4,12 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
+    xmlns:dynamicBinding="clr-namespace:TestAdministration.Views.DynamicBinding"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Instructions.Nhpt"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
+    xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
     xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
-    xmlns:dynamicBinding="clr-namespace:TestAdministration.Views.DynamicBinding"
-    xmlns:converters="clr-namespace:TestAdministration.Views.Converters">
+    xmlns:viewInstructionsNhpt="clr-namespace:TestAdministration.Views.Instructions.Nhpt"
+    xmlns:viewInstructionsPpt="clr-namespace:TestAdministration.Views.Instructions.Ppt"
+    xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Instructions.Bbt">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -48,6 +54,58 @@
 
             <DataTemplate DataType="{x:Type viewModels:TestConductionViewModel}">
                 <views:TestConduction />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsNhpt:NhptInstructionsDominantPracticeViewModel}">
+                <viewInstructionsNhpt:NhptInstructionsDominantPractice />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsNhpt:NhptInstructionsNonDominantPracticeViewModel}">
+                <viewInstructionsNhpt:NhptInstructionsNonDominantPractice />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsNhpt:NhptInstructionsRegularViewModel}">
+                <viewInstructionsNhpt:NhptInstructionsRegular />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsDominantHandFirstViewModel}">
+                <viewInstructionsPpt:PptInstructionsDominantHandFirst />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsNonDominantHandFirstViewModel}">
+                <viewInstructionsPpt:PptInstructionsNonDominantHandFirst />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsSingleHandRegularViewModel}">
+                <viewInstructionsPpt:PptInstructionsSingleHandRegular />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsBothHandsFirstViewModel}">
+                <viewInstructionsPpt:PptInstructionsBothHandsFirst />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsBothHandsRegularViewModel}">
+                <viewInstructionsPpt:PptInstructionsBothHandsRegular />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsAssemblyFirstViewModel}">
+                <viewInstructionsPpt:PptInstructionsAssemblyFirst />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsPpt:PptInstructionsAssemblyRegularViewModel}">
+                <viewInstructionsPpt:PptInstructionsAssemblyRegular />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsBbt:BbtInstructionsDominantPracticeViewModel}">
+                <viewInstructionsBbt:BbtInstructionsDominantPractice />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsBbt:BbtInstructionsNonDominantPracticeViewModel}">
+                <viewInstructionsBbt:BbtInstructionsNonDominantPractice />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelInstructionsBbt:BbtInstructionsRegularViewModel}">
+                <viewInstructionsBbt:BbtInstructionsRegular />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModelRules:NhptRulesViewModel}">

@@ -1,0 +1,24 @@
+using TestAdministration.Models.Data;
+
+namespace TestAdministration.ViewModels.Instructions.Ppt;
+
+public class PptInstructionsNonDominantHandFirstViewModel(
+    Hand dominantHand
+) : ViewModelBase
+{
+    public string PracticeOralInstruction =>
+        $"„{NonDominantHandInstrumental} rukou vezměte vždy jeden kolík z levého zásobníku. Jednotlivé kolíky" +
+        $" umisťujte do řady nalevo. Začněte horním otvorem.“";
+
+    public string TrialOralInstruction =>
+        $"„Až řeknu: „Teď!“, umístěte co nejvíce kolíků do řady na {NonDominantHandLocative} straně, začněte horním" +
+        $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
+        $" Jste připraven/a?“";
+
+    public string LastOralInstruction =>
+        $"„Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku {ReturnLocation}.“";
+
+    private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "Levou" : "Pravou";
+    private string NonDominantHandLocative => dominantHand == Hand.Right ? "levé" : "pravé";
+    private string ReturnLocation => dominantHand == Hand.Right ? "nalevo" : "napravo";
+}

@@ -1,0 +1,47 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Nhpt.NhptInstructionsNonDominantPractice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Instructions.Nhpt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsNhpt:NhptInstructionsNonDominantPracticeViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding TopText}" />
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Test zopakujte stejným způsobem pro levou ruku: Řekněte/přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding OralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak řekněte: „Teď!“ Během testu: „Rychleji!“ Ihned po umístění posledního kolíku do otvoru: „A zpět…
+            rychleji!“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Opravte veškeré chyby provedené během zkušebního pokusu a zodpovězte všechny případné dotazy.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Zapište čas do záznamového archu i případné poznámky.
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

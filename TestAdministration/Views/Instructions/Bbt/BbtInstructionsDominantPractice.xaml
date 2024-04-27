@@ -1,0 +1,79 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Bbt.BbtInstructionsDominantPractice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsBbt:BbtInstructionsDominantPracticeViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Probandovi přečtěte následující pokyny/přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding TopOralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Přemístěte tři kostky přes přepážku v souladu s pravidly pro BBT, a to ve stejném směru, ve kterém je pak má
+            přemisťovat testovaná osoba. Po ukázce řekněte/přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            „Pokud přemístíte dvě kostky najednou, bude se počítat pouze jedna. Pokud kostka spadne mimo testovací
+            krabici poté, co byla přemístěna přes přepážku a alespoň se dotkla druhé strany krabice, bude stále
+            započítána. Neztrácejte tedy čas jejím zvedáním. Kostka nebude započítána, pokud ji přemístíte, ale
+            nedostanete se konečky vašich prstů přes přepážku. Než začnete, vyzkoušíte si to nanečisto během 15 sekund.
+            Až bude čas začít, řeknu: „Jste připraven/a?“ a poté: „Teď!“. Máte nějaké dotazy?“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Odpovězte na všechny případné dotazy.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Přemístěné kostky vraťte zpět do původní přihrádky
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Dobře. Položte obě ruce po stranách krabice. Jste připraven/a?“ (počkejte 3 sekundy) „Teď!“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            Současně se slovem: „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte: „Stop!“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je před zahájením skutečného testu
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Máte ještě nějaké dotazy?“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Zapište počet správně přemístěných kostek a případně i další poznámky.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po dokončení zkušebního testu přemístěné kostky vraťte zpět do původní přihrádky.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Kostky pak zamíchejte pro zajištění jejich náhodného rozmístění.
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,103 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Ppt.PptInstructionsAssemblyFirst"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsPpt:PptInstructionsAssemblyFirstViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Předvádějte následující úkon a zároveň říkejte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding FirstOralInstruction}" />
+
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding SecondOralInstruction}" />
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            (dokončete ukázku druhého kompletu umístěného ve druhém otvoru shora).
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Položte obě ruce po stranách desky. Nyní si vyzkoušejte sestavit alespoň čtyři cvičné komplety.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Zdůrazněte, že by obě ruce měly pracovat po celou dobu zároveň: první zvedá kolík, druhá podložku, první trubičku
+            a tak dále. Před zahájením testu by proband měl sestavit čtyři nebo pět úplných kompletů, aby bylo jisté, že proband
+            plně porozuměl systému „střídání“ rukou. Proband musí po celou dobu pohybovat oběma rukama najednou. Pokud tomu
+            tak nebude, měl by testující poskytnout další pokyny.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté, co si proband vyzkoušel sestavit 4-5 kompletů, zapište si případné poznámky a řekněte / přehrajte
+            nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Stačí. Nyní vraťte kolíky, trubičky a podložky zpět do příslušných zásobníků.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Poté řekněte / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding TrialOralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 60 sekund.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Přesně po minutě (60 sekundách) řekněte: „Stop!“.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Spočítejte množství správně umístěných součástek (nikoliv kompletů) a výsledek zaznamenejte do záznamového
+            formuláře do Skóre pro kompletování. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda.
+            Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak vyzvěte probanda / přehrajte nahrávku:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Děkuji. Nyní, prosím, vraťte všechny součástky zpět do jejich zásobníků.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

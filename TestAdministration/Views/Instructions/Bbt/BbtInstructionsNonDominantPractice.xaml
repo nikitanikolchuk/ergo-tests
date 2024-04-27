@@ -1,0 +1,62 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Bbt.BbtInstructionsNonDominantPractice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsBbt:BbtInstructionsNonDominantPracticeViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní končetiny.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pokračujte sdělením následujících pokynů/přehráním nahrávky:
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding OralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Jste připraven/a?“ (počkejte 3 sekundy) „Teď!“. Spusťte odpočítávání 1 minuty
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Současně se slovem „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte: „Stop!“.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je před zahájením skutečného testu.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Máte ještě nějaké dotazy?“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Zapište počet správně přemístěných kostek a případně i další poznámky do záznamového archu.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po dokončení zkušebního testu přemístěné kostky vraťte zpět do původní přihrádky.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Kostky pak zamíchejte pro zajištění jejich náhodného rozmístění.
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

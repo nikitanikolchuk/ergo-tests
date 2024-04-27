@@ -1,0 +1,80 @@
+<UserControl
+    x:Class="TestAdministration.Views.Instructions.Nhpt.NhptInstructionsDominantPractice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Instructions.Nhpt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsNhpt:NhptInstructionsDominantPracticeViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ui:TextBlock
+            Margin="{StaticResource ShortMargin}"
+            Text="{Binding TopText}" />
+
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Text="{Binding TopOralInstruction}" />
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak probandovi předveďte, jak dáváte postupně všech devět kolíků do otvorů, zatímco si desku přidržujete
+            druhou rukou. Při ukázce sedíte naproti probandovi. S kolíky tedy manipulujete Vaší levou rukou.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Poté kolíky hned po jednom vyndáte z otvorů a vrátíte je zpět do zásobníku.“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Pak předveďte, jak postupně vyndaváte všech devět kolíků z otvorů a dáváte je zpět do zásobníku, zatímco si
+            desku přidržujete druhou rukou.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            „Nejprve provedeme zkušební pokus. Uvidíme, jak rychle dokážete umístit všechny kolíky do otvorů a poté je
+            opět po jednom uložit zpět do zásobníku. Uchopte desku oběma rukama. Jste připraven/a?“
+        </ui:TextBlock>
+
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte: „Teď!“ Stopky spusťte přesně v momentu, kdy se proband dotkne prvního kolíku (POZOR – stopky se
+            nezapínají zároveň se slovem: „Teď!“).
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Během testu řekněte: „Rychleji!“ Ihned po umístění posledního kolíku do otvoru řekněte: „A zpět… rychleji!“
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Stopky zastavte v momentu, kdy se poslední kolík dotkne zásobníku.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Opravte veškeré chyby provedené během zkušebního pokusu a zodpovězte všechny případné dotazy.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Zapište čas i případné poznámky.
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>
