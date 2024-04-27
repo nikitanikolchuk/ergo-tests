@@ -45,7 +45,10 @@ public abstract class AbstractTestSectionBuilder<T>(
 
     private static float? _nullableAverage(IEnumerable<float?> values)
     {
-        var nonNullValues = values.Where(v => v != null).ToList();
+        var nonNullValues = values
+            .TakeLast(3)
+            .Where(v => v != null)
+            .ToList();
         return nonNullValues.Count > 0 ? nonNullValues.Average() : null;
     }
 }

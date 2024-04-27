@@ -17,10 +17,6 @@ public class TestConductionTitleViewModel(
     public string CurrentSection => _getSectionName(testBuilder.CurrentSection, dominantHand);
     public string CurrentTrial => _getTrialName(testBuilder.Type, testBuilder.CurrentTrial);
 
-    // Public override for binding from parent view model
-    public new void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-        base.OnPropertyChanged(propertyName);
-
     private static string _getSectionName(int section, Hand dominantHand) => section switch
     {
         0 => $"Dominantní ruka - {_getHandString(dominantHand)}",
