@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using TestAdministration.Models.Data;
 
-namespace TestAdministration.Models.TestBuilders;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders;
 
 /// <summary>
 /// An interface for test specific section creation.

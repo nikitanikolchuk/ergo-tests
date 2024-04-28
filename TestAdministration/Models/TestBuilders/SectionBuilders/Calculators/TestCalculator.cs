@@ -1,7 +1,7 @@
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Utils;
 
-namespace TestAdministration.Models.TestBuilders.Calculators;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 public class TestCalculator<T>(
     IDateTimeProvider dateTimeProvider,

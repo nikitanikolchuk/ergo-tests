@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
 using TestAdministration.Models.Data;
-using TestAdministration.Models.TestBuilders.Calculators;
+using TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
-namespace TestAdministration.Models.TestBuilders;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders;
 
 /// <summary>
 /// <see cref="ITestSectionBuilder"/> implementation for Purdue Pegboard Test.

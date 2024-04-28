@@ -1,4 +1,4 @@
-namespace TestAdministration.Models.TestBuilders.Calculators;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 /// <summary>
 /// An immutable class representing a norm for a particular test section.

@@ -1,6 +1,6 @@
 using TestAdministration.Models.Data;
 
-namespace TestAdministration.Models.TestBuilders.Calculators;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 /// <summary>
 /// An interface for calculating values used in tests.

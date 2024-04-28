@@ -1,4 +1,4 @@
-namespace TestAdministration.Models.TestBuilders.Calculators;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 /// <summary>
 /// An interface for getting test specific norms.

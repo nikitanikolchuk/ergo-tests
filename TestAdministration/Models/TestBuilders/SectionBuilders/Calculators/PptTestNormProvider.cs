@@ -1,4 +1,4 @@
-namespace TestAdministration.Models.TestBuilders.Calculators;
+namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 /// <summary>
 /// <see cref="ITestNormProvider"/> implementation for Purdue Pegboard Test.
