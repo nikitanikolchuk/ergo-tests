@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Services;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
 using TestAdministration.ViewModels.Instructions;
@@ -35,6 +36,7 @@ public partial class TestConductionViewModel : ViewModelBase
     private string _currentNote = string.Empty;
 
     public TestConductionViewModel(
+        AudioInstructionService audioInstructionService,
         ITestBuilderFactory testBuilderFactory,
         IDateTimeProvider dateTimeProvider,
         string tester,
@@ -50,7 +52,7 @@ public partial class TestConductionViewModel : ViewModelBase
             .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
         TitleViewModel = new TestConductionTitleViewModel(_testBuilder, patient.DominantHand);
-        InstructionsViewModel = _getInstructionsViewModel(_testBuilder, patient.DominantHand);
+        InstructionsViewModel = _getInstructionsViewModel(audioInstructionService, _testBuilder, patient);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
@@ -125,18 +127,21 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
-    private static IInstructionsViewModel _getInstructionsViewModel(ITestBuilder testBuilder, Hand dominantHand) =>
-        testBuilder.Type switch
-        {
-            TestType.Nhpt => new NhptInstructionsViewModel(testBuilder, dominantHand),
-            TestType.Ppt => new PptInstructionsViewModel(testBuilder, dominantHand),
-            TestType.Bbt => new BbtInstructionsViewModel(testBuilder, dominantHand),
-            _ => throw new InvalidEnumArgumentException(
-                nameof(testBuilder.Type),
-                Convert.ToInt32(testBuilder.Type),
-                typeof(TestType)
-            )
-        };
+    private static IInstructionsViewModel _getInstructionsViewModel(
+        AudioInstructionService audioService,
+        ITestBuilder testBuilder,
+        Patient patient
+    ) => testBuilder.Type switch
+    {
+        TestType.Nhpt => new NhptInstructionsViewModel(audioService, testBuilder, patient),
+        TestType.Ppt => new PptInstructionsViewModel(audioService, testBuilder, patient),
+        TestType.Bbt => new BbtInstructionsViewModel(audioService, testBuilder, patient),
+        _ => throw new InvalidEnumArgumentException(
+            nameof(testBuilder.Type),
+            Convert.ToInt32(testBuilder.Type),
+            typeof(TestType)
+        )
+    };
 
     private static ViewModelBase _getRulesViewModel(TestType testType) => testType switch
     {

@@ -3,6 +3,7 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.ViewModels.Instructions.Ppt;
 
 public class PptInstructionsNonDominantHandFirstViewModel(
+    AudioInstructionResolver audioResolver,
     Hand dominantHand
 ) : ViewModelBase
 {
@@ -17,6 +18,11 @@ public class PptInstructionsNonDominantHandFirstViewModel(
 
     public string LastAudioInstruction =>
         $"„Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku {ReturnLocation}.“";
+
+    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0);
+    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1);
+    public ViewModelBase ThirdAudioInstructionViewModel => audioResolver.Get(2, true);
+    public ViewModelBase FourthAudioInstructionViewModel => audioResolver.Get(3);
 
     private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "Levou" : "Pravou";
     private string NonDominantHandLocative => dominantHand == Hand.Right ? "levé" : "pravé";

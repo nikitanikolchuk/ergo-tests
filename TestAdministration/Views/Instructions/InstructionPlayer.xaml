@@ -1,0 +1,35 @@
+<UserControl
+    x:Class="TestAdministration.Views.InstructionPlayer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructions="clr-namespace:TestAdministration.ViewModels.Instructions"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructions:InstructionPlayerViewModel}">
+
+    <StackPanel>
+        <ui:TextBlock
+            Text="{
+                Binding Time,
+                Mode=OneWay
+            }" />
+
+        <StackPanel Orientation="Horizontal">
+            <ui:Button
+                Margin="0,0,16,0"
+                Content="Play"
+                Command="{Binding PlayCommand}" />
+
+            <ui:Button
+                Margin="0,0,16,0"
+                Content="Pause"
+                Command="{Binding PauseCommand}" />
+
+            <ui:Button
+                Content="Stop"
+                Command="{Binding StopCommand}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

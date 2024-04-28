@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:viewModelInstructions="clr-namespace:TestAdministration.ViewModels.Instructions"
     xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Instructions.Nhpt"
     xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
     xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
@@ -94,6 +95,10 @@
 
     <DataTemplate DataType="{x:Type viewModelInstructionsBbt:BbtInstructionsRegularViewModel}">
         <viewInstructionsBbt:BbtInstructionsRegular />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelInstructions:InstructionPlayerViewModel}">
+        <views:InstructionPlayer />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelRules:NhptRulesViewModel}">

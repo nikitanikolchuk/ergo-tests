@@ -31,7 +31,7 @@ public partial class App
         }
 
         ApplicationThemeManager.Apply(configurationService.ApplicationTheme);
-        
+
         var fontSize = configurationService.FontSize;
         Current.Resources["BaseFontSize"] = (double)fontSize;
         Current.Resources["ControlContentThemeFontSize"] = (double)fontSize;
@@ -77,5 +77,6 @@ public partial class App
             .AddSingleton<BbtTestNormProvider>()
             .AddSingleton<NhptCsvConverter>()
             .AddSingleton<PptCsvConverter>()
-            .AddSingleton<BbtCsvConverter>();
+            .AddSingleton<BbtCsvConverter>()
+            .AddSingleton<AudioInstructionService>();
 }

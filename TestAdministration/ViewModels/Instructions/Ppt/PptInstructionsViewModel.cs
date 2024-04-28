@@ -1,22 +1,60 @@
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Services;
 using TestAdministration.Models.TestBuilders;
 
 namespace TestAdministration.ViewModels.Instructions.Ppt;
 
 public class PptInstructionsViewModel(
+    AudioInstructionService audioService,
     ITestBuilder testBuilder,
-    Hand dominantHand
+    Patient patient
 ) : ViewModelBase, IInstructionsViewModel
 {
     public ViewModelBase CurrentViewModel => (testBuilder.CurrentSection, testBuilder.CurrentTrial) switch
     {
-        (0, 0) => new PptInstructionsDominantHandFirstViewModel(dominantHand),
-        (1, 0) => new PptInstructionsNonDominantHandFirstViewModel(dominantHand),
-        (0, _) => new PptInstructionsSingleHandRegularViewModel(testBuilder.CurrentTrial, dominantHand),
-        (1, _) => new PptInstructionsSingleHandRegularViewModel(testBuilder.CurrentTrial, dominantHand),
-        (2, 0) => new PptInstructionsBothHandsFirstViewModel(dominantHand),
-        (2, _) => new PptInstructionsBothHandsRegularViewModel(),
-        (3, 0) => new PptInstructionsAssemblyFirstViewModel(dominantHand),
-        _ => new PptInstructionsAssemblyRegularViewModel(testBuilder.CurrentTrial)
+        (0, 0) => new PptInstructionsDominantHandFirstViewModel(
+            _getAudioResolver(0, 0),
+            patient.DominantHand
+        ),
+        (1, 0) => new PptInstructionsNonDominantHandFirstViewModel(
+            _getAudioResolver(1, 0),
+            patient.DominantHand
+        ),
+        (0, _) => new PptInstructionsSingleHandRegularViewModel(
+            _getAudioResolver(0, testBuilder.CurrentTrial),
+            testBuilder.CurrentSection,
+            testBuilder.CurrentTrial,
+            patient.DominantHand
+        ),
+        (1, _) => new PptInstructionsSingleHandRegularViewModel(
+            _getAudioResolver(1, testBuilder.CurrentTrial),
+            testBuilder.CurrentSection,
+            testBuilder.CurrentTrial,
+            patient.DominantHand
+        ),
+        (2, 0) => new PptInstructionsBothHandsFirstViewModel(
+            _getAudioResolver(2, 0),
+            patient.DominantHand
+        ),
+        (2, _) => new PptInstructionsBothHandsRegularViewModel(
+            _getAudioResolver(2, testBuilder.CurrentTrial),
+            testBuilder.CurrentTrial
+        ),
+        (3, 0) => new PptInstructionsAssemblyFirstViewModel(
+            _getAudioResolver(3, 0),
+            patient.DominantHand
+        ),
+        _ => new PptInstructionsAssemblyRegularViewModel(
+            _getAudioResolver(testBuilder.CurrentSection, testBuilder.CurrentTrial),
+            testBuilder.CurrentTrial
+        )
     };
+
+    private AudioInstructionResolver _getAudioResolver(int section, int trial) => new(
+        audioService,
+        TestType.Ppt,
+        patient,
+        section,
+        trial
+    );
 }

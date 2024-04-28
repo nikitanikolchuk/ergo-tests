@@ -10,8 +10,9 @@
     d:DesignHeight="1048">
 
     <StackPanel VerticalAlignment="Center">
-        <Image
+        <ui:Image
             Margin="0,0,0,32"
+            CornerRadius="4"
             Height="600"
             Source="/Resources/Images/InitScreen.jpg" />
 

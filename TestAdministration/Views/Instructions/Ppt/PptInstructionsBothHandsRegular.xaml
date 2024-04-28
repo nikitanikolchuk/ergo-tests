@@ -18,15 +18,13 @@
             Dále řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
-                Teď ještě jednou zopakujeme to samé oběma rukama najednou. Instrukce zůstávají stejné. Pracujte co
-                nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“
+                <Run Text="{Binding FirstAudioInstruction,Mode=OneWay}" />
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Řekněte:
@@ -44,9 +42,8 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding SecondAudioInstructionViewModel}" />
     </StackPanel>
 </UserControl>

@@ -1,17 +1,37 @@
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Services;
 using TestAdministration.Models.TestBuilders;
 
 namespace TestAdministration.ViewModels.Instructions.Nhpt;
 
 public class NhptInstructionsViewModel(
+    AudioInstructionService audioService,
     ITestBuilder testBuilder,
-    Hand dominantHand
+    Patient patient
 ) : ViewModelBase, IInstructionsViewModel
 {
     public ViewModelBase CurrentViewModel => (testBuilder.CurrentSection, testBuilder.CurrentTrial) switch
     {
-        (0, 0) => new NhptInstructionsDominantPracticeViewModel(dominantHand),
-        (1, 0) => new NhptInstructionsNonDominantPracticeViewModel(dominantHand),
-        _ => new NhptInstructionsRegularViewModel(testBuilder.CurrentTrial, dominantHand),
+        (0, 0) => new NhptInstructionsDominantPracticeViewModel(
+            _getAudioResolver(0, 0),
+            patient.DominantHand
+        ),
+        (1, 0) => new NhptInstructionsNonDominantPracticeViewModel(
+            _getAudioResolver(1, 0),
+            patient.DominantHand
+        ),
+        _ => new NhptInstructionsRegularViewModel(
+            _getAudioResolver(testBuilder.CurrentSection, testBuilder.CurrentTrial),
+            testBuilder.CurrentTrial,
+            patient.DominantHand
+        ),
     };
+
+    private AudioInstructionResolver _getAudioResolver(int section, int trial) => new(
+        audioService,
+        TestType.Nhpt,
+        patient,
+        section,
+        trial
+    );
 }

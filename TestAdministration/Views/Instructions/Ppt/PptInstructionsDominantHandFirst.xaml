@@ -43,10 +43,9 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             <Span FontWeight="Bold" TextDecorations="Underline">
@@ -65,14 +64,7 @@
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
             </Span>
-        </ui:TextBlock>
-
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
-
-        <ui:TextBlock>
+            <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
                 „Pokud v průběhu testování kolík upustíte, nezastavujte a nesbírejte jej. Jednoduše pokračujte tím, že
                 si ze zásobníku vezmete další kolík. Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit
@@ -80,10 +72,9 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding SecondAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
@@ -100,22 +91,21 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding ThirdAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
+            <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
                 <Run Text="{Binding TrialAudioInstruction,Mode=OneWay}" />
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FourthAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Řekněte:
@@ -139,9 +129,8 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FifthAudioInstructionViewModel}" />
     </StackPanel>
 </UserControl>

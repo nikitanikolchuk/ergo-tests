@@ -24,23 +24,15 @@
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
             </Span>
-        </ui:TextBlock>
-
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
-
-        <ui:TextBlock>
+            <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
                 „Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit alespoň tři kolíky.“
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Poté, co proband
@@ -52,10 +44,9 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding SecondAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
@@ -65,10 +56,9 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding ThirdAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Řekněte:
@@ -90,9 +80,8 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FourthAudioInstructionViewModel}" />
     </StackPanel>
 </UserControl>

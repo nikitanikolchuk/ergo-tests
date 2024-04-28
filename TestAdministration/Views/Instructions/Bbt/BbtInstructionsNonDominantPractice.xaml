@@ -36,10 +36,9 @@
             </Span>
         </ui:TextBlock>
 
-        <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
-            AUDIO
-        </ui:TextBlock>
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding AudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Řekněte:

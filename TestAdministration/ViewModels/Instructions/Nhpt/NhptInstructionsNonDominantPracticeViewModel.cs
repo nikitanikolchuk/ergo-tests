@@ -3,6 +3,7 @@ using TestAdministration.Models.Data;
 namespace TestAdministration.ViewModels.Instructions.Nhpt;
 
 public class NhptInstructionsNonDominantPracticeViewModel(
+    AudioInstructionResolver audioResolver,
     Hand dominantHand
 ) : ViewModelBase
 {
@@ -11,6 +12,8 @@ public class NhptInstructionsNonDominantPracticeViewModel(
     public string AudioInstruction =>
         $"„Nyní zopakujeme to samé s vaší {NonDominantHandInstrumental} rukou. Nejprve opět provedeme zkušební pokus." +
         $" Uchopte desku oběma rukama. Jste připraven/a?“";
+
+    public ViewModelBase AudioInstructionViewModel => audioResolver.Get(0, true);
 
     private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "levou" : "pravou";
 }
