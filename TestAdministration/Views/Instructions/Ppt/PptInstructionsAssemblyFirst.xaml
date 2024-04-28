@@ -15,22 +15,32 @@
 
     <StackPanel>
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Předvádějte následující úkon a zároveň říkejte / přehrajte nahrávku:
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Předvádějte následující úkon a zároveň říkejte / přehrajte nahrávku:
+            </Span>
         </ui:TextBlock>
 
         <ui:TextBlock
             Margin="{StaticResource ShortMargin}"
-            Text="{Binding FirstOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding FirstAudioInstruction}" />
 
         <ui:TextBlock
             Margin="{StaticResource ShortMargin}"
-            Text="{Binding SecondOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding SecondAudioInstruction}" />
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            (dokončete ukázku druhého kompletu umístěného ve druhém otvoru shora).
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                (dokončete ukázku druhého kompletu umístěného ve druhém otvoru shora)
+            </Span>
+            .
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             „Položte obě ruce po stranách desky. Nyní si vyzkoušejte sestavit alespoň čtyři cvičné komplety.“
         </ui:TextBlock>
 
@@ -40,18 +50,29 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Zdůrazněte, že by obě ruce měly pracovat po celou dobu zároveň: první zvedá kolík, druhá podložku, první trubičku
-            a tak dále. Před zahájením testu by proband měl sestavit čtyři nebo pět úplných kompletů, aby bylo jisté, že proband
-            plně porozuměl systému „střídání“ rukou. Proband musí po celou dobu pohybovat oběma rukama najednou. Pokud tomu
-            tak nebude, měl by testující poskytnout další pokyny.
+            Zdůrazněte, že by obě ruce měly pracovat po celou dobu zároveň: první zvedá kolík, druhá podložku, první
+            trubičku a tak dále. Před zahájením testu by proband měl sestavit čtyři nebo pět úplných kompletů, aby bylo
+            jisté, že proband plně porozuměl systému
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">„střídání“ rukou</Span>.
+            Proband musí po celou dobu pohybovat oběma rukama najednou.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Pokud tomu tak nebude, měl by testující poskytnout další pokyny.
+            </Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Poté, co si proband vyzkoušel sestavit 4-5 kompletů, zapište si případné poznámky a řekněte / přehrajte
+            Poté, co si
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                proband vyzkoušel sestavit 4-5 kompletů
+            </Span>
+            , zapište si případné poznámky a řekněte / přehrajte
             nahrávku:
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             „Stačí. Nyní vraťte kolíky, trubičky a podložky zpět do příslušných zásobníků.“
         </ui:TextBlock>
 
@@ -66,6 +87,7 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}"
             Text="{Binding TrialOralInstruction}" />
 
         <!-- TODO: add audio player -->
@@ -74,24 +96,35 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 60 sekund.
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Současně s vydáním pokynu „Teď!“
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 60 sekund</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Přesně po minutě (60 sekundách) řekněte: „Stop!“.
+            Přesně po minutě (60 sekundách) řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Spočítejte množství správně umístěných součástek (nikoliv kompletů) a výsledek zaznamenejte do záznamového
-            formuláře do Skóre pro kompletování. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda.
-            Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Spočítejte množství správně umístěných
+                <Span FontWeight="Bold">součástek</Span>
+            </Span>
+            (<Span FontWeight="Bold">nikoliv kompletů</Span>)
+            a výsledek zaznamenejte. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda. Stejným
+            způsobem postupujte i u dalších pokusů tohoto subtestu.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
             Pak vyzvěte probanda / přehrajte nahrávku:
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             „Děkuji. Nyní, prosím, vraťte všechny součástky zpět do jejich zásobníků.“
         </ui:TextBlock>
 

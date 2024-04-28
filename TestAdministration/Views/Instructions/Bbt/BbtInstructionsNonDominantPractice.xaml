@@ -15,16 +15,30 @@
 
     <StackPanel>
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní končetiny.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní
+                končetiny.
+            </Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
             Pokračujte sdělením následujících pokynů/přehráním nahrávky:
         </ui:TextBlock>
 
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Text="{Binding OralInstruction}" />
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Nyní budete provádět totéž, a to
+                <Run Text="{Binding NonDominantHand,Mode=OneWay}" />
+                rukou
+            </Span>
+            (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">ukažte na danou ruku</Span>).
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                Před testem si to opět nejprve vyzkoušíte.
+                Postupně budete rukou odebírat jednotlivé kostky a umisťovat je na druhou stranu krabice. Nezapomeňte,
+                že kostka nebude započítána, pokud ji přemístíte, ale nedostanete se konečky vašich prstů přes přepážku.
+                Položte obě ruce po stranách krabice.“
+            </Span>
+        </ui:TextBlock>
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -32,19 +46,28 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Jste připraven/a?“ (počkejte 3 sekundy) „Teď!“. Spusťte odpočítávání 1 minuty
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Jste připraven/a?“</Span>
+            (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">počkejte 3 sekundy</Span>)
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Spusťte odpočítávání 1 minuty
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Současně se slovem „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte: „Stop!“.
+            Současně se slovem „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je před zahájením skutečného testu.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je
+            </Span>
+            před zahájením skutečného testu.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Máte ještě nějaké dotazy?“
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Máte ještě nějaké dotazy?“</Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
@@ -52,11 +75,15 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Po dokončení zkušebního testu přemístěné kostky vraťte zpět do původní přihrádky.
+            Po dokončení zkušebního testu přemístěné
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">kostky vraťte zpět</Span>
+            do původní přihrádky.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Kostky pak zamíchejte pro zajištění jejich náhodného rozmístění.
+            Kostky pak
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zamíchejte</Span>
+            pro zajištění jejich náhodného rozmístění.
         </ui:TextBlock>
     </StackPanel>
 </UserControl>

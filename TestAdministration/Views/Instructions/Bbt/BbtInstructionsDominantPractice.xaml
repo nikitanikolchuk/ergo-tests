@@ -18,9 +18,19 @@
             Probandovi přečtěte následující pokyny/přehrajte nahrávku:
         </ui:TextBlock>
 
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Text="{Binding TopOralInstruction}" />
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Chci zjistit, jak rychle dokážete vaší
+                <Run Text="{Binding DominantHand, Mode=OneWay}" />
+                rukou
+            </Span>
+            (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">ukažte na danou ruku</Span>)
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                chytit postupně jednu kostku po druhé, přenést ji přes přepážku na druhou stranu testovací krabice a
+                pustit ji. Je důležité, abyste se dostal/a konečky vašich prstů až za přepážku. Sledujte mě. Ukážu vám
+                jak.“
+            </Span>
+        </ui:TextBlock>
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -28,11 +38,19 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Přemístěte tři kostky přes přepážku v souladu s pravidly pro BBT, a to ve stejném směru, ve kterém je pak má
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Přemístěte
+                <Span TextDecorations="Underline">tři kostky</Span>
+                přes přepážku
+            </Span>
+            v souladu s pravidly pro BBT, a to ve stejném směru, ve kterém je pak má
             přemisťovat testovaná osoba. Po ukázce řekněte/přehrajte nahrávku:
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             „Pokud přemístíte dvě kostky najednou, bude se počítat pouze jedna. Pokud kostka spadne mimo testovací
             krabici poté, co byla přemístěna přes přepážku a alespoň se dotkla druhé strany krabice, bude stále
             započítána. Neztrácejte tedy čas jejím zvedáním. Kostka nebude započítána, pokud ji přemístíte, ale
@@ -40,28 +58,46 @@
             Až bude čas začít, řeknu: „Jste připraven/a?“ a poté: „Teď!“. Máte nějaké dotazy?“
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Odpovězte na všechny případné dotazy.
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Přemístěné kostky vraťte zpět do původní přihrádky
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Odpovězte</Span>
+            na všechny případné dotazy.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Dobře. Položte obě ruce po stranách krabice. Jste připraven/a?“ (počkejte 3 sekundy) „Teď!“
+            Přemístěné
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">kostky vraťte zpět</Span>
+            do původní přihrádky
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">
+                „Dobře. Položte obě ruce po stranách krabice. Jste připraven/a?“
+            </Span>
+            (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">počkejte 3 sekundy</Span>)
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource LongMargin}">
-            Současně se slovem: „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte: „Stop!“
+            Současně se slovem: „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je před zahájením skutečného testu
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je
+            </Span>
+            před zahájením skutečného testu
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Máte ještě nějaké dotazy?“
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Máte ještě nějaké dotazy?“</Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
@@ -69,11 +105,15 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Po dokončení zkušebního testu přemístěné kostky vraťte zpět do původní přihrádky.
+            Po dokončení zkušebního testu přemístěné
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">kostky vraťte zpět</Span>
+            do původní přihrádky.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Kostky pak zamíchejte pro zajištění jejich náhodného rozmístění.
+            Kostky pak
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zamíchejte</Span>
+            pro zajištění jejich náhodného rozmístění.
         </ui:TextBlock>
     </StackPanel>
 </UserControl>

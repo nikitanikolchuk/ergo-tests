@@ -20,7 +20,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding TopOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding TopAudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -28,11 +29,14 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 30 sekund.
+            Řekněte: <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Současně s vydáním pokynu „Teď!“
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 30 sekund</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Po uplynutí přesně 30 sekund, řekněte: „Stop!“.
+            Po uplynutí přesně 30 sekund, řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
@@ -41,7 +45,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding BottomOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding BottomAudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">

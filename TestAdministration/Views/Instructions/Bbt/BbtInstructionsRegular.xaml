@@ -20,7 +20,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding OralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding AudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -28,17 +29,25 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Jste připraven/a?“ (počkejte 3 sekundy) „Teď!“. Spusťte odpočítávání 1 minuty.
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Jste připraven/a?“</Span>
+            (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">počkejte 3 sekundy</Span>)
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Spusťte odpočítávání 1 minuty.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Přesně po uplynutí 1 minuty řekněte: „Stop!“ Počet přemístěných kostek zaznamenejte, jak je popsáno v
-            manuálu
+            Přesně po uplynutí 1 minuty řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>
+            Počet přemístěných kostek zaznamenejte, jak je popsáno v manuálu
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Přemístěné kostky vraťte zpět do původní přihrádky a zamíchejte je pro zajištění jejich náhodného
-            rozmístění.
+            Přemístěné
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">kostky vraťte zpět</Span>
+            do původní přihrádky a
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zamíchejte</Span>
+            je pro zajištění jejich náhodného rozmístění.
         </ui:TextBlock>
     </StackPanel>
 </UserControl>

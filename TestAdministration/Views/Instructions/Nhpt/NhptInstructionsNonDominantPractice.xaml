@@ -14,9 +14,19 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Text="{Binding TopText}" />
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po dokončení 3. pokusu
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>
+            tak, aby její
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                část se zásobníkem byla na straně nedominantní
+                (<Run Text="{Binding NonDominantHandGenitive, Mode=OneWay}" />)
+                ruky
+            </Span>
+            probanda.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Střed desky zarovnejte</Span>
+            přibližně se středem trupu probanda. Vzdálenost desky od hrany stolu si libovolně nastaví proband.
+        </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
             Test zopakujte stejným způsobem pro levou ruku: Řekněte/přehrajte nahrávku:
@@ -24,7 +34,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding OralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding AudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -32,16 +43,24 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Pak řekněte: „Teď!“ Během testu: „Rychleji!“ Ihned po umístění posledního kolíku do otvoru: „A zpět…
-            rychleji!“
+            Pak řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
+            Během testu:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
+            Ihned po umístění posledního kolíku do otvoru:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Opravte veškeré chyby provedené během zkušebního pokusu a zodpovězte všechny případné dotazy.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
+            provedené během zkušebního pokusu a
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zodpovězte</Span>
+            všechny případné dotazy.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Zapište čas do záznamového archu i případné poznámky.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Zapište</Span>
+            čas i případné poznámky.
         </ui:TextBlock>
     </StackPanel>
 </UserControl>

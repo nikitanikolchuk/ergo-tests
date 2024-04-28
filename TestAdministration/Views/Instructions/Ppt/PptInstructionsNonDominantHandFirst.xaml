@@ -15,15 +15,19 @@
 
     <StackPanel>
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Začněte tím, že řeknete / přehrajete nahrávku a zároveň ukážete:
+            Začněte tím, že řeknete / přehrajete nahrávku a
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zároveň ukážete</Span>:
         </ui:TextBlock>
 
         <ui:TextBlock
             Margin="{StaticResource ShortMargin}"
-            Text="{Binding PracticeOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding PracticeAudioInstruction}" />
 
         <ui:TextBlock Margin="{StaticResource LongMargin}">
-            (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                (Umístěte hned do dalšího otvoru ještě jeden kolík. Oba je pak nechte v otvorech.)
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
@@ -31,7 +35,10 @@
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             „Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit alespoň tři kolíky.“
         </ui:TextBlock>
 
@@ -41,11 +48,15 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Poté, co proband umístil tři nebo čtyři kolíky a je zřejmé, že zadání porozuměl, zapište si případné
-            poznámky a řekněte / přehrajte nahrávku:
+            Poté, co proband
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">umístil tři nebo čtyři kolíky</Span>
+            a je zřejmé, že zadání porozuměl, zapište si případné poznámky a řekněte / přehrajte nahrávku:
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}">
+
             “Stačí. Nyní vyndejte zkušební kolíky a vraťte je zpět do zásobníku nalevo.“
         </ui:TextBlock>
 
@@ -59,15 +70,25 @@
         </ui:TextBlock>
 
         <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Text="{Binding TrialOralInstruction}" />
+            Margin="{StaticResource LongMargin}"
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding TrialAudioInstruction}" />
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Řekněte: „Teď!“. Současně s vydáním pokynu „Teď!“ spusťte odpočítávání 30 sekund.
+        <!-- TODO: add audio player -->
+        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            AUDIO
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Po uplynutí přesně 30 sekund, řekněte: „Stop!“.
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Současně s vydáním pokynu „Teď!“
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 30 sekund</Span>.
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            Po uplynutí přesně 30 sekund, řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
@@ -82,7 +103,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding LastOralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding LastAudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">

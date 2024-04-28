@@ -20,7 +20,8 @@
 
         <ui:TextBlock
             Margin="{StaticResource LongMargin}"
-            Text="{Binding OralInstruction}" />
+            Style="{StaticResource AudioInstructionTextStyle}"
+            Text="{Binding AudioInstruction}" />
 
         <!-- TODO: add audio player -->
         <ui:TextBlock Margin="{StaticResource LongMargin}">
@@ -28,8 +29,12 @@
         </ui:TextBlock>
 
         <ui:TextBlock Margin="{StaticResource ShortMargin}">
-            Pak řekněte: „Teď!“ Během testu: „Rychleji!“ Ihned po umístění posledního kolíku do otvoru: „A zpět…
-            rychleji!“
+            Pak řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
+            Během testu:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
+            Ihned po umístění posledního kolíku do otvoru:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
         </ui:TextBlock>
     </StackPanel>
 </UserControl>
