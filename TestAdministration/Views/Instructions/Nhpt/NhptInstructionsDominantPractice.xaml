@@ -65,7 +65,9 @@
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Stopky spusťte</Span>
             přesně v momentu, kdy se proband
-            <Span Style="{StaticResource ImportantPhysicalInstructionSpanStyle}">dotkne prvního kolíku</Span>
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                <Underline FontWeight="Bold">dotkne prvního kolíku</Underline>
+            </Span>
             <Span FontWeight="Bold">(POZOR – stopky se nezapínají zároveň se slovem: „Teď!“)</Span>.
             <LineBreak />
             Během testu řekněte:
@@ -75,8 +77,8 @@
             <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Stopky zastavte v momentu</Span>,
             kdy se
-            <Span Style="{StaticResource ImportantPhysicalInstructionSpanStyle}">
-                poslední kolík dotkne zásobníku
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                <Underline FontWeight="Bold">poslední kolík dotkne zásobníku</Underline>
             </Span>
             .
             <LineBreak />
