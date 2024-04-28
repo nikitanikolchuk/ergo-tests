@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using TestAdministration.Models.Services;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels.Instructions;
@@ -10,10 +11,12 @@ namespace TestAdministration.ViewModels.Instructions;
 /// </summary>
 public class InstructionPlayerViewModel : ViewModelBase
 {
+    private readonly AudioInstructionService _audioService;
     private readonly MediaPlayer _mediaPlayer;
 
-    public InstructionPlayerViewModel(MediaPlayer mediaPlayer)
+    public InstructionPlayerViewModel(AudioInstructionService audioService, MediaPlayer mediaPlayer)
     {
+        _audioService = audioService;
         _mediaPlayer = mediaPlayer;
 
         var timer = new DispatcherTimer
@@ -25,7 +28,7 @@ public class InstructionPlayerViewModel : ViewModelBase
     }
 
     public string Time { get; private set; } = "00:00 / 00:00";
-    public ICommand PlayCommand => new RelayCommand<object?>(_ => _mediaPlayer.Play());
+    public ICommand PlayCommand => new RelayCommand<object?>(_ => _audioService.Play(_mediaPlayer));
     public ICommand PauseCommand => new RelayCommand<object?>(_ => _mediaPlayer.Pause());
     public ICommand StopCommand => new RelayCommand<object?>(_ => _mediaPlayer.Stop());
 

@@ -27,6 +27,7 @@ public partial class TestConductionViewModel : ViewModelBase
     [GeneratedRegex(@"^(?!0\d)\d+,?\d*$")]
     private static partial Regex FloatRegex();
 
+    private readonly AudioInstructionService _audioInstructionService;
     private readonly ITestBuilder _testBuilder;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly Action<Test> _saveTest;
@@ -44,6 +45,7 @@ public partial class TestConductionViewModel : ViewModelBase
         TestType testType,
         Action<Test> saveTest)
     {
+        _audioInstructionService = audioInstructionService;
         _dateTimeProvider = dateTimeProvider;
         _testBuilder = testBuilderFactory.Create(testType)
             .SetTester(tester)
@@ -52,7 +54,7 @@ public partial class TestConductionViewModel : ViewModelBase
             .SetStartTime(_dateTimeProvider.Now);
         _saveTest = saveTest;
         TitleViewModel = new TestConductionTitleViewModel(_testBuilder, patient.DominantHand);
-        InstructionsViewModel = _getInstructionsViewModel(audioInstructionService, _testBuilder, patient);
+        InstructionsViewModel = _getInstructionsViewModel(_audioInstructionService, _testBuilder, patient);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
@@ -198,6 +200,7 @@ public partial class TestConductionViewModel : ViewModelBase
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
         InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
+        _audioInstructionService.Pause();
         OnPropertyChanged(nameof(ValuePlaceholderText));
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;

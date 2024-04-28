@@ -21,6 +21,6 @@ public class AudioInstructionResolver(
     {
         bool? isMale = isGendered ? patient.IsMale : null;
         var mediaPlayer = audioService.Get(testType, patient.DominantHand, section, trial, index, isMale);
-        return new InstructionPlayerViewModel(mediaPlayer);
+        return new InstructionPlayerViewModel(audioService, mediaPlayer);
     }
 }

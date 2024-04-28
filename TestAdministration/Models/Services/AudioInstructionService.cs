@@ -8,6 +8,8 @@ public class AudioInstructionService
 {
     private const string ResourcesPath = "pack://siteoforigin:,,,/Resources/Audio/";
 
+    private MediaPlayer? _currentAudioPlayer;
+
     public MediaPlayer Get(
         TestType testType,
         Hand dominantHand,
@@ -37,5 +39,24 @@ public class AudioInstructionService
         mediaPlayer.Open(uri);
 
         return mediaPlayer;
+    }
+
+    /// <summary>
+    /// Pauses the current audio player (if not null) before
+    /// using the next one.
+    /// </summary>
+    public void Play(MediaPlayer mediaPlayer)
+    {
+        _currentAudioPlayer?.Pause();
+        _currentAudioPlayer = mediaPlayer;
+        _currentAudioPlayer.Play();
+    }
+
+    /// <summary>
+    /// Pauses the current audio player if not null.
+    /// </summary>
+    public void Pause()
+    {
+        _currentAudioPlayer?.Pause();
     }
 }
