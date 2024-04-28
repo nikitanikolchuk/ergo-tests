@@ -13,8 +13,8 @@
         <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
             Po dokončení 3. pokusu
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>
             tak, aby její
@@ -26,39 +26,32 @@
             probanda.
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Střed desky zarovnejte</Span>
             přibližně se středem trupu probanda. Vzdálenost desky od hrany stolu si libovolně nastaví proband.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Test zopakujte stejným způsobem pro levou ruku: Řekněte/přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding AudioInstruction,Mode=OneWay}" />
+            </Span>
         </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding AudioInstruction}" />
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Pak řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             Během testu:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
             Ihned po umístění posledního kolíku do otvoru:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
             provedené během zkušebního pokusu a
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zodpovězte</Span>
             všechny případné dotazy.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Zapište</Span>
             čas i případné poznámky.
         </ui:TextBlock>

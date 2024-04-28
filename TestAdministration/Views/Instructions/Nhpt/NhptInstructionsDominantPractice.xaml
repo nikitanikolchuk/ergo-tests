@@ -13,93 +13,78 @@
         <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Text="{Binding TopText}" />
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding TopAudioInstruction}" />
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
+            <Run Text="{Binding TopText,Mode=OneWay}" />
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding TopAudioInstruction,Mode=OneWay}" />
+            </Span>
+        </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Pak probandovi
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>,
             jak dáváte postupně všech devět kolíků do otvorů, zatímco si desku přidržujete druhou rukou. Při ukázce
             sedíte naproti probandovi. S kolíky tedy manipulujete Vaší levou rukou.
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}">
-
-            „Poté kolíky hned po jednom vyndáte z otvorů a vrátíte je zpět do zásobníku.“
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Poté kolíky hned po jednom vyndáte z otvorů a vrátíte je zpět do zásobníku.“
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Pak
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>,
             jak postupně vyndaváte všech devět kolíků z otvorů a dáváte je zpět do zásobníku, zatímco si
             desku přidržujete druhou rukou.
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}">
-
-            „Nejprve provedeme zkušební pokus. Uvidíme, jak rychle dokážete umístit všechny kolíky do otvorů a poté je
-            opět po jednom uložit zpět do zásobníku. Uchopte desku oběma rukama. Jste připraven/a?“
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Nejprve provedeme zkušební pokus. Uvidíme, jak rychle dokážete umístit všechny kolíky do otvorů a poté
+                je opět po jednom uložit zpět do zásobníku. Uchopte desku oběma rukama. Jste připraven/a?“
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Stopky spusťte</Span>
             přesně v momentu, kdy se proband
             <Span Style="{StaticResource ImportantPhysicalInstructionSpanStyle}">dotkne prvního kolíku</Span>
             <Span FontWeight="Bold">(POZOR – stopky se nezapínají zároveň se slovem: „Teď!“)</Span>.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Během testu řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
             Ihned po umístění posledního kolíku do otvoru řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Stopky zastavte v momentu</Span>,
             kdy se
             <Span Style="{StaticResource ImportantPhysicalInstructionSpanStyle}">
                 poslední kolík dotkne zásobníku
             </Span>
             .
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
             provedené během zkušebního pokusu a
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zodpovězte</Span>
             všechny případné dotazy.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Zapište</Span>
             čas i případné poznámky.
         </ui:TextBlock>

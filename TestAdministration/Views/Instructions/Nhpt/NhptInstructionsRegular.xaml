@@ -13,22 +13,21 @@
         <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Text="{Binding TopText}" />
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding AudioInstruction}" />
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
+            <Run Text="{Binding TopText,Mode=OneWay}" />
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding AudioInstruction,Mode=OneWay}" />
+            </Span>
+        </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Pak řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             Během testu:

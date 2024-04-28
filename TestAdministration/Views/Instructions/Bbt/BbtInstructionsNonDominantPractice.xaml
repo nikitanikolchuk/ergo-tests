@@ -13,19 +13,15 @@
         <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní
                 končetiny.
             </Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Pokračujte sdělením následujících pokynů/přehráním nahrávky:
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+            <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
                 „Nyní budete provádět totéž, a to
                 <Run Text="{Binding NonDominantHand,Mode=OneWay}" />
@@ -41,46 +37,34 @@
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Jste připraven/a?“</Span>
             (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">počkejte 3 sekundy</Span>)
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Spusťte odpočítávání 1 minuty
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Současně se slovem „Teď!“ spusťte odpočítávání 15 sekund. Přesně po uplynutí 15 sekund řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Pokud v průběhu zkušebního pokusu došlo k chybám, opravte je
             </Span>
             před zahájením skutečného testu.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Máte ještě nějaké dotazy?“</Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Zapište počet správně přemístěných kostek a případně i další poznámky do záznamového archu.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Po dokončení zkušebního testu přemístěné
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">kostky vraťte zpět</Span>
             do původní přihrádky.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Kostky pak
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zamíchejte</Span>
             pro zajištění jejich náhodného rozmístění.

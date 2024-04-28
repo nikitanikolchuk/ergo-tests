@@ -13,43 +13,35 @@
         <ResourceDictionary Source="/Views/Instructions/InstructionsDictionary.xaml" />
     </UserControl.Resources>
 
-    <StackPanel>
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Předvádějte následující úkon a zároveň říkejte / přehrajte nahrávku:
             </Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding FirstAudioInstruction}" />
-
-        <ui:TextBlock
-            Margin="{StaticResource ShortMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding SecondAudioInstruction}" />
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding FirstAudioInstruction,Mode=OneWay}" />
+            </Span>
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding SecondAudioInstruction,Mode=OneWay}" />
+            </Span>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 (dokončete ukázku druhého kompletu umístěného ve druhém otvoru shora)
             </Span>
             .
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}">
-
-            „Položte obě ruce po stranách desky. Nyní si vyzkoušejte sestavit alespoň čtyři cvičné komplety.“
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Položte obě ruce po stranách desky. Nyní si vyzkoušejte sestavit alespoň čtyři cvičné komplety.“
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Zdůrazněte, že by obě ruce měly pracovat po celou dobu zároveň: první zvedá kolík, druhá podložku, první
             trubičku a tak dále. Před zahájením testu by proband měl sestavit čtyři nebo pět úplných kompletů, aby bylo
             jisté, že proband plně porozuměl systému
@@ -58,56 +50,45 @@
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Pokud tomu tak nebude, měl by testující poskytnout další pokyny.
             </Span>
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Poté, co si
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 proband vyzkoušel sestavit 4-5 kompletů
             </Span>
-            , zapište si případné poznámky a řekněte / přehrajte
-            nahrávku:
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}">
-
-            „Stačí. Nyní vraťte kolíky, trubičky a podložky zpět do příslušných zásobníků.“
+            , zapište si případné poznámky a řekněte / přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Stačí. Nyní vraťte kolíky, trubičky a podložky zpět do příslušných zásobníků.“
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Poté řekněte / přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding TrialOralInstruction,Mode=OneWay}" />
+            </Span>
         </ui:TextBlock>
 
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}"
-            Text="{Binding TrialOralInstruction}" />
-
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
 
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+        <ui:TextBlock>
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 60 sekund</Span>.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Přesně po minutě (60 sekundách) řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Spočítejte množství správně umístěných
                 <Span FontWeight="Bold">součástek</Span>
@@ -115,21 +96,16 @@
             (<Span FontWeight="Bold">nikoliv kompletů</Span>)
             a výsledek zaznamenejte. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda. Stejným
             způsobem postupujte i u dalších pokusů tohoto subtestu.
-        </ui:TextBlock>
-
-        <ui:TextBlock Margin="{StaticResource ShortMargin}">
+            <LineBreak />
             Pak vyzvěte probanda / přehrajte nahrávku:
-        </ui:TextBlock>
-
-        <ui:TextBlock
-            Margin="{StaticResource LongMargin}"
-            Style="{StaticResource AudioInstructionTextStyle}">
-
-            „Děkuji. Nyní, prosím, vraťte všechny součástky zpět do jejich zásobníků.“
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Děkuji. Nyní, prosím, vraťte všechny součástky zpět do jejich zásobníků.“
+            </Span>
         </ui:TextBlock>
 
         <!-- TODO: add audio player -->
-        <ui:TextBlock Margin="{StaticResource LongMargin}">
+        <ui:TextBlock Margin="{StaticResource AudioPlayerMargin}">
             AUDIO
         </ui:TextBlock>
     </StackPanel>
