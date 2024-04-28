@@ -6,7 +6,7 @@ public class PptInstructionsBothHandsFirstViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string OralInstruction =>
+    public string AudioInstruction =>
         $"„V této části testu budete používat obě ruce zároveň. {OrderedInstruction} Poté oba kolíky umístěte do řad." +
         $" Začněte horním otvorem v obou řadách.";
 

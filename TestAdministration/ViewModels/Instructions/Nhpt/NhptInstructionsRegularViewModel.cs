@@ -12,7 +12,7 @@ public class NhptInstructionsRegularViewModel(
             ? "Poté, co proband dokončí zkušební pokus, řekněte/přehrajte nahrávku:"
             : "Dále řekněte/přehrajte nahrávku:";
 
-    public string OralInstruction =>
+    public string AudioInstruction =>
         trial == 1
             ? "„Toto už bude skutečný test. Instrukce zůstávají stejné. Pracujte co nejrychleji. Uchopte desku oběma" +
               " rukama. Jste připraven/a?“"

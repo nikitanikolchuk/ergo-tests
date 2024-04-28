@@ -15,11 +15,11 @@ public class PptInstructionsDominantHandFirstViewModel(
         $" {DominantHandInstrumental} rukou bude v zásobníku {WashersSide} od středu umístěno 40 podložek a" +
         $" {CollarsSide} od středu 40 trubiček.";
 
-    public string PracticeOralInstruction =>
+    public string PracticeAudioInstruction =>
         $"„{UppercaseDominantHandInstrumental} rukou vezměte vždy jeden kolík z pravého zásobníku. Jednotlivé kolíky" +
         $" umisťujte do řady napravo. Začněte horním otvorem.“";
 
-    public string TrialOralInstruction =>
+    public string TrialAudioInstruction =>
         $"„Až řeknu: „Teď!“, umístěte co nejvíce kolíků do řady na {DominantHandLocative} straně. Začněte horním" +
         $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
         $" Jste připraven/a?“";

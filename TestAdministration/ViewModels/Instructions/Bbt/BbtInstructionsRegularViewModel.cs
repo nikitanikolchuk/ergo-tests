@@ -8,7 +8,7 @@ public class BbtInstructionsRegularViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string OralInstruction =>
+    public string AudioInstruction =>
         trial == 1
             ? "„Toto už bude skutečný test. Instrukce zůstávají stejné. Pracujte co nejrychleji. Položte obě ruce po" +
               " stranách krabice.“"

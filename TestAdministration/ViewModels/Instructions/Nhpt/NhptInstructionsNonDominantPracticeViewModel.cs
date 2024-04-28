@@ -11,7 +11,7 @@ public class NhptInstructionsNonDominantPracticeViewModel(
         $" ({NonDominantHandGenitive}) ruky probanda. Střed desky zarovnejte přibližně se středem trupu probanda." +
         $" Vzdálenost desky od hrany stolu si libovolně nastaví proband.";
 
-    public string OralInstruction =>
+    public string AudioInstruction =>
         $"„Nyní zopakujeme to samé s vaší {NonDominantHandInstrumental} rukou. Nejprve opět provedeme zkušební pokus." +
         $" Uchopte desku oběma rukama. Jste připraven/a?“";
 

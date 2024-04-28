@@ -6,16 +6,16 @@ public class PptInstructionsNonDominantHandFirstViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string PracticeOralInstruction =>
+    public string PracticeAudioInstruction =>
         $"„{NonDominantHandInstrumental} rukou vezměte vždy jeden kolík z levého zásobníku. Jednotlivé kolíky" +
         $" umisťujte do řady nalevo. Začněte horním otvorem.“";
 
-    public string TrialOralInstruction =>
+    public string TrialAudioInstruction =>
         $"„Až řeknu: „Teď!“, umístěte co nejvíce kolíků do řady na {NonDominantHandLocative} straně, začněte horním" +
         $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
         $" Jste připraven/a?“";
 
-    public string LastOralInstruction =>
+    public string LastAudioInstruction =>
         $"„Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku {ReturnLocation}.“";
 
     private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "Levou" : "Pravou";

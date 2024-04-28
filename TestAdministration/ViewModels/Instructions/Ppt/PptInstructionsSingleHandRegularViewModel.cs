@@ -7,14 +7,14 @@ public class PptInstructionsSingleHandRegularViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string TopOralInstruction =>
+    public string TopAudioInstruction =>
         trial == 2
             ? $"„Teď ještě jednou zopakujeme to samé s vaší {DominantHand} rukou. Instrukce zůstávají stejné." +
               $" Pracujte co nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“"
             : $"„Teď ještě naposledy zopakujeme to samé s vaší {DominantHand} rukou. Instrukce zůstávají stejné." +
               $" Pracujte co nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“";
 
-    public string BottomOralInstruction =>
+    public string BottomAudioInstruction =>
         $"„Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku {ReturnDirection}.“";
 
     private string DominantHand => dominantHand == Hand.Right ? "pravou" : "levou";

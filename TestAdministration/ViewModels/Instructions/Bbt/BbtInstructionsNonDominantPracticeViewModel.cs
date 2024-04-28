@@ -6,7 +6,7 @@ public class BbtInstructionsNonDominantPracticeViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string OralInstruction =>
+    public string AudioInstruction =>
         $"„Nyní budete provádět totéž, a to {NonDominantHand} rukou (ukažte na danou ruku). Před testem si to opět" +
         $" nejprve vyzkoušíte. Postupně budete rukou odebírat jednotlivé kostky a umisťovat je na druhou stranu" +
         $" krabice. Nezapomeňte, že kostka nebude započítána, pokud ji přemístíte, ale nedostanete se konečky vašich" +

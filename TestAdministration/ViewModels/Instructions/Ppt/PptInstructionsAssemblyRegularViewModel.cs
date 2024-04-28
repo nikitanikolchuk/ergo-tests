@@ -4,7 +4,7 @@ public class PptInstructionsAssemblyRegularViewModel(
     int trial
 ) : ViewModelBase
 {
-    public string OralInstruction =>
+    public string AudioInstruction =>
         trial == 2
             ? "„Teď ještě jednou zopakujeme to samé. Instrukce zůstávají stejné. Pracujte co nejrychleji. Položte obě" +
               " ruce po stranách desky. Jste připraven/a?“"

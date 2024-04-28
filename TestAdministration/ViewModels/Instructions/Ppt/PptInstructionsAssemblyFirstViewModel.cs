@@ -6,7 +6,7 @@ public class PptInstructionsAssemblyFirstViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string FirstOralInstruction =>
+    public string FirstAudioInstruction =>
         $"„Pravou rukou vezměte jeden kolík z {DominantHandMasculine} zásobníku. Zatímco jej budete umisťovat do" +
         $" horního otvoru {DominantHandFeminine} řady, uchopte {NonDominantHandInstrumental} rukou podložku. Jakmile" +
         $" umístíte kolík, nasaďte podložku na kolík. Zatímco budete {NonDominantHandInstrumental} rukou nasazovat" +
@@ -14,7 +14,7 @@ public class PptInstructionsAssemblyFirstViewModel(
         $" kolík, uchopte {NonDominantHandInstrumental} rukou další podložku a nasaďte ji na trubičku. Tím dokončíte" +
         $" první “komplet“ složený z kolíku, podložky, trubičky a podložky.";
 
-    public string SecondOralInstruction =>
+    public string SecondAudioInstruction =>
         $"Zatímco budete {NonDominantHandInstrumental} rukou nasazovat poslední podložku prvního kompletu, začněte" +
         $" okamžitě vytvářet další komplet tím, že {DominantHandInstrumental} rukou vezmete další kolík. Umístěte" +
         $" jej do dalšího otvoru, {NonDominantHandInstrumental} rukou nasaďte podložku a tak dále, až dokončíte další" +

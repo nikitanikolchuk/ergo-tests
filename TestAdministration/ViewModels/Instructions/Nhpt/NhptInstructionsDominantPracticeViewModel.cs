@@ -10,7 +10,7 @@ public class NhptInstructionsDominantPracticeViewModel(
         $"Nejdříve otestujte dominantní ({DominantHand}) ruku. Probandovi sdělte následující instrukce/přehrajte" +
         $" nahrávku:";
 
-    public string TopOralInstruction =>
+    public string TopAudioInstruction =>
         $"„Chci zjistit, jak rychle a přesně dokážete provést tento Devítikolíkový test. Nejprve budete pracovat vaší" +
         $" {DominantHand} rukou, pak tou {NonDominantHand}. Každá ruka bude testována třikrát. Vždy vám nejprve" +
         $" řeknu, co máte dělat, a pak budete mít příležitost si to ještě vyzkoušet nanečisto. Desku si budete" +
