@@ -47,6 +47,7 @@ public partial class App
 
         MainWindow = mainWindow;
         MainWindow.Show();
+        MainWindow.WindowState = WindowState.Maximized;
     }
 
     private static IServiceCollection _configureServices() =>

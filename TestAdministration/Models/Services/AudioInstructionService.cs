@@ -8,7 +8,8 @@ public class AudioInstructionService
 {
     private const string ResourcesPath = "pack://siteoforigin:,,,/Resources/Audio/";
 
-    private MediaPlayer? _currentAudioPlayer;
+    private Action? _onPlay;
+    private Action? _onPause;
 
     public MediaPlayer Get(
         TestType testType,
@@ -42,21 +43,22 @@ public class AudioInstructionService
     }
 
     /// <summary>
-    /// Pauses the current audio player (if not null) before
-    /// using the next one.
+    /// Sets the current audio player actions that account for
+    /// custom play/pause logic.
     /// </summary>
-    public void Play(MediaPlayer mediaPlayer)
+    public void SetPlayerActions(Action onPlay, Action onPause)
     {
-        _currentAudioPlayer?.Pause();
-        _currentAudioPlayer = mediaPlayer;
-        _currentAudioPlayer.Play();
+        _onPlay = onPlay;
+        _onPause = onPause;
     }
+
+    /// <summary>
+    /// Resumes the current audio player if not null.
+    /// </summary>
+    public void Play() => _onPlay?.Invoke();
 
     /// <summary>
     /// Pauses the current audio player if not null.
     /// </summary>
-    public void Pause()
-    {
-        _currentAudioPlayer?.Pause();
-    }
+    public void Pause() => _onPause?.Invoke();
 }

@@ -13,11 +13,14 @@ public class InstructionPlayerViewModel : ViewModelBase
 {
     private readonly AudioInstructionService _audioService;
     private readonly MediaPlayer _mediaPlayer;
+    private bool _isPlaying;
 
     public InstructionPlayerViewModel(AudioInstructionService audioService, MediaPlayer mediaPlayer)
     {
         _audioService = audioService;
         _mediaPlayer = mediaPlayer;
+
+        _mediaPlayer.MediaEnded += _onAudioEnded;
 
         var timer = new DispatcherTimer
         {
@@ -27,19 +30,65 @@ public class InstructionPlayerViewModel : ViewModelBase
         timer.Start();
     }
 
-    public string Time { get; private set; } = "00:00 / 00:00";
-    public ICommand PlayCommand => new RelayCommand<object?>(_ => _audioService.Play(_mediaPlayer));
-    public ICommand PauseCommand => new RelayCommand<object?>(_ => _mediaPlayer.Pause());
-    public ICommand StopCommand => new RelayCommand<object?>(_ => _mediaPlayer.Stop());
-
-    private void _timerTick(object? sender, EventArgs e)
+    public double ListenedPercentage
     {
-        if (!_mediaPlayer.NaturalDuration.HasTimeSpan)
+        get => DurationSeconds != 0
+            ? _mediaPlayer.Position.TotalSeconds / DurationSeconds
+            : 0;
+        set
         {
-            return;
+            _mediaPlayer.Position = TimeSpan.FromSeconds(DurationSeconds * value);
+            OnPropertyChanged();
         }
+    }
 
-        Time = $@"{_mediaPlayer.Position:mm\:ss} / {_mediaPlayer.NaturalDuration.TimeSpan:mm\:ss}";
-        OnPropertyChanged(nameof(Time));
+    public bool IsPlaying
+    {
+        get => _isPlaying;
+        private set
+        {
+            _isPlaying = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ICommand OnPlayCommand => new RelayCommand<object?>(_ =>
+    {
+        if (!IsPlaying)
+        {
+            _audioService.Pause();
+            _audioService.SetPlayerActions(_onPlay, _onPause);
+            _audioService.Play();
+        }
+        else
+        {
+            _onPause();
+        }
+    });
+
+    private double DurationSeconds =>
+        _mediaPlayer.NaturalDuration.HasTimeSpan
+            ? _mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds
+            : 0;
+
+    private void _timerTick(object? sender, EventArgs e) =>
+        OnPropertyChanged(nameof(ListenedPercentage));
+
+    private void _onPlay()
+    {
+        IsPlaying = true;
+        _mediaPlayer.Play();
+    }
+
+    private void _onPause()
+    {
+        IsPlaying = false;
+        _mediaPlayer.Pause();
+    }
+
+    private void _onAudioEnded(object? sender, EventArgs e)
+    {
+        IsPlaying = false;
+        _mediaPlayer.Stop();
     }
 }

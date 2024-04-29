@@ -9,6 +9,7 @@
     xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
     xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
+    xmlns:viewInstructions="clr-namespace:TestAdministration.Views.Instructions"
     xmlns:viewInstructionsNhpt="clr-namespace:TestAdministration.Views.Instructions.Nhpt"
     xmlns:viewInstructionsPpt="clr-namespace:TestAdministration.Views.Instructions.Ppt"
     xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Instructions.Bbt">
@@ -98,7 +99,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelInstructions:InstructionPlayerViewModel}">
-        <views:InstructionPlayer />
+        <viewInstructions:InstructionPlayer />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelRules:NhptRulesViewModel}">

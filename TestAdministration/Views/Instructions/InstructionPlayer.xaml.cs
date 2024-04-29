@@ -1,4 +1,4 @@
-namespace TestAdministration.Views;
+namespace TestAdministration.Views.Instructions;
 
 public partial class InstructionPlayer
 {
