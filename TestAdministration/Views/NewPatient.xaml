@@ -27,8 +27,8 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,16,0,64">
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock 
-                            Margin="0,0,0,12" 
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
                             Foreground="{DynamicResource TextControlForeground}"
                             Text="Jméno" />
 
@@ -42,8 +42,8 @@
                     </StackPanel>
 
                     <StackPanel>
-                        <ui:TextBlock 
-                            Margin="0,0,0,12" 
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
                             Foreground="{DynamicResource TextControlForeground}"
                             Text="Příjmení" />
 
@@ -59,10 +59,10 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,64">
                     <StackPanel Margin="0,0,32,0">
-                        <ui:TextBlock 
-                            Margin="0,0,0,12" 
+                        <ui:TextBlock
+                            Margin="0,0,0,12"
                             Foreground="{DynamicResource TextControlForeground}"
-                            Text="Rodné číslo bez lomítka (nebo ekvivalent)" />
+                            Text="Rodné číslo (bez lomítka)" />
 
                         <ui:TextBox
                             Width="296"

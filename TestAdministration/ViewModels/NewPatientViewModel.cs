@@ -20,6 +20,9 @@ public partial class NewPatientViewModel(
     private const string RightHand = "Pravá";
     private const string BothHands = "Obě";
 
+    // Characters that cannot be used in a directory name.
+    private static readonly List<char> ForbiddenIdChars = ['/', '\\', ':', '*', '?', '"', '<', '>', '|'];
+
     [GeneratedRegex(" +")]
     private static partial Regex MultipleSpaceRegex();
 
@@ -71,7 +74,7 @@ public partial class NewPatientViewModel(
         get => _id;
         set
         {
-            if (value.Any(ch => ch is '/' or '\\'))
+            if (value.Any(ch => ForbiddenIdChars.Contains(ch)))
             {
                 return;
             }
