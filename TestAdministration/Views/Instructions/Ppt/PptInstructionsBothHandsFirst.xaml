@@ -20,7 +20,6 @@
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
                 <Run Text="{Binding AudioInstruction,Mode=OneWay}" />
             </Span>
-            <LineBreak />
             (Po dokončení zadání slovních instrukcí probandovi
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>
             správné provedení tohoto subtestu pomocí

@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.TestBuilders;
 
@@ -19,8 +18,8 @@ public class TestConductionTitleViewModel(
 
     private static string _getSectionName(int section, Hand dominantHand) => section switch
     {
-        0 => $"Dominantní ruka - {_getHandString(dominantHand)}",
-        1 => $"Nedominantní ruka - {_getHandString(dominantHand)}",
+        0 => $"Dominantní ruka - {_getDominantHandString(dominantHand)}",
+        1 => $"Nedominantní ruka - {_getNonDominantHandString(dominantHand)}",
         2 => "Obě ruce",
         3 => "Kompletování",
         _ => throw new ArgumentOutOfRangeException(
@@ -30,10 +29,22 @@ public class TestConductionTitleViewModel(
         )
     };
 
-    private static string _getHandString(Hand dominantHand) => dominantHand switch
+    private static string _getDominantHandString(Hand dominantHand) => dominantHand switch
     {
         Hand.Left => "LHK",
         Hand.Right => "PHK",
+        Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),
+        _ => throw new InvalidEnumArgumentException(
+            nameof(dominantHand),
+            Convert.ToInt32(dominantHand),
+            typeof(Hand)
+        )
+    };
+
+    private static string _getNonDominantHandString(Hand dominantHand) => dominantHand switch
+    {
+        Hand.Left => "PHK",
+        Hand.Right => "LHK",
         Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),
         _ => throw new InvalidEnumArgumentException(
             nameof(dominantHand),
