@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using CsvHelper;
@@ -56,7 +57,17 @@ public class LocalCsvExporter(
         var surname = patient.Surname.ToUpper().Replace(" ", "-");
         var name = patient.Name.ToUpper().Replace(" ", "-");
         var id = patient.Id.Replace(" ", "-");
-        return $"{surname}_{name}_{id}";
+        return _removeDiacritics($"{surname}_{name}_{id}");
+    }
+
+    private static string _removeDiacritics(string str)
+    {
+        var chars = str
+            .Normalize(NormalizationForm.FormD)
+            .Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray();
+
+        return new string(chars);
     }
 
     private void _exportPatient(Patient patient, string filePath)
