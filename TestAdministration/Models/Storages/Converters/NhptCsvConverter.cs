@@ -52,7 +52,7 @@ public class NhptCsvConverter
         NonDominantSecondNormDifference = test.Sections[1].Trials[2].NormDifference,
         NonDominantThirdNormDifference = test.Sections[1].Trials[3].NormDifference,
         NonDominantAverageNormDifference = test.Sections[1].AverageNormDifference,
-        Notes = CreateNotes(test, NhptCsvRecord.NoteNames)
+        Notes = CreateNotes(test)
     };
 
     private static Test _fromRecord(NhptCsvRecord record, IList<string> notes) => new(

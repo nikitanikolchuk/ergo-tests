@@ -82,7 +82,7 @@ public class PptCsvConverter
         AssemblySecondNormDifference = test.Sections[4].Trials[1].NormDifference,
         AssemblyThirdNormDifference = test.Sections[4].Trials[2].NormDifference,
         AssemblyAverageNormDifference = test.Sections[4].AverageNormDifference,
-        Notes = CreateNotes(test, PptCsvRecord.NoteNames)
+        Notes = CreateNotes(test)
     };
 
     private static Test _fromRecord(PptCsvRecord record, IList<string> notes) => new(

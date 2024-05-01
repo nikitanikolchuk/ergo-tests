@@ -4,6 +4,7 @@ using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
+using TestAdministration.ViewModels.Results;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
@@ -109,7 +110,23 @@ public class TestingViewModel(
             tester,
             patient,
             testType,
-            _onSaveTest
+            _onShowResults
+        );
+    }
+
+    private void _onShowResults(Test test)
+    {
+        if (_currentPatient is null)
+        {
+            throw new InvalidOperationException("Go to results used without a chosen patient");
+        }
+
+        var previousTest = testStorage.GetLastTestByPatientId(test.Type, _currentPatient.Id);
+        CurrentViewModel = new ResultsViewModel(
+            _currentPatient,
+            test,
+            previousTest,
+            () => _onSaveTest(test)
         );
     }
 
@@ -123,7 +140,6 @@ public class TestingViewModel(
         testStorage.AddTest(_currentPatient, test);
         SelectedPatient = null;
         _currentPatient = null;
-        // TODO: replace with result page
         CurrentViewModel = new PatientChoiceViewModel(testStorage);
     }
 }

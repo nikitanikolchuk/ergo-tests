@@ -1,0 +1,157 @@
+using System.ComponentModel;
+using System.Windows.Input;
+using TestAdministration.Models.Data;
+using TestAdministration.Models.Storages.Converters;
+using Wpf.Ui.Input;
+
+namespace TestAdministration.ViewModels.Results;
+
+/// <summary>
+/// A view model for showing results of the last test.
+/// </summary>
+public class ResultsViewModel(
+    Patient patient,
+    Test test,
+    Test? previousTest,
+    Action onSaveTest
+) : ViewModelBase
+{
+    private bool _isPreviousTestShown;
+    private bool _isSdScoreShown;
+    private bool _isNormDifferenceShown;
+
+    // TODO: display correct age
+    public List<ResultPatientTable> Patients =>
+    [
+        new ResultPatientTable(
+            $"{patient.Name} {patient.Surname}",
+            0,
+            patient.DominantHand == Hand.Right ? "Pravá" : "Levá"
+        )
+    ];
+
+    public List<ResultTableViewModel> Tables => _getTables();
+
+    public bool IsPreviousTestShown
+    {
+        get => _isPreviousTestShown;
+        set
+        {
+            _isPreviousTestShown = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsPreviousSdScoreShown));
+            OnPropertyChanged(nameof(IsPreviousNormDifferenceShown));
+        }
+    }
+
+    public bool IsSdScoreShown
+    {
+        get => _isSdScoreShown;
+        set
+        {
+            _isSdScoreShown = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsPreviousSdScoreShown));
+        }
+    }
+
+    public bool IsPreviousSdScoreShown => IsPreviousTestShown && IsSdScoreShown;
+
+    public bool IsNormDifferenceShown
+    {
+        get => _isNormDifferenceShown;
+        set
+        {
+            _isNormDifferenceShown = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsPreviousNormDifferenceShown));
+        }
+    }
+
+    public bool IsPreviousNormDifferenceShown => IsPreviousTestShown && IsNormDifferenceShown;
+
+    // TODO
+    public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => {});
+
+    public ICommand OnSaveTest => new RelayCommand<object?>(_ => onSaveTest());
+
+    public string Notes => CsvConversionHelper.CreateNotes(test);
+
+    private List<ResultTableViewModel> _getTables() => test.Type switch
+    {
+        TestType.Nhpt => _getNhptTables(),
+        TestType.Ppt => _getPptTables(),
+        TestType.Bbt => _getBbtTables(),
+        _ => throw new InvalidEnumArgumentException(
+            nameof(test.Type),
+            Convert.ToInt32(test.Type),
+            typeof(TestType)
+        )
+    };
+
+    private List<ResultTableViewModel> _getNhptTables() =>
+    [
+        new ResultTableViewModel(
+            test.Sections[0],
+            previousTest?.Sections[0],
+            "Dominantní HK",
+            "Čas (v sekundách)"
+        ),
+        new ResultTableViewModel(
+            test.Sections[1],
+            previousTest?.Sections[1],
+            "Nedominantní HK",
+            "Čas (v sekundách)"
+        )
+    ];
+
+    private List<ResultTableViewModel> _getPptTables() =>
+    [
+        new ResultTableViewModel(
+            test.Sections[0],
+            previousTest?.Sections[0],
+            "Dominantní HK",
+            "Počet kolíků"
+        ),
+        new ResultTableViewModel(
+            test.Sections[1],
+            previousTest?.Sections[1],
+            "Nedominantní HK",
+            "Počet kolíků"
+        ),
+        new ResultTableViewModel(
+            test.Sections[2],
+            previousTest?.Sections[2],
+            "Obě HK",
+            "Počet párů kolíků"
+        ),
+        new ResultTableViewModel(
+            test.Sections[3],
+            previousTest?.Sections[3],
+            "LHK + PHK + Obě",
+            "Součet výsledků"
+        ),
+        new ResultTableViewModel(
+            test.Sections[4],
+            previousTest?.Sections[4],
+            "Nedominantní HK",
+            "Počet součástek"
+        )
+    ];
+
+    private List<ResultTableViewModel> _getBbtTables() =>
+    [
+        new ResultTableViewModel(
+            test.Sections[0],
+            previousTest?.Sections[0],
+            "Dominantní HK",
+            "Počet kostek"
+        ),
+        new ResultTableViewModel(
+            test.Sections[1],
+            previousTest?.Sections[1],
+            "Nedominantní HK",
+            "Počet kostek"
+        )
+    ];
+}

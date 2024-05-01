@@ -1,0 +1,172 @@
+<UserControl
+    x:Class="TestAdministration.Views.Results.Results"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModelResults="clr-namespace:TestAdministration.ViewModels.Results"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelResults:ResultsViewModel}">
+
+    <UserControl.Resources>
+        <system:Double x:Key="ColumnWidth">200</system:Double>
+
+        <DataTemplate x:Key="PatientHeaderTemplate" DataType="system:String">
+            <ui:TextBlock
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="{Binding}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <StackPanel
+        Orientation="Horizontal"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+
+        <StackPanel
+            Margin="0,0,16,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <UniformGrid
+                x:Name="CheckmarkRow"
+                Margin="0,0,0,8"
+                Rows="1"
+                Columns="4">
+
+                <Border />
+
+                <CheckBox
+                    Content="Předchozí výsledky"
+                    IsChecked="{Binding IsPreviousTestShown}" />
+
+                <CheckBox
+                    Content="SD-skóre"
+                    IsChecked="{Binding IsSdScoreShown}" />
+
+                <CheckBox
+                    Content="Porovnání s normou"
+                    IsChecked="{Binding IsNormDifferenceShown}" />
+            </UniformGrid>
+
+            <ui:ListView x:Name="PatientTable" ItemsSource="{Binding Patients}">
+                <ui:ListView.View>
+                    <ui:GridView>
+                        <ui:GridViewColumn
+                            Width="{StaticResource ColumnWidth}"
+                            DisplayMemberBinding="{Binding LeftHeader}">
+
+                            <ui:GridViewColumn.HeaderTemplate>
+                                <DataTemplate DataType="{x:Type system:String}">
+                                    <ui:TextBlock
+                                        Padding="16,0"
+                                        FontTypography="Subtitle"
+                                        Foreground="{DynamicResource TextControlForeground}"
+                                        Text="Pacient" />
+                                </DataTemplate>
+                            </ui:GridViewColumn.HeaderTemplate>
+                        </ui:GridViewColumn>
+
+                        <ui:GridViewColumn
+                            Width="{StaticResource ColumnWidth}"
+                            DisplayMemberBinding="{Binding FullName}"
+                            HeaderTemplate="{StaticResource PatientHeaderTemplate}"
+                            Header="Jméno a příjmení" />
+
+                        <ui:GridViewColumn
+                            Width="{StaticResource ColumnWidth}"
+                            DisplayMemberBinding="{Binding Age}"
+                            HeaderTemplate="{StaticResource PatientHeaderTemplate}"
+                            Header="Věk" />
+
+                        <ui:GridViewColumn
+                            Width="{StaticResource ColumnWidth}"
+                            DisplayMemberBinding="{Binding DominantHand}"
+                            HeaderTemplate="{StaticResource PatientHeaderTemplate}"
+                            Header="Dominantní HK" />
+                    </ui:GridView>
+                </ui:ListView.View>
+            </ui:ListView>
+
+            <Border Height="404">
+                <ui:DynamicScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Tables}" />
+                </ui:DynamicScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <Grid Width="400" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{Binding ActualHeight,ElementName=CheckmarkRow}" />
+                <RowDefinition Height="{Binding Margin.Bottom,ElementName=CheckmarkRow}" />
+                <RowDefinition Height="{Binding ActualHeight,ElementName=PatientTable}" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Grid.Row="2"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <ui:Button
+                    x:Name="DocumentationButton"
+                    Margin="0,0,32,0"
+                    Icon="{ui:SymbolIcon Document24}"
+                    Content="Text do dokumentace"
+                    Command="{Binding OnGetDocumentationText}" />
+
+                <ui:Button
+                    Width="{Binding ActualWidth,ElementName=DocumentationButton}"
+                    Appearance="Primary"
+                    Icon="{ui:SymbolIcon Save24}"
+                    Content="Uložit a ukončit"
+                    Command="{Binding OnSaveTest}" />
+            </StackPanel>
+
+            <UniformGrid Grid.Row="3" Rows="2" Columns="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Margin="16,10,0,0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="Poznámky" />
+
+                    <ui:TextBox
+                        Grid.Row="2"
+                        IsReadOnly="True"
+                        TextWrapping="Wrap"
+                        Text="{
+                            Binding Notes,
+                            Mode=OneWay
+                        }" />
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Margin="16,10,0,0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="Vložená videa" />
+
+                    <!-- TODO: add video addition -->
+                    <Border Grid.Row="2" />
+                </Grid>
+            </UniformGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

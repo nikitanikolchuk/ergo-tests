@@ -12,7 +12,9 @@
     xmlns:viewInstructions="clr-namespace:TestAdministration.Views.Instructions"
     xmlns:viewInstructionsNhpt="clr-namespace:TestAdministration.Views.Instructions.Nhpt"
     xmlns:viewInstructionsPpt="clr-namespace:TestAdministration.Views.Instructions.Ppt"
-    xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Instructions.Bbt">
+    xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Instructions.Bbt"
+    xmlns:viewModelResults="clr-namespace:TestAdministration.ViewModels.Results"
+    xmlns:viewResults="clr-namespace:TestAdministration.Views.Results">
 
     <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
         <views:LoginScreen />
@@ -112,5 +114,13 @@
 
     <DataTemplate DataType="{x:Type viewModelRules:BbtRulesViewModel}">
         <viewRules:BbtRules />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelResults:ResultsViewModel}">
+        <viewResults:Results />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelResults:ResultTableViewModel}">
+        <viewResults:ResultTable />
     </DataTemplate>
 </ResourceDictionary>

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 using TestAdministration.Models.Data;
 
@@ -8,6 +9,37 @@ namespace TestAdministration.Models.Storages.Converters;
 /// </summary>
 public static partial class CsvConversionHelper
 {
+    private static readonly List<string> ShortNoteNamesList =
+    [
+        "Dom. zkuš. pokus",
+        "Dom. 1. pokus",
+        "Dom. 2. pokus",
+        "Dom. 3. pokus",
+        "Nedom. zkuš. pokus",
+        "Nedom. 1. pokus",
+        "Nedom. 2. pokus",
+        "Nedom. 3. pokus"
+    ];
+
+    private static readonly List<string> LongNoteNamesList =
+    [
+        "Dom. 1. pokus",
+        "Dom. 2. pokus",
+        "Dom. 3. pokus",
+        "Nedom. 1. pokus",
+        "Nedom. 2. pokus",
+        "Nedom. 3. pokus",
+        "Obě HK 1. pokus",
+        "Obě HK 2. pokus",
+        "Obě HK 3. pokus",
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        "Kompletování 1. pokus",
+        "Kompletování 2. pokus",
+        "Kompletování 3. pokus",
+    ];
+
     [GeneratedRegex(@"\s+")]
     private static partial Regex WhitespaceRegex();
 
@@ -17,12 +49,9 @@ public static partial class CsvConversionHelper
     /// single spaces.
     /// </summary>
     /// <param name="test">The test to take notes from.</param>
-    /// <param name="noteNames">
-    /// A list of note names of the same length as the test's
-    /// trial count.
-    /// </param>
-    public static string CreateNotes(Test test, IList<string> noteNames)
+    public static string CreateNotes(Test test)
     {
+        var noteNames = _getNoteNames(test.Type);
         var notes = test.Sections
             .SelectMany(s => s.Trials.Select(t => t.Note))
             .Select(note => WhitespaceRegex().Replace(note, " "))
@@ -66,4 +95,16 @@ public static partial class CsvConversionHelper
 
         return result;
     }
+
+    private static List<string> _getNoteNames(TestType testType) => testType switch
+    {
+        TestType.Nhpt => ShortNoteNamesList,
+        TestType.Ppt => LongNoteNamesList,
+        TestType.Bbt => ShortNoteNamesList,
+        _ => throw new InvalidEnumArgumentException(
+            nameof(testType),
+            Convert.ToInt32(testType),
+            typeof(TestType)
+        )
+    };
 }

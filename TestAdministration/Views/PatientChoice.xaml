@@ -12,7 +12,7 @@
     d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}">
 
     <UserControl.Resources>
-        <converters:TableRowWidthConverter x:Key="TableRuleRowWidthConverter" />
+        <converters:TableRowWidthConverter x:Key="TableRowWidthConverter" />
     </UserControl.Resources>
 
     <StackPanel
@@ -51,7 +51,7 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource TableRuleRowWidthConverter},
+                            Converter={StaticResource TableRowWidthConverter},
                             ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
@@ -61,7 +61,7 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource TableRuleRowWidthConverter},
+                            Converter={StaticResource TableRowWidthConverter},
                             ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"
@@ -71,7 +71,7 @@
                     <ui:GridViewColumn
                         Width="{
                             Binding ActualWidth,
-                            Converter={StaticResource TableRuleRowWidthConverter},
+                            Converter={StaticResource TableRowWidthConverter},
                             ConverterParameter=3,
                             RelativeSource={RelativeSource AncestorType=ui:ListView}
                         }"

@@ -52,7 +52,7 @@ public class BbtCsvConverter
         NonDominantSecondNormDifference = test.Sections[1].Trials[2].NormDifference,
         NonDominantThirdNormDifference = test.Sections[1].Trials[3].NormDifference,
         NonDominantAverageNormDifference = test.Sections[1].AverageNormDifference,
-        Notes = CreateNotes(test, BbtCsvRecord.NoteNames)
+        Notes = CreateNotes(test)
     };
 
     private static Test _fromRecord(BbtCsvRecord record, IList<string> notes) => new(
