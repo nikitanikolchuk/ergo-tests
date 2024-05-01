@@ -11,6 +11,7 @@ namespace TestAdministration.ViewModels.Results;
 /// </summary>
 public class ResultsViewModel(
     Patient patient,
+    int patientAge,
     Test test,
     Test? previousTest,
     Action onSaveTest
@@ -20,12 +21,11 @@ public class ResultsViewModel(
     private bool _isSdScoreShown;
     private bool _isNormDifferenceShown;
 
-    // TODO: display correct age
     public List<ResultPatientTable> Patients =>
     [
         new ResultPatientTable(
             $"{patient.Name} {patient.Surname}",
-            0,
+            patientAge,
             patient.DominantHand == Hand.Right ? "Pravá" : "Levá"
         )
     ];
@@ -71,7 +71,7 @@ public class ResultsViewModel(
     public bool IsPreviousNormDifferenceShown => IsPreviousTestShown && IsNormDifferenceShown;
 
     // TODO
-    public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => {});
+    public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => { });
 
     public ICommand OnSaveTest => new RelayCommand<object?>(_ => onSaveTest());
 

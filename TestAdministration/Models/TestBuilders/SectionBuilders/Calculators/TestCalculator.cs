@@ -1,10 +1,10 @@
 using TestAdministration.Models.Data;
-using TestAdministration.Models.Utils;
+using TestAdministration.Models.Services;
 
 namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 public class TestCalculator<T>(
-    IDateTimeProvider dateTimeProvider,
+    AgeCalculatorService ageCalculatorService,
     T normProvider
 ) : ITestCalculator<T> where T : ITestNormProvider
 {
@@ -26,7 +26,7 @@ public class TestCalculator<T>(
 
     private TestNorm? _getNorm(int section, Patient patient)
     {
-        var age = _age(patient);
+        var age = ageCalculatorService.Calculate(patient);
         if (age < MinAge)
         {
             return null;
@@ -35,18 +35,5 @@ public class TestCalculator<T>(
         return normProvider.GetNormDictionary(section, patient.IsMale)
             .Last(keyValuePair => keyValuePair.Key <= age)
             .Value;
-    }
-
-    private int _age(Patient patient)
-    {
-        var today = dateTimeProvider.Today;
-        var age = today.Year - patient.BirthDate.Year;
-        if (today.Month < patient.BirthDate.Month ||
-            (today.Month == patient.BirthDate.Month && today.Day < patient.BirthDate.Day))
-        {
-            age--;
-        }
-
-        return age;
     }
 }

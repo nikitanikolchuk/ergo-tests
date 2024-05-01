@@ -14,7 +14,8 @@ public class TestingViewModelFactory(
     AudioInstructionService audioInstructionService,
     UserService userService,
     ITestBuilderFactory testBuilderFactory,
-    IDateTimeProvider dateTimeProvider
+    IDateTimeProvider dateTimeProvider,
+    AgeCalculatorService ageCalculatorService
 )
 {
     public TestingViewModel Create(ITestStorage testStorage, TestType testType) => new(
@@ -23,6 +24,7 @@ public class TestingViewModelFactory(
         testBuilderFactory,
         testStorage,
         dateTimeProvider,
+        ageCalculatorService,
         testType
     );
 }

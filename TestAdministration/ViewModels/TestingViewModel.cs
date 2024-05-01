@@ -19,6 +19,7 @@ public class TestingViewModel(
     ITestBuilderFactory testBuilderFactory,
     ITestStorage testStorage,
     IDateTimeProvider dateTimeProvider,
+    AgeCalculatorService ageCalculatorService,
     TestType testType
 ) : ViewModelBase
 {
@@ -122,8 +123,10 @@ public class TestingViewModel(
         }
 
         var previousTest = testStorage.GetLastTestByPatientId(test.Type, _currentPatient.Id);
+        var patientAge = ageCalculatorService.Calculate(_currentPatient);
         CurrentViewModel = new ResultsViewModel(
             _currentPatient,
+            patientAge,
             test,
             previousTest,
             () => _onSaveTest(test)
