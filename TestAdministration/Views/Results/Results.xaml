@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <system:Double x:Key="ColumnWidth">200</system:Double>
+        <SolidColorBrush x:Key="VideoDashBrush" Color="{DynamicResource SystemFillColorAttention}" />
 
         <DataTemplate x:Key="PatientHeaderTemplate" DataType="system:String">
             <ui:TextBlock
@@ -164,7 +165,50 @@
                         Text="Vložená videa" />
 
                     <!-- TODO: add video addition -->
-                    <Border Grid.Row="2" />
+                    <Border
+                        x:Name="VideoDashBorder"
+                        Grid.Row="2"
+                        CornerRadius="4"
+                        BorderThickness="1">
+
+                        <Border.BorderBrush>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Rectangle
+                                        RadiusX="4"
+                                        RadiusY="4"
+                                        StrokeThickness="1"
+                                        StrokeDashArray="10 5"
+                                        Stroke="{StaticResource VideoDashBrush}"
+                                        Width="{Binding ActualWidth, ElementName=VideoDashBorder}"
+                                        Height="{Binding ActualHeight, ElementName=VideoDashBorder}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.BorderBrush>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ui:SymbolIcon
+                                Margin="0,0,0,8"
+                                FontSize="32"
+                                Symbol="ArrowUpload24" />
+
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                HorizontalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="Přetáhněte sem" />
+
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                HorizontalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="Nebo" />
+
+                            <ui:Button
+                                Appearance="Primary"
+                                Content="Vyberte soubor" />
+                        </StackPanel>
+                    </Border>
                 </Grid>
             </UniformGrid>
         </Grid>
