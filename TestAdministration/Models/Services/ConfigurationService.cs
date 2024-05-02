@@ -98,16 +98,25 @@ public class ConfigurationService
         return Path.Combine(exeDirectoryPath, FileName);
     }
 
+    private static ConfigurationData _createDefaultData() => new()
+    {
+        SharePointTestDataPath = string.Empty,
+        LocalTestDataPath = string.Empty,
+        LocalUsers = [],
+        ApplicationTheme = ApplicationTheme.Light.ToString(),
+        FontSize = DefaultFontSize.ToString(),
+    };
+
     private ConfigurationData _readData()
     {
         if (!File.Exists(_filePath))
         {
-            _writeData(new ConfigurationData());
+            _writeData(_createDefaultData());
         }
 
         using var fileStream = File.OpenRead(_filePath);
         return JsonSerializer.Deserialize<ConfigurationData>(fileStream)
-               ?? new ConfigurationData();
+               ?? _createDefaultData();
     }
 
     private void _writeData(ConfigurationData data)

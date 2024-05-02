@@ -7,9 +7,9 @@ namespace TestAdministration.Models.Data;
 /// </summary>
 public class ConfigurationData
 {
-    public string SharePointTestDataPath { get; set; } = string.Empty;
-    public string LocalTestDataPath { get; set; } = string.Empty;
-    public ImmutableList<string> LocalUsers { get; set; } = [];
-    public string ApplicationTheme { get; set; } = Wpf.Ui.Appearance.ApplicationTheme.Light.ToString();
-    public string FontSize { get; set; } = string.Empty;
+    public required string SharePointTestDataPath { get; set; }
+    public required string LocalTestDataPath { get; set; }
+    public required ImmutableList<string> LocalUsers { get; set; }
+    public required string ApplicationTheme { get; set; }
+    public required string FontSize { get; set; }
 }
