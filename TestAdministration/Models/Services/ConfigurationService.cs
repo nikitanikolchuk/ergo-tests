@@ -10,6 +10,8 @@ namespace TestAdministration.Models.Services;
 /// <summary>
 /// A class for storing application configuration data in a
 /// data.json file located in the same directory as the .exe file.
+/// Loads data.json during creation and updates it when any value
+/// changes.
 /// </summary>
 public class ConfigurationService
 {
@@ -20,38 +22,53 @@ public class ConfigurationService
         WriteIndented = true
     };
 
-    private readonly string _filePath = _getFilePath();
+    private readonly string _filePath;
+
+    private string _localTestDataPath;
+    private ImmutableList<string> _localUsers;
+    private string _currentUser;
+    private string _applicationTheme;
+    private string _fontSize;
+
+    public ConfigurationService()
+    {
+        _filePath = _getFilePath();
+
+        var data = _readData();
+        _localTestDataPath = data.LocalTestDataPath;
+        _localUsers = data.LocalUsers;
+        _currentUser = data.CurrentUser;
+        _applicationTheme = data.ApplicationTheme;
+        _fontSize = data.FontSize;
+    }
 
     public string LocalTestDataPath
     {
-        get => _readData().LocalTestDataPath;
+        get => _localTestDataPath;
         set
         {
-            var data = _readData();
-            data.LocalTestDataPath = value;
-            _writeData(data);
+            _localTestDataPath = value;
+            _updateData();
         }
     }
 
     public ImmutableList<string> LocalUsers
     {
-        get => _readData().LocalUsers;
+        get => _localUsers;
         set
         {
-            var data = _readData();
-            data.LocalUsers = value;
-            _writeData(data);
+            _localUsers = value;
+            _updateData();
         }
     }
 
     public string CurrentUser
     {
-        get => _readData().CurrentUser;
+        get => _currentUser;
         set
         {
-            var data = _readData();
-            data.CurrentUser = value;
-            _writeData(data);
+            _currentUser = value;
+            _updateData();
         }
     }
 
@@ -59,16 +76,15 @@ public class ConfigurationService
     {
         get
         {
-            var themeString = _readData().ApplicationTheme;
+            var themeString = _applicationTheme;
             return themeString == ApplicationTheme.Dark.ToString()
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light;
         }
         set
         {
-            var data = _readData();
-            data.ApplicationTheme = value.ToString();
-            _writeData(data);
+            _applicationTheme = value.ToString();
+            _updateData();
         }
     }
 
@@ -76,16 +92,15 @@ public class ConfigurationService
     {
         get
         {
-            var sizeString = _readData().FontSize;
+            var sizeString = _fontSize;
             return int.TryParse(sizeString, out var size)
                 ? size
                 : ConfigurationData.DefaultFontSize;
         }
         set
         {
-            var data = _readData();
-            data.FontSize = value.ToString();
-            _writeData(data);
+            _fontSize = value.ToString();
+            _updateData();
         }
     }
 
@@ -114,5 +129,19 @@ public class ConfigurationService
         using var fileStream = File.Create(_filePath);
         JsonSerializer.Serialize(fileStream, data, JsonSerializerOptions);
         fileStream.Flush();
+    }
+
+    private void _updateData()
+    {
+        var data = new ConfigurationData
+        {
+            LocalTestDataPath = _localTestDataPath,
+            LocalUsers = _localUsers,
+            ApplicationTheme = _applicationTheme,
+            CurrentUser = _currentUser,
+            FontSize = _fontSize
+        };
+
+        _writeData(data);
     }
 }
