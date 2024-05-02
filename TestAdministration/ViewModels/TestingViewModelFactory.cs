@@ -9,7 +9,7 @@ namespace TestAdministration.ViewModels;
 
 /// <summary>
 /// A factory for runtime creation of <see cref="TestingViewModel"/>
-/// objects with specific storage and test types.
+/// objects with specific test types.
 /// </summary>
 public class TestingViewModelFactory(
     AudioInstructionService audioInstructionService,
@@ -17,10 +17,11 @@ public class TestingViewModelFactory(
     ITestBuilderFactory testBuilderFactory,
     IDateTimeProvider dateTimeProvider,
     AgeCalculatorService ageCalculatorService,
-    DocumentationConverter documentationConverter
+    DocumentationConverter documentationConverter,
+    ITestStorage testStorage
 )
 {
-    public TestingViewModel Create(ITestStorage testStorage, TestType testType) => new(
+    public TestingViewModel Create(TestType testType) => new(
         audioInstructionService,
         userService,
         testBuilderFactory,

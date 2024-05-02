@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using TestAdministration.Models.Data;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
@@ -13,7 +12,7 @@ namespace TestAdministration.ViewModels;
 public class MainWindowViewModel(
     IContentDialogService contentDialogService,
     LoginScreenViewModel loginScreenViewModel,
-    MainScreenViewModelFactory mainScreenViewModelFactory
+    MainScreenViewModel mainScreenViewModel
 ) : ViewModelBase
 {
     private ViewModelBase _screenViewModel = loginScreenViewModel;
@@ -50,7 +49,7 @@ public class MainWindowViewModel(
     {
         // TODO: add validation
 
-        ScreenViewModel = mainScreenViewModelFactory.Create(StorageType.SharePoint);
+        ScreenViewModel = mainScreenViewModel;
     }
 
     private async void _onDisplayLocalMainScreen()
@@ -81,7 +80,7 @@ public class MainWindowViewModel(
             return;
         }
 
-        ScreenViewModel = mainScreenViewModelFactory.Create(StorageType.Local);
+        ScreenViewModel = mainScreenViewModel;
     }
 
     private void _onDisplayLoginScreen()

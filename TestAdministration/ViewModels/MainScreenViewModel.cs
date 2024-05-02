@@ -103,7 +103,7 @@ public partial class MainScreenViewModel(
             _ => string.Empty
         };
 
-        var testingViewModel = testingViewModelFactory.Create(testStorage, testType);
+        var testingViewModel = testingViewModelFactory.Create(testType);
         CurrentViewModel = testingViewModel;
     }
 }

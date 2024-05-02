@@ -7,7 +7,6 @@ namespace TestAdministration.Models.Data;
 /// </summary>
 public class ConfigurationData
 {
-    public required string SharePointTestDataPath { get; set; }
     public required string LocalTestDataPath { get; set; }
     public required ImmutableList<string> LocalUsers { get; set; }
     public required string ApplicationTheme { get; set; }

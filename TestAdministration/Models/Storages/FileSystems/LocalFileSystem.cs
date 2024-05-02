@@ -11,7 +11,7 @@ public class LocalFileSystem(
 
     public IEnumerable<string> GetSubdirectoryNames()
     {
-        var directoryPath = configurationService.LocalTestDataPath;
+        var directoryPath = TestDataPath;
         return Directory.GetDirectories(directoryPath, "*", SearchOption.TopDirectoryOnly)
             .Select(path => new DirectoryInfo(path).Name);
     }

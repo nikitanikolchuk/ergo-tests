@@ -17,6 +17,7 @@ public class LoginScreenViewModel(
     IContentDialogService contentDialogService
 ) : ViewModelBase
 {
+    private string _sharePointTestDataPath = string.Empty;
     private string _newSharePointTestDataPath = string.Empty;
     private string _newLocalTestDataPath = string.Empty;
     private string _newUser = string.Empty;
@@ -24,10 +25,10 @@ public class LoginScreenViewModel(
 
     public string SharePointTestDataPath
     {
-        get => configurationService.SharePointTestDataPath;
+        get => _sharePointTestDataPath;
         set
         {
-            configurationService.SharePointTestDataPath = value;
+            _sharePointTestDataPath = value;
             OnPropertyChanged();
         }
     }

@@ -23,17 +23,6 @@ public class ConfigurationService
 
     private readonly string _filePath = _getFilePath();
 
-    public string SharePointTestDataPath
-    {
-        get => _readData().SharePointTestDataPath;
-        set
-        {
-            var data = _readData();
-            data.SharePointTestDataPath = value;
-            _writeData(data);
-        }
-    }
-
     public string LocalTestDataPath
     {
         get => _readData().LocalTestDataPath;
@@ -100,7 +89,6 @@ public class ConfigurationService
 
     private static ConfigurationData _createDefaultData() => new()
     {
-        SharePointTestDataPath = string.Empty,
         LocalTestDataPath = string.Empty,
         LocalUsers = [],
         ApplicationTheme = ApplicationTheme.Light.ToString(),

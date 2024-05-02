@@ -5,7 +5,6 @@ using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages.Converters;
 using TestAdministration.Models.Storages.FileSystems;
 
-
 namespace TestAdministration.Models.Storages.Exporters;
 
 /// <summary>
@@ -13,7 +12,7 @@ namespace TestAdministration.Models.Storages.Exporters;
 /// copying to medical documentation.
 /// </summary>
 public class DocumentationExporter(
-    LocalFileSystem fileSystem,
+    IFileSystem fileSystem,
     DocumentationConverter converter
 )
 {
