@@ -2,6 +2,7 @@ using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
+using TestAdministration.Models.Storages.Converters;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
 using TestAdministration.ViewModels.Results;
@@ -18,6 +19,7 @@ public class TestingViewModel(
     UserService userService,
     ITestBuilderFactory testBuilderFactory,
     ITestStorage testStorage,
+    DocumentationConverter documentationConverter,
     IDateTimeProvider dateTimeProvider,
     AgeCalculatorService ageCalculatorService,
     TestType testType
@@ -125,6 +127,7 @@ public class TestingViewModel(
         var previousTest = testStorage.GetLastTestByPatientId(test.Type, _currentPatient.Id);
         var patientAge = ageCalculatorService.Calculate(_currentPatient);
         CurrentViewModel = new ResultsViewModel(
+            documentationConverter,
             _currentPatient,
             patientAge,
             test,

@@ -1,8 +1,10 @@
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages.Converters;
 using Wpf.Ui.Input;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 namespace TestAdministration.ViewModels.Results;
 
@@ -10,6 +12,7 @@ namespace TestAdministration.ViewModels.Results;
 /// A view model for showing results of the last test.
 /// </summary>
 public class ResultsViewModel(
+    DocumentationConverter documentationConverter,
     Patient patient,
     int patientAge,
     Test test,
@@ -70,8 +73,7 @@ public class ResultsViewModel(
 
     public bool IsPreviousNormDifferenceShown => IsPreviousTestShown && IsNormDifferenceShown;
 
-    // TODO
-    public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => { });
+    public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => _onGetDocumentationText());
 
     public ICommand OnSaveTest => new RelayCommand<object?>(_ => onSaveTest());
 
@@ -154,4 +156,19 @@ public class ResultsViewModel(
             "Počet kostek"
         )
     ];
+
+    private async void _onGetDocumentationText()
+    {
+        var text = documentationConverter.Convert(test);
+        Clipboard.SetText(text);
+
+        var messageBox = new MessageBox
+        {
+            Title = "Informace",
+            Content = "Text do dokumentace byl zkopírován",
+            CloseButtonText = "Zavřít"
+        };
+
+        await messageBox.ShowDialogAsync();
+    }
 }

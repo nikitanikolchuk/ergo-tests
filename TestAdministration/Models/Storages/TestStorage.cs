@@ -8,7 +8,8 @@ namespace TestAdministration.Models.Storages;
 public class TestStorage(
     IFileSystem fileSystem,
     ICsvImporter csvImporter,
-    ICsvExporter csvExporter
+    ICsvExporter csvExporter,
+    DocumentationExporter documentationExporter
 ) : ITestStorage
 {
     private const string DirectoryNameSeparator = "_";
@@ -27,7 +28,11 @@ public class TestStorage(
 
     public void AddPatient(Patient patient) => csvExporter.Export(patient);
 
-    public void AddTest(Patient patient, Test test) => csvExporter.Export(patient, test);
+    public void AddTest(Patient patient, Test test)
+    {
+        csvExporter.Export(patient, test);
+        documentationExporter.Export(patient, test);
+    }
 
     private static PatientDirectoryInfo? _patientDirectoryInfoFromName(string directoryName)
     {

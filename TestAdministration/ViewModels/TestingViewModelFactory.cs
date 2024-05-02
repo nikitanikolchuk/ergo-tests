@@ -1,6 +1,7 @@
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
+using TestAdministration.Models.Storages.Converters;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
 
@@ -15,7 +16,8 @@ public class TestingViewModelFactory(
     UserService userService,
     ITestBuilderFactory testBuilderFactory,
     IDateTimeProvider dateTimeProvider,
-    AgeCalculatorService ageCalculatorService
+    AgeCalculatorService ageCalculatorService,
+    DocumentationConverter documentationConverter
 )
 {
     public TestingViewModel Create(ITestStorage testStorage, TestType testType) => new(
@@ -23,6 +25,7 @@ public class TestingViewModelFactory(
         userService,
         testBuilderFactory,
         testStorage,
+        documentationConverter,
         dateTimeProvider,
         ageCalculatorService,
         testType

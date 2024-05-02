@@ -12,7 +12,8 @@ namespace TestAdministration.Models.Storages;
 public class TestStorageFactory(
     LocalFileSystem localFileSystem,
     LocalCsvImporter localCsvImporter,
-    LocalCsvExporter localCsvExporter
+    LocalCsvExporter localCsvExporter,
+    DocumentationExporter documentationExporter
 )
 {
     public TestStorage Create(StorageType storageType) => storageType switch
@@ -29,6 +30,7 @@ public class TestStorageFactory(
     private TestStorage _createLocal() => new(
         localFileSystem,
         localCsvImporter,
-        localCsvExporter
+        localCsvExporter,
+        documentationExporter
     );
 }
