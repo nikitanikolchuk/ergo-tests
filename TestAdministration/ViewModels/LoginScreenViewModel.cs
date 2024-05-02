@@ -185,8 +185,9 @@ public class LoginScreenViewModel(
         content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
-        if (result != ContentDialogResult.Primary)
+        if (result == ContentDialogResult.None)
         {
+            NewUser = string.Empty;
             return;
         }
 

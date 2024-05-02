@@ -94,7 +94,13 @@
 
             <StackPanel>
                 <ui:TextBlock Margin="0,0,0,12" Text="Jméno a/nebo příjmení" />
-                <ui:TextBox Text="{Binding NewUser}" />
+
+                <ui:TextBox
+                    Text="{
+                        Binding NewUser,
+                        UpdateSourceTrigger=PropertyChanged
+                    }" />
+
                 <Border Width="600" />
             </StackPanel>
         </ui:ContentDialog>
