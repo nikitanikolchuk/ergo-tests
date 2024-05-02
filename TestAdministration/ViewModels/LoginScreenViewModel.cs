@@ -13,7 +13,6 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public class LoginScreenViewModel(
     ConfigurationService configurationService,
-    UserService userService,
     IContentDialogService contentDialogService
 ) : ViewModelBase
 {
@@ -75,12 +74,12 @@ public class LoginScreenViewModel(
         }
     }
 
-    public string? CurrentUser
+    public string CurrentUser
     {
-        get => userService.CurrentUser;
+        get => configurationService.CurrentUser;
         set
         {
-            userService.CurrentUser = value;
+            configurationService.CurrentUser = value;
             OnPropertyChanged();
         }
     }
@@ -186,11 +185,25 @@ public class LoginScreenViewModel(
         content.DataContext = this;
         var result = await contentDialogService.ShowAsync(content, CancellationToken.None);
 
-        if (result == ContentDialogResult.Primary)
+        if (result != ContentDialogResult.Primary)
         {
-            Users = Users.Add(NewUser);
+            return;
         }
 
+        if (string.IsNullOrWhiteSpace(NewUser))
+        {
+            var messagebox = new MessageBox
+            {
+                Title = "Chyba",
+                Content = "Prázdné jméno, uživatel nebyl přidán",
+                CloseButtonText = "Zavřít"
+            };
+
+            await messagebox.ShowDialogAsync();
+            return;
+        }
+
+        Users = Users.Add(NewUser);
         NewUser = string.Empty;
     }
 

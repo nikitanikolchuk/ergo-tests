@@ -14,7 +14,6 @@ namespace TestAdministration.Models.Services;
 public class ConfigurationService
 {
     private const string FileName = "data.json";
-    private const int DefaultFontSize = 14;
 
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
@@ -45,6 +44,17 @@ public class ConfigurationService
         }
     }
 
+    public string CurrentUser
+    {
+        get => _readData().CurrentUser;
+        set
+        {
+            var data = _readData();
+            data.CurrentUser = value;
+            _writeData(data);
+        }
+    }
+
     public ApplicationTheme ApplicationTheme
     {
         get
@@ -69,7 +79,7 @@ public class ConfigurationService
             var sizeString = _readData().FontSize;
             return int.TryParse(sizeString, out var size)
                 ? size
-                : DefaultFontSize;
+                : ConfigurationData.DefaultFontSize;
         }
         set
         {
@@ -87,24 +97,16 @@ public class ConfigurationService
         return Path.Combine(exeDirectoryPath, FileName);
     }
 
-    private static ConfigurationData _createDefaultData() => new()
-    {
-        LocalTestDataPath = string.Empty,
-        LocalUsers = [],
-        ApplicationTheme = ApplicationTheme.Light.ToString(),
-        FontSize = DefaultFontSize.ToString(),
-    };
-
     private ConfigurationData _readData()
     {
         if (!File.Exists(_filePath))
         {
-            _writeData(_createDefaultData());
+            _writeData(new ConfigurationData());
         }
 
         using var fileStream = File.OpenRead(_filePath);
         return JsonSerializer.Deserialize<ConfigurationData>(fileStream)
-               ?? _createDefaultData();
+               ?? new ConfigurationData();
     }
 
     private void _writeData(ConfigurationData data)

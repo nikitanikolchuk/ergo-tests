@@ -54,7 +54,7 @@ public class MainWindowViewModel(
 
     private async void _onDisplayLocalMainScreen()
     {
-        if (loginScreenViewModel.CurrentUser is null)
+        if (IsNullOrWhiteSpace(loginScreenViewModel.CurrentUser))
         {
             var messageBox = new MessageBox
             {
@@ -67,7 +67,7 @@ public class MainWindowViewModel(
             return;
         }
 
-        if (loginScreenViewModel.LocalTestDataPath == Empty)
+        if (IsNullOrWhiteSpace(loginScreenViewModel.LocalTestDataPath))
         {
             var messageBox = new MessageBox
             {

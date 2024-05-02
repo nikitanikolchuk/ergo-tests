@@ -55,7 +55,6 @@ public partial class App
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<LoginScreenViewModel>()
             .AddSingleton<ConfigurationService>()
-            .AddSingleton<UserService>()
             .AddSingleton<IContentDialogService, ContentDialogService>()
             .AddSingleton<MainScreenViewModel>()
             .AddSingleton<ITestStorage, TestStorage>()

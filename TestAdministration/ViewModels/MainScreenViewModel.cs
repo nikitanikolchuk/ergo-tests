@@ -12,7 +12,7 @@ namespace TestAdministration.ViewModels;
 /// The ViewModel that handles navigation after logging in.
 /// </summary>
 public partial class MainScreenViewModel(
-    UserService userService,
+    ConfigurationService configurationService,
     ITestStorage testStorage,
     InitContentViewModel initContentViewModel,
     SettingsViewModel settingsViewModel,
@@ -28,7 +28,7 @@ public partial class MainScreenViewModel(
     private string _contentHeader = string.Empty;
     private ViewModelBase _currentViewModel = initContentViewModel;
 
-    public string CurrentUser => userService.CurrentUser ?? "";
+    public string CurrentUser => configurationService.CurrentUser;
 
     public string CurrentUserInitials
     {

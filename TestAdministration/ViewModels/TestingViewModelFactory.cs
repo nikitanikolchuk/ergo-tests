@@ -12,8 +12,8 @@ namespace TestAdministration.ViewModels;
 /// objects with specific test types.
 /// </summary>
 public class TestingViewModelFactory(
+    ConfigurationService configurationService,
     AudioInstructionService audioInstructionService,
-    UserService userService,
     ITestBuilderFactory testBuilderFactory,
     IDateTimeProvider dateTimeProvider,
     AgeCalculatorService ageCalculatorService,
@@ -22,8 +22,8 @@ public class TestingViewModelFactory(
 )
 {
     public TestingViewModel Create(TestType testType) => new(
+        configurationService,
         audioInstructionService,
-        userService,
         testBuilderFactory,
         testStorage,
         documentationConverter,

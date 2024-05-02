@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Wpf.Ui.Appearance;
 
 namespace TestAdministration.Models.Data;
 
@@ -7,8 +8,13 @@ namespace TestAdministration.Models.Data;
 /// </summary>
 public class ConfigurationData
 {
-    public required string LocalTestDataPath { get; set; }
-    public required ImmutableList<string> LocalUsers { get; set; }
-    public required string ApplicationTheme { get; set; }
-    public required string FontSize { get; set; }
+    public const int DefaultFontSize = 14;
+
+    private const ApplicationTheme DefaultTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
+
+    public string LocalTestDataPath { get; set; } = string.Empty;
+    public ImmutableList<string> LocalUsers { get; set; } = [];
+    public string CurrentUser { get; set; } = string.Empty;
+    public string ApplicationTheme { get; set; } = DefaultTheme.ToString();
+    public string FontSize { get; set; } = DefaultFontSize.ToString();
 }

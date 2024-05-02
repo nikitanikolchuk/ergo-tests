@@ -15,8 +15,8 @@ namespace TestAdministration.ViewModels;
 /// A view model for choosing patients and conducting tests.
 /// </summary>
 public class TestingViewModel(
+    ConfigurationService configurationService,
     AudioInstructionService audioInstructionService,
-    UserService userService,
     ITestBuilderFactory testBuilderFactory,
     ITestStorage testStorage,
     DocumentationConverter documentationConverter,
@@ -105,7 +105,7 @@ public class TestingViewModel(
         }
 
         _currentPatient = patient;
-        var tester = userService.CurrentUser ?? string.Empty;
+        var tester = configurationService.CurrentUser;
         CurrentViewModel = new TestConductionViewModel(
             audioInstructionService,
             testBuilderFactory,
