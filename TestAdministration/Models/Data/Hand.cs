@@ -5,6 +5,7 @@ namespace TestAdministration.Models.Data;
 /// </summary>
 public enum Hand
 {
+    None,
     Left,
     Right,
     Both

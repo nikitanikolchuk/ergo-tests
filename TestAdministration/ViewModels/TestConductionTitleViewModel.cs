@@ -31,6 +31,7 @@ public class TestConductionTitleViewModel(
 
     private static string _getDominantHandString(Hand dominantHand) => dominantHand switch
     {
+        Hand.None => throw new ArgumentException("Invalid value of dominant hand"),
         Hand.Left => "LHK",
         Hand.Right => "PHK",
         Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),
@@ -43,6 +44,7 @@ public class TestConductionTitleViewModel(
 
     private static string _getNonDominantHandString(Hand dominantHand) => dominantHand switch
     {
+        Hand.None => throw new ArgumentException("Invalid value of dominant hand"),
         Hand.Left => "PHK",
         Hand.Right => "LHK",
         Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),

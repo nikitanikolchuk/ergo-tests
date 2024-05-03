@@ -23,6 +23,7 @@ public partial class NewPatientViewModel(
 {
     private const string Male = "Muž";
     private const string Female = "Žena";
+    private const string NoneHands = "Žádná";
     private const string LeftHand = "Levá";
     private const string RightHand = "Pravá";
     private const string BothHands = "Obě";
@@ -43,7 +44,7 @@ public partial class NewPatientViewModel(
 
     public static List<string> GenderVariants => [Male, Female];
     public static List<string> DominantHandVariants => [LeftHand, RightHand];
-    public static List<string> PathologicalHandVariants => [LeftHand, RightHand, BothHands];
+    public static List<string> PathologicalHandVariants => [NoneHands, LeftHand, RightHand, BothHands];
 
     public string Name
     {
@@ -135,6 +136,7 @@ public partial class NewPatientViewModel(
         {
             _dominantHand = value switch
             {
+                NoneHands => throw new ArgumentException("Patient must have a dominant hand"),
                 LeftHand => Hand.Left,
                 RightHand => Hand.Right,
                 BothHands => throw new ArgumentException("Patient can't have both dominant hands"),
@@ -154,6 +156,7 @@ public partial class NewPatientViewModel(
         {
             _pathologicalHand = value switch
             {
+                NoneHands => Hand.None,
                 LeftHand => Hand.Left,
                 RightHand => Hand.Right,
                 BothHands => Hand.Both,
@@ -171,6 +174,7 @@ public partial class NewPatientViewModel(
 
     private string _handString(Hand hand) => hand switch
     {
+        Hand.None => NoneHands,
         Hand.Left => LeftHand,
         Hand.Right => RightHand,
         Hand.Both => BothHands,

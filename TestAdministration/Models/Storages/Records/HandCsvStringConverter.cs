@@ -12,6 +12,7 @@ namespace TestAdministration.Models.Storages.Records;
 /// </summary>
 public class HandCsvStringConverter : ITypeConverter
 {
+    private const string None = "žádná";
     private const string Left = "levá";
     private const string Right = "pravá";
     private const string Both = "obě";
@@ -25,6 +26,7 @@ public class HandCsvStringConverter : ITypeConverter
 
         return hand switch
         {
+            Hand.None => None,
             Hand.Left => Left,
             Hand.Right => Right,
             Hand.Both => Both,
@@ -39,6 +41,7 @@ public class HandCsvStringConverter : ITypeConverter
     public object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData) =>
         text switch
         {
+            None => Hand.None,
             Left => Hand.Left,
             Right => Hand.Right,
             Both => Hand.Both,
