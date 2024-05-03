@@ -5,6 +5,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     xmlns:views="clr-namespace:TestAdministration.Views"
     HorizontalAlignment="Stretch"
@@ -13,37 +14,11 @@
     d:DataContext="{d:DesignInstance viewModels:LoginScreenViewModel}">
 
     <UserControl.Resources>
-        <ui:ContentDialog
-            x:Key="SharePointConfigDialog"
-            Title="Změna SharePoint adresáře"
-            PrimaryButtonText="Potvrdit"
-            CloseButtonText="Zrušit">
-
-            <StackPanel>
-                <ui:TextBlock
-                    Margin="0,0,0,12"
-                    FontTypography="Body"
-                    Text="Aktuální adresář" />
-
-                <ui:TextBox
-                    Margin="0,0,0,16"
-                    IsReadOnly="True"
-                    Text="{Binding SharePointTestDataPath}" />
-
-                <ui:TextBlock
-                    Margin="0,0,0,12"
-                    FontTypography="Body"
-                    Text="Nový adresář" />
-
-                <ui:TextBox Text="{Binding NewSharePointTestDataPath}" />
-
-                <Border Width="600" />
-            </StackPanel>
-        </ui:ContentDialog>
+        <system:Double x:Key="ButtonWidth">200</system:Double>
 
         <ui:ContentDialog
             x:Key="LocalConfigDialog"
-            Title="Změna lokálního adresáře"
+            Title="Změna adresáře"
             PrimaryButtonText="Potvrdit"
             CloseButtonText="Zrušit">
 
@@ -93,7 +68,7 @@
             CloseButtonText="Zrušit">
 
             <StackPanel>
-                <ui:TextBlock Margin="0,0,0,12" Text="Jméno a/nebo příjmení" />
+                <ui:TextBlock Margin="0,0,0,12" Text="Jméno a/nebo příjmení testujícího" />
 
                 <ui:TextBox
                     Text="{
@@ -123,210 +98,84 @@
                 <Border Width="600" />
             </StackPanel>
         </ui:ContentDialog>
-
-        <Style TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Width" Value="200" />
-        </Style>
-
-        <DrawingImage x:Key="SharePointIcon">
-            <DrawingImage.Drawing>
-                <DrawingGroup ClipGeometry="M0,0 V1946 H1992.333 V0 H0 Z">
-                    <GeometryDrawing Brush="#FF036C70">
-                        <GeometryDrawing.Geometry>
-                            <EllipseGeometry RadiusX="556" RadiusY="556" Center="1019.333,556" />
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FF1A9BA1">
-                        <GeometryDrawing.Geometry>
-                            <EllipseGeometry RadiusX="509.667" RadiusY="509.667" Center="1482.667,1065.667" />
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FF37C6D0">
-                        <GeometryDrawing.Geometry>
-                            <EllipseGeometry RadiusX="393.833" RadiusY="393.833" Center="1088.833,1552.167" />
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                    <GeometryDrawing
-                        Geometry="F1 M1992.333,1946z M0,0z M1112,501.79L1112,1490.543C1111.77,1524.9 1090.95,1555.765 1059.18,1568.846 1049.064,1573.125 1038.193,1575.33 1027.21,1575.333L695.463,1575.333C695,1567.456 695,1560.043 695,1552.166 694.846,1544.432 695.155,1536.696 695.927,1528.999 704.407,1380.893 795.648,1250.217 931.764,1191.229L931.764,1105.049C628.832,1057.044 422.172,772.554 470.177,469.622 470.51,467.524 470.854,465.427 471.211,463.333 473.517,447.707 476.767,432.234 480.941,417L1027.211,417C1073.964,417.178,1111.822,455.036,1112,501.79z">
-                        <GeometryDrawing.Brush>
-                            <SolidColorBrush Color="#FF000000" Opacity="0.1" />
-                        </GeometryDrawing.Brush>
-                    </GeometryDrawing>
-                    <GeometryDrawing
-                        Geometry="F1 M1992.333,1946z M0,0z M980.877,463.333L471.21,463.333C419.724,765.719 623.118,1052.589 925.503,1104.075 934.659,1105.634 943.853,1106.963 953.076,1108.061 809.443,1176.171 704.776,1369.613 695.88,1528.999 695.109,1536.696 694.799,1544.432 694.953,1552.166 694.953,1560.043 694.953,1567.456 695.416,1575.333 696.252,1590.907 698.266,1606.396 701.439,1621.666L980.829,1621.666C1015.186,1621.436 1046.051,1600.616 1059.132,1568.846 1063.411,1558.731 1065.617,1547.859 1065.619,1536.876L1065.619,548.123C1065.443,501.387,1027.613,463.537,980.877,463.333z">
-                        <GeometryDrawing.Brush>
-                            <SolidColorBrush Color="#FF000000" Opacity="0.2" />
-                        </GeometryDrawing.Brush>
-                    </GeometryDrawing>
-                    <GeometryDrawing
-                        Geometry="F1 M1992.333,1946z M0,0z M980.877,463.333L471.21,463.333C419.735,765.747 623.16,1052.63 925.574,1104.106 931.76,1105.159 937.963,1106.107 944.181,1106.95 805.181,1179.971 704.638,1372.95 695.927,1529L980.877,1529C1027.558,1528.647,1065.314,1490.891,1065.667,1444.21L1065.667,548.123C1065.489,501.369,1027.631,463.511,980.877,463.333z">
-                        <GeometryDrawing.Brush>
-                            <SolidColorBrush Color="#FF000000" Opacity="0.2" />
-                        </GeometryDrawing.Brush>
-                    </GeometryDrawing>
-                    <GeometryDrawing
-                        Geometry="F1 M1992.333,1946z M0,0z M934.543,463.333L471.21,463.333C422.604,748.815 601.489,1023.737 882.187,1094.949 775.901,1216.384 710.711,1368.301 695.927,1529L934.544,1529C981.298,1528.822,1019.156,1490.964,1019.334,1444.21L1019.334,548.123C1019.308,501.306,981.361,463.359,934.543,463.333z">
-                        <GeometryDrawing.Brush>
-                            <SolidColorBrush Color="#FF000000" Opacity="0.2" />
-                        </GeometryDrawing.Brush>
-                    </GeometryDrawing>
-                    <GeometryDrawing
-                        Geometry="F1 M1992.333,1946z M0,0z M84.929,463.333L934.404,463.333C981.309,463.333,1019.333,501.357,1019.333,548.262L1019.333,1397.737C1019.333,1444.642,981.309,1482.666,934.404,1482.666L84.929,1482.666C38.024,1482.666,0,1444.642,0,1397.737L0,548.262C0,501.357,38.024,463.333,84.929,463.333z">
-                        <GeometryDrawing.Brush>
-                            <LinearGradientBrush StartPoint="177.0788,1551.0284" EndPoint="842.2545,398.9716"
-                                                 MappingMode="Absolute" SpreadMethod="Pad" Opacity="1"
-                                                 Transform="1,0,0,-1,0,1948">
-                                <GradientStop Color="#FF058F92" Offset="0" />
-                                <GradientStop Color="#FF038489" Offset="0.5" />
-                                <GradientStop Color="#FF026D71" Offset="1" />
-                            </LinearGradientBrush>
-                        </GeometryDrawing.Brush>
-                    </GeometryDrawing>
-                    <GeometryDrawing Brush="#FFFFFFFF"
-                                     Geometry="F1 M1992.333,1946z M0,0z M379.331,962.621C359.428,949.419 342.803,931.844 330.727,911.237 319.026,889.695 313.194,865.456 313.815,840.949 312.773,807.768 323.97,775.363 345.275,749.904 367.663,724.414 396.601,705.538 428.953,695.323 465.824,683.187 504.443,677.207 543.257,677.624 594.3,675.759 645.272,682.896 693.84,698.706L693.84,805.273C672.737,792.489 649.752,783.107 625.73,777.473 599.665,771.081 572.92,767.876 546.083,767.928 517.783,766.889 489.664,772.841 464.212,785.257 444.562,793.732 431.82,813.064 431.779,834.463 431.699,847.444 436.686,859.944 445.679,869.306 456.301,880.343 468.866,889.327 482.746,895.809 498.19,903.5 521.357,913.725 552.246,926.482 555.647,927.557 558.962,928.889 562.161,930.467 592.562,942.348 621.89,956.811 649.824,973.696 670.978,986.739 688.732,1004.62 701.625,1025.867 714.843,1049.952 721.25,1077.182 720.158,1104.634 721.667,1138.7 711.245,1172.225 690.69,1199.432 670.202,1224.444 642.81,1242.878 611.923,1252.437 575.594,1263.824 537.678,1269.329 499.611,1268.746 465.457,1268.901 431.353,1266.111 397.678,1260.406 369.244,1255.753 341.496,1247.599 315.066,1236.127L315.066,1123.769C340.33,1141.812 368.555,1155.298 398.466,1163.616 428.276,1172.905 459.264,1177.867 490.484,1178.35 519.379,1180.18 548.223,1174.059 573.884,1160.651 591.86,1150.507 602.793,1131.293 602.333,1110.657 602.453,1096.298 596.773,1082.499 586.58,1072.386 573.904,1059.942 559.228,1049.715 543.166,1042.13 524.633,1032.863 497.342,1020.647 461.295,1005.48 432.618,993.951 405.161,979.594 379.331,962.621z" />
-                </DrawingGroup>
-            </DrawingImage.Drawing>
-        </DrawingImage>
     </UserControl.Resources>
 
-    <StackPanel VerticalAlignment="Center">
-        <ui:TextBlock
-            Margin="0,0,0,16"
-            HorizontalAlignment="Center"
-            FontTypography="TitleLarge"
-            FontWeight="SemiBold"
-            Text="Přihlášení" />
+    <Border
+        Width="534"
+        VerticalAlignment="Center"
+        Padding="32"
+        CornerRadius="4"
+        BorderThickness="1"
+        BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
-        <ui:TextBlock
-            Margin="0,0,0,16"
-            HorizontalAlignment="Center"
-            FontTypography="Subtitle"
-            Text="Vyberte si místo pro ukládání dat" />
+        <StackPanel HorizontalAlignment="Center">
+            <ui:TextBlock
+                Margin="0,0,0,16"
+                HorizontalAlignment="Center"
+                FontTypography="TitleLarge"
+                FontWeight="SemiBold"
+                Text="Přihlášení" />
 
-        <Border
-            Width="600"
-            Padding="32"
-            CornerRadius="4"
-            BorderThickness="1"
-            BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+            <ui:TextBlock
+                Margin="0,0,0,32"
+                HorizontalAlignment="Center"
+                FontTypography="Subtitle"
+                Text="Vyberte si místo pro ukládání dat" />
 
-            <StackPanel>
-                <ui:TextBlock
-                    Margin="0,0,0,32"
-                    FontTypography="Subtitle"
-                    HorizontalAlignment="Center"
-                    Text="SharePoint" />
+            <ui:FontIcon
+                Margin="0,0,0,32"
+                FontFamily="Segoe Fluent Icons"
+                FontSize="64"
+                Glyph="" />
 
-                <Image
-                    Margin="0,0,0,32"
-                    Height="64"
-                    Source="{StaticResource SharePointIcon}" />
+            <ComboBox
+                Margin="0,0,0,8"
+                HorizontalAlignment="Center"
+                MinWidth="{StaticResource ButtonWidth}"
+                ItemsSource="{Binding Users}"
+                SelectedValue="{Binding CurrentUser}" />
 
-                <ui:Button
-                    Margin="0,0,0,8"
-                    Content="Změnit adresář"
-                    Command="{Binding OnOpenSharePointConfigDialogCommand}"
-                    CommandParameter="{StaticResource SharePointConfigDialog}" />
+            <ui:DropDownButton
+                Margin="0,0,0,8"
+                HorizontalAlignment="Center"
+                Width="{StaticResource ButtonWidth}"
+                Icon="{ui:SymbolIcon Settings24}"
+                Content="Nastavení">
 
-                <ui:Button
-                    Margin="0,0,0,32"
-                    Appearance="Primary"
-                    Content="Přihlásit se"
-                    DataContext="{
-                        Binding DataContext,
-                        RelativeSource={RelativeSource AncestorType=views:MainWindow}
-                    }"
-                    d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
-                    Command="{Binding OnDisplaySharePointMainScreenCommand}" />
+                <ui:DropDownButton.Flyout>
+                    <ContextMenu>
+                        <ui:MenuItem
+                            Icon="{ui:SymbolIcon Folder24}"
+                            Header="Změnit adresář"
+                            Command="{Binding OnOpenLocalConfigDialogCommand}"
+                            CommandParameter="{StaticResource LocalConfigDialog}" />
 
-                <Grid Margin="0,0,0,32">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        <ui:MenuItem
+                            Icon="{ui:SymbolIcon Add24}"
+                            Header="Přidat uživatele"
+                            Command="{Binding OnOpenAddUserDialogCommand}"
+                            CommandParameter="{StaticResource AddUserDialog}" />
 
-                    <Border
-                        Grid.Column="0"
-                        Height="1"
-                        BorderThickness="1"
-                        BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}" />
+                        <ui:MenuItem
+                            Icon="{ui:SymbolIcon Delete24}"
+                            Header="Odstranit uživatele"
+                            Command="{Binding OnOpenDeleteUserDialogCommand}"
+                            CommandParameter="{StaticResource DeleteUserDialog}" />
+                    </ContextMenu>
+                </ui:DropDownButton.Flyout>
+            </ui:DropDownButton>
 
-                    <ui:TextBlock
-                        Grid.Column="1"
-                        FontTypography="Body"
-                        FontSize="18"
-                        Margin="32,0"
-                        Text="nebo" />
-
-                    <Border
-                        Grid.Column="2"
-                        Height="1"
-                        BorderThickness="1"
-                        BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}" />
-                </Grid>
-
-                <ui:TextBlock
-                    Margin="0,0,0,32"
-                    FontTypography="Subtitle"
-                    HorizontalAlignment="Center"
-                    FontWeight="SemiBold"
-                    Text="Lokální úložiště" />
-
-                <ui:FontIcon
-                    Margin="0,0,0,32"
-                    FontFamily="Segoe Fluent Icons"
-                    FontSize="64"
-                    Glyph="" />
-
-                <ComboBox
-                    Margin="0,0,0,8"
-                    HorizontalAlignment="Center"
-                    MinWidth="200"
-                    ItemsSource="{Binding Users}"
-                    SelectedValue="{Binding CurrentUser}" />
-
-                <ui:DropDownButton
-                    Margin="0,0,0,8"
-                    HorizontalAlignment="Center"
-                    Width="200"
-                    Icon="{ui:SymbolIcon Settings24}"
-                    Content="Nastavení">
-
-                    <ui:DropDownButton.Flyout>
-                        <ContextMenu>
-                            <ui:MenuItem
-                                Icon="{ui:SymbolIcon Folder24}"
-                                Header="Změnit adresář"
-                                Command="{Binding OnOpenLocalConfigDialogCommand}"
-                                CommandParameter="{StaticResource LocalConfigDialog}" />
-
-                            <ui:MenuItem
-                                Icon="{ui:SymbolIcon Add24}"
-                                Header="Přidat uživatele"
-                                Command="{Binding OnOpenAddUserDialogCommand}"
-                                CommandParameter="{StaticResource AddUserDialog}" />
-
-                            <ui:MenuItem
-                                Icon="{ui:SymbolIcon Delete24}"
-                                Header="Odstranit uživatele"
-                                Command="{Binding OnOpenDeleteUserDialogCommand}"
-                                CommandParameter="{StaticResource DeleteUserDialog}" />
-                        </ContextMenu>
-                    </ui:DropDownButton.Flyout>
-                </ui:DropDownButton>
-
-                <ui:Button
-                    Appearance="Primary"
-                    Content="Přihlásit se"
-                    DataContext="{
-                        Binding DataContext,
-                        RelativeSource={RelativeSource AncestorType=views:MainWindow}
-                    }"
-                    d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
-                    Command="{Binding OnDisplayLocalMainScreenCommand}" />
-            </StackPanel>
-        </Border>
-    </StackPanel>
+            <ui:Button
+                HorizontalAlignment="Center"
+                Width="{StaticResource ButtonWidth}"
+                Appearance="Primary"
+                Content="Přihlásit se"
+                DataContext="{
+                    Binding DataContext,
+                    RelativeSource={RelativeSource AncestorType=views:MainWindow}
+                }"
+                d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+                Command="{Binding OnDisplayMainScreenCommand}" />
+        </StackPanel>
+    </Border>
 </UserControl>

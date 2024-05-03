@@ -33,26 +33,10 @@ public class MainWindowViewModel(
         }
     }
 
-    public ICommand OnDisplaySharePointMainScreenCommand => new RelayCommand<object?>(
-        _ => _onDisplaySharePointMainScreen()
-    );
+    public ICommand OnDisplayMainScreenCommand => new RelayCommand<object?>(_ => _onDisplayMainScreen());
+    public ICommand OnDisplayLoginScreenCommand => new RelayCommand<object?>(_ => _onDisplayLoginScreen());
 
-    public ICommand OnDisplayLocalMainScreenCommand => new RelayCommand<object?>(
-        _ => _onDisplayLocalMainScreen()
-    );
-
-    public ICommand OnDisplayLoginScreenCommand => new RelayCommand<object?>(
-        _ => _onDisplayLoginScreen()
-    );
-
-    private void _onDisplaySharePointMainScreen()
-    {
-        // TODO: add validation
-
-        ScreenViewModel = mainScreenViewModel;
-    }
-
-    private async void _onDisplayLocalMainScreen()
+    private async void _onDisplayMainScreen()
     {
         if (IsNullOrWhiteSpace(loginScreenViewModel.CurrentUser))
         {
