@@ -16,7 +16,7 @@ public class TestBuilderFactory(
     BbtTestSectionBuilder bbtSectionBuilder
 ) : ITestBuilderFactory
 {
-    public TestBuilder Create(TestType type)
+    public ITestBuilder Create(TestType type)
     {
         var sectionBuilder = _getSectionBuilder(type);
         return new TestBuilder(sectionBuilder);

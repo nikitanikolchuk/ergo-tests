@@ -23,7 +23,7 @@ public interface ITestStorage
     /// Parses patient directory names into a
     /// <see cref="PatientDirectoryInfo"/> list for identification.
     /// </summary>
-    public IEnumerable<PatientDirectoryInfo> GetAllPatientDirectoryInfos();
+    public List<PatientDirectoryInfo> GetAllPatientDirectoryInfos();
 
     /// <summary>
     /// Gets last test results from the [TEST_TYPE].csv by ID

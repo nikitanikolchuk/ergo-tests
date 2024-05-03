@@ -16,10 +16,11 @@ public class TestStorage(
 
     public string DataPath => fileSystem.TestDataPath;
 
-    public IEnumerable<PatientDirectoryInfo> GetAllPatientDirectoryInfos() =>
+    public List<PatientDirectoryInfo> GetAllPatientDirectoryInfos() =>
         fileSystem.GetSubdirectoryNames()
             .Select(_patientDirectoryInfoFromName)
-            .OfType<PatientDirectoryInfo>();
+            .OfType<PatientDirectoryInfo>()
+            .ToList();
 
     public Patient? GetPatientById(string id) => csvImporter.ImportPatientById(id);
 

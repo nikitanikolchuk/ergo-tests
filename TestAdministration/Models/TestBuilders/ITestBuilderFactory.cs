@@ -12,5 +12,5 @@ public interface ITestBuilderFactory
     /// </summary>
     /// <param name="type">The test's type.</param>
     /// <returns>A new <c>TestBuilder</c> instance.</returns>
-    TestBuilder Create(TestType type);
+    ITestBuilder Create(TestType type);
 }
