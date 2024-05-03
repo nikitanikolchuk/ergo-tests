@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:views="clr-namespace:TestAdministration.Views"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:NewPatientViewModel}">
 
@@ -126,27 +125,17 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                     <ui:Button
                         Margin="0,0,32,0"
                         Width="120"
                         Appearance="Primary"
                         Content="Uložit"
-                        Command="{
-                            Binding DataContext.OnAddPatient,
-                            RelativeSource={RelativeSource AncestorType=views:Testing}
-                        }"
-                        CommandParameter="{Binding AddPatient}" />
+                        Command="{Binding OnAddPatient}" />
 
                     <ui:Button
                         Width="120"
                         Content="Zrušit"
-                        DataContext="{
-                            Binding DataContext,
-                            RelativeSource={RelativeSource AncestorType=views:Testing}
-                        }"
-                        d:DataContext="{d:DesignInstance viewModels:TestingViewModel}"
-                        Command="{Binding OnOpenPatientChoice}" />
+                        Command="{Binding OnCancelAddition}" />
                 </StackPanel>
             </StackPanel>
         </Border>

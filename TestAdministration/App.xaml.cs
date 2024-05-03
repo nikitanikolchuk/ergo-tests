@@ -11,6 +11,7 @@ using TestAdministration.Models.TestBuilders.SectionBuilders;
 using TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 using TestAdministration.Models.Utils;
 using TestAdministration.ViewModels;
+using TestAdministration.ViewModels.Results;
 using TestAdministration.Views;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
@@ -67,6 +68,8 @@ public partial class App
             .AddSingleton<ICsvExporter, LocalCsvExporter>()
             .AddSingleton<PatientCsvConverter>()
             .AddSingleton<TestingViewModelFactory>()
+            .AddSingleton<TestConductionViewModelFactory>()
+            .AddSingleton<ResultsViewModelFactory>()
             .AddSingleton<ITestBuilderFactory, TestBuilderFactory>()
             .AddSingleton<NhptTestSectionBuilder>()
             .AddSingleton<PptTestSectionBuilder>()

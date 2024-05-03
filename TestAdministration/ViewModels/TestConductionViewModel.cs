@@ -30,7 +30,9 @@ public partial class TestConductionViewModel : ViewModelBase
     private readonly AudioInstructionService _audioInstructionService;
     private readonly ITestBuilder _testBuilder;
     private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly Action<Test> _onShowResults;
+    private readonly Patient _patient;
+    private readonly Action<Patient, Test> _onShowResults;
+
     private float? _currentValue;
     private string _currentValueString = string.Empty;
     private int _annulationCount;
@@ -43,19 +45,21 @@ public partial class TestConductionViewModel : ViewModelBase
         string tester,
         Patient patient,
         TestType testType,
-        Action<Test> onShowResults
-        )
+        Action<Patient, Test> onShowResults
+    )
     {
         _audioInstructionService = audioInstructionService;
         _dateTimeProvider = dateTimeProvider;
+        _patient = patient;
         _testBuilder = testBuilderFactory.Create(testType)
             .SetTester(tester)
-            .SetPatient(patient)
+            .SetPatient(_patient)
             .SetDate(_dateTimeProvider.Today)
             .SetStartTime(_dateTimeProvider.Now);
         _onShowResults = onShowResults;
-        TitleViewModel = new TestConductionTitleViewModel(_testBuilder, patient.DominantHand);
-        InstructionsViewModel = _getInstructionsViewModel(_audioInstructionService, _testBuilder, patient);
+
+        TitleViewModel = new TestConductionTitleViewModel(_testBuilder, _patient.DominantHand);
+        InstructionsViewModel = _getInstructionsViewModel(_audioInstructionService, _testBuilder, _patient);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
@@ -217,6 +221,6 @@ public partial class TestConductionViewModel : ViewModelBase
     {
         _testBuilder.SetEndTime(_dateTimeProvider.Now);
         var test = _testBuilder.Build();
-        _onShowResults(test);
+        _onShowResults(_patient, test);
     }
 }

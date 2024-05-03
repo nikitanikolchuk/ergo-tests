@@ -1,5 +1,8 @@
+using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
 
@@ -8,20 +11,35 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public class PatientChoiceViewModel : ViewModelBase
 {
+    private readonly ITestStorage _testStorage;
     private readonly List<PatientDirectoryInfo> _patients;
+    private readonly Action<Patient> _onChoosePatient;
+    private readonly Action _onOpenAddPatient;
+
     private string _searchText = string.Empty;
 
-    public PatientChoiceViewModel(ITestStorage testStorage)
+    /// <summary>
+    /// Sets dependencies and adds an anonymous patient if
+    /// patient list is empty.
+    /// </summary>
+    public PatientChoiceViewModel(
+        ITestStorage testStorage,
+        Action<Patient> onChoosePatient,
+        Action onOpenAddPatient
+    )
     {
-        _patients = testStorage.GetAllPatientDirectoryInfos();
+        _testStorage = testStorage;
+        _onChoosePatient = onChoosePatient;
+        _onOpenAddPatient = onOpenAddPatient;
+        _patients = _testStorage.GetAllPatientDirectoryInfos();
         if (_patients.Count != 0)
         {
             return;
         }
 
         var anonymousPatient = _createAnonymousPatient();
-        testStorage.AddPatient(anonymousPatient);
-        _patients = testStorage.GetAllPatientDirectoryInfos();
+        _testStorage.AddPatient(anonymousPatient);
+        _patients = _testStorage.GetAllPatientDirectoryInfos();
     }
 
     public List<PatientDirectoryInfo> Patients => _filteredPatients();
@@ -37,6 +55,28 @@ public class PatientChoiceViewModel : ViewModelBase
         }
     }
 
+    public PatientDirectoryInfo? SelectedPatient
+    {
+        set
+        {
+            if (value is null)
+            {
+                return;
+            }
+
+            var patient = _testStorage.GetPatientById(value.Id);
+            if (patient is null)
+            {
+                _alertInvalidPatientFile();
+                return;
+            }
+
+            _onChoosePatient(patient);
+        }
+    }
+
+    public ICommand OnOpenAddPatient => new RelayCommand<object?>(_ => _onOpenAddPatient());
+
     private List<PatientDirectoryInfo> _filteredPatients() => _patients.Where(
         patient => patient.Surname.StartsWith(SearchText, StringComparison.CurrentCultureIgnoreCase)
     ).ToList();
@@ -50,4 +90,17 @@ public class PatientChoiceViewModel : ViewModelBase
         Hand.Right,
         Hand.Right
     );
+
+    private static async void _alertInvalidPatientFile()
+    {
+        var messageBox = new MessageBox
+        {
+            Title = "Chyba",
+            Content = "Nesprávný formát souboru s osobními údaji pacienta nebo chybějící soubor. " +
+                      "Otevřete návod k použití pro více informace",
+            CloseButtonText = "Zavřít"
+        };
+
+        await messageBox.ShowDialogAsync();
+    }
 }

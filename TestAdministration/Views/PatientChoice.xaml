@@ -5,9 +5,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:views="clr-namespace:TestAdministration.Views"
     xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:PatientChoiceViewModel}">
 
@@ -35,16 +34,12 @@
                 UpdateSourceTrigger=PropertyChanged
             }" />
 
-        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
         <ui:ListView
             Height="360"
             BorderThickness="1,0"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
             ItemsSource="{Binding Patients}"
-            SelectedItem="{
-                Binding DataContext.SelectedPatient,
-                RelativeSource={RelativeSource AncestorType=views:Testing}
-            }">
+            SelectedItem="{Binding SelectedPatient}">
 
             <ui:ListView.View>
                 <ui:GridView>
@@ -84,11 +79,6 @@
         <ui:Button
             HorizontalAlignment="Stretch"
             CornerRadius="0,0,4,4"
-            DataContext="{
-                Binding DataContext,
-                RelativeSource={RelativeSource AncestorType=views:Testing}
-            }"
-            d:DataContext="{d:DesignInstance viewModels:TestingViewModel}"
             Command="{Binding OnOpenAddPatient}">
 
             <StackPanel Orientation="Horizontal">

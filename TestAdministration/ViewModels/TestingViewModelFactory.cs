@@ -1,9 +1,6 @@
 using TestAdministration.Models.Data;
-using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
-using TestAdministration.Models.Storages.Converters;
-using TestAdministration.Models.TestBuilders;
-using TestAdministration.Models.Utils;
+using TestAdministration.ViewModels.Results;
 
 namespace TestAdministration.ViewModels;
 
@@ -12,23 +9,15 @@ namespace TestAdministration.ViewModels;
 /// objects with specific test types.
 /// </summary>
 public class TestingViewModelFactory(
-    ConfigurationService configurationService,
-    AudioInstructionService audioInstructionService,
-    ITestBuilderFactory testBuilderFactory,
-    IDateTimeProvider dateTimeProvider,
-    AgeCalculatorService ageCalculatorService,
-    DocumentationConverter documentationConverter,
-    ITestStorage testStorage
+    ITestStorage testStorage,
+    TestConductionViewModelFactory testConductionViewModelFactory,
+    ResultsViewModelFactory resultsViewModelFactory
 )
 {
     public TestingViewModel Create(TestType testType) => new(
-        configurationService,
-        audioInstructionService,
-        testBuilderFactory,
         testStorage,
-        documentationConverter,
-        dateTimeProvider,
-        ageCalculatorService,
+        testConductionViewModelFactory,
+        resultsViewModelFactory,
         testType
     );
 }

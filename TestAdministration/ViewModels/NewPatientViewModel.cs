@@ -1,8 +1,10 @@
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
 
@@ -10,8 +12,13 @@ namespace TestAdministration.ViewModels;
 /// A view model for saving patients' personal data and its
 /// validation.
 /// </summary>
+/// <param name="testStorage">Patient and test data storage.</param>
+/// <param name="onReturn">
+/// Function to call after successful patient addition or canceling.
+/// </param>
 public partial class NewPatientViewModel(
-    ITestStorage testStorage
+    ITestStorage testStorage,
+    Action onReturn
 ) : ViewModelBase
 {
     private const string Male = "Muž";
@@ -37,7 +44,6 @@ public partial class NewPatientViewModel(
     public static List<string> GenderVariants => [Male, Female];
     public static List<string> DominantHandVariants => [LeftHand, RightHand];
     public static List<string> PathologicalHandVariants => [LeftHand, RightHand, BothHands];
-    public Func<bool> AddPatient => _addPatient;
 
     public string Name
     {
@@ -160,6 +166,9 @@ public partial class NewPatientViewModel(
         }
     }
 
+    public ICommand OnAddPatient => new RelayCommand<object?>(_ => _onAddPatient());
+    public ICommand OnCancelAddition => new RelayCommand<object?>(_ => onReturn());
+
     private string _handString(Hand hand) => hand switch
     {
         Hand.Left => LeftHand,
@@ -175,48 +184,48 @@ public partial class NewPatientViewModel(
     /// <summary>
     /// Exports patient's personal data and returns true if all required values were set.
     /// </summary>
-    private bool _addPatient()
+    private void _onAddPatient()
     {
         if (string.IsNullOrWhiteSpace(_name))
         {
             _alertMissingParameter("Jméno");
-            return false;
+            return;
         }
 
         if (string.IsNullOrWhiteSpace(_surname))
         {
             _alertMissingParameter("Příjmení");
-            return false;
+            return;
         }
 
         if (string.IsNullOrWhiteSpace(_id))
         {
             _alertMissingParameter("Rodné číslo");
-            return false;
+            return;
         }
 
         if (_isMale is null)
         {
             _alertMissingParameter("Pohlaví");
-            return false;
+            return;
         }
 
         if (_birthDate is null)
         {
             _alertMissingParameter("Datum narození");
-            return false;
+            return;
         }
 
         if (_dominantHand is null)
         {
             _alertMissingParameter("Dominantní HK");
-            return false;
+            return;
         }
 
         if (_pathologicalHand is null)
         {
             _alertMissingParameter("HK s patologií");
-            return false;
+            return;
         }
 
         var patient = new Patient(
@@ -230,7 +239,7 @@ public partial class NewPatientViewModel(
         );
 
         testStorage.AddPatient(patient);
-        return true;
+        onReturn();
     }
 
     private static async void _alertMissingParameter(string parameterName)
