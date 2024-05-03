@@ -85,8 +85,8 @@ public class MainWindowViewModel(
 
     private void _onDisplayLoginScreen()
     {
-        // TODO: add logout logic
-
+        mainScreenViewModel.ContentHeader = Empty;
+        mainScreenViewModel.CurrentViewModel = new InitContentViewModel();
         ScreenViewModel = loginScreenViewModel;
     }
 }

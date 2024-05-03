@@ -66,8 +66,6 @@ public partial class App
             .AddSingleton<ICsvImporter, LocalCsvImporter>()
             .AddSingleton<ICsvExporter, LocalCsvExporter>()
             .AddSingleton<PatientCsvConverter>()
-            .AddSingleton<InitContentViewModel>()
-            .AddSingleton<SettingsViewModel>()
             .AddSingleton<TestingViewModelFactory>()
             .AddSingleton<ITestBuilderFactory, TestBuilderFactory>()
             .AddSingleton<NhptTestSectionBuilder>()

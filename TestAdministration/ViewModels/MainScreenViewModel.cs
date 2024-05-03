@@ -14,8 +14,6 @@ namespace TestAdministration.ViewModels;
 public partial class MainScreenViewModel(
     ConfigurationService configurationService,
     ITestStorage testStorage,
-    InitContentViewModel initContentViewModel,
-    SettingsViewModel settingsViewModel,
     TestingViewModelFactory testingViewModelFactory
 ) : ViewModelBase
 {
@@ -26,7 +24,7 @@ public partial class MainScreenViewModel(
     private static partial Regex WhitespaceRegex();
 
     private string _contentHeader = string.Empty;
-    private ViewModelBase _currentViewModel = initContentViewModel;
+    private ViewModelBase _currentViewModel = new InitContentViewModel();
 
     public string CurrentUser => configurationService.CurrentUser;
 
@@ -58,7 +56,7 @@ public partial class MainScreenViewModel(
     public string ContentHeader
     {
         get => _contentHeader;
-        private set
+        set
         {
             _contentHeader = value;
             OnPropertyChanged();
@@ -68,7 +66,7 @@ public partial class MainScreenViewModel(
     public ViewModelBase CurrentViewModel
     {
         get => _currentViewModel;
-        private set
+        set
         {
             _currentViewModel = value;
             OnPropertyChanged();
@@ -89,9 +87,7 @@ public partial class MainScreenViewModel(
         Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
     );
 
-    public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ =>
-        CurrentViewModel = settingsViewModel
-    );
+    public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ => _onOpenSettingsCommand());
 
     private void _onStartTesting(TestType testType)
     {
@@ -105,5 +101,11 @@ public partial class MainScreenViewModel(
 
         var testingViewModel = testingViewModelFactory.Create(testType);
         CurrentViewModel = testingViewModel;
+    }
+
+    private void _onOpenSettingsCommand()
+    {
+        ContentHeader = "Nastavení";
+        CurrentViewModel = new SettingsViewModel(configurationService);
     }
 }
