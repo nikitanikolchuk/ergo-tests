@@ -85,6 +85,7 @@ public partial class App
             .AddSingleton<NhptCsvConverter>()
             .AddSingleton<PptCsvConverter>()
             .AddSingleton<BbtCsvConverter>()
+            .AddSingleton<VideoExporter>()
             .AddSingleton<DocumentationExporter>()
             .AddSingleton<DocumentationConverter>()
             .AddSingleton<AudioInstructionService>();

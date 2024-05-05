@@ -17,7 +17,7 @@ public class ResultsViewModel(
     int patientAge,
     Test test,
     Test? previousTest,
-    Action<Patient, Test> onSaveTest
+    Action<Patient, Test, List<string>> onSaveTest
 ) : ViewModelBase
 {
     private bool _isPreviousTestShown;
@@ -73,9 +73,13 @@ public class ResultsViewModel(
 
     public bool IsPreviousNormDifferenceShown => IsPreviousTestShown && IsNormDifferenceShown;
     public string Notes => CsvConversionHelper.CreateNotes(test);
+    public ResultFilesBoxViewModel FilesBoxViewModel { get; } = new();
 
     public ICommand OnGetDocumentationText => new RelayCommand<object?>(_ => _onGetDocumentationText());
-    public ICommand OnSaveTest => new RelayCommand<object?>(_ => onSaveTest(patient, test));
+
+    public ICommand OnSaveTest => new RelayCommand<object?>(_ =>
+        onSaveTest(patient, test, FilesBoxViewModel.FilePaths.ToList())
+    );
 
     private List<ResultTableViewModel> _getTables() => test.Type switch
     {

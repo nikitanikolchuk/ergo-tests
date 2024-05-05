@@ -9,6 +9,7 @@ public class TestStorage(
     IFileSystem fileSystem,
     ICsvImporter csvImporter,
     ICsvExporter csvExporter,
+    VideoExporter videoExporter,
     DocumentationExporter documentationExporter
 ) : ITestStorage
 {
@@ -29,9 +30,10 @@ public class TestStorage(
 
     public void AddPatient(Patient patient) => csvExporter.Export(patient);
 
-    public void AddTest(Patient patient, Test test)
+    public void AddTest(Patient patient, Test test, List<string> videoFilePaths)
     {
         csvExporter.Export(patient, test);
+        videoExporter.CopyFiles(patient, test, videoFilePaths);
         documentationExporter.Export(patient, test);
     }
 

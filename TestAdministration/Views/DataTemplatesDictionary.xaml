@@ -123,4 +123,8 @@
     <DataTemplate DataType="{x:Type viewModelResults:ResultTableViewModel}">
         <viewResults:ResultTable />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelResults:ResultFilesBoxViewModel}">
+        <viewResults:ResultFilesBox />
+    </DataTemplate>
 </ResourceDictionary>

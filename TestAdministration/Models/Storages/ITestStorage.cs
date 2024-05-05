@@ -40,5 +40,5 @@ public interface ITestStorage
     /// Saves test data into the patient's directory. Additionally
     /// saves patient info if not present. 
     /// </summary>
-    public void AddTest(Patient patient, Test test);
+    public void AddTest(Patient patient, Test test, List<string> videoFilePaths);
 }

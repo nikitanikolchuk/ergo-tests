@@ -52,9 +52,9 @@ public class TestingViewModel : ViewModelBase
     private void _onShowResults(Patient patient, Test test) =>
         CurrentViewModel = _resultsViewModelFactory.Create(patient, test, _onSaveTest);
 
-    private void _onSaveTest(Patient patient, Test test)
+    private void _onSaveTest(Patient patient, Test test, List<string> videoFilePaths)
     {
-        _testStorage.AddTest(patient, test);
+        _testStorage.AddTest(patient, test, videoFilePaths);
         _onOpenPatientChoice();
     }
 }
