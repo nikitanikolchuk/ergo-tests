@@ -2,12 +2,15 @@ using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.TestBuilders;
 using TestAdministration.Models.Utils;
+using Wpf.Ui;
 
 namespace TestAdministration.ViewModels;
 
 public class TestConductionViewModelFactory(
+    IContentDialogService contentDialogService,
     ConfigurationService configurationService,
     AudioInstructionService audioInstructionService,
+    CameraCaptureService cameraCaptureService,
     ITestBuilderFactory testBuilderFactory,
     IDateTimeProvider dateTimeProvider
 )
@@ -17,7 +20,9 @@ public class TestConductionViewModelFactory(
         TestType testType,
         Action<Patient, Test> onShowResults
     ) => new(
+        contentDialogService,
         audioInstructionService,
+        cameraCaptureService,
         testBuilderFactory,
         dateTimeProvider,
         configurationService.CurrentUser,

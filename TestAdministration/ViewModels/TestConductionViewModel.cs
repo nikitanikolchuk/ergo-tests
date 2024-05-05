@@ -11,6 +11,8 @@ using TestAdministration.ViewModels.Instructions.Bbt;
 using TestAdministration.ViewModels.Instructions.Nhpt;
 using TestAdministration.ViewModels.Instructions.Ppt;
 using TestAdministration.ViewModels.Rules;
+using Wpf.Ui;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
@@ -27,7 +29,9 @@ public partial class TestConductionViewModel : ViewModelBase
     [GeneratedRegex(@"^(?!0\d)\d+,?\d*$")]
     private static partial Regex FloatRegex();
 
+    private readonly IContentDialogService _contentDialogService;
     private readonly AudioInstructionService _audioInstructionService;
+    private readonly CameraCaptureService _cameraCaptureService;
     private readonly ITestBuilder _testBuilder;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly Patient _patient;
@@ -39,7 +43,9 @@ public partial class TestConductionViewModel : ViewModelBase
     private string _currentNote = string.Empty;
 
     public TestConductionViewModel(
+        IContentDialogService contentDialogService,
         AudioInstructionService audioInstructionService,
+        CameraCaptureService cameraCaptureService,
         ITestBuilderFactory testBuilderFactory,
         IDateTimeProvider dateTimeProvider,
         string tester,
@@ -48,7 +54,9 @@ public partial class TestConductionViewModel : ViewModelBase
         Action<Patient, Test> onShowResults
     )
     {
+        _contentDialogService = contentDialogService;
         _audioInstructionService = audioInstructionService;
+        _cameraCaptureService = cameraCaptureService;
         _dateTimeProvider = dateTimeProvider;
         _patient = patient;
         _testBuilder = testBuilderFactory.Create(testType)
@@ -60,6 +68,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
         TitleViewModel = new TestConductionTitleViewModel(_testBuilder, _patient.DominantHand);
         InstructionsViewModel = _getInstructionsViewModel(_audioInstructionService, _testBuilder, _patient);
+        CameraFeedViewModel = new CameraFeedViewModel(_cameraCaptureService);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
@@ -123,6 +132,7 @@ public partial class TestConductionViewModel : ViewModelBase
     }
 
     public ViewModelBase RulesViewModel { get; }
+    public CameraFeedViewModel CameraFeedViewModel { get; }
 
     // ReSharper disable once UnusedMember.Global
     public string SelectedRule
@@ -132,6 +142,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     public ICommand OnIncrementAnnulations => new RelayCommand<object?>(_ => _onIncrementAnnulations());
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
+    public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
     private static IInstructionsViewModel _getInstructionsViewModel(
@@ -215,6 +226,17 @@ public partial class TestConductionViewModel : ViewModelBase
         {
             _onFinishTesting();
         }
+    }
+
+    private async void _onOpenCameraDialog(ContentDialog? content)
+    {
+        if (content is null)
+        {
+            throw new ArgumentException("Content is null");
+        }
+
+        content.DataContext = this;
+        await _contentDialogService.ShowAsync(content, CancellationToken.None);
     }
 
     private void _onFinishTesting()

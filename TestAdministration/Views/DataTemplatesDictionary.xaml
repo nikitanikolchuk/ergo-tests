@@ -104,6 +104,10 @@
         <viewInstructions:InstructionPlayer />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewModels:CameraFeedViewModel}">
+        <views:CameraFeed />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModelRules:NhptRulesViewModel}">
         <viewRules:NhptRules />
     </DataTemplate>

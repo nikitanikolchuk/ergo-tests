@@ -11,6 +11,8 @@
     <ItemGroup>
         <PackageReference Include="CsvHelper" Version="31.0.2"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5"/>
+        <PackageReference Include="OpenCvSharp4.Windows" Version="4.9.0.20240103" />
+        <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.9.0.20240103" />
         <PackageReference Include="WPF-UI" Version="3.0.4"/>
     </ItemGroup>
 

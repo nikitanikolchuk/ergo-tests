@@ -9,6 +9,26 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:TestConductionViewModel}">
 
+    <UserControl.Resources>
+        <ui:ContentDialog
+            x:Key="CameraFeedDialog"
+            Title="Kamera"
+            CloseButtonText="Zavřít">
+
+            <ContentPresenter Content="{Binding CameraFeedViewModel}"/>
+        </ui:ContentDialog>
+
+        <Style x:Key="IconButtonStyle" TargetType="ui:Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ui:Button">
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Border Padding="8" Margin="54,80">
         <Grid>
             <Grid.RowDefinitions>
@@ -112,6 +132,7 @@
                         Grid.Row="8"
                         Grid.Column="0"
                         PlaceholderText="Text"
+                        TextWrapping="Wrap"
                         Text="{Binding CurrentNote}" />
 
                     <ui:TextBlock
@@ -152,11 +173,17 @@
                             Foreground="{DynamicResource TextControlForeground}"
                             Symbol="MicOff24" />
 
-                        <ui:SymbolIcon
-                            VerticalAlignment="Center"
-                            FontSize="24"
-                            Foreground="{DynamicResource TextControlForeground}"
-                            Symbol="Video24" />
+                        <ui:Button
+                            Style="{StaticResource IconButtonStyle}"
+                            Command="{Binding OnOpenCameraFeedDialog}"
+                            CommandParameter="{StaticResource CameraFeedDialog}">
+
+                            <ui:SymbolIcon
+                                VerticalAlignment="Center"
+                                FontSize="24"
+                                Foreground="{DynamicResource TextControlForeground}"
+                                Symbol="Video24" />
+                        </ui:Button>
                     </StackPanel>
 
                     <Grid
