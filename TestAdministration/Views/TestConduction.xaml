@@ -168,7 +168,6 @@
                         Grid.Row="8"
                         Grid.Column="0"
                         PlaceholderText="Text"
-                        TextWrapping="Wrap"
                         Text="{Binding CurrentNote}" />
 
                     <ui:TextBlock

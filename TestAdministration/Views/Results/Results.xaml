@@ -126,7 +126,12 @@
                     Command="{Binding OnSaveTest}" />
             </StackPanel>
 
-            <UniformGrid Grid.Row="3" Rows="2" Columns="1">
+            <UniformGrid
+                Grid.Row="3"
+                Height="404"
+                Rows="2"
+                Columns="1">
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
