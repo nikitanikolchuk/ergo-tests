@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.IO;
-using System.Reflection;
 using System.Text.Json;
 using TestAdministration.Models.Data;
 using Wpf.Ui.Appearance;
@@ -106,7 +105,7 @@ public class ConfigurationService
 
     private static string _getFilePath()
     {
-        var exePath = Assembly.GetExecutingAssembly().Location;
+        var exePath = AppContext.BaseDirectory;
         var exeDirectoryPath = Path.GetDirectoryName(exePath)
                                ?? throw new ArgumentException("Can't get exe directory");
         return Path.Combine(exeDirectoryPath, FileName);

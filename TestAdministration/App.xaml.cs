@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
@@ -15,6 +16,7 @@ using TestAdministration.ViewModels.Results;
 using TestAdministration.Views;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 namespace TestAdministration;
 
@@ -23,6 +25,8 @@ public partial class App
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        DispatcherUnhandledException += _onDispatcherUnhandledException;
 
         var serviceProvider = _configureServices().BuildServiceProvider();
 
@@ -90,4 +94,14 @@ public partial class App
             .AddSingleton<DocumentationConverter>()
             .AddSingleton<AudioInstructionService>()
             .AddSingleton<VideoRecorderService>();
+
+    private async void _onDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        var messageBox = new MessageBox
+        {
+            Title = "Chyba",
+            Content = e.Exception.Message
+        };
+        _ = await messageBox.ShowDialogAsync();
+    }
 }
