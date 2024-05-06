@@ -89,5 +89,5 @@ public partial class App
             .AddSingleton<DocumentationExporter>()
             .AddSingleton<DocumentationConverter>()
             .AddSingleton<AudioInstructionService>()
-            .AddSingleton<CameraCaptureService>();
+            .AddSingleton<VideoRecorderService>();
 }

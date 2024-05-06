@@ -31,7 +31,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     private readonly IContentDialogService _contentDialogService;
     private readonly AudioInstructionService _audioInstructionService;
-    private readonly CameraCaptureService _cameraCaptureService;
+    private readonly VideoRecorderService _videoRecorderService;
     private readonly ITestBuilder _testBuilder;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly Patient _patient;
@@ -45,7 +45,7 @@ public partial class TestConductionViewModel : ViewModelBase
     public TestConductionViewModel(
         IContentDialogService contentDialogService,
         AudioInstructionService audioInstructionService,
-        CameraCaptureService cameraCaptureService,
+        VideoRecorderService videoRecorderService,
         ITestBuilderFactory testBuilderFactory,
         IDateTimeProvider dateTimeProvider,
         string tester,
@@ -56,7 +56,7 @@ public partial class TestConductionViewModel : ViewModelBase
     {
         _contentDialogService = contentDialogService;
         _audioInstructionService = audioInstructionService;
-        _cameraCaptureService = cameraCaptureService;
+        _videoRecorderService = videoRecorderService;
         _dateTimeProvider = dateTimeProvider;
         _patient = patient;
         _testBuilder = testBuilderFactory.Create(testType)
@@ -68,7 +68,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
         TitleViewModel = new TestConductionTitleViewModel(_testBuilder, _patient.DominantHand);
         InstructionsViewModel = _getInstructionsViewModel(_audioInstructionService, _testBuilder, _patient);
-        CameraFeedViewModel = new CameraFeedViewModel(_cameraCaptureService);
+        CameraFeedViewModel = new CameraFeedViewModel(_videoRecorderService);
         RulesViewModel = _getRulesViewModel(testType);
     }
 
@@ -142,6 +142,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     public ICommand OnIncrementAnnulations => new RelayCommand<object?>(_ => _onIncrementAnnulations());
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
+    public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
     public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
 
@@ -243,6 +244,7 @@ public partial class TestConductionViewModel : ViewModelBase
     {
         _testBuilder.SetEndTime(_dateTimeProvider.Now);
         var test = _testBuilder.Build();
+        CameraFeedViewModel.OnStopRecording();
         _onShowResults(_patient, test);
     }
 }

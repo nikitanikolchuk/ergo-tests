@@ -57,23 +57,23 @@
                     Converter={StaticResource VisibilityConverter}
                 }">
 
-                <ui:SymbolIcon
-                    Margin="0,0,0,8"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    FontSize="32"
-                    Symbol="ArrowUpload24" />
-
-                <ui:TextBlock
-                    Margin="0,0,0,8"
-                    HorizontalAlignment="Center"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="Přetáhněte sem" />
-
-                <ui:TextBlock
-                    Margin="0,0,0,8"
-                    HorizontalAlignment="Center"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="Nebo" />
+                <!-- <ui:SymbolIcon -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     FontSize="32" -->
+                <!--     Symbol="ArrowUpload24" /> -->
+                <!-- -->
+                <!-- <ui:TextBlock -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     HorizontalAlignment="Center" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     Text="Přetáhněte sem" /> -->
+                <!-- -->
+                <!-- <ui:TextBlock -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     HorizontalAlignment="Center" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     Text="Nebo" /> -->
 
                 <ui:Button
                     Appearance="Primary"

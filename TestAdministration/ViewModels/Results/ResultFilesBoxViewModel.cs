@@ -1,6 +1,7 @@
 using System.IO;
 using System.Windows.Input;
 using Microsoft.Win32;
+using TestAdministration.Models.Services;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels.Results;
@@ -12,13 +13,31 @@ namespace TestAdministration.ViewModels.Results;
 /// </summary>
 public class ResultFilesBoxViewModel : ViewModelBase
 {
-    public List<string> FilePaths { get; } = [];
-    public List<string> FileNames => [..FilePaths.Select(Path.GetFileName)!];
-    public bool IsEmpty => FilePaths.Count == 0;
+    private const string RecordingName = "Nahrávka";
+
+    public List<string> FilePaths { get; } = _getFilePaths();
+    public List<string> FileNames => _getFileNames();
+    public bool IsEmpty => !_isRecordingAvailable() && FilePaths.Count == 0;
     public bool IsNotEmpty => !IsEmpty;
 
     public ICommand OnAddFiles => new RelayCommand<object?>(_ => _onAddFiles());
     public ICommand OnRemoveFile => new RelayCommand<string>(_onRemoveFile);
+
+    private static bool _isRecordingAvailable() => File.Exists(VideoRecorderService.TempFilePath);
+
+    private static List<string> _getFilePaths() =>
+        _isRecordingAvailable()
+            ? [VideoRecorderService.TempFilePath]
+            : [];
+
+    private List<string> _getFileNames() =>
+        FilePaths
+            .Select(path =>
+                path == VideoRecorderService.TempFilePath
+                    ? RecordingName
+                    : Path.GetFileName(path)
+            )
+            .ToList();
 
     private void _onAddFiles()
     {
@@ -61,7 +80,9 @@ public class ResultFilesBoxViewModel : ViewModelBase
             return;
         }
 
-        var filePath = FilePaths.Find(path => Path.GetFileName(path) == name);
+        var filePath = FilePaths.Find(path =>
+            path == VideoRecorderService.TempFilePath || Path.GetFileName(path) == name
+        );
         if (filePath is null)
         {
             return;

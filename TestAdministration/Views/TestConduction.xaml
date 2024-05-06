@@ -15,7 +15,7 @@
             Title="Kamera"
             CloseButtonText="Zavřít">
 
-            <ContentPresenter Content="{Binding CameraFeedViewModel}"/>
+            <ContentPresenter Content="{Binding CameraFeedViewModel}" />
         </ui:ContentDialog>
 
         <Style x:Key="IconButtonStyle" TargetType="ui:Button">
@@ -26,6 +26,42 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="RecordIconStyle" TargetType="ui:SymbolIcon">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding CameraFeedViewModel.IsRecording}"
+                    Value="False">
+
+                    <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
+                </DataTrigger>
+
+                <DataTrigger
+                    Binding="{Binding CameraFeedViewModel.IsRecording}"
+                    Value="True">
+
+                    <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PauseRecordingIconStyle" TargetType="ui:SymbolIcon">
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding CameraFeedViewModel.IsRecording}"
+                    Value="False">
+
+                    <Setter Property="Symbol" Value="Play24" />
+                </DataTrigger>
+
+                <DataTrigger
+                    Binding="{Binding CameraFeedViewModel.IsRecording}"
+                    Value="True">
+
+                    <Setter Property="Symbol" Value="Pause24" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
@@ -149,22 +185,27 @@
                         <ui:SymbolIcon
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
-                            Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                            Style="{StaticResource RecordIconStyle}"
                             FontSize="32"
                             Symbol="Record32" />
 
-                        <ui:SymbolIcon
-                            Margin="0,0,16,0"
-                            VerticalAlignment="Center"
-                            Foreground="{DynamicResource TextControlForeground}"
-                            FontSize="24"
-                            Symbol="Pause24" />
+                        <ui:Button
+                            Style="{StaticResource IconButtonStyle}"
+                            Command="{Binding OnPauseRecording}">
+
+                            <ui:SymbolIcon
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource PauseRecordingIconStyle}"
+                                Foreground="{DynamicResource TextControlForeground}"
+                                FontSize="24" />
+                        </ui:Button>
 
                         <ui:TextBlock
                             Margin="0,0,16,0"
                             VerticalAlignment="Center"
                             Foreground="{DynamicResource TextControlForeground}"
-                            Text="Čas" />
+                            Text="{Binding CameraFeedViewModel.RecordingTime}" />
 
                         <ui:SymbolIcon
                             Margin="0,0,16,0"

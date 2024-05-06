@@ -10,7 +10,7 @@ public class TestConductionViewModelFactory(
     IContentDialogService contentDialogService,
     ConfigurationService configurationService,
     AudioInstructionService audioInstructionService,
-    CameraCaptureService cameraCaptureService,
+    VideoRecorderService videoRecorderService,
     ITestBuilderFactory testBuilderFactory,
     IDateTimeProvider dateTimeProvider
 )
@@ -22,7 +22,7 @@ public class TestConductionViewModelFactory(
     ) => new(
         contentDialogService,
         audioInstructionService,
-        cameraCaptureService,
+        videoRecorderService,
         testBuilderFactory,
         dateTimeProvider,
         configurationService.CurrentUser,
