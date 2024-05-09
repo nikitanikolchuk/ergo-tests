@@ -12,6 +12,7 @@ namespace TestAdministration.ViewModels.Results;
 /// A view model for showing results of the last test.
 /// </summary>
 public class ResultsViewModel(
+    NormInterpretationConverter normInterpretationConverter,
     DocumentationConverter documentationConverter,
     Patient patient,
     int patientAge,
@@ -22,7 +23,7 @@ public class ResultsViewModel(
 {
     private bool _isPreviousTestShown;
     private bool _isSdScoreShown;
-    private bool _isNormDifferenceShown;
+    private bool _isNormInterpretationShown;
 
     public List<ResultPatientTable> Patients =>
     [
@@ -43,7 +44,7 @@ public class ResultsViewModel(
             _isPreviousTestShown = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(IsPreviousSdScoreShown));
-            OnPropertyChanged(nameof(IsPreviousNormDifferenceShown));
+            OnPropertyChanged(nameof(IsPreviousNormInterpretationShown));
         }
     }
 
@@ -60,18 +61,18 @@ public class ResultsViewModel(
 
     public bool IsPreviousSdScoreShown => IsPreviousTestShown && IsSdScoreShown;
 
-    public bool IsNormDifferenceShown
+    public bool IsNormInterpretationShown
     {
-        get => _isNormDifferenceShown;
+        get => _isNormInterpretationShown;
         set
         {
-            _isNormDifferenceShown = value;
+            _isNormInterpretationShown = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(IsPreviousNormDifferenceShown));
+            OnPropertyChanged(nameof(IsPreviousNormInterpretationShown));
         }
     }
 
-    public bool IsPreviousNormDifferenceShown => IsPreviousTestShown && IsNormDifferenceShown;
+    public bool IsPreviousNormInterpretationShown => IsPreviousTestShown && IsNormInterpretationShown;
     public string Notes => CsvConversionHelper.CreateNotes(test);
     public ResultFilesBoxViewModel FilesBoxViewModel { get; } = new();
 
@@ -96,12 +97,14 @@ public class ResultsViewModel(
     private List<ResultTableViewModel> _getNhptTables() =>
     [
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[0],
             previousTest?.Sections[0],
             "Dominantní HK",
             "Čas (v sekundách)"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[1],
             previousTest?.Sections[1],
             "Nedominantní HK",
@@ -112,30 +115,35 @@ public class ResultsViewModel(
     private List<ResultTableViewModel> _getPptTables() =>
     [
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[0],
             previousTest?.Sections[0],
             "Dominantní HK",
             "Počet kolíků"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[1],
             previousTest?.Sections[1],
             "Nedominantní HK",
             "Počet kolíků"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[2],
             previousTest?.Sections[2],
             "Obě HK",
             "Počet párů kolíků"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[3],
             previousTest?.Sections[3],
             "LHK + PHK + Obě",
             "Součet výsledků"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[4],
             previousTest?.Sections[4],
             "Nedominantní HK",
@@ -146,12 +154,14 @@ public class ResultsViewModel(
     private List<ResultTableViewModel> _getBbtTables() =>
     [
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[0],
             previousTest?.Sections[0],
             "Dominantní HK",
             "Počet kostek"
         ),
         new ResultTableViewModel(
+            normInterpretationConverter,
             test.Sections[1],
             previousTest?.Sections[1],
             "Nedominantní HK",

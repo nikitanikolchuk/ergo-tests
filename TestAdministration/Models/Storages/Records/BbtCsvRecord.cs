@@ -140,53 +140,43 @@ public class BbtCsvRecord
 
     [Index(24)]
     [Name("Dom_zkus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantPracticeNormDifference { get; init; }
+    public required string DominantPracticeNormInterpretation { get; init; }
 
     [Index(25)]
     [Name("Dom_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantFirstNormDifference { get; init; }
+    public required string DominantFirstNormInterpretation { get; init; }
 
     [Index(26)]
     [Name("Dom_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantSecondNormDifference { get; init; }
+    public required string DominantSecondNormInterpretation { get; init; }
 
     [Index(27)]
     [Name("Dom_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantThirdNormDifference { get; init; }
+    public required string DominantThirdNormInterpretation { get; init; }
 
     [Index(28)]
     [Name("Dom_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantAverageNormDifference { get; init; }
+    public required string DominantAverageNormInterpretation { get; init; }
 
     [Index(29)]
     [Name("Nedom_zkus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantPracticeNormDifference { get; init; }
+    public required string NonDominantPracticeNormInterpretation { get; init; }
 
     [Index(30)]
     [Name("Nedom_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantFirstNormDifference { get; init; }
+    public required string NonDominantFirstNormInterpretation { get; init; }
 
     [Index(31)]
     [Name("Nedom_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantSecondNormDifference { get; init; }
+    public required string NonDominantSecondNormInterpretation { get; init; }
 
     [Index(32)]
     [Name("Nedom_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantThirdNormDifference { get; init; }
+    public required string NonDominantThirdNormInterpretation { get; init; }
 
     [Index(33)]
     [Name("Nedom_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantAverageNormDifference { get; init; }
+    public required string NonDominantAverageNormInterpretation { get; init; }
 
     [Index(34)]
     [Name("Poznamky")]

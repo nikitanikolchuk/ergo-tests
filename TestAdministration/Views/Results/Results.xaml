@@ -47,8 +47,8 @@
                     IsChecked="{Binding IsSdScoreShown}" />
 
                 <CheckBox
-                    Content="Porovnání s normou"
-                    IsChecked="{Binding IsNormDifferenceShown}" />
+                    Content="Interpretace dle normy"
+                    IsChecked="{Binding IsNormInterpretationShown}" />
             </UniformGrid>
 
             <ui:ListView x:Name="PatientTable" ItemsSource="{Binding Patients}">

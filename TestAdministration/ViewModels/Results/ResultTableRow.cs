@@ -10,10 +10,10 @@ public class ResultTableRow(
     string header,
     float? value,
     float? sdScore,
-    float? normDifference,
+    string normInterpretation,
     float? previousValue,
     float? previousSdScore,
-    float? previousNormDifference
+    string previousNormInterpretation
 )
 {
     private const string FloatFormat = "0.##";
@@ -22,10 +22,10 @@ public class ResultTableRow(
     public string Header => header;
     public string Value => _floatToString(value);
     public string SdScore => _floatToString(sdScore);
-    public string NormDifference => _floatToString(normDifference);
+    public string NormInterpretation => normInterpretation;
     public string PreviousValue => $" ({_floatToString(previousValue)})";
     public string PreviousSdScore => $" ({_floatToString(previousSdScore)})";
-    public string PreviousNormDifference => $" ({_floatToString(previousNormDifference)})";
+    public string PreviousNormInterpretation => $" ({previousNormInterpretation})";
 
     private static string _floatToString(float? number) =>
         number is not null

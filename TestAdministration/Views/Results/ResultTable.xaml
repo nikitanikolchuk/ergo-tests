@@ -108,7 +108,7 @@
                 <ui:GridViewColumn
                     Width="{StaticResource ColumnWidth}"
                     HeaderTemplate="{StaticResource TopHeaderTemplate}"
-                    Header="Porovnání s normou">
+                    Header="Interpretace dle normy">
 
                     <ui:GridViewColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type viewModelResults:ResultTableRow}">
@@ -117,21 +117,21 @@
                                 <ui:TextBlock
                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                     Visibility="{
-                                        Binding DataContext.IsNormDifferenceShown,
+                                        Binding DataContext.IsNormInterpretationShown,
                                         Converter={StaticResource VisibilityConverter},
                                         RelativeSource={RelativeSource AncestorType=viewResults:Results}
                                     }"
-                                    Text="{Binding NormDifference}" />
+                                    Text="{Binding NormInterpretation}" />
 
                                 <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                                 <ui:TextBlock
                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                     Visibility="{
-                                        Binding DataContext.IsPreviousNormDifferenceShown,
+                                        Binding DataContext.IsPreviousNormInterpretationShown,
                                         Converter={StaticResource VisibilityConverter},
                                         RelativeSource={RelativeSource AncestorType=viewResults:Results}
                                     }"
-                                    Text="{Binding PreviousNormDifference}" />
+                                    Text="{Binding PreviousNormInterpretation}" />
                             </StackPanel>
                         </DataTemplate>
                     </ui:GridViewColumn.CellTemplate>

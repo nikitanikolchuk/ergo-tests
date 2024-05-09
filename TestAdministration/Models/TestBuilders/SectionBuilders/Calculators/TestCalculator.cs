@@ -17,13 +17,6 @@ public class TestCalculator<T>(
         return normProvider.IsInverted ? -sdScore : sdScore;
     }
 
-    public float? NormDifference(float value, int section, Patient patient)
-    {
-        var norm = _getNorm(section, patient);
-        var normDifference = value - norm?.Average;
-        return normProvider.IsInverted ? -normDifference : normDifference;
-    }
-
     private TestNorm? _getNorm(int section, Patient patient)
     {
         var age = ageCalculatorService.Calculate(patient);

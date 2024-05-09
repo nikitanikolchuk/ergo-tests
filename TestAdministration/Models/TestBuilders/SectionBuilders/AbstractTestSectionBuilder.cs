@@ -21,10 +21,8 @@ public abstract class AbstractTestSectionBuilder<T>(
         var sdScore = value != null
             ? testCalculator.SdScore(value.Value, section, patient)
             : null;
-        var normDifference = value != null
-            ? testCalculator.NormDifference(value.Value, section, patient)
-            : null;
-        return new TestTrial(value, sdScore, normDifference, note);
+
+        return new TestTrial(value, sdScore, note);
     }
 
     public virtual ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials, Patient patient) =>
@@ -32,12 +30,10 @@ public abstract class AbstractTestSectionBuilder<T>(
             {
                 var values = trialList.Select(t => t.Value);
                 var sdScores = trialList.Select(t => t.SdScore);
-                var normDifferences = trialList.Select(t => t.NormDifference);
 
                 return new TestSection(
                     _nullableAverage(values),
                     _nullableAverage(sdScores),
-                    _nullableAverage(normDifferences),
                     trialList.ToImmutableList()
                 );
             }

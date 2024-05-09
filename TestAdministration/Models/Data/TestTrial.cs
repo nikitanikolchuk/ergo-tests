@@ -6,14 +6,10 @@
 /// </summary>
 /// <param name="Value">Test value.</param>
 /// <param name="SdScore">Standard Deviation Score.</param>
-/// <param name="NormDifference">
-/// Difference between this value and average norm value.
-/// </param>
 /// <param name="Note">Attached note.</param>
 public record TestTrial(
     float? Value,
     float? SdScore,
-    float? NormDifference,
     string Note
 )
 {
@@ -36,10 +32,8 @@ public record TestTrial(
 
         return Utils.Utils.NearlyEqual(Value, other.Value) &&
                Utils.Utils.NearlyEqual(SdScore, other.SdScore) &&
-               Utils.Utils.NearlyEqual(NormDifference, other.NormDifference) &&
                Note == other.Note;
     }
 
-    public override int GetHashCode() =>
-        HashCode.Combine(Value, SdScore, NormDifference, Note);
+    public override int GetHashCode() => HashCode.Combine(Value, SdScore, Note);
 }

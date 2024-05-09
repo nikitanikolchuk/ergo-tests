@@ -7,6 +7,7 @@ namespace TestAdministration.ViewModels.Results;
 
 public class ResultsViewModelFactory(
     ITestStorage testStorage,
+    NormInterpretationConverter normInterpretationConverter,
     DocumentationConverter documentationConverter,
     AgeCalculatorService ageCalculatorService
 )
@@ -17,6 +18,7 @@ public class ResultsViewModelFactory(
         var previousTest = testStorage.GetLastTestByPatientId(test.Type, patient.Id);
 
         return new ResultsViewModel(
+            normInterpretationConverter,
             documentationConverter,
             patient,
             patientAge,

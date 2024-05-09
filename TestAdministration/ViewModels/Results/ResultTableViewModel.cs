@@ -1,4 +1,5 @@
 using TestAdministration.Models.Data;
+using TestAdministration.Models.Storages.Converters;
 
 namespace TestAdministration.ViewModels.Results;
 
@@ -7,6 +8,7 @@ namespace TestAdministration.ViewModels.Results;
 /// with optional comparison to the previous values.
 /// </summary>
 public class ResultTableViewModel(
+    NormInterpretationConverter normInterpretationConverter,
     TestSection testSection,
     TestSection? previousTestSection,
     string title,
@@ -42,20 +44,20 @@ public class ResultTableViewModel(
             headerList[i],
             trial.Value,
             trial.SdScore,
-            trial.NormDifference,
+            normInterpretationConverter.Convert(trial.SdScore),
             previousTestSection?.Trials[i].Value,
             previousTestSection?.Trials[i].SdScore,
-            previousTestSection?.Trials[i].NormDifference
+            normInterpretationConverter.Convert(previousTestSection?.Trials[i].SdScore)
         )).ToList();
 
         var averagesRow = new ResultTableRow(
             "Průměr",
             testSection.AverageValue,
             testSection.AverageSdScore,
-            testSection.AverageNormDifference,
+            normInterpretationConverter.Convert(testSection.AverageSdScore),
             previousTestSection?.AverageValue,
             previousTestSection?.AverageSdScore,
-            previousTestSection?.AverageNormDifference
+            normInterpretationConverter.Convert(previousTestSection?.AverageSdScore)
         );
 
         return rows.Append(averagesRow).ToList();

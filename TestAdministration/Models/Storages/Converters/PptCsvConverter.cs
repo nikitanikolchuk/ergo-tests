@@ -8,7 +8,9 @@ namespace TestAdministration.Models.Storages.Converters;
 /// A class for conversion between <see cref="Test"/> and
 /// <see cref="PptCsvRecord"/> objects.
 /// </summary>
-public class PptCsvConverter
+public class PptCsvConverter(
+    NormInterpretationConverter normInterpretationConverter
+)
 {
     public Test FromRecord(PptCsvRecord record)
     {
@@ -62,26 +64,26 @@ public class PptCsvConverter
         AssemblySecondSdScore = test.Sections[4].Trials[1].SdScore,
         AssemblyThirdSdScore = test.Sections[4].Trials[2].SdScore,
         AssemblyAverageSdScore = test.Sections[4].AverageSdScore,
-        DominantFirstNormDifference = test.Sections[0].Trials[0].NormDifference,
-        DominantSecondNormDifference = test.Sections[0].Trials[1].NormDifference,
-        DominantThirdNormDifference = test.Sections[0].Trials[2].NormDifference,
-        DominantAverageNormDifference = test.Sections[0].AverageNormDifference,
-        NonDominantFirstNormDifference = test.Sections[1].Trials[0].NormDifference,
-        NonDominantSecondNormDifference = test.Sections[1].Trials[1].NormDifference,
-        NonDominantThirdNormDifference = test.Sections[1].Trials[2].NormDifference,
-        NonDominantAverageNormDifference = test.Sections[1].AverageNormDifference,
-        BothFirstNormDifference = test.Sections[2].Trials[0].NormDifference,
-        BothSecondNormDifference = test.Sections[2].Trials[1].NormDifference,
-        BothThirdNormDifference = test.Sections[2].Trials[2].NormDifference,
-        BothAverageNormDifference = test.Sections[2].AverageNormDifference,
-        TotalFirstNormDifference = test.Sections[3].Trials[0].NormDifference,
-        TotalSecondNormDifference = test.Sections[3].Trials[1].NormDifference,
-        TotalThirdNormDifference = test.Sections[3].Trials[2].NormDifference,
-        TotalAverageNormDifference = test.Sections[3].AverageNormDifference,
-        AssemblyFirstNormDifference = test.Sections[4].Trials[0].NormDifference,
-        AssemblySecondNormDifference = test.Sections[4].Trials[1].NormDifference,
-        AssemblyThirdNormDifference = test.Sections[4].Trials[2].NormDifference,
-        AssemblyAverageNormDifference = test.Sections[4].AverageNormDifference,
+        DominantFirstNormInterpretation = normInterpretationConverter.Convert(test.Sections[0].Trials[0].SdScore),
+        DominantSecondNormInterpretation = normInterpretationConverter.Convert(test.Sections[0].Trials[1].SdScore),
+        DominantThirdNormInterpretation = normInterpretationConverter.Convert(test.Sections[0].Trials[2].SdScore),
+        DominantAverageNormInterpretation = normInterpretationConverter.Convert(test.Sections[0].AverageSdScore),
+        NonDominantFirstNormInterpretation = normInterpretationConverter.Convert(test.Sections[1].Trials[0].SdScore),
+        NonDominantSecondNormInterpretation = normInterpretationConverter.Convert(test.Sections[1].Trials[1].SdScore),
+        NonDominantThirdNormInterpretation = normInterpretationConverter.Convert(test.Sections[1].Trials[2].SdScore),
+        NonDominantAverageNormInterpretation = normInterpretationConverter.Convert(test.Sections[1].AverageSdScore),
+        BothFirstNormInterpretation = normInterpretationConverter.Convert(test.Sections[2].Trials[0].SdScore),
+        BothSecondNormInterpretation = normInterpretationConverter.Convert(test.Sections[2].Trials[1].SdScore),
+        BothThirdNormInterpretation = normInterpretationConverter.Convert(test.Sections[2].Trials[2].SdScore),
+        BothAverageNormInterpretation = normInterpretationConverter.Convert(test.Sections[2].AverageSdScore),
+        TotalFirstNormInterpretation = normInterpretationConverter.Convert(test.Sections[3].Trials[0].SdScore),
+        TotalSecondNormInterpretation = normInterpretationConverter.Convert(test.Sections[3].Trials[1].SdScore),
+        TotalThirdNormInterpretation = normInterpretationConverter.Convert(test.Sections[3].Trials[2].SdScore),
+        TotalAverageNormInterpretation = normInterpretationConverter.Convert(test.Sections[3].AverageSdScore),
+        AssemblyFirstNormInterpretation = normInterpretationConverter.Convert(test.Sections[4].Trials[0].SdScore),
+        AssemblySecondNormInterpretation = normInterpretationConverter.Convert(test.Sections[4].Trials[1].SdScore),
+        AssemblyThirdNormInterpretation = normInterpretationConverter.Convert(test.Sections[4].Trials[2].SdScore),
+        AssemblyAverageNormInterpretation = normInterpretationConverter.Convert(test.Sections[4].AverageSdScore),
         Notes = CreateNotes(test)
     };
 
@@ -95,126 +97,46 @@ public class PptCsvConverter
             new TestSection(
                 record.DominantAverage,
                 record.DominantAverageSdScore,
-                record.DominantAverageNormDifference,
                 [
-                    new TestTrial(
-                        record.DominantFirst,
-                        record.DominantFirstSdScore,
-                        record.DominantFirstNormDifference,
-                        notes[0]
-                    ),
-                    new TestTrial(
-                        record.DominantSecond,
-                        record.DominantSecondSdScore,
-                        record.DominantSecondNormDifference,
-                        notes[1]
-                    ),
-                    new TestTrial(
-                        record.DominantThird,
-                        record.DominantThirdSdScore,
-                        record.DominantThirdNormDifference,
-                        notes[2]
-                    )
+                    new TestTrial(record.DominantFirst, record.DominantFirstSdScore, notes[0]),
+                    new TestTrial(record.DominantSecond, record.DominantSecondSdScore, notes[1]),
+                    new TestTrial(record.DominantThird, record.DominantThirdSdScore, notes[2])
                 ]
             ),
             new TestSection(
                 record.NonDominantAverage,
                 record.NonDominantAverageSdScore,
-                record.NonDominantAverageNormDifference,
                 [
-                    new TestTrial(
-                        record.NonDominantFirst,
-                        record.NonDominantFirstSdScore,
-                        record.NonDominantFirstNormDifference,
-                        notes[3]
-                    ),
-                    new TestTrial(
-                        record.NonDominantSecond,
-                        record.NonDominantSecondSdScore,
-                        record.NonDominantSecondNormDifference,
-                        notes[4]
-                    ),
-                    new TestTrial(
-                        record.NonDominantThird,
-                        record.NonDominantThirdSdScore,
-                        record.NonDominantThirdNormDifference,
-                        notes[5]
-                    )
+                    new TestTrial(record.NonDominantFirst, record.NonDominantFirstSdScore, notes[3]),
+                    new TestTrial(record.NonDominantSecond, record.NonDominantSecondSdScore, notes[4]),
+                    new TestTrial(record.NonDominantThird, record.NonDominantThirdSdScore, notes[5])
                 ]
             ),
             new TestSection(
                 record.BothAverage,
                 record.BothAverageSdScore,
-                record.BothAverageNormDifference,
                 [
-                    new TestTrial(
-                        record.BothFirst,
-                        record.BothFirstSdScore,
-                        record.BothFirstNormDifference,
-                        notes[6]
-                    ),
-                    new TestTrial(
-                        record.BothSecond,
-                        record.BothSecondSdScore,
-                        record.BothSecondNormDifference,
-                        notes[7]
-                    ),
-                    new TestTrial(
-                        record.BothThird,
-                        record.BothThirdSdScore,
-                        record.BothThirdNormDifference,
-                        notes[8]
-                    )
+                    new TestTrial(record.BothFirst, record.BothFirstSdScore, notes[6]),
+                    new TestTrial(record.BothSecond, record.BothSecondSdScore, notes[7]),
+                    new TestTrial(record.BothThird, record.BothThirdSdScore, notes[8])
                 ]
             ),
             new TestSection(
                 record.TotalAverage,
                 record.TotalAverageSdScore,
-                record.TotalAverageNormDifference,
                 [
-                    new TestTrial(
-                        record.TotalFirst,
-                        record.TotalFirstSdScore,
-                        record.TotalFirstNormDifference,
-                        string.Empty
-                    ),
-                    new TestTrial(
-                        record.TotalSecond,
-                        record.TotalSecondSdScore,
-                        record.TotalSecondNormDifference,
-                        string.Empty
-                    ),
-                    new TestTrial(
-                        record.TotalThird,
-                        record.TotalThirdSdScore,
-                        record.TotalThirdNormDifference,
-                        string.Empty
-                    )
+                    new TestTrial(record.TotalFirst, record.TotalFirstSdScore, string.Empty),
+                    new TestTrial(record.TotalSecond, record.TotalSecondSdScore, string.Empty),
+                    new TestTrial(record.TotalThird, record.TotalThirdSdScore, string.Empty)
                 ]
             ),
             new TestSection(
                 record.AssemblyAverage,
                 record.AssemblyAverageSdScore,
-                record.AssemblyAverageNormDifference,
                 [
-                    new TestTrial(
-                        record.AssemblyFirst,
-                        record.AssemblyFirstSdScore,
-                        record.AssemblyFirstNormDifference,
-                        notes[12]
-                    ),
-                    new TestTrial(
-                        record.AssemblySecond,
-                        record.AssemblySecondSdScore,
-                        record.AssemblySecondNormDifference,
-                        notes[13]
-                    ),
-                    new TestTrial(
-                        record.AssemblyThird,
-                        record.AssemblyThirdSdScore,
-                        record.AssemblyThirdNormDifference,
-                        notes[14]
-                    )
+                    new TestTrial(record.AssemblyFirst, record.AssemblyFirstSdScore, notes[12]),
+                    new TestTrial(record.AssemblySecond, record.AssemblySecondSdScore, notes[13]),
+                    new TestTrial(record.AssemblyThird, record.AssemblyThirdSdScore, notes[14])
                 ]
             )
         ]

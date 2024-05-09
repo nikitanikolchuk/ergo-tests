@@ -247,103 +247,83 @@ public class PptCsvRecord
 
     [Index(46)]
     [Name("Dom_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantFirstNormDifference { get; init; }
+    public required string DominantFirstNormInterpretation { get; init; }
 
     [Index(47)]
     [Name("Dom_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantSecondNormDifference { get; init; }
+    public required string DominantSecondNormInterpretation { get; init; }
 
     [Index(48)]
     [Name("Dom_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantThirdNormDifference { get; init; }
+    public required string DominantThirdNormInterpretation { get; init; }
 
     [Index(49)]
     [Name("Dom_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? DominantAverageNormDifference { get; init; }
+    public required string DominantAverageNormInterpretation { get; init; }
 
     [Index(50)]
     [Name("Nedom_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantFirstNormDifference { get; init; }
+    public required string NonDominantFirstNormInterpretation { get; init; }
 
     [Index(51)]
     [Name("Nedom_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantSecondNormDifference { get; init; }
+    public required string NonDominantSecondNormInterpretation { get; init; }
 
     [Index(52)]
     [Name("Nedom_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantThirdNormDifference { get; init; }
+    public required string NonDominantThirdNormInterpretation { get; init; }
 
     [Index(53)]
     [Name("Nedom_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? NonDominantAverageNormDifference { get; init; }
+    public required string NonDominantAverageNormInterpretation { get; init; }
 
     [Index(54)]
     [Name("Bbe_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? BothFirstNormDifference { get; init; }
+    public required string BothFirstNormInterpretation { get; init; }
 
     [Index(55)]
     [Name("Bbe_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? BothSecondNormDifference { get; init; }
+    public required string BothSecondNormInterpretation { get; init; }
 
     [Index(56)]
     [Name("Bbe_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? BothThirdNormDifference { get; init; }
+    public required string BothThirdNormInterpretation { get; init; }
 
     [Index(57)]
     [Name("Bbe_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? BothAverageNormDifference { get; init; }
+    public required string BothAverageNormInterpretation { get; init; }
 
     [Index(58)]
     [Name("Soucet_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? TotalFirstNormDifference { get; init; }
+    public required string TotalFirstNormInterpretation { get; init; }
 
     [Index(59)]
     [Name("Soucet_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? TotalSecondNormDifference { get; init; }
+    public required string TotalSecondNormInterpretation { get; init; }
 
     [Index(60)]
     [Name("Soucet_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? TotalThirdNormDifference { get; init; }
+    public required string TotalThirdNormInterpretation { get; init; }
 
     [Index(61)]
     [Name("Soucet_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? TotalAverageNormDifference { get; init; }
+    public required string TotalAverageNormInterpretation { get; init; }
 
     [Index(62)]
     [Name("Kompletovani_1_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? AssemblyFirstNormDifference { get; init; }
+    public required string AssemblyFirstNormInterpretation { get; init; }
 
     [Index(63)]
     [Name("Kompletovani_2_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? AssemblySecondNormDifference { get; init; }
+    public required string AssemblySecondNormInterpretation { get; init; }
 
     [Index(64)]
     [Name("Kompletovani_3_pokus_porovnani")]
-    [Format(FloatFormat)]
-    public required float? AssemblyThirdNormDifference { get; init; }
+    public required string AssemblyThirdNormInterpretation { get; init; }
 
     [Index(65)]
     [Name("Kompletovani_prumer_porovnani")]
-    [Format(FloatFormat)]
-    public required float? AssemblyAverageNormDifference { get; init; }
+    public required string AssemblyAverageNormInterpretation { get; init; }
 
     [Index(66)]
     [Name("Poznamky")]
