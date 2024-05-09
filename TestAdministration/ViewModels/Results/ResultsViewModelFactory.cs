@@ -15,7 +15,7 @@ public class ResultsViewModelFactory(
     public ResultsViewModel Create(Patient patient, Test test, Action<Patient, Test, List<string>> onSaveTest)
     {
         var patientAge = ageCalculatorService.Calculate(patient);
-        var previousTest = testStorage.GetLastTestByPatientId(test.Type, patient.Id);
+        var previousTest = testStorage.GetLastTestByPatient(test.Type, patient);
 
         return new ResultsViewModel(
             normInterpretationConverter,

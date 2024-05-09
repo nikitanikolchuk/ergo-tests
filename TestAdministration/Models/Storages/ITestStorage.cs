@@ -14,10 +14,10 @@ public interface ITestStorage
     public string DataPath { get; }
 
     /// <summary>
-    /// Gets the patient from Patient.csv by ID specified in the
-    /// corresponding directory's name.
+    /// Gets the patient from Patient.csv by converting
+    /// directory info to the patient's directory name.
     /// </summary>
-    public Patient? GetPatientById(string id);
+    public Patient? GetPatient(PatientDirectoryInfo patientDirectoryInfo);
 
     /// <summary>
     /// Parses patient directory names into a
@@ -26,16 +26,16 @@ public interface ITestStorage
     public List<PatientDirectoryInfo> GetAllPatientDirectoryInfos();
 
     /// <summary>
-    /// Gets last test results from the [TEST_TYPE].csv by ID
-    /// specified in the corresponding directory's name. 
+    /// Gets last test results from the [TEST_TYPE].csv from the
+    /// patient's directory. 
     /// </summary>
-    public Test? GetLastTestByPatientId(TestType testType, string patientId);
+    public Test? GetLastTestByPatient(TestType testType, Patient patient);
 
     /// <summary>
     /// Saves patient data into the patient's directory.
     /// </summary>
     public void AddPatient(Patient patient);
-    
+
     /// <summary>
     /// Saves test data into the patient's directory. Additionally
     /// saves patient info if not present. 

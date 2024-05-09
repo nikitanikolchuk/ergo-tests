@@ -64,7 +64,7 @@ public class PatientChoiceViewModel : ViewModelBase
                 return;
             }
 
-            var patient = _testStorage.GetPatientById(value.Id);
+            var patient = _testStorage.GetPatient(value);
             if (patient is null)
             {
                 _alertInvalidPatientFile();

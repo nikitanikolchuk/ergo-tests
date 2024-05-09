@@ -23,10 +23,11 @@ public class TestStorage(
             .OfType<PatientDirectoryInfo>()
             .ToList();
 
-    public Patient? GetPatientById(string id) => csvImporter.ImportPatientById(id);
+    public Patient? GetPatient(PatientDirectoryInfo patientDirectoryInfo) =>
+        csvImporter.ImportPatient(patientDirectoryInfo);
 
-    public Test? GetLastTestByPatientId(TestType testType, string patientId) =>
-        csvImporter.ImportTestByPatientId(testType, patientId);
+    public Test? GetLastTestByPatient(TestType testType, Patient patient) =>
+        csvImporter.ImportLastTestByPatient(testType, patient);
 
     public void AddPatient(Patient patient) => csvExporter.Export(patient);
 

@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using CsvHelper;
@@ -24,14 +25,9 @@ public class LocalCsvImporter(
     // TODO: move to config file
     private const string PatientFileName = "Pacient.csv";
 
-    public Patient? ImportPatientById(string id)
+    public Patient? ImportPatient(PatientDirectoryInfo patientDirectoryInfo)
     {
-        var patientDirectoryName = _patientDirectoryName(id);
-        if (patientDirectoryName is null)
-        {
-            return null;
-        }
-
+        var patientDirectoryName = _patientDirectoryName(patientDirectoryInfo);
         var patientPath = Path.Combine(fileSystem.TestDataPath, patientDirectoryName, PatientFileName);
         if (!File.Exists(patientPath))
         {
@@ -55,14 +51,9 @@ public class LocalCsvImporter(
         }
     }
 
-    public Test? ImportTestByPatientId(TestType testType, string patientId)
+    public Test? ImportLastTestByPatient(TestType testType, Patient patient)
     {
-        var patientDirectoryName = _patientDirectoryName(patientId);
-        if (patientDirectoryName is null)
-        {
-            return null;
-        }
-
+        var patientDirectoryName = _patientDirectoryName(patient);
         var fileName = $"{testType.ToString().ToUpper()}.csv";
         var filePath = Path.Combine(fileSystem.TestDataPath, patientDirectoryName, fileName);
         if (!File.Exists(filePath))
@@ -86,14 +77,26 @@ public class LocalCsvImporter(
         }
     }
 
-    private string? _patientDirectoryName(string patientId) =>
-        fileSystem.GetSubdirectoryNames()
-            .FirstOrDefault(dir =>
-            {
-                var parts = dir.Split('_');
-                return parts.Length == 3 && parts.Last() == patientId;
-            });
+    private static string _patientDirectoryName(PatientDirectoryInfo patientDirectoryInfo) =>
+        $"{patientDirectoryInfo.Surname}_{patientDirectoryInfo.Name}_{patientDirectoryInfo.Id}";
 
+    private static string _patientDirectoryName(Patient patient)
+    {
+        var surname = patient.Surname.ToUpper().Replace(" ", "-");
+        var name = patient.Name.ToUpper().Replace(" ", "-");
+        var id = patient.Id.Replace(" ", "-");
+        return _removeDiacritics($"{surname}_{name}_{id}");
+    }
+
+    private static string _removeDiacritics(string str)
+    {
+        var chars = str
+            .Normalize(NormalizationForm.FormD)
+            .Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray();
+
+        return new string(chars);
+    }
 
     private static CsvConfiguration _getConfig(TestType testType) => testType switch
     {
