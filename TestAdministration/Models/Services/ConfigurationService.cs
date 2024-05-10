@@ -103,13 +103,7 @@ public class ConfigurationService
         }
     }
 
-    private static string _getFilePath()
-    {
-        var exePath = AppContext.BaseDirectory;
-        var exeDirectoryPath = Path.GetDirectoryName(exePath)
-                               ?? throw new ArgumentException("Can't get exe directory");
-        return Path.Combine(exeDirectoryPath, FileName);
-    }
+    private static string _getFilePath() => Path.Combine(AppContext.BaseDirectory, FileName);
 
     private ConfigurationData _readData()
     {

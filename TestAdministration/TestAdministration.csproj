@@ -10,9 +10,11 @@
 
     <ItemGroup>
         <PackageReference Include="CsvHelper" Version="31.0.2"/>
+        <PackageReference Include="FFMpegCore" Version="5.1.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5"/>
-        <PackageReference Include="OpenCvSharp4.Windows" Version="4.9.0.20240103" />
-        <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.9.0.20240103" />
+        <PackageReference Include="NAudio" Version="2.2.1"/>
+        <PackageReference Include="OpenCvSharp4.Windows" Version="4.9.0.20240103"/>
+        <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.9.0.20240103"/>
         <PackageReference Include="WPF-UI" Version="3.0.4"/>
     </ItemGroup>
 
@@ -30,6 +32,7 @@
 
     <ItemGroup>
         <Content Include="Resources\Audio\**" CopyToOutputDirectory="Always"/>
+        <Content Include="Resources\ffmpeg\**" CopyToOutputDirectory="Always"/>
     </ItemGroup>
 
     <ItemGroup>

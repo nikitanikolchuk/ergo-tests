@@ -23,17 +23,17 @@ public class ResultFilesBoxViewModel : ViewModelBase
     public ICommand OnAddFiles => new RelayCommand<object?>(_ => _onAddFiles());
     public ICommand OnRemoveFile => new RelayCommand<string>(_onRemoveFile);
 
-    private static bool _isRecordingAvailable() => File.Exists(VideoRecorderService.TempFilePath);
+    private static bool _isRecordingAvailable() => File.Exists(VideoRecorderService.TempRecordingFilePath);
 
     private static List<string> _getFilePaths() =>
         _isRecordingAvailable()
-            ? [VideoRecorderService.TempFilePath]
+            ? [VideoRecorderService.TempRecordingFilePath]
             : [];
 
     private List<string> _getFileNames() =>
         FilePaths
             .Select(path =>
-                path == VideoRecorderService.TempFilePath
+                path == VideoRecorderService.TempRecordingFilePath
                     ? RecordingName
                     : Path.GetFileName(path)
             )
@@ -81,7 +81,7 @@ public class ResultFilesBoxViewModel : ViewModelBase
         }
 
         var filePath = FilePaths.Find(path =>
-            path == VideoRecorderService.TempFilePath || Path.GetFileName(path) == name
+            path == VideoRecorderService.TempRecordingFilePath || Path.GetFileName(path) == name
         );
         if (filePath is null)
         {
