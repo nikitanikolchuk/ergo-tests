@@ -15,7 +15,6 @@ public class VideoRecorderService
     private const string TempRecordingFileName = "TempRecording.mp4";
     private const string TempVideoFileName = "TempVideo.mp4";
     private const string TempAudioFileName = "TempAudio.wav";
-    private const int UpdateTimeoutMilliseconds = 30;
     private const int Mp4Tag = 0x7634706d;
     private const int AudioSampleRate = 44100;
 
@@ -69,8 +68,16 @@ public class VideoRecorderService
 
         Task.Run(() =>
             {
+                var waitTimeBetweenFrames = 1_000 / _capture.Fps;
+                var lastWrite = DateTime.Now;
+
                 while (!cancellationToken.IsCancellationRequested)
                 {
+                    if (DateTime.Now.Subtract(lastWrite).TotalMilliseconds < waitTimeBetweenFrames)
+                    {
+                        continue;
+                    }
+
                     using var mat = _capture.RetrieveMat();
                     if (mat.Empty())
                     {
@@ -81,14 +88,17 @@ public class VideoRecorderService
                     bitmapSource.Freeze();
                     NewFrameAvailable?.Invoke(bitmapSource);
 
-                    if (IsRecording && !IsPaused)
+                    var lastWriteDifference = DateTime.Now.Subtract(lastWrite);
+                    lastWrite = DateTime.Now;
+
+                    if (!IsRecording || IsPaused)
                     {
-                        _writer?.Write(mat);
-                        _recordingTime += TimeSpan.FromMilliseconds(UpdateTimeoutMilliseconds);
-                        RecordingTimeUpdated?.Invoke(_recordingTime);
+                        continue;
                     }
 
-                    Thread.Sleep(UpdateTimeoutMilliseconds);
+                    _writer?.Write(mat);
+                    _recordingTime += lastWriteDifference;
+                    RecordingTimeUpdated?.Invoke(_recordingTime);
                 }
             },
             cancellationToken
@@ -129,17 +139,7 @@ public class VideoRecorderService
             WaveFormat = new WaveFormat(AudioSampleRate, 1)
         };
         _waveFileWriter = new WaveFileWriter(TempAudioFilePath, _waveIn.WaveFormat);
-        // TODO: add audio synchronization
-        _waveIn.DataAvailable += (_, e) =>
-        {
-            if (_waveFileWriter == null || IsPaused)
-            {
-                return;
-            }
-
-            _waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
-            _waveFileWriter.Flush();
-        };
+        _waveIn.DataAvailable += _writeAudio;
         _waveIn.StartRecording();
 
         _recordingTime = TimeSpan.Zero;
@@ -200,7 +200,43 @@ public class VideoRecorderService
 
     private static void _mergeMediaFiles()
     {
-        FFMpeg.ReplaceAudio(TempVideoFilePath, TempAudioFilePath, TempRecordingFilePath);
+        if (!File.Exists(TempVideoFilePath))
+        {
+            _deleteTempMediaFiles();
+            return;
+        }
+
+        if (!File.Exists(TempAudioFilePath))
+        {
+            File.Move(TempVideoFilePath, TempRecordingFilePath);
+            return;
+        }
+
+        try
+        {
+            FFMpeg.ReplaceAudio(TempVideoFilePath, TempAudioFilePath, TempRecordingFilePath);
+        }
+        catch
+        {
+            if (File.Exists(TempRecordingFilePath))
+            {
+                File.Delete(TempRecordingFilePath);
+            }
+
+            File.Move(TempVideoFilePath, TempRecordingFilePath);
+        }
+
         _deleteTempMediaFiles();
+    }
+
+    private void _writeAudio(object? sender, WaveInEventArgs e)
+    {
+        if (_waveFileWriter is null || !IsRecording || IsPaused)
+        {
+            return;
+        }
+
+        _waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
+        _waveFileWriter.Flush();
     }
 }
