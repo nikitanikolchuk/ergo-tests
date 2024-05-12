@@ -7,9 +7,9 @@ using Wpf.Ui.Input;
 namespace TestAdministration.ViewModels.Results;
 
 /// <summary>
-/// A view model for drag and dropping or picking files to be
-/// added in the test data directory. Is intended for video
-/// files but accepts all file types.
+/// A view model for picking files to be added to the test data
+/// directory.Is intended for video files but accepts all file
+/// types.
 /// </summary>
 public class ResultFilesBoxViewModel : ViewModelBase
 {
@@ -17,16 +17,14 @@ public class ResultFilesBoxViewModel : ViewModelBase
 
     public List<string> FilePaths { get; } = _getFilePaths();
     public List<string> FileNames => _getFileNames();
-    public bool IsEmpty => !_isRecordingAvailable() && FilePaths.Count == 0;
+    public bool IsEmpty => FilePaths.Count == 0;
     public bool IsNotEmpty => !IsEmpty;
 
     public ICommand OnAddFiles => new RelayCommand<object?>(_ => _onAddFiles());
     public ICommand OnRemoveFile => new RelayCommand<string>(_onRemoveFile);
 
-    private static bool _isRecordingAvailable() => File.Exists(VideoRecorderService.TempRecordingFilePath);
-
     private static List<string> _getFilePaths() =>
-        _isRecordingAvailable()
+        File.Exists(VideoRecorderService.TempRecordingFilePath)
             ? [VideoRecorderService.TempRecordingFilePath]
             : [];
 
