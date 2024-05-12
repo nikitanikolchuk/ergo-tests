@@ -1,0 +1,92 @@
+<UserControl
+    x:Class="TestAdministration.Views.VideoManuals"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:VideoManualsViewModel}">
+
+    <ui:TextBlock
+        Margin="54,0"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        TextWrapping="Wrap"
+        Foreground="{DynamicResource TextControlForeground}">
+
+        <Bold>Online kurzy s videomanuály</Bold> k Devítikolíkovému testu, Purdue Pegboard Testu a Box and Block
+        Testu jsou <Bold>zdarma</Bold> dostupné prostřednictvím portálu
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz">
+
+            https://kurzy.lf1.cuni.cz
+        </Hyperlink>
+        <Bold>pro členy České asociace ergoterapeutů</Bold>.
+        <LineBreak />
+        <LineBreak />
+        <Bold>K získání přístupů do těchto kurzů je potřeba provést následující kroky:</Bold>
+        <LineBreak />
+        1) ZAREGISTROVAT SE zdarma do portálu
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz">
+
+            https://kurzy.lf1.cuni.cz
+        </Hyperlink>
+        prostřednictvím libovolného e-mailu.
+        <LineBreak />
+        2) ZAŽÁDAT O ZPŘÍSTUPNĚNÍ KURZU s videomanuály ergoterapeutku Mgr. Kateřinu Vondrovou (Rybářovou)
+        prostřednictvím e-mailu
+        <Hyperlink
+            Command="{Binding OnCopyEmail}"
+            CommandParameter="katerina.rybarova@lf1.cuni.cz">
+
+            katerina.rybarova@lf1.cuni.cz
+        </Hyperlink>
+        .
+        <LineBreak />
+        Do tohoto e-mailu je potřeba <Bold>uvést e-mail</Bold>, přes který byla provedena registrace do portálu
+        https://kurzy.lf1.cuni.cz/, a <Bold>připsat čestné prohlášení o platném členství v ČAE</Bold>.
+        <LineBreak />
+        3) VYČKAT na potvrzení přijetí žádosti a zpřístupnění kurzu.
+        <LineBreak />
+        <LineBreak />
+        Kurzy jsou pak dostupné buď prostřednictvím přímých odkazů:
+        <LineBreak />
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz/course/view.php?id=64>">
+
+            https://kurzy.lf1.cuni.cz/course/view.php?id=64>
+        </Hyperlink>
+        pro Box and Block Test,
+        <LineBreak />
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz/course/view.php?id=63>">
+
+            https://kurzy.lf1.cuni.cz/course/view.php?id=63>
+        </Hyperlink>
+        pro Purdue Pegboard Test,
+        <LineBreak />
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz/course/view.php?id=65>">
+
+            https://kurzy.lf1.cuni.cz/course/view.php?id=65>
+        </Hyperlink>
+        pro Devítikolíkový test
+        <LineBreak />
+        nebo díky přihlášení do portálu
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz">
+
+            https://kurzy.lf1.cuni.cz
+        </Hyperlink>
+        , kde jsou oba uložené v sekci Moje kurzy.
+    </ui:TextBlock>
+</UserControl>

@@ -1,0 +1,35 @@
+<UserControl
+    x:Class="TestAdministration.Views.ResultsStorage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:ResultsStorageViewModel}">
+
+    <StackPanel
+        Margin="54,0"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+
+        <ui:SymbolIcon
+            Margin="0,0,0,32"
+            FontSize="128"
+            Symbol="DocumentMultiple24" />
+
+        <ui:TextBlock
+            FontTypography="Title"
+            FontWeight="Regular"
+            TextWrapping="Wrap"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Zde je odkaz na adresář s výsledky všech pacientů:
+            <LineBreak />
+            <Hyperlink Command="{Binding OnOpenResultsDirectory}">
+                Výsledky
+            </Hyperlink>
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

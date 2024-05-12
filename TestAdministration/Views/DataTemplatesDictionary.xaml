@@ -28,6 +28,18 @@
         <views:InitContent />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewModels:ResultsStorageViewModel}">
+        <views:ResultsStorage />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:TextManualsViewModel}">
+        <views:TextManuals />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModels:VideoManualsViewModel}">
+        <views:VideoManuals />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
         <views:Settings />
     </DataTemplate>

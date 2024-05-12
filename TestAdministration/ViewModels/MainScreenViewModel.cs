@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
@@ -17,9 +16,6 @@ public partial class MainScreenViewModel(
     TestingViewModelFactory testingViewModelFactory
 ) : ViewModelBase
 {
-    private const string TextManualsLink = "https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod";
-    private const string VideoManualsLink = "https://kurzy.lf1.cuni.cz/";
-
     [GeneratedRegex(@"\s+")]
     private static partial Regex WhitespaceRegex();
 
@@ -34,7 +30,7 @@ public partial class MainScreenViewModel(
         {
             if (string.IsNullOrWhiteSpace(CurrentUser))
             {
-                return "";
+                return string.Empty;
             }
 
             var names = WhitespaceRegex()
@@ -74,19 +70,9 @@ public partial class MainScreenViewModel(
     }
 
     public ICommand OnStartTestingCommand => new RelayCommand<TestType>(_onStartTesting);
-
-    public ICommand OnOpenResultsCommand => new RelayCommand<object?>(_ =>
-        Process.Start("explorer.exe", testStorage.DataPath)
-    );
-
-    public static ICommand OnOpenTextManualsCommand => new RelayCommand<object?>(_ =>
-        Process.Start(new ProcessStartInfo(TextManualsLink) { UseShellExecute = true })
-    );
-
-    public static ICommand OnOpenVideoManualsCommand => new RelayCommand<object?>(_ =>
-        Process.Start(new ProcessStartInfo(VideoManualsLink) { UseShellExecute = true })
-    );
-
+    public ICommand OnOpenResultsCommand => new RelayCommand<object?>(_ => _onOpenResultsSection());
+    public ICommand OnOpenTextManualsCommand => new RelayCommand<object?>(_ => _onOpenTextManuals());
+    public ICommand OnOpenVideoManualsCommand => new RelayCommand<object?>(_ => _onOpenVideoManuals());
     public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ => _onOpenSettingsCommand());
 
     private void _onStartTesting(TestType testType)
@@ -101,6 +87,24 @@ public partial class MainScreenViewModel(
 
         var testingViewModel = testingViewModelFactory.Create(testType);
         CurrentViewModel = testingViewModel;
+    }
+
+    private void _onOpenResultsSection()
+    {
+        ContentHeader = "Výsledky";
+        CurrentViewModel = new ResultsStorageViewModel(testStorage.DataPath);
+    }
+
+    private void _onOpenTextManuals()
+    {
+        ContentHeader = "Textové manuály";
+        CurrentViewModel = new TextManualsViewModel();
+    }
+
+    private void _onOpenVideoManuals()
+    {
+        ContentHeader = "Videomanuály";
+        CurrentViewModel = new VideoManualsViewModel();
     }
 
     private void _onOpenSettingsCommand()
