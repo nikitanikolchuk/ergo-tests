@@ -101,10 +101,10 @@
                 BorderThickness="1"
                 BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
-                <Grid VerticalAlignment="Bottom">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="8" />
+                        <RowDefinition Height="*" MinHeight="64" />
+                        <RowDefinition Height="32" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="12" />
                         <RowDefinition Height="Auto" />
@@ -122,63 +122,91 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
+                    <Border
+                        x:Name="InstructionsBase"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3" />
+
                     <ScrollViewer
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
-                        Height="392"
+                        Height="{Binding ActualHeight,ElementName=InstructionsBase}"
                         VerticalScrollBarVisibility="Auto"
                         Content="{Binding InstructionsViewModel.CurrentViewModel}" />
 
                     <ui:TextBlock
                         Grid.Row="2"
-                        Grid.Column="0"
-                        Foreground="{DynamicResource TextControlForeground}"
-                        Text="Výsledek" />
-
-                    <ui:TextBox
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        PlaceholderText="{Binding ValuePlaceholderText}"
-                        IsReadOnly="{Binding IsValueReadOnly}"
-                        Text="{
-                            Binding CurrentValue,
-                            UpdateSourceTrigger=PropertyChanged
-                        }" />
-
-                    <ui:TextBlock
-                        Grid.Row="2"
                         Grid.Column="2"
-                        Foreground="{DynamicResource TextControlForeground}"
-                        Text="Počet anulování" />
-
-                    <ui:TextBox
-                        Grid.Row="4"
-                        Grid.Column="2"
-                        IsReadOnly="True"
-                        Text="{Binding AnnulationCount}" />
-
-                    <ui:TextBlock
-                        Grid.Row="6"
-                        Grid.Column="0"
                         Foreground="{DynamicResource TextControlForeground}"
                         Text="Poznámky" />
 
+                    <Border
+                        x:Name="NotesBase"
+                        Grid.Row="4"
+                        Grid.RowSpan="5"
+                        Grid.Column="2" />
+
                     <ui:TextBox
-                        Grid.Row="8"
-                        Grid.Column="0"
+                        Grid.Row="4"
+                        Grid.RowSpan="5"
+                        Grid.Column="2"
+                        Height="{Binding ActualHeight,ElementName=NotesBase}"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
                         PlaceholderText="Text"
                         Text="{Binding CurrentNote}" />
 
+                    <Grid Grid.Row="2" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ui:TextBlock
+                            Grid.Column="0"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Výsledek" />
+
+                        <ui:TextBlock
+                            Grid.Column="2"
+                            Foreground="{DynamicResource TextControlForeground}"
+                            Text="Počet anulování" />
+                    </Grid>
+
+                    <Grid Grid.Row="4" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ui:TextBox
+                            Grid.Column="0"
+                            PlaceholderText="{Binding ValuePlaceholderText}"
+                            IsReadOnly="{Binding IsValueReadOnly}"
+                            Text="{
+                                Binding CurrentValue,
+                                UpdateSourceTrigger=PropertyChanged
+                            }" />
+
+                        <ui:TextBox
+                            Grid.Column="2"
+                            IsReadOnly="True"
+                            Text="{Binding AnnulationCount}" />
+                    </Grid>
+
                     <ui:TextBlock
                         Grid.Row="6"
-                        Grid.Column="2"
+                        Grid.Column="0"
                         Foreground="{DynamicResource TextControlForeground}"
                         Text="Nahrávání" />
 
                     <StackPanel
                         Grid.Row="8"
-                        Grid.Column="2"
+                        Grid.Column="0"
                         Orientation="Horizontal">
 
                         <ui:SymbolIcon
@@ -205,13 +233,6 @@
                             VerticalAlignment="Center"
                             Foreground="{DynamicResource TextControlForeground}"
                             Text="{Binding CameraFeedViewModel.RecordingTime}" />
-
-                        <ui:SymbolIcon
-                            Margin="0,0,16,0"
-                            VerticalAlignment="Center"
-                            FontSize="24"
-                            Foreground="{DynamicResource TextControlForeground}"
-                            Symbol="MicOff24" />
 
                         <ui:Button
                             Style="{StaticResource IconButtonStyle}"
@@ -272,7 +293,6 @@
                         <ui:Button
                             Grid.Column="5"
                             HorizontalAlignment="Stretch"
-                            Appearance="Primary"
                             Content="Ukončit testování"
                             Command="{Binding OnFinishTesting}" />
                     </Grid>
