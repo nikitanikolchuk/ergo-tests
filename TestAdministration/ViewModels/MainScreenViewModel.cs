@@ -3,6 +3,7 @@ using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
 namespace TestAdministration.ViewModels;
@@ -77,7 +78,7 @@ public partial class MainScreenViewModel(
 
     private void _onStartTesting(TestType testType)
     {
-        ContentHeader = testType switch
+        var contentHeader = testType switch
         {
             TestType.Nhpt => "Devítikolíkový Test",
             TestType.Ppt => "Purdue Pegboard Test",
@@ -85,31 +86,54 @@ public partial class MainScreenViewModel(
             _ => string.Empty
         };
 
-        var testingViewModel = testingViewModelFactory.Create(testType);
-        CurrentViewModel = testingViewModel;
+        _navigate(contentHeader, () => testingViewModelFactory.Create(testType));
     }
 
-    private void _onOpenResultsSection()
+    private void _onOpenResultsSection() =>
+        _navigate("Výsledky", () => new ResultsStorageViewModel(testStorage.DataPath));
+
+    private void _onOpenTextManuals() =>
+        _navigate("Textové manuály", () => new TextManualsViewModel());
+
+    private void _onOpenVideoManuals() =>
+        _navigate("Videomanuály", () => new VideoManualsViewModel());
+
+    private void _onOpenSettingsCommand() =>
+        _navigate("Nastavení", () => new SettingsViewModel(configurationService));
+
+    /// <summary>
+    /// Navigates to another page if the user confirms it.
+    /// View model creating delegate is used to avoid its
+    /// creation in case user cancels the navigation request.
+    /// </summary>
+    private async void _navigate(string contentHeader, Func<ViewModelBase> createViewModel)
     {
-        ContentHeader = "Výsledky";
-        CurrentViewModel = new ResultsStorageViewModel(testStorage.DataPath);
+        var navigationConfirmed = await _confirmNavigation();
+        if (!navigationConfirmed)
+        {
+            return;
+        }
+
+        ContentHeader = contentHeader;
+        CurrentViewModel = createViewModel();
     }
 
-    private void _onOpenTextManuals()
+    private async Task<bool> _confirmNavigation()
     {
-        ContentHeader = "Textové manuály";
-        CurrentViewModel = new TextManualsViewModel();
-    }
+        if (CurrentViewModel is not TestingViewModel { IsBlockingNavigation: true })
+        {
+            return true;
+        }
 
-    private void _onOpenVideoManuals()
-    {
-        ContentHeader = "Videomanuály";
-        CurrentViewModel = new VideoManualsViewModel();
-    }
+        var messageBox = new MessageBox
+        {
+            Title = "Upozornění",
+            Content = "Opravdu chcete přejít na jinou stránku? Všechna neuložená data budou ztrácena",
+            PrimaryButtonText = "Potvrdit",
+            CloseButtonText = "Zrušit"
+        };
 
-    private void _onOpenSettingsCommand()
-    {
-        ContentHeader = "Nastavení";
-        CurrentViewModel = new SettingsViewModel(configurationService);
+        var messageBoxResult = await messageBox.ShowDialogAsync();
+        return messageBoxResult == MessageBoxResult.Primary;
     }
 }

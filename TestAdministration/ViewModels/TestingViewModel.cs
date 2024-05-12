@@ -16,16 +16,6 @@ public class TestingViewModel : ViewModelBase
 
     private ViewModelBase _currentViewModel;
 
-    public ViewModelBase CurrentViewModel
-    {
-        get => _currentViewModel;
-        private set
-        {
-            _currentViewModel = value;
-            OnPropertyChanged();
-        }
-    }
-
     public TestingViewModel(
         ITestStorage testStorage,
         TestConductionViewModelFactory testConductionViewModelFactory,
@@ -39,6 +29,21 @@ public class TestingViewModel : ViewModelBase
         _testType = testType;
         _currentViewModel = new PatientChoiceViewModel(_testStorage, _onStartTesting, _onOpenAddPatient);
     }
+
+    public ViewModelBase CurrentViewModel
+    {
+        get => _currentViewModel;
+        private set
+        {
+            _currentViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+
+    /// <summary>
+    /// Is true if there may be unsaved data.
+    /// </summary>
+    public bool IsBlockingNavigation => CurrentViewModel is not PatientChoiceViewModel;
 
     private void _onOpenPatientChoice() =>
         CurrentViewModel = new PatientChoiceViewModel(_testStorage, _onStartTesting, _onOpenAddPatient);
