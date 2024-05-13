@@ -343,8 +343,8 @@
                         <ui:Button
                             Grid.Column="5"
                             HorizontalAlignment="Stretch"
-                            Content="Ukončit testování"
-                            Command="{Binding OnFinishTesting}" />
+                            Content="Předčasně ukončit"
+                            Command="{Binding OnFinishTestingEarly}" />
                     </Grid>
                 </Grid>
             </Border>

@@ -135,7 +135,7 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnRemoveValue => new RelayCommand<object?>(_ => _onRemoveValue());
     public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
     public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
-    public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
+    public ICommand OnFinishTestingEarly => new RelayCommand<object?>(_ => _onFinishTestingEarly());
 
     private int AnnulationCount
     {
@@ -202,9 +202,9 @@ public partial class TestConductionViewModel : ViewModelBase
         )
     };
 
-    private async void _onIncrementAnnulations(ContentDialog? nhptAnnulationDialogContent)
+    private async void _onIncrementAnnulations(ContentDialog? nhptAnnulationDialog)
     {
-        if (nhptAnnulationDialogContent is null)
+        if (nhptAnnulationDialog is null)
         {
             throw new ArgumentException("NHPT annulation dialog is null");
         }
@@ -216,7 +216,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
         if (_testBuilder.Type == TestType.Nhpt)
         {
-            _ = await _contentDialogService.ShowAsync(nhptAnnulationDialogContent, CancellationToken.None);
+            _ = await _contentDialogService.ShowAsync(nhptAnnulationDialog, CancellationToken.None);
         }
 
         AnnulationCount++;
@@ -240,15 +240,15 @@ public partial class TestConductionViewModel : ViewModelBase
         _resetContent();
     }
 
-    private async void _onOpenCameraDialog(ContentDialog? content)
+    private async void _onOpenCameraDialog(ContentDialog? dialog)
     {
-        if (content is null)
+        if (dialog is null)
         {
             throw new ArgumentException("Content is null");
         }
 
-        content.DataContext = this;
-        await _contentDialogService.ShowAsync(content, CancellationToken.None);
+        dialog.DataContext = this;
+        await _contentDialogService.ShowAsync(dialog, CancellationToken.None);
     }
 
     private void _resetContent()
@@ -261,6 +261,27 @@ public partial class TestConductionViewModel : ViewModelBase
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;
         AnnulationCount = 0;
+    }
+
+    private async void _onFinishTestingEarly()
+    {
+        var messageBox = new MessageBox
+        {
+            Title = "Upozornění",
+            Content = "Opravdu chcete předčasně ukončit testování?" +
+                      " Tímto uložíte poslední hodnotu a budete přesměrován(a) na stránku s výsledky",
+            PrimaryButtonText = "Potvrdit",
+            CloseButtonText = "Zrušit"
+        };
+
+        var messageBoxResult = await messageBox.ShowDialogAsync();
+        if (messageBoxResult != MessageBoxResult.Primary)
+        {
+            return;
+        }
+
+        _testBuilder.AddValue(_currentValue, CurrentNote);
+        _onFinishTesting();
     }
 
     private void _onFinishTesting()
