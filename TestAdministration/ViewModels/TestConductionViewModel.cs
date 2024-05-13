@@ -14,6 +14,7 @@ using TestAdministration.ViewModels.Rules;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
+using static TestAdministration.Models.Storages.Records.CsvRecordConfiguration;
 
 namespace TestAdministration.ViewModels;
 
@@ -236,8 +237,13 @@ public partial class TestConductionViewModel : ViewModelBase
 
     private void _onRemoveValue()
     {
-        _testBuilder.RemoveValue();
+        _testBuilder.RemoveValue(out var value, out var note);
         _resetContent();
+
+        CurrentValue = value is not null
+            ? value.Value.ToString(FloatFormat, new CultureInfo(Culture))
+            : string.Empty;
+        CurrentNote = note;
     }
 
     private async void _onOpenCameraDialog(ContentDialog? dialog)

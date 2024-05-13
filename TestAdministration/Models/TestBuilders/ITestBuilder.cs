@@ -74,8 +74,9 @@ public interface ITestBuilder
 
     /// <summary>
     /// Removes the last added value and note if there is one.
+    /// Returns removed values as out parameters.
     /// </summary>
-    ITestBuilder RemoveValue();
+    ITestBuilder RemoveValue(out float? value, out string note);
 
     /// <summary>
     /// Creates a <c>Test</c> instance using previously set values.

@@ -80,10 +80,12 @@ public class TestBuilder(
         return this;
     }
 
-    public ITestBuilder RemoveValue()
+    public ITestBuilder RemoveValue(out float? value, out string note)
     {
         if (_trials.Count <= 1 && _trials.Last().Count == 0)
         {
+            value = null;
+            note = string.Empty;
             return this;
         }
 
@@ -92,6 +94,8 @@ public class TestBuilder(
             _trials.RemoveAt(_trials.Count - 1);
         }
 
+        value = _trials.Last().Last().Value;
+        note = _trials.Last().Last().Note;
         _trials.Last().RemoveAt(_trials.Last().Count - 1);
         return this;
     }
