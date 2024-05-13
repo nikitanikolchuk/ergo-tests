@@ -109,17 +109,7 @@ public partial class TestConductionViewModel : ViewModelBase
     }
 
     public bool IsValueReadOnly => AnnulationCount >= MaxAnnulations;
-
-    public int AnnulationCount
-    {
-        get => _annulationCount;
-        set
-        {
-            _annulationCount = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsValueReadOnly));
-        }
-    }
+    public string AnnulationProgress => $"{AnnulationCount}/{MaxAnnulations}";
 
     public string CurrentNote
     {
@@ -140,11 +130,23 @@ public partial class TestConductionViewModel : ViewModelBase
         set => CurrentNote += value;
     }
 
-    public ICommand OnIncrementAnnulations => new RelayCommand<object?>(_ => _onIncrementAnnulations());
+    public ICommand OnIncrementAnnulations => new RelayCommand<ContentDialog>(_onIncrementAnnulations);
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
     public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
+
+    private int AnnulationCount
+    {
+        get => _annulationCount;
+        set
+        {
+            _annulationCount = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsValueReadOnly));
+            OnPropertyChanged(nameof(AnnulationProgress));
+        }
+    }
 
     private static IInstructionsViewModel _getInstructionsViewModel(
         AudioInstructionService audioService,
@@ -199,11 +201,21 @@ public partial class TestConductionViewModel : ViewModelBase
         )
     };
 
-    private void _onIncrementAnnulations()
+    private async void _onIncrementAnnulations(ContentDialog? nhptAnnulationDialogContent)
     {
+        if (nhptAnnulationDialogContent is null)
+        {
+            throw new ArgumentException("NHPT annulation dialog is null");
+        }
+
         if (AnnulationCount >= MaxAnnulations)
         {
             return;
+        }
+
+        if (_testBuilder.Type == TestType.Nhpt)
+        {
+            _ = await _contentDialogService.ShowAsync(nhptAnnulationDialogContent, CancellationToken.None);
         }
 
         AnnulationCount++;
