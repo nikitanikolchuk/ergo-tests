@@ -62,6 +62,7 @@ public partial class App
             .AddSingleton<ConfigurationService>()
             .AddSingleton<IContentDialogService, ContentDialogService>()
             .AddSingleton<MainScreenViewModel>()
+            .AddSingleton<SettingsViewModelFactory>()
             .AddSingleton<ITestStorage, TestStorage>()
             .AddSingleton<LocalFileSystem>()
             .AddSingleton<IFileSystem>(s =>

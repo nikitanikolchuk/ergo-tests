@@ -9,6 +9,26 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 
+    <UserControl.Resources>
+        <ui:ContentDialog
+            x:Key="CameraFeedDialog"
+            Title="Kamera"
+            CloseButtonText="Zavřít">
+
+            <ContentPresenter Content="{Binding CameraFeedViewModel}" />
+        </ui:ContentDialog>
+
+        <Style x:Key="IconButtonStyle" TargetType="ui:Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ui:Button">
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Border
         Margin="54,0"
         HorizontalAlignment="Stretch"
@@ -42,9 +62,29 @@
                 Text="Tmavý režim" />
 
             <ui:ToggleSwitch
+                Margin="0,0,0,32"
                 OffContent="Vypnutý"
                 OnContent="Zapnutý"
                 IsChecked="{Binding IsDarkModeSet}" />
+
+            <ui:TextBlock
+                Margin="0,0,0,12"
+                Foreground="{DynamicResource TextControlForeground}"
+                Text="Kamera" />
+
+            <ui:Button
+                HorizontalAlignment="Left"
+                Style="{StaticResource IconButtonStyle}"
+                Command="{Binding OnOpenCameraFeedDialog}"
+                CommandParameter="{StaticResource CameraFeedDialog}">
+
+                <ui:SymbolIcon
+                    VerticalAlignment="Center"
+                    Filled="True"
+                    FontSize="24"
+                    Foreground="{DynamicResource TextControlForeground}"
+                    Symbol="Video24" />
+            </ui:Button>
         </StackPanel>
     </Border>
 </UserControl>

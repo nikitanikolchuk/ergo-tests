@@ -14,7 +14,8 @@ namespace TestAdministration.ViewModels;
 public partial class MainScreenViewModel(
     ConfigurationService configurationService,
     ITestStorage testStorage,
-    TestingViewModelFactory testingViewModelFactory
+    TestingViewModelFactory testingViewModelFactory,
+    SettingsViewModelFactory settingsViewModelFactory
 ) : ViewModelBase
 {
     [GeneratedRegex(@"\s+")]
@@ -99,7 +100,7 @@ public partial class MainScreenViewModel(
         _navigate("Videomanuály", () => new VideoManualsViewModel());
 
     private void _onOpenSettingsCommand() =>
-        _navigate("Nastavení", () => new SettingsViewModel(configurationService));
+        _navigate("Nastavení", settingsViewModelFactory.Create);
 
     /// <summary>
     /// Navigates to another page if the user confirms it.

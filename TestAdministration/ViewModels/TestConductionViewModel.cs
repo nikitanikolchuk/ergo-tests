@@ -135,7 +135,6 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnRemoveValue => new RelayCommand<object?>(_ => _onRemoveValue());
     public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
-    public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
     public ICommand OnFinishTestingEarly => new RelayCommand<object?>(_ => _onFinishTestingEarly());
 
     private int AnnulationCount
@@ -244,17 +243,6 @@ public partial class TestConductionViewModel : ViewModelBase
             ? value.Value.ToString(FloatFormat, new CultureInfo(Culture))
             : string.Empty;
         CurrentNote = note;
-    }
-
-    private async void _onOpenCameraDialog(ContentDialog? dialog)
-    {
-        if (dialog is null)
-        {
-            throw new ArgumentException("Content is null");
-        }
-
-        dialog.DataContext = this;
-        await _contentDialogService.ShowAsync(dialog, CancellationToken.None);
     }
 
     private void _resetContent()

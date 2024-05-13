@@ -35,14 +35,6 @@
                 </ui:TextBlock>
             </ui:ContentDialog>
 
-            <ui:ContentDialog
-                x:Key="CameraFeedDialog"
-                Title="Kamera"
-                CloseButtonText="Zavřít">
-
-                <ContentPresenter Content="{Binding CameraFeedViewModel}" />
-            </ui:ContentDialog>
-
             <Style x:Key="IconButtonStyle" TargetType="ui:Button">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -283,18 +275,6 @@
                             VerticalAlignment="Center"
                             Foreground="{DynamicResource TextControlForeground}"
                             Text="{Binding CameraFeedViewModel.RecordingTime}" />
-
-                        <ui:Button
-                            Style="{StaticResource IconButtonStyle}"
-                            Command="{Binding OnOpenCameraFeedDialog}"
-                            CommandParameter="{StaticResource CameraFeedDialog}">
-
-                            <ui:SymbolIcon
-                                VerticalAlignment="Center"
-                                FontSize="24"
-                                Foreground="{DynamicResource TextControlForeground}"
-                                Symbol="Video24" />
-                        </ui:Button>
                     </StackPanel>
 
                     <Grid

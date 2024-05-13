@@ -7,7 +7,7 @@ namespace TestAdministration.ViewModels;
 /// A view model for displaying camera feed and managing video
 /// recording.
 /// </summary>
-public class CameraFeedViewModel : ViewModelBase
+public class CameraFeedViewModel : ViewModelBase, IDisposable
 {
     private readonly VideoRecorderService _videoRecorderService;
 
@@ -22,7 +22,7 @@ public class CameraFeedViewModel : ViewModelBase
         _videoRecorderService.StartCamera();
     }
 
-    ~CameraFeedViewModel() => _videoRecorderService.StopCamera();
+    ~CameraFeedViewModel() => Dispose();
 
     public BitmapSource? CameraFeedImage
     {
@@ -64,4 +64,10 @@ public class CameraFeedViewModel : ViewModelBase
 
     private void _onNewFrameAvailable(BitmapSource bitmapSource) => CameraFeedImage = bitmapSource;
     private void _onRecordingTimeUpdated(TimeSpan time) => RecordingTime = time.ToString(@"mm\:ss");
+
+    public void Dispose()
+    {
+        _videoRecorderService.StopCamera();
+        GC.SuppressFinalize(this);
+    }
 }
