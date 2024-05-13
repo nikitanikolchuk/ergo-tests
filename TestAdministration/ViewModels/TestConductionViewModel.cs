@@ -249,8 +249,8 @@ public partial class TestConductionViewModel : ViewModelBase
     {
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
         TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
+        _audioInstructionService.Stop();
         InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
-        _audioInstructionService.Pause();
         OnPropertyChanged(nameof(ValuePlaceholderText));
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;

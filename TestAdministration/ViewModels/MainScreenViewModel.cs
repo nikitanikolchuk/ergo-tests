@@ -13,6 +13,7 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public partial class MainScreenViewModel(
     ConfigurationService configurationService,
+    AudioInstructionService audioInstructionService,
     ITestStorage testStorage,
     TestingViewModelFactory testingViewModelFactory,
     SettingsViewModelFactory settingsViewModelFactory
@@ -115,6 +116,7 @@ public partial class MainScreenViewModel(
             return;
         }
 
+        audioInstructionService.Stop();
         ContentHeader = contentHeader;
         CurrentViewModel = createViewModel();
     }

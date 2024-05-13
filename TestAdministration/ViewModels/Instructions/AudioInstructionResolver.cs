@@ -17,10 +17,14 @@ public class AudioInstructionResolver(
     int trial
 )
 {
-    public InstructionPlayerViewModel Get(int index, bool isGendered = false)
+    public InstructionPlayerViewModel Get(
+        int index,
+        bool isGendered = false,
+        InstructionPlayerViewModel? nextPlayer = null
+    )
     {
         bool? isMale = isGendered ? patient.IsMale : null;
         var mediaPlayer = audioService.Get(testType, patient.DominantHand, section, trial, index, isMale);
-        return new InstructionPlayerViewModel(audioService, mediaPlayer);
+        return new InstructionPlayerViewModel(audioService, mediaPlayer, nextPlayer);
     }
 }

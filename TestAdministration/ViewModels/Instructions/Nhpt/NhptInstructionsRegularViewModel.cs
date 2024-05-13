@@ -6,7 +6,7 @@ public class NhptInstructionsRegularViewModel(
     AudioInstructionResolver audioResolver,
     int trial,
     Hand dominantHand
-) : ViewModelBase
+) : ViewModelBase, IInstructionsPageViewModel
 {
     public string TopText =>
         trial == 1
@@ -23,7 +23,8 @@ public class NhptInstructionsRegularViewModel(
              $" Pracujte co nejrychleji. Uchopte desku oběma rukama. Jste připraven/a?“"
     };
 
-    public ViewModelBase AudioInstructionViewModel => audioResolver.Get(0, true);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; } =
+        audioResolver.Get(0, true);
 
     private string DominantHand => dominantHand == Hand.Right ? "pravou" : "levou";
 }

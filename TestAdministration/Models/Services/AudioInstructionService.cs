@@ -8,8 +8,10 @@ public class AudioInstructionService
 {
     private const string ResourcesPath = "pack://siteoforigin:,,,/Resources/Audio/";
 
-    private Action? _onPlay;
+    private bool _isPlaying;
+    private Action? _onResume;
     private Action? _onPause;
+    private Action? _onStop;
 
     public MediaPlayer Get(
         TestType testType,
@@ -43,22 +45,62 @@ public class AudioInstructionService
     }
 
     /// <summary>
+    /// Resumes or pauses the current audio player.
+    /// </summary>
+    public void Play()
+    {
+        if (_onResume is null || _onPause is null)
+        {
+            return;
+        }
+
+        if (!_isPlaying)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    /// <summary>
     /// Sets the current audio player actions that account for
     /// custom play/pause logic.
     /// </summary>
-    public void SetPlayerActions(Action onPlay, Action onPause)
+    public void SetPlayerActions(Action? onResume, Action? onPause, Action? onStop)
     {
-        _onPlay = onPlay;
+        _onResume = onResume;
         _onPause = onPause;
+        _onStop = onStop;
     }
 
     /// <summary>
     /// Resumes the current audio player if not null.
     /// </summary>
-    public void Play() => _onPlay?.Invoke();
+    public void Resume()
+    {
+        _isPlaying = true;
+        _onResume?.Invoke();
+    }
 
     /// <summary>
     /// Pauses the current audio player if not null.
     /// </summary>
-    public void Pause() => _onPause?.Invoke();
+    public void Pause()
+    {
+        _isPlaying = false;
+        _onPause?.Invoke();
+    }
+
+    /// <summary>
+    /// Pauses the current audio player and clears audio player
+    /// choice.
+    /// </summary>
+    public void Stop()
+    {
+        _isPlaying = false;
+        _onStop?.Invoke();
+        SetPlayerActions(null, null, null);
+    }
 }

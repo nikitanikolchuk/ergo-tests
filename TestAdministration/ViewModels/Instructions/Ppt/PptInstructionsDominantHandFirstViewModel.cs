@@ -2,14 +2,25 @@ using TestAdministration.Models.Data;
 
 namespace TestAdministration.ViewModels.Instructions.Ppt;
 
-public class PptInstructionsDominantHandFirstViewModel(
-    AudioInstructionResolver audioResolver,
-    Hand dominantHand
-) : ViewModelBase
+public class PptInstructionsDominantHandFirstViewModel : ViewModelBase, IInstructionsPageViewModel
 {
-    public string DominantHandInstrumental => dominantHand == Hand.Right ? "pravou" : "levou";
-    public string WashersSide => dominantHand == Hand.Right ? "nalevo" : "napravo";
-    public string CollarsSide => dominantHand == Hand.Right ? "napravo" : "nalevo";
+    public PptInstructionsDominantHandFirstViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    {
+        DominantHandInstrumental = dominantHand == Hand.Right ? "pravou" : "levou";
+        WashersSide = dominantHand == Hand.Right ? "nalevo" : "napravo";
+        CollarsSide = dominantHand == Hand.Right ? "napravo" : "nalevo";
+        UppercaseDominantHandInstrumental = dominantHand == Hand.Right ? "Pravou" : "Levou";
+        DominantHandLocative = dominantHand == Hand.Right ? "pravé" : "levé";
+        FifthAudioInstructionViewModel = audioResolver.Get(4);
+        FourthAudioInstructionViewModel = audioResolver.Get(3, true, FifthAudioInstructionViewModel);
+        ThirdAudioInstructionViewModel = audioResolver.Get(2, false, FourthAudioInstructionViewModel);
+        SecondAudioInstructionViewModel = audioResolver.Get(1, false, ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+    }
+
+    public string DominantHandInstrumental { get; }
+    public string WashersSide { get; }
+    public string CollarsSide { get; }
 
     public string PracticeAudioInstruction =>
         $"„{UppercaseDominantHandInstrumental} rukou vezměte vždy jeden kolík z pravého zásobníku. Jednotlivé kolíky" +
@@ -20,12 +31,12 @@ public class PptInstructionsDominantHandFirstViewModel(
         $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
         $" Jste připraven/a?“";
 
-    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0, true);
-    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1);
-    public ViewModelBase ThirdAudioInstructionViewModel => audioResolver.Get(2);
-    public ViewModelBase FourthAudioInstructionViewModel => audioResolver.Get(3, true);
-    public ViewModelBase FifthAudioInstructionViewModel => audioResolver.Get(4);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel FourthAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel FifthAudioInstructionViewModel { get; }
 
-    private string UppercaseDominantHandInstrumental => dominantHand == Hand.Right ? "Pravou" : "Levou";
-    private string DominantHandLocative => dominantHand == Hand.Right ? "pravé" : "levé";
+    private string UppercaseDominantHandInstrumental { get; }
+    private string DominantHandLocative { get; }
 }

@@ -2,11 +2,20 @@ using TestAdministration.Models.Data;
 
 namespace TestAdministration.ViewModels.Instructions.Ppt;
 
-public class PptInstructionsAssemblyFirstViewModel(
-    AudioInstructionResolver audioResolver,
-    Hand dominantHand
-) : ViewModelBase
+public class PptInstructionsAssemblyFirstViewModel : ViewModelBase, IInstructionsPageViewModel
 {
+    public PptInstructionsAssemblyFirstViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    {
+        DominantHandMasculine = dominantHand == Hand.Right ? "pravého" : "levého";
+        DominantHandFeminine = dominantHand == Hand.Right ? "pravé" : "levé";
+        NonDominantHandInstrumental = dominantHand == Hand.Right ? "levou" : "pravou";
+        DominantHandInstrumental = dominantHand == Hand.Right ? "pravou" : "levou";
+        FourthAudioInstructionViewModel = audioResolver.Get(3);
+        ThirdAudioInstructionViewModel = audioResolver.Get(2, true, FourthAudioInstructionViewModel);
+        SecondAudioInstructionViewModel = audioResolver.Get(1, false, ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, false, SecondAudioInstructionViewModel);
+    }
+
     public string FirstAudioInstruction =>
         $"„Pravou rukou vezměte jeden kolík z {DominantHandMasculine} zásobníku. Zatímco jej budete umisťovat do" +
         $" horního otvoru {DominantHandFeminine} řady, uchopte {NonDominantHandInstrumental} rukou podložku. Jakmile" +
@@ -26,13 +35,13 @@ public class PptInstructionsAssemblyFirstViewModel(
         $" řadě. Pracujte co nejrychleji, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky. Jste" +
         $" připraven/a?“";
 
-    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0);
-    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1);
-    public ViewModelBase ThirdAudioInstructionViewModel => audioResolver.Get(2, true);
-    public ViewModelBase FourthAudioInstructionViewModel => audioResolver.Get(3);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel FourthAudioInstructionViewModel { get; }
 
-    private string DominantHandMasculine => dominantHand == Hand.Right ? "pravého" : "levého";
-    private string DominantHandFeminine => dominantHand == Hand.Right ? "pravé" : "levé";
-    private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "levou" : "pravou";
-    private string DominantHandInstrumental => dominantHand == Hand.Right ? "pravou" : "levou";
+    private string DominantHandMasculine { get; }
+    private string DominantHandFeminine { get; }
+    private string NonDominantHandInstrumental { get; }
+    private string DominantHandInstrumental { get; }
 }

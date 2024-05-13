@@ -1,17 +1,20 @@
 namespace TestAdministration.ViewModels.Instructions.Ppt;
 
-public class PptInstructionsAssemblyRegularViewModel(
-    AudioInstructionResolver audioResolver,
-    int trial
-) : ViewModelBase
+public class PptInstructionsAssemblyRegularViewModel : ViewModelBase, IInstructionsPageViewModel
 {
-    public string AudioInstruction =>
-        trial == 1
+    public PptInstructionsAssemblyRegularViewModel(AudioInstructionResolver audioResolver, int trial)
+    {
+        AudioInstruction = trial == 1
             ? "„Teď ještě jednou zopakujeme to samé. Instrukce zůstávají stejné. Pracujte co nejrychleji. Položte obě" +
               " ruce po stranách desky. Jste připraven/a?“"
             : "„Teď ještě naposledy zopakujeme to samé. Instrukce zůstávají stejné. Pracujte co nejrychleji. Položte" +
               " obě ruce po stranách desky. Jste připraven/a?“";
+        SecondAudioInstructionViewModel = audioResolver.Get(1);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+    }
 
-    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0, true);
-    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1);
+    public string AudioInstruction { get; }
+
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
 }

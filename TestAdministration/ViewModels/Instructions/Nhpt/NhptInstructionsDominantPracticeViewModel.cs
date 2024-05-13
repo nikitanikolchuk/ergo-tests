@@ -2,11 +2,17 @@ using TestAdministration.Models.Data;
 
 namespace TestAdministration.ViewModels.Instructions.Nhpt;
 
-public class NhptInstructionsDominantPracticeViewModel(
-    AudioInstructionResolver audioResolver,
-    Hand dominantHand
-) : ViewModelBase
+public class NhptInstructionsDominantPracticeViewModel : ViewModelBase, IInstructionsPageViewModel
 {
+    public NhptInstructionsDominantPracticeViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    {
+        DominantHand = dominantHand == Hand.Right ? "pravou" : "levou";
+        NonDominantHand = dominantHand == Hand.Right ? "levou" : "pravou";
+        ThirdAudioInstructionViewModel = audioResolver.Get(2, true);
+        SecondAudioInstructionViewModel = audioResolver.Get(1, false, ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, false, SecondAudioInstructionViewModel);
+    }
+
     public string TopText =>
         $"Nejdříve otestujte dominantní ({DominantHand}) ruku. Probandovi sdělte následující instrukce/přehrajte" +
         $" nahrávku:";
@@ -18,10 +24,10 @@ public class NhptInstructionsDominantPracticeViewModel(
         $" přidržovat {NonDominantHand} rukou. Postupně budete po jednom odebírat kolíky ze zásobníku pouze" +
         $" {DominantHand} rukou a dávat je do otvorů v libovolném pořadí, dokud nebudou všechny otvory zaplněny.“";
 
-    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0);
-    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1);
-    public ViewModelBase ThirdAudioInstructionViewModel => audioResolver.Get(2, true);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
 
-    private string DominantHand => dominantHand == Hand.Right ? "pravou" : "levou";
-    private string NonDominantHand => dominantHand == Hand.Right ? "levou" : "pravou";
+    private string DominantHand { get; }
+    private string NonDominantHand { get; }
 }

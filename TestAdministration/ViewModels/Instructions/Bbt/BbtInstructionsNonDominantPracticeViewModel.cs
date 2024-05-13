@@ -5,8 +5,8 @@ namespace TestAdministration.ViewModels.Instructions.Bbt;
 public class BbtInstructionsNonDominantPracticeViewModel(
     AudioInstructionResolver audioResolver,
     Hand dominantHand
-) : ViewModelBase
+) : ViewModelBase, IInstructionsPageViewModel
 {
-    public string NonDominantHand => dominantHand == Hand.Right ? "levou" : "pravou";
-    public ViewModelBase AudioInstructionViewModel => audioResolver.Get(0);
+    public string NonDominantHand { get; } = dominantHand == Hand.Right ? "levou" : "pravou";
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; } = audioResolver.Get(0);
 }

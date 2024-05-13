@@ -13,12 +13,19 @@ public class InstructionPlayerViewModel : ViewModelBase
 {
     private readonly AudioInstructionService _audioService;
     private readonly MediaPlayer _mediaPlayer;
+    private readonly InstructionPlayerViewModel? _nextPlayer;
+
     private bool _isPlaying;
 
-    public InstructionPlayerViewModel(AudioInstructionService audioService, MediaPlayer mediaPlayer)
+    public InstructionPlayerViewModel(
+        AudioInstructionService audioService,
+        MediaPlayer mediaPlayer,
+        InstructionPlayerViewModel? nextPlayer
+    )
     {
         _audioService = audioService;
         _mediaPlayer = mediaPlayer;
+        _nextPlayer = nextPlayer;
 
         _mediaPlayer.MediaEnded += _onAudioEnded;
 
@@ -52,43 +59,56 @@ public class InstructionPlayerViewModel : ViewModelBase
         }
     }
 
-    public ICommand OnPlayCommand => new RelayCommand<object?>(_ =>
-    {
-        if (!IsPlaying)
-        {
-            _audioService.Pause();
-            _audioService.SetPlayerActions(_onPlay, _onPause);
-            _audioService.Play();
-        }
-        else
-        {
-            _onPause();
-        }
-    });
+    public ICommand OnPlayCommand => new RelayCommand<object?>(_ => _onPlay());
 
     private double DurationSeconds =>
         _mediaPlayer.NaturalDuration.HasTimeSpan
             ? _mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds
             : 0;
 
-    private void _timerTick(object? sender, EventArgs e) =>
-        OnPropertyChanged(nameof(ListenedPercentage));
-
-    private void _onPlay()
+    public void OnResume()
     {
         IsPlaying = true;
         _mediaPlayer.Play();
     }
 
-    private void _onPause()
+    public void OnPause()
     {
         IsPlaying = false;
         _mediaPlayer.Pause();
     }
 
-    private void _onAudioEnded(object? sender, EventArgs e)
+    public void OnStop()
     {
         IsPlaying = false;
         _mediaPlayer.Stop();
+    }
+
+    private void _timerTick(object? sender, EventArgs e) =>
+        OnPropertyChanged(nameof(ListenedPercentage));
+
+    private void _onPlay()
+    {
+        if (!IsPlaying)
+        {
+            _audioService.Pause();
+            _audioService.SetPlayerActions(OnResume, OnPause, OnStop);
+            _audioService.Resume();
+        }
+        else
+        {
+            OnPause();
+        }
+    }
+
+    private void _onAudioEnded(object? sender, EventArgs e)
+    {
+        IsPlaying = false;
+        _audioService.Stop();
+
+        if (_nextPlayer is not null)
+        {
+            _audioService.SetPlayerActions(_nextPlayer.OnResume, _nextPlayer.OnPause, _nextPlayer.OnStop);
+        }
     }
 }

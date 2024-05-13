@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using TestAdministration.Models.Services;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
@@ -11,6 +12,7 @@ namespace TestAdministration.ViewModels;
 /// </summary>
 public class MainWindowViewModel(
     IContentDialogService contentDialogService,
+    AudioInstructionService audioInstructionService,
     LoginScreenViewModel loginScreenViewModel,
     MainScreenViewModel mainScreenViewModel
 ) : ViewModelBase
@@ -35,6 +37,17 @@ public class MainWindowViewModel(
 
     public ICommand OnDisplayMainScreenCommand => new RelayCommand<object?>(_ => _onDisplayMainScreen());
     public ICommand OnDisplayLoginScreenCommand => new RelayCommand<object?>(_ => _onDisplayLoginScreen());
+
+    public void OnSpaceBarPressed(object _, KeyEventArgs e)
+    {
+        if (e.OriginalSource is TextBox || e.Key != Key.Space)
+        {
+            return;
+        }
+
+        audioInstructionService.Play();
+        e.Handled = true;
+    }
 
     private async void _onDisplayMainScreen()
     {

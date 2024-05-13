@@ -10,7 +10,23 @@ public class BbtInstructionsViewModel(
     Patient patient
 ) : ViewModelBase, IInstructionsViewModel
 {
-    public ViewModelBase CurrentViewModel => (testBuilder.CurrentSection, testBuilder.CurrentTrial) switch
+    public ViewModelBase CurrentViewModel
+    {
+        get
+        {
+            var viewModel = _getViewModel();
+            var firstAudioPlayer = viewModel.FirstAudioInstructionViewModel;
+            audioService.SetPlayerActions(
+                firstAudioPlayer.OnResume,
+                firstAudioPlayer.OnPause,
+                firstAudioPlayer.OnStop
+            );
+
+            return (ViewModelBase)viewModel;
+        }
+    }
+
+    private IInstructionsPageViewModel _getViewModel() => (testBuilder.CurrentSection, testBuilder.CurrentTrial) switch
     {
         (0, 0) => new BbtInstructionsDominantPracticeViewModel(
             _getAudioResolver(0, 0),

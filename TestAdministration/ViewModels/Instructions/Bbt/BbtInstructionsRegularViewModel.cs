@@ -7,7 +7,7 @@ public class BbtInstructionsRegularViewModel(
     int section,
     int trial,
     Hand dominantHand
-) : ViewModelBase
+) : ViewModelBase, IInstructionsPageViewModel
 {
     public string AudioInstruction => trial switch
     {
@@ -19,7 +19,7 @@ public class BbtInstructionsRegularViewModel(
              $" Pracujte co nejrychleji. Položte obě ruce po stranách krabice.“"
     };
 
-    public ViewModelBase AudioInstructionViewModel => audioResolver.Get(0);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; } = audioResolver.Get(0);
 
     private string CurrentHand => section == 0 ? DominantHand : NonDominantHand;
     private string DominantHand => dominantHand == Hand.Right ? "pravou" : "levou";

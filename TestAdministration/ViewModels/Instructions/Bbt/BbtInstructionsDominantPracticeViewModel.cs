@@ -2,12 +2,16 @@ using TestAdministration.Models.Data;
 
 namespace TestAdministration.ViewModels.Instructions.Bbt;
 
-public class BbtInstructionsDominantPracticeViewModel(
-    AudioInstructionResolver audioResolver,
-    Hand dominantHand
-) : ViewModelBase
+public class BbtInstructionsDominantPracticeViewModel : ViewModelBase, IInstructionsPageViewModel
 {
-    public string DominantHand => dominantHand == Hand.Right ? "pravou" : "levou";
-    public ViewModelBase FirstAudioInstructionViewModel => audioResolver.Get(0, true);
-    public ViewModelBase SecondAudioInstructionViewModel => audioResolver.Get(1, true);
+    public BbtInstructionsDominantPracticeViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    {
+        DominantHand = dominantHand == Hand.Right ? "pravou" : "levou";
+        SecondAudioInstructionViewModel = audioResolver.Get(1, true);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+    }
+
+    public string DominantHand { get; }
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
 }

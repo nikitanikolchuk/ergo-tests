@@ -38,7 +38,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding AudioInstructionViewModel}" />
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock>
             Řekněte:

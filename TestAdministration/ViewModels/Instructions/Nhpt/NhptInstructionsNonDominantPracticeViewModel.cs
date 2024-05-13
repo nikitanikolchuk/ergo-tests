@@ -5,7 +5,7 @@ namespace TestAdministration.ViewModels.Instructions.Nhpt;
 public class NhptInstructionsNonDominantPracticeViewModel(
     AudioInstructionResolver audioResolver,
     Hand dominantHand
-) : ViewModelBase
+) : ViewModelBase, IInstructionsPageViewModel
 {
     public string NonDominantHandGenitive => dominantHand == Hand.Right ? "levé" : "pravé";
 
@@ -13,7 +13,8 @@ public class NhptInstructionsNonDominantPracticeViewModel(
         $"„Nyní zopakujeme to samé s vaší {NonDominantHandInstrumental} rukou. Nejprve opět provedeme zkušební pokus." +
         $" Uchopte desku oběma rukama. Jste připraven/a?“";
 
-    public ViewModelBase AudioInstructionViewModel => audioResolver.Get(0, true);
+    public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; } =
+        audioResolver.Get(0, true);
 
     private string NonDominantHandInstrumental => dominantHand == Hand.Right ? "levou" : "pravou";
 }
