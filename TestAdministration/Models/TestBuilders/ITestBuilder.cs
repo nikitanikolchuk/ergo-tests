@@ -73,6 +73,11 @@ public interface ITestBuilder
     ITestBuilder AddValue(float? value, string note);
 
     /// <summary>
+    /// Removes the last added value and note if there is one.
+    /// </summary>
+    ITestBuilder RemoveValue();
+
+    /// <summary>
     /// Creates a <c>Test</c> instance using previously set values.
     /// Fills missing test values and notes with null.
     /// </summary>

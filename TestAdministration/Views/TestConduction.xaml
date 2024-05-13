@@ -333,7 +333,12 @@
                             Content="Pokračovat"
                             Command="{Binding OnAddValue}" />
 
-                        <!-- TODO: add "Back" button -->
+                        <ui:Button
+                            Grid.Column="3"
+                            HorizontalAlignment="Stretch"
+                            Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                            Content="Zpět"
+                            Command="{Binding OnRemoveValue}" />
 
                         <ui:Button
                             Grid.Column="5"

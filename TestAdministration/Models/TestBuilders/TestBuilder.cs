@@ -80,6 +80,22 @@ public class TestBuilder(
         return this;
     }
 
+    public ITestBuilder RemoveValue()
+    {
+        if (_trials.Count <= 1 && _trials.Last().Count == 0)
+        {
+            return this;
+        }
+
+        if (_trials.Last().Count == 0)
+        {
+            _trials.RemoveAt(_trials.Count - 1);
+        }
+
+        _trials.Last().RemoveAt(_trials.Last().Count - 1);
+        return this;
+    }
+
     public Test Build()
     {
         if (_patient == null)

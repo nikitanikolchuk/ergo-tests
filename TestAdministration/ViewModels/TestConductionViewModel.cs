@@ -132,6 +132,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     public ICommand OnIncrementAnnulations => new RelayCommand<ContentDialog>(_onIncrementAnnulations);
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
+    public ICommand OnRemoveValue => new RelayCommand<object?>(_ => _onRemoveValue());
     public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
     public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraDialog);
     public ICommand OnFinishTesting => new RelayCommand<object?>(_ => _onFinishTesting());
@@ -225,20 +226,18 @@ public partial class TestConductionViewModel : ViewModelBase
     private void _onAddValue()
     {
         _testBuilder.AddValue(_currentValue, CurrentNote);
-
-        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
-        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
-        InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
-        _audioInstructionService.Pause();
-        OnPropertyChanged(nameof(ValuePlaceholderText));
-        CurrentValue = string.Empty;
-        CurrentNote = string.Empty;
-        AnnulationCount = 0;
+        _resetContent();
 
         if (_testBuilder.IsFinished)
         {
             _onFinishTesting();
         }
+    }
+
+    private void _onRemoveValue()
+    {
+        _testBuilder.RemoveValue();
+        _resetContent();
     }
 
     private async void _onOpenCameraDialog(ContentDialog? content)
@@ -250,6 +249,18 @@ public partial class TestConductionViewModel : ViewModelBase
 
         content.DataContext = this;
         await _contentDialogService.ShowAsync(content, CancellationToken.None);
+    }
+
+    private void _resetContent()
+    {
+        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
+        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
+        InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
+        _audioInstructionService.Pause();
+        OnPropertyChanged(nameof(ValuePlaceholderText));
+        CurrentValue = string.Empty;
+        CurrentNote = string.Empty;
+        AnnulationCount = 0;
     }
 
     private void _onFinishTesting()
