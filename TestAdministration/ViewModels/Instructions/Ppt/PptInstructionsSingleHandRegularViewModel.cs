@@ -14,7 +14,15 @@ public class PptInstructionsSingleHandRegularViewModel : ViewModelBase, IInstruc
         DominantHand = dominantHand == Hand.Right ? "pravou" : "levou";
         NonDominantHand = dominantHand == Hand.Right ? "levou" : "pravou";
         CurrentHand = section == 0 ? DominantHand : NonDominantHand;
-        ReturnDirection = dominantHand == Hand.Right ? "vpravo" : "vlevo";
+        if (section == 0)
+        {
+            ReturnDirection = dominantHand == Hand.Right ? "vpravo" : "nalevo";
+        }
+        else
+        {
+            ReturnDirection = dominantHand == Hand.Right ? "nalevo" : "vpravo";
+        }
+
         TopAudioInstruction =
             trial == 1
                 ? $"„Teď ještě jednou zopakujeme to samé s vaší {CurrentHand} rukou. Instrukce zůstávají stejné." +

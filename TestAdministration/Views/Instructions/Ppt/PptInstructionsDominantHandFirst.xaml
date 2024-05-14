@@ -87,7 +87,8 @@
             a je zřejmé, že zadání porozuměl, zapište si případné poznámky a řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
-                „Stačí. Nyní vyndejte zkušební kolíky a vraťte je zpět do zásobníku vpravo.“
+                „Stačí. Nyní vyndejte zkušební kolíky a vraťte je zpět do zásobníku
+                <Run Text="{Binding PinsSide,Mode=OneWay}" />.“
             </Span>
         </ui:TextBlock>
 
@@ -125,7 +126,8 @@
             Pak vyzvěte probanda / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
-                „Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku vpravo.“
+                „Děkuji. Nyní, prosím, vraťte kolíky zpět do zásobníku
+                <Run Text="{Binding PinsSide,Mode=OneWay}" />.“
             </Span>
         </ui:TextBlock>
 

@@ -8,7 +8,7 @@ public class PptInstructionsNonDominantHandFirstViewModel : ViewModelBase, IInst
     {
         NonDominantHandInstrumental = dominantHand == Hand.Right ? "Levou" : "Pravou";
         NonDominantHandLocative = dominantHand == Hand.Right ? "levé" : "pravé";
-        ReturnLocation = dominantHand == Hand.Right ? "nalevo" : "napravo";
+        ReturnLocation = dominantHand == Hand.Right ? "nalevo" : "vpravo";
         FourthAudioInstructionViewModel = audioResolver.Get(3);
         ThirdAudioInstructionViewModel = audioResolver.Get(2, true, FourthAudioInstructionViewModel);
         SecondAudioInstructionViewModel = audioResolver.Get(1, false, ThirdAudioInstructionViewModel);

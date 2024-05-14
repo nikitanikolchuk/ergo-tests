@@ -120,13 +120,12 @@
                 Margin="0,0,0,32"
                 HorizontalAlignment="Center"
                 FontTypography="Subtitle"
-                Text="Vyberte si místo pro ukládání dat" />
+                Text="Vyberte si místo pro ukládání dat a testujícího" />
 
-            <ui:FontIcon
+            <ui:SymbolIcon
                 Margin="0,0,0,32"
-                FontFamily="Segoe Fluent Icons"
                 FontSize="64"
-                Glyph="" />
+                Symbol="FolderOpen24" />
 
             <ComboBox
                 Margin="0,0,0,8"

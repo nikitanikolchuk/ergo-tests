@@ -23,7 +23,7 @@
             Command="{Binding OnOpenLink}"
             CommandParameter="https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod">
 
-            www.https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod.cz
+            https://rehabilitace.lf1.cuni.cz/publikacni-cinnost-uvod.cz
         </Hyperlink>
     </ui:TextBlock>
 </UserControl>

@@ -339,7 +339,7 @@
                 <ui:InfoBar
                     IsOpen="True"
                     IsClosable="False"
-                    Message="Klikněte na situaci pro její zapsání do poznámek" />
+                    Message="Klikněte na jedno z tlačítek pro přidání odpovídající poznámky" />
             </StackPanel>
 
             <Border

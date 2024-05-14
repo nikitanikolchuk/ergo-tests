@@ -49,7 +49,13 @@
         .
         <LineBreak />
         Do tohoto e-mailu je potřeba <Bold>uvést e-mail</Bold>, přes který byla provedena registrace do portálu
-        https://kurzy.lf1.cuni.cz/, a <Bold>připsat čestné prohlášení o platném členství v ČAE</Bold>.
+        <Hyperlink
+            Command="{Binding OnOpenLink}"
+            CommandParameter="https://kurzy.lf1.cuni.cz">
+
+            https://kurzy.lf1.cuni.cz
+        </Hyperlink>
+        , a <Bold>připsat čestné prohlášení o platném členství v ČAE</Bold>.
         <LineBreak />
         3) VYČKAT na potvrzení přijetí žádosti a zpřístupnění kurzu.
         <LineBreak />
