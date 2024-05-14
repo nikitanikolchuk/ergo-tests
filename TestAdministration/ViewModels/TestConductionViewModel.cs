@@ -180,7 +180,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     private static string _getValuePlaceholderText(TestType testType, int section) => testType switch
     {
-        TestType.Nhpt => "Čas v sekundách",
+        TestType.Nhpt => "Čas v sekundách a setinách sekund",
         TestType.Ppt => _getPptValuePlaceholderText(section),
         TestType.Bbt => "Počet kostek",
         _ => throw new InvalidEnumArgumentException(
