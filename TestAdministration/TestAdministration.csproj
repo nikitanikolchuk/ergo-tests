@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <AssemblyName>Ergo Testy Jemné Motoriky</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

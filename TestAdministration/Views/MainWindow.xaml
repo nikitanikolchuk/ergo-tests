@@ -22,7 +22,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ui:TitleBar Grid.Row="0" Title="Administrace testů" />
+            <ui:TitleBar Grid.Row="0" Title="Ergo Testy Jemné Motoriky" />
             <ContentControl Grid.Row="1" Content="{Binding ScreenViewModel}" />
         </Grid>
 

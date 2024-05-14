@@ -23,6 +23,6 @@
             Foreground="{DynamicResource TextControlForeground}"
             TextWrapping="Wrap"
             TextAlignment="Center"
-            Text="Aplikace pro administraci testů manuální zručnosti" />
+            Text="Ergo Testy Jemné Motoriky" />
     </StackPanel>
 </UserControl>
