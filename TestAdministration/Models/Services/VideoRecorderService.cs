@@ -29,7 +29,6 @@ public class VideoRecorderService(
     private VideoWriter? _writer;
     private WaveIn? _waveIn;
     private WaveFileWriter? _waveFileWriter;
-    private bool _isCameraRunning;
     private TimeSpan _recordingTime = TimeSpan.Zero;
     private CancellationTokenSource? _cancellationTokenSource;
 
@@ -42,12 +41,13 @@ public class VideoRecorderService(
     public event Action<BitmapSource>? NewFrameAvailable;
     public event Action<TimeSpan>? RecordingTimeUpdated;
 
+    public bool IsCameraRunning { get; private set; }
     public bool IsRecording { get; private set; }
     public bool IsPaused { get; private set; }
 
     public void StartCamera()
     {
-        if (_isCameraRunning)
+        if (IsCameraRunning)
         {
             StopRecording();
             _deleteTempRecording();
@@ -64,7 +64,7 @@ public class VideoRecorderService(
             return;
         }
 
-        _isCameraRunning = true;
+        IsCameraRunning = true;
         _cancellationTokenSource = new CancellationTokenSource();
         var cancellationToken = _cancellationTokenSource.Token;
 
@@ -109,7 +109,7 @@ public class VideoRecorderService(
 
     public void StopCamera()
     {
-        if (!_isCameraRunning)
+        if (!IsCameraRunning)
         {
             _deleteTempRecording();
             _deleteTempMediaFiles();
@@ -117,7 +117,7 @@ public class VideoRecorderService(
         }
 
         _cancellationTokenSource?.Cancel();
-        _isCameraRunning = false;
+        IsCameraRunning = false;
         StopRecording();
         _capture?.Release();
     }
@@ -141,6 +141,7 @@ public class VideoRecorderService(
         catch (Exception)
         {
             _writer = null;
+            return;
         }
 
         try

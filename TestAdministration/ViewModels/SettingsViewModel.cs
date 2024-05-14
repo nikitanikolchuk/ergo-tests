@@ -52,6 +52,7 @@ public class SettingsViewModel(
         get => configurationService.CameraId;
         set
         {
+            videoRecorderService.StopCamera();
             configurationService.CameraId = value;
             OnPropertyChanged();
         }
@@ -117,6 +118,7 @@ public class SettingsViewModel(
 
         using var cameraFeedViewModel = new CameraFeedViewModel(videoRecorderService);
         CameraFeedViewModel = cameraFeedViewModel;
+        CameraFeedViewModel.OnStartCamera();
         dialog.DataContext = this;
         _ = await contentDialogService.ShowAsync(dialog, CancellationToken.None);
     }

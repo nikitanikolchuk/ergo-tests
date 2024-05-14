@@ -19,7 +19,6 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
         _videoRecorderService = videoRecorderService;
         _videoRecorderService.NewFrameAvailable += _onNewFrameAvailable;
         _videoRecorderService.RecordingTimeUpdated += _onRecordingTimeUpdated;
-        _videoRecorderService.StartCamera();
     }
 
     ~CameraFeedViewModel() => Dispose();
@@ -46,10 +45,17 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
         }
     }
 
+    public void OnStartCamera() => _videoRecorderService.StartCamera();
+
     public void OnPauseRecording()
     {
         if (!_videoRecorderService.IsRecording)
         {
+            if (!_videoRecorderService.IsCameraRunning)
+            {
+                _videoRecorderService.StartCamera();
+            }
+
             _videoRecorderService.StartRecording();
         }
         else
