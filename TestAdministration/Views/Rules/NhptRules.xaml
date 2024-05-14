@@ -5,60 +5,334 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     xmlns:views="clr-namespace:TestAdministration.Views"
-    xmlns:converters="clr-namespace:TestAdministration.Views.Converters"
+    DataContext="{
+        Binding DataContext,
+        RelativeSource={RelativeSource AncestorType=views:TestConduction}
+    }"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance viewModelRules:NhptRulesViewModel}">
+    d:DataContext="{d:DesignInstance viewModels:TestConductionViewModel}">
 
     <UserControl.Resources>
-        <converters:TestRuleWidthConverter x:Key="TestRuleWidthConverter" />
-
-        <DataTemplate x:Key="TestRuleItemTemplate" DataType="system:String">
-            <ui:TextBlock
-                Text="{Binding}"
-                TextWrapping="Wrap"
-                Width="{
-                    Binding ActualWidth,
-                    Converter={StaticResource TestRuleWidthConverter},
-                    RelativeSource={RelativeSource AncestorType=ui:ListView}
-                }" />
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RulesDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <StackPanel>
         <ui:TextBlock
             Margin="0,0,0,8"
+            TextWrapping="Wrap"
             FontTypography="Subtitle"
-            Foreground="{DynamicResource TextControlForeground}"
-            Text="Pokus musí být ihned přerušen a anulován, pokud:" />
+            Foreground="{DynamicResource TextControlForeground}">
 
-        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-        <ui:ListView
-            Margin="0,0,0,16"
-            ItemsSource="{Binding AnnulationRules}"
-            ItemTemplate="{StaticResource TestRuleItemTemplate}"
-            SelectedItem="{
-                Binding DataContext.SelectedRule,
-                Mode=OneWayToSource,
-                RelativeSource={RelativeSource AncestorType=views:TestConduction}
-            }" />
+            Pokus musí být <Underline>ihned přerušen a anulován</Underline>, pokud:
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Proband vzal do ruky více než jeden kolík a sám se neopravil (nevrátil omylem uchopený kolík zpět
+                    do zásobníku před jeho použitím).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                proband vezme do ruky více než jeden kolík a sám se neopraví (nevrátí omylem uchopený kolík zpět do
+                zásobníku před jeho použitím
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Proband si pomohl při manipulaci s kolíkem druhou rukou.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                proband si pomůže při manipulaci s kolíkem druhou rukou
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík upadl mimo testovací desku nebo mimo stůl (např. do klína nebo na zem).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík upadne mimo testovací desku nebo mimo stůl (např. do klína nebo na zem)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík byl zastrčen do otvoru jen částečně a zůstal tak (proband ho do něj nedozastrčil aktivně).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík byl zastrčen do otvoru jen částečně a zůstal tak (proband ho do něj nedozastrčil aktivně)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík se nechtěným vyjmutím z otvoru sám dostal do zásobníku (nebyl tam aktivně přesunut pomocí
+                    prstů probanda).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík se nechtěným vyjmutím z otvoru sám dostane do zásobníku (nebyl tam aktivně přesunut pomocí prstů
+                probanda)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík se při vracení zpět do zásobníku vůbec nedotkl tohoto zásobníku a spadl na zem nebo do klína
+                    (pokus nebyl dokončen).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík se při vracení zpět do zásobníku vůbec nedotkne tohoto zásobníku a spadne na zem nebo do klína
+                (pokus nebyl dokončen)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Proband z nějakého důvodu přestal pokračovat v provádění testu (např. vyhodnotil, že udělal chybu a
+                    měl by nejspíše začít znova).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                proband z nějakého důvodu přestane pokračovat v provádění testu (např. vyhodnotí, že udělal chybu a měl
+                by nejspíše začít znova)
+            </ui:TextBlock>
+        </Grid>
+
+        <ui:TextBlock Style="{StaticResource TestRuleTextStyle}">
+            <Bold>
+                Každý pokus testování PHK/LHK může být po jeho anulování kvůli chybě probanda proveden max. dvakrát
+            </Bold>
+            (tzn. pokud proband při testování 1. pokusu pro PHK nedokáže úkol dokončit dle instrukcí ani potřetí,
+            testující osoba výsledek 1. pokusu proškrtne, zapíše si poznámku a pokračuje testováním 2. pokusu pro PHK.
+            Druhý pokus pro PHK může zkusit dokončit dle instrukcí opět maximálně třikrát.)
+        </ui:TextBlock>
+
+        <ui:TextBlock Style="{StaticResource TestRuleTextStyle}">
+            <Bold>Pro zastavení probanda v provádění testu řekněte:</Bold>
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>,
+            vysvětlete probandovi důvod přerušení, vraťte kolíky zpět do zásobníku a vyzvěte ho k opakování anulovaného
+            pokusu:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">
+                „Ještě jednou zopakujeme to samé.
+                Uchopte desku oběma rukama. Jste připraven/a?“
+            </Span>
+            Pak řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
+            Během testu:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
+            Ihned po umístění posledního kolíku do otvoru:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
+        </ui:TextBlock>
 
         <ui:TextBlock
             Margin="0,0,0,8"
+            TextWrapping="Wrap"
             FontTypography="Subtitle"
-            Foreground="{DynamicResource TextControlForeground}"
-            Text="Pokus může být dokončen, pokud:" />
+            Foreground="{DynamicResource TextControlForeground}">
 
-        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-        <ui:ListView
-            ItemsSource="{Binding ContinuationRules}"
-            ItemTemplate="{StaticResource TestRuleItemTemplate}"
-            SelectedItem="{
-                Binding DataContext.SelectedRule,
-                Mode=OneWayToSource,
-                RelativeSource={RelativeSource AncestorType=views:TestConduction}
-            }" />
+            Pokus <Underline>může být dokončen</Underline>, pokud:
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Probandovi upadl kolík na testovací desku nebo na stůl, vzal ho testovanou rukou a pokračoval dál.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                probandovi upadne kolík na testovací desku nebo na stůl, vezme ho testovanou rukou a pokračuje dál
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Správně umístěný kolík proband z otvoru omylem vyjmul a sám ho tam znovu vrátil.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                správně umístěný kolík proband z otvoru omylem vyjme a sám ho tam znovu vrátí
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Proband umístil kolík do otvoru jen částečně, ale během pokusu ho do otvoru úplně dozastrčil (sám
+                    nebo na základě poskytnuté slovní instrukce: „Zastrčte ho!“) a pokračoval dál.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                proband umístí kolík do otvoru jen částečně, ale během pokusu ho do otvoru úplně dozastrčí (sám nebo na
+                základě poskytnuté slovní instrukce:
+                <Span Style="{StaticResource OralInstructionSpanStyle}">„Zastrčte ho!“</Span>)
+                a pokračuje dál
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík se při vracení zpět do zásobníku právě od tohoto zásobníku odrazil a vyletěl mimo něj (počítá
+                    se, jako by do něj byl správně umístěn).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík se při vracení zpět do zásobníku právě od tohoto zásobníku odrazí a vyletí mimo něj (počítá se,
+                jako by do něj byl správně umístěn)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kolík se při vracení zpět do zásobníku vůbec nedotkl tohoto zásobníku a spadl na stůl či testovací
+                    desku, proband ho sám uchopil testovanou rukou a umístil ho do zásobníku nebo se tento kolík
+                    zásobníku alespoň dotkl (počítá se, jako by do něj byl správně umístěn).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                kolík se při vracení zpět do zásobníku vůbec nedotkne tohoto zásobníku a spadne na stůl či testovací
+                desku, proband ho sám uchopí testovanou rukou a umístí ho do zásobníku nebo se tento kolík zásobníku
+                alespoň dotkne (počítá se, jako by do něj byl správně umístěn)
+            </ui:TextBlock>
+        </Grid>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Během probíhajícího pokusu testující smí říkat pouze:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="0,0,0,8" Style="{StaticResource TestRuleTextStyle}">
+            - <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>,
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět … rychleji!“</Span>,
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>
+            (pro přerušení pokusu)
+            <LineBreak />
+            - <Span Style="{StaticResource OralInstructionSpanStyle}">„Zastrčte ho!“</Span>
+            (pro vyzvání probanda k úplnému zastrčení kolíku do otvoru)
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Mezi jednotlivými pokusy:
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="0,0,0,8" Style="{StaticResource TestRuleTextStyle}">
+            - testující smí probandovi zodpovědět jeho dotazy
+            <LineBreak />
+            - testující smí probandovi doporučit, aby během probíhajících pokusů nemluvil
+        </ui:TextBlock>
     </StackPanel>
 </UserControl>

@@ -134,6 +134,7 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnIncrementAnnulations => new RelayCommand<ContentDialog>(_onIncrementAnnulations);
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnRemoveValue => new RelayCommand<object?>(_ => _onRemoveValue());
+    public ICommand OnAppendNote => new RelayCommand<string>(_onAppendNote);
     public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
     public ICommand OnFinishTestingEarly => new RelayCommand<object?>(_ => _onFinishTestingEarly());
 
@@ -255,6 +256,21 @@ public partial class TestConductionViewModel : ViewModelBase
         CurrentValue = string.Empty;
         CurrentNote = string.Empty;
         AnnulationCount = 0;
+    }
+
+    private void _onAppendNote(string? text)
+    {
+        if (text is null)
+        {
+            return;
+        }
+
+        if (CurrentNote != string.Empty)
+        {
+            CurrentNote += " ";
+        }
+
+        CurrentNote += text;
     }
 
     private async void _onFinishTestingEarly()

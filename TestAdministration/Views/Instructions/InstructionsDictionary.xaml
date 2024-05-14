@@ -27,4 +27,9 @@
         <Setter Property="Background" Value="#FAFF19" />
         <Setter Property="Foreground" Value="#E4000000" />
     </Style>
+    
+    <Style x:Key="ScoringInstructionSpanStyle" TargetType="Span">
+        <Setter Property="Background" Value="#16FF0D" />
+        <Setter Property="Foreground" Value="#E4000000" />
+    </Style>
 </ResourceDictionary>
