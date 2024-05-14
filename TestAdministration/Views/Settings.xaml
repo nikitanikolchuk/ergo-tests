@@ -17,16 +17,6 @@
 
             <ContentPresenter Content="{Binding CameraFeedViewModel}" />
         </ui:ContentDialog>
-
-        <Style x:Key="IconButtonStyle" TargetType="ui:Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ui:Button">
-                        <ContentPresenter Content="{TemplateBinding Content}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </UserControl.Resources>
 
     <Border
@@ -70,21 +60,37 @@
             <ui:TextBlock
                 Margin="0,0,0,12"
                 Foreground="{DynamicResource TextControlForeground}"
-                Text="Kamera" />
+                Text="ID kamery" />
 
-            <ui:Button
-                HorizontalAlignment="Left"
-                Style="{StaticResource IconButtonStyle}"
-                Command="{Binding OnOpenCameraFeedDialog}"
-                CommandParameter="{StaticResource CameraFeedDialog}">
+            <Grid Margin="0,0,0,32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                <ui:SymbolIcon
-                    VerticalAlignment="Center"
-                    Filled="True"
-                    FontSize="24"
-                    Foreground="{DynamicResource TextControlForeground}"
-                    Symbol="Video24" />
-            </ui:Button>
+                <ComboBox
+                    Grid.Column="0"
+                    ItemsSource="{Binding CameraDeviceIds}"
+                    SelectedItem="{Binding CameraId}" />
+
+                <ui:Button
+                    Grid.Column="2"
+                    Command="{Binding OnOpenCameraFeedDialog}"
+                    CommandParameter="{StaticResource CameraFeedDialog}"
+                    Content="Zobrazit kameru" />
+            </Grid>
+
+            <ui:TextBlock
+                Margin="0,0,0,12"
+                Foreground="{DynamicResource TextControlForeground}"
+                Text="Mikrofon" />
+
+            <ComboBox
+                Margin="0,0,0,32"
+                ItemsSource="{Binding MicrophoneNames}"
+                SelectedItem="{Binding MicrophoneName,Mode=OneWay}"
+                SelectedIndex="{Binding MicrophoneId}" />
         </StackPanel>
     </Border>
 </UserControl>

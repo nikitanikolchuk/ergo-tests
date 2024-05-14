@@ -1,5 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
+using NAudio.Wave;
+using OpenCvSharp;
 using TestAdministration.Models.Services;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
@@ -43,9 +45,68 @@ public class SettingsViewModel(
         }
     }
 
+    public List<int> CameraDeviceIds { get; } = _getCameraDeviceIds();
+
+    public int CameraId
+    {
+        get => configurationService.CameraId;
+        set
+        {
+            configurationService.CameraId = value;
+            OnPropertyChanged();
+        }
+    }
+
     public CameraFeedViewModel? CameraFeedViewModel { get; private set; }
 
+    public List<string> MicrophoneNames { get; } = _getMicrophoneDeviceNames();
+
+    public string MicrophoneName =>
+        MicrophoneId >= 0 && MicrophoneId < MicrophoneNames.Count
+            ? MicrophoneNames[MicrophoneId]
+            : string.Empty;
+
+    public int MicrophoneId
+    {
+        get => configurationService.MicrophoneId;
+        set
+        {
+            configurationService.MicrophoneId = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(MicrophoneName));
+        }
+    }
+
     public ICommand OnOpenCameraFeedDialog => new RelayCommand<ContentDialog>(_onOpenCameraFeedDialog);
+
+    private static List<int> _getCameraDeviceIds()
+    {
+        var ids = new List<int>();
+        for (var i = 0; i < 10; i++)
+        {
+            using var capture = new VideoCapture();
+            if (!capture.Open(i))
+            {
+                continue;
+            }
+
+            ids.Add(i);
+            capture.Release();
+        }
+
+        return ids;
+    }
+
+    private static List<string> _getMicrophoneDeviceNames()
+    {
+        var names = new List<string>();
+        for (var i = 0; i < WaveIn.DeviceCount; i++)
+        {
+            names.Add(WaveIn.GetCapabilities(i).ProductName);
+        }
+
+        return names;
+    }
 
     private async void _onOpenCameraFeedDialog(ContentDialog? dialog)
     {

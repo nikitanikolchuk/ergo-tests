@@ -10,7 +10,9 @@ namespace TestAdministration.Models.Services;
 /// <summary>
 /// A class for displaying default camera's feed and recording video and audio.
 /// </summary>
-public class VideoRecorderService
+public class VideoRecorderService(
+    ConfigurationService configurationService
+)
 {
     private const string TempRecordingFileName = "TempRecording.mp4";
     private const string TempVideoFileName = "TempVideo.mp4";
@@ -19,6 +21,7 @@ public class VideoRecorderService
     private const int AudioSampleRate = 44100;
 
     public static readonly string TempRecordingFilePath = _getFilePath(TempRecordingFileName);
+
     private static readonly string TempVideoFilePath = _getFilePath(TempVideoFileName);
     private static readonly string TempAudioFilePath = _getFilePath(TempAudioFileName);
 
@@ -56,8 +59,7 @@ public class VideoRecorderService
         _deleteTempMediaFiles();
 
         _capture = new VideoCapture();
-        // TODO: add device selection
-        if (!_capture.Open(0))
+        if (!_capture.Open(configurationService.CameraId))
         {
             return;
         }
@@ -127,20 +129,35 @@ public class VideoRecorderService
             return;
         }
 
-        _writer = new VideoWriter(
-            TempVideoFilePath,
-            new FourCC(Mp4Tag),
-            _capture.Fps,
-            new Size(_capture.FrameWidth, _capture.FrameHeight)
-        );
-
-        _waveIn = new WaveIn
+        try
         {
-            WaveFormat = new WaveFormat(AudioSampleRate, 1)
-        };
-        _waveFileWriter = new WaveFileWriter(TempAudioFilePath, _waveIn.WaveFormat);
-        _waveIn.DataAvailable += _writeAudio;
-        _waveIn.StartRecording();
+            _writer = new VideoWriter(
+                TempVideoFilePath,
+                new FourCC(Mp4Tag),
+                _capture.Fps,
+                new Size(_capture.FrameWidth, _capture.FrameHeight)
+            );
+        }
+        catch (Exception)
+        {
+            _writer = null;
+        }
+
+        try
+        {
+            _waveIn = new WaveIn
+            {
+                DeviceNumber = configurationService.MicrophoneId,
+                WaveFormat = new WaveFormat(AudioSampleRate, 1)
+            };
+            _waveFileWriter = new WaveFileWriter(TempAudioFilePath, _waveIn.WaveFormat);
+            _waveIn.DataAvailable += _writeAudio;
+            _waveIn.StartRecording();
+        }
+        catch (Exception)
+        {
+            _waveIn = null;
+        }
 
         _recordingTime = TimeSpan.Zero;
         IsRecording = true;

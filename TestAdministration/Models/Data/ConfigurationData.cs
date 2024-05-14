@@ -17,4 +17,6 @@ public class ConfigurationData
     public string CurrentUser { get; init; } = string.Empty;
     public string ApplicationTheme { get; init; } = DefaultTheme.ToString();
     public string FontSize { get; init; } = DefaultFontSize.ToString();
+    public string CameraId { get; init; } = 0.ToString();
+    public string MicrophoneId { get; init; } = 0.ToString();
 }

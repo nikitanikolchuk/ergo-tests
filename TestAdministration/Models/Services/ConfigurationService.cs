@@ -28,6 +28,8 @@ public class ConfigurationService
     private string _currentUser;
     private string _applicationTheme;
     private string _fontSize;
+    private string _cameraId;
+    private string _microphoneId;
 
     public ConfigurationService()
     {
@@ -39,6 +41,8 @@ public class ConfigurationService
         _currentUser = data.CurrentUser;
         _applicationTheme = data.ApplicationTheme;
         _fontSize = data.FontSize;
+        _cameraId = data.CameraId;
+        _microphoneId = data.MicrophoneId;
     }
 
     public string LocalTestDataPath
@@ -103,6 +107,26 @@ public class ConfigurationService
         }
     }
 
+    public int CameraId
+    {
+        get => int.TryParse(_cameraId, out var id) ? id : 0;
+        set
+        {
+            _cameraId = value.ToString();
+            _updateData();
+        }
+    }
+
+    public int MicrophoneId
+    {
+        get => int.TryParse(_microphoneId, out var id) ? id : 0;
+        set
+        {
+            _microphoneId = value.ToString();
+            _updateData();
+        }
+    }
+
     private static string _getFilePath() => Path.Combine(AppContext.BaseDirectory, FileName);
 
     private ConfigurationData _readData()
@@ -132,7 +156,9 @@ public class ConfigurationService
             LocalUsers = _localUsers,
             ApplicationTheme = _applicationTheme,
             CurrentUser = _currentUser,
-            FontSize = _fontSize
+            FontSize = _fontSize,
+            CameraId = _cameraId,
+            MicrophoneId = _microphoneId
         };
 
         _writeData(data);
