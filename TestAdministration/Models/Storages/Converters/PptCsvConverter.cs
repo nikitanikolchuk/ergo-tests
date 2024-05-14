@@ -18,9 +18,12 @@ public class PptCsvConverter(
         return _fromRecord(record, notes);
     }
 
-    public PptCsvRecord ToRecord(Test test) => new()
+    public PptCsvRecord ToRecord(Patient patient, Test test) => new()
     {
         Tester = test.Tester,
+        Id = patient.Id,
+        Name = patient.Name,
+        Surname = patient.Surname,
         Date = test.Date,
         StartTime = test.StartTime,
         EndTime = test.EndTime,

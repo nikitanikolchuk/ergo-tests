@@ -31,301 +31,313 @@ public class PptCsvRecord
     public required string Tester { get; init; }
 
     [Index(1)]
+    [Name("Rodne_cislo")]
+    public required string Id { get; init; }
+
+    [Index(2)]
+    [Name("Jmeno")]
+    public required string Name { get; init; }
+
+    [Index(3)]
+    [Name("Prijmeni")]
+    public required string Surname { get; init; }
+
+    [Index(4)]
     [Name("Datum")]
     [Format(DateFormat)]
     public required DateOnly Date { get; init; }
 
-    [Index(2)]
+    [Index(5)]
     [Name("Cas_zahajeni")]
     [Format(TimeFormat)]
     public required TimeOnly StartTime { get; init; }
 
-    [Index(3)]
+    [Index(6)]
     [Name("Cas_ukonceni")]
     [Format(TimeFormat)]
     public required TimeOnly EndTime { get; init; }
 
-    [Index(4)]
+    [Index(7)]
     [Name("Dom_1_pokus")]
     [Format(FloatFormat)]
     public required float? DominantFirst { get; init; }
 
-    [Index(5)]
+    [Index(8)]
     [Name("Dom_2_pokus")]
     [Format(FloatFormat)]
     public required float? DominantSecond { get; init; }
 
-    [Index(7)]
+    [Index(9)]
     [Name("Dom_3_pokus")]
     [Format(FloatFormat)]
     public required float? DominantThird { get; init; }
 
-    [Index(8)]
+    [Index(10)]
     [Name("Dom_prumer")]
     [Format(FloatFormat)]
     public required float? DominantAverage { get; init; }
 
-    [Index(10)]
+    [Index(11)]
     [Name("Nedom_1_pokus")]
     [Format(FloatFormat)]
     public required float? NonDominantFirst { get; init; }
 
-    [Index(11)]
+    [Index(12)]
     [Name("Nedom_2_pokus")]
     [Format(FloatFormat)]
     public required float? NonDominantSecond { get; init; }
 
-    [Index(12)]
+    [Index(13)]
     [Name("Nedom_3_pokus")]
     [Format(FloatFormat)]
     public required float? NonDominantThird { get; init; }
 
-    [Index(13)]
+    [Index(14)]
     [Name("Nedom_prumer")]
     [Format(FloatFormat)]
     public required float? NonDominantAverage { get; init; }
 
-    [Index(14)]
+    [Index(15)]
     [Name("Obe_1_pokus")]
     [Format(FloatFormat)]
     public required float? BothFirst { get; init; }
 
-    [Index(15)]
+    [Index(16)]
     [Name("Obe_2_pokus")]
     [Format(FloatFormat)]
     public required float? BothSecond { get; init; }
 
-    [Index(16)]
+    [Index(17)]
     [Name("Obe_3_pokus")]
     [Format(FloatFormat)]
     public required float? BothThird { get; init; }
 
-    [Index(17)]
+    [Index(18)]
     [Name("Obe_prumer")]
     [Format(FloatFormat)]
     public required float? BothAverage { get; init; }
 
-    [Index(18)]
+    [Index(19)]
     [Name("Soucet_1_pokus")]
     [Format(FloatFormat)]
     public required float? TotalFirst { get; init; }
 
-    [Index(19)]
+    [Index(20)]
     [Name("Soucet_2_pokus")]
     [Format(FloatFormat)]
     public required float? TotalSecond { get; init; }
 
-    [Index(20)]
+    [Index(21)]
     [Name("Soucet_3_pokus")]
     [Format(FloatFormat)]
     public required float? TotalThird { get; init; }
 
-    [Index(21)]
+    [Index(22)]
     [Name("Soucet_prumer")]
     [Format(FloatFormat)]
     public required float? TotalAverage { get; init; }
 
-    [Index(22)]
+    [Index(23)]
     [Name("Kompletovani_1_pokus")]
     [Format(FloatFormat)]
     public required float? AssemblyFirst { get; init; }
 
-    [Index(23)]
+    [Index(24)]
     [Name("Kompletovani_2_pokus")]
     [Format(FloatFormat)]
     public required float? AssemblySecond { get; init; }
 
-    [Index(24)]
+    [Index(25)]
     [Name("Kompletovani_3_pokus")]
     [Format(FloatFormat)]
     public required float? AssemblyThird { get; init; }
 
-    [Index(25)]
+    [Index(26)]
     [Name("Kompletovani_prumer")]
     [Format(FloatFormat)]
     public required float? AssemblyAverage { get; init; }
 
-    [Index(26)]
+    [Index(27)]
     [Name("Dom_1_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? DominantFirstSdScore { get; init; }
 
-    [Index(27)]
+    [Index(28)]
     [Name("Dom_2_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? DominantSecondSdScore { get; init; }
 
-    [Index(28)]
+    [Index(29)]
     [Name("Dom_3_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? DominantThirdSdScore { get; init; }
 
-    [Index(29)]
+    [Index(30)]
     [Name("Dom_prumer_SDS")]
     [Format(FloatFormat)]
     public required float? DominantAverageSdScore { get; init; }
 
-    [Index(30)]
+    [Index(31)]
     [Name("Nedom_1_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? NonDominantFirstSdScore { get; init; }
 
-    [Index(31)]
+    [Index(32)]
     [Name("Nedom_2_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? NonDominantSecondSdScore { get; init; }
 
-    [Index(32)]
+    [Index(33)]
     [Name("Nedom_3_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? NonDominantThirdSdScore { get; init; }
 
-    [Index(33)]
+    [Index(34)]
     [Name("Nedom_prumer_SDS")]
     [Format(FloatFormat)]
     public required float? NonDominantAverageSdScore { get; init; }
 
-    [Index(34)]
+    [Index(35)]
     [Name("Bbe_1_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? BothFirstSdScore { get; init; }
 
-    [Index(35)]
+    [Index(36)]
     [Name("Bbe_2_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? BothSecondSdScore { get; init; }
 
-    [Index(36)]
+    [Index(37)]
     [Name("Bbe_3_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? BothThirdSdScore { get; init; }
 
-    [Index(37)]
+    [Index(38)]
     [Name("Bbe_prumer_SDS")]
     [Format(FloatFormat)]
     public required float? BothAverageSdScore { get; init; }
 
-    [Index(38)]
+    [Index(39)]
     [Name("Soucet_1_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? TotalFirstSdScore { get; init; }
 
-    [Index(39)]
+    [Index(40)]
     [Name("Soucet_2_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? TotalSecondSdScore { get; init; }
 
-    [Index(40)]
+    [Index(41)]
     [Name("Soucet_3_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? TotalThirdSdScore { get; init; }
 
-    [Index(41)]
+    [Index(42)]
     [Name("Soucet_prumer_SDS")]
     [Format(FloatFormat)]
     public required float? TotalAverageSdScore { get; init; }
 
-    [Index(42)]
+    [Index(43)]
     [Name("Kompletovani_1_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? AssemblyFirstSdScore { get; init; }
 
-    [Index(43)]
+    [Index(44)]
     [Name("Kompletovani_2_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? AssemblySecondSdScore { get; init; }
 
-    [Index(44)]
+    [Index(45)]
     [Name("Kompletovani_3_pokus_SDS")]
     [Format(FloatFormat)]
     public required float? AssemblyThirdSdScore { get; init; }
 
-    [Index(45)]
+    [Index(46)]
     [Name("Kompletovani_prumer_SDS")]
     [Format(FloatFormat)]
     public required float? AssemblyAverageSdScore { get; init; }
 
-    [Index(46)]
+    [Index(47)]
     [Name("Dom_1_pokus_porovnani")]
     public required string DominantFirstNormInterpretation { get; init; }
 
-    [Index(47)]
+    [Index(48)]
     [Name("Dom_2_pokus_porovnani")]
     public required string DominantSecondNormInterpretation { get; init; }
 
-    [Index(48)]
+    [Index(49)]
     [Name("Dom_3_pokus_porovnani")]
     public required string DominantThirdNormInterpretation { get; init; }
 
-    [Index(49)]
+    [Index(50)]
     [Name("Dom_prumer_porovnani")]
     public required string DominantAverageNormInterpretation { get; init; }
 
-    [Index(50)]
+    [Index(51)]
     [Name("Nedom_1_pokus_porovnani")]
     public required string NonDominantFirstNormInterpretation { get; init; }
 
-    [Index(51)]
+    [Index(52)]
     [Name("Nedom_2_pokus_porovnani")]
     public required string NonDominantSecondNormInterpretation { get; init; }
 
-    [Index(52)]
+    [Index(53)]
     [Name("Nedom_3_pokus_porovnani")]
     public required string NonDominantThirdNormInterpretation { get; init; }
 
-    [Index(53)]
+    [Index(54)]
     [Name("Nedom_prumer_porovnani")]
     public required string NonDominantAverageNormInterpretation { get; init; }
 
-    [Index(54)]
+    [Index(55)]
     [Name("Bbe_1_pokus_porovnani")]
     public required string BothFirstNormInterpretation { get; init; }
 
-    [Index(55)]
+    [Index(56)]
     [Name("Bbe_2_pokus_porovnani")]
     public required string BothSecondNormInterpretation { get; init; }
 
-    [Index(56)]
+    [Index(57)]
     [Name("Bbe_3_pokus_porovnani")]
     public required string BothThirdNormInterpretation { get; init; }
 
-    [Index(57)]
+    [Index(58)]
     [Name("Bbe_prumer_porovnani")]
     public required string BothAverageNormInterpretation { get; init; }
 
-    [Index(58)]
+    [Index(59)]
     [Name("Soucet_1_pokus_porovnani")]
     public required string TotalFirstNormInterpretation { get; init; }
 
-    [Index(59)]
+    [Index(60)]
     [Name("Soucet_2_pokus_porovnani")]
     public required string TotalSecondNormInterpretation { get; init; }
 
-    [Index(60)]
+    [Index(61)]
     [Name("Soucet_3_pokus_porovnani")]
     public required string TotalThirdNormInterpretation { get; init; }
 
-    [Index(61)]
+    [Index(62)]
     [Name("Soucet_prumer_porovnani")]
     public required string TotalAverageNormInterpretation { get; init; }
 
-    [Index(62)]
+    [Index(63)]
     [Name("Kompletovani_1_pokus_porovnani")]
     public required string AssemblyFirstNormInterpretation { get; init; }
 
-    [Index(63)]
+    [Index(64)]
     [Name("Kompletovani_2_pokus_porovnani")]
     public required string AssemblySecondNormInterpretation { get; init; }
 
-    [Index(64)]
+    [Index(65)]
     [Name("Kompletovani_3_pokus_porovnani")]
     public required string AssemblyThirdNormInterpretation { get; init; }
 
-    [Index(65)]
+    [Index(66)]
     [Name("Kompletovani_prumer_porovnani")]
     public required string AssemblyAverageNormInterpretation { get; init; }
 
-    [Index(66)]
+    [Index(67)]
     [Name("Poznamky")]
     public required string Notes { get; init; }
 }

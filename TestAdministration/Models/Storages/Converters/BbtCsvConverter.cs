@@ -18,9 +18,12 @@ public class BbtCsvConverter(
         return _fromRecord(record, notes);
     }
 
-    public BbtCsvRecord ToRecord(Test test) => new()
+    public BbtCsvRecord ToRecord(Patient patient, Test test) => new()
     {
         Tester = test.Tester,
+        Id = patient.Id,
+        Name = patient.Name,
+        Surname = patient.Surname,
         Date = test.Date,
         StartTime = test.StartTime,
         EndTime = test.EndTime,

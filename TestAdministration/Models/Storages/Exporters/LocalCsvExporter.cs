@@ -49,7 +49,7 @@ public class LocalCsvExporter(
 
         var testType = test.Type.ToString().ToUpper();
         var testPath = Path.Combine(patientDirectory, $"{testType}.csv");
-        _exportTest(test, testPath);
+        _exportTest(patient, test, testPath);
     }
 
     private static string _directoryName(Patient patient)
@@ -82,7 +82,7 @@ public class LocalCsvExporter(
         csvWriter.WriteRecords([record]);
     }
 
-    private void _exportTest(Test test, string filePath)
+    private void _exportTest(Patient patient, Test test, string filePath)
     {
         var fileExisted = File.Exists(filePath);
         using var stream = File.Open(filePath, FileMode.Append);
@@ -92,7 +92,7 @@ public class LocalCsvExporter(
         config.HasHeaderRecord = !fileExisted;
         using var csvWriter = new CsvWriter(writer, config);
 
-        _writeRecord(csvWriter, test);
+        _writeRecord(csvWriter, patient, test);
     }
 
     private static CsvConfiguration _getConfig(TestType testType) => testType switch
@@ -107,20 +107,20 @@ public class LocalCsvExporter(
         )
     };
 
-    private void _writeRecord(CsvWriter csvWriter, Test test)
+    private void _writeRecord(CsvWriter csvWriter, Patient patient, Test test)
     {
         switch (test.Type)
         {
             case TestType.Nhpt:
-                var nhptRecord = nhptConverter.ToRecord(test);
+                var nhptRecord = nhptConverter.ToRecord(patient, test);
                 csvWriter.WriteRecords([nhptRecord]);
                 break;
             case TestType.Ppt:
-                var pptRecord = pptConverter.ToRecord(test);
+                var pptRecord = pptConverter.ToRecord(patient, test);
                 csvWriter.WriteRecords([pptRecord]);
                 break;
             case TestType.Bbt:
-                var bbtRecord = bbtConverter.ToRecord(test);
+                var bbtRecord = bbtConverter.ToRecord(patient, test);
                 csvWriter.WriteRecords([bbtRecord]);
                 break;
             default:

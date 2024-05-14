@@ -18,9 +18,12 @@ public class NhptCsvConverter(
         return _fromRecord(record, notes);
     }
 
-    public NhptCsvRecord ToRecord(Test test) => new()
+    public NhptCsvRecord ToRecord(Patient patient, Test test) => new()
     {
         Tester = test.Tester,
+        Id = patient.Id,
+        Name = patient.Name,
+        Surname = patient.Surname,
         Date = test.Date,
         StartTime = test.StartTime,
         EndTime = test.EndTime,
