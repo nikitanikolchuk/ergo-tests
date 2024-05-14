@@ -14,6 +14,27 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Orientace NHPT pro testování
+            <Run Text="{Binding NonDominantHandAcronym,Mode=OneWay}" />
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="1" Source="{Binding ImagePath}" />
+        </Grid>
+
         <ui:TextBlock>
             Po dokončení 3. pokusu
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>

@@ -14,6 +14,58 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
+        <Grid Margin="0,0,0,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.65*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                TextWrapping="Wrap"
+                FontTypography="Subtitle"
+                Foreground="{DynamicResource TextControlForeground}"
+                Text="Výchozí pozice probanda u Purdue Pegboard Testu" />
+
+            <Image
+                Grid.Row="1"
+                Grid.Column="1"
+                x:Name="InitPositionImage"
+                Source="/Resources/Images/PptInitial.jpg" />
+
+            <ui:TextBlock
+                Grid.Row="0"
+                Grid.Column="3"
+                Margin="0,0,0,8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                TextWrapping="Wrap"
+                FontTypography="Subtitle"
+                Foreground="{DynamicResource TextControlForeground}">
+
+                Rozmístění součástek Purdue Pegboard Testu pro
+                <Run Text="{Binding DominantHandPlural,Mode=OneWay}" />
+            </ui:TextBlock>
+
+            <Image
+                Grid.Row="1"
+                Grid.Column="3"
+                Height="{Binding ActualHeight,ElementName=InitPositionImage}"
+                Source="{Binding ImagePath}" />
+        </Grid>
+
         <ui:TextBlock>
             Vyzvěte probanda, ať se posadí ke stolu na pevnou židli. Sami se posaďte naproti němu. Výšku stolu nastavte
             tak, aby na něm mohl mít položenou alespoň polovinu předloktí za vzpřímeného sedu. Desku umístěte na stůl

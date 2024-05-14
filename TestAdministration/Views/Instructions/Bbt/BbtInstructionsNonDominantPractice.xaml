@@ -14,6 +14,27 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Orientace BBT pro testování
+            <Run Text="{Binding NonDominantHandAcronym,Mode=OneWay}" />
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="1" Source="{Binding ImagePath}" />
+        </Grid>
+
         <ui:TextBlock>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní
