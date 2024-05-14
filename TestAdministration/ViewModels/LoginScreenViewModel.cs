@@ -153,6 +153,7 @@ public class LoginScreenViewModel(
         }
 
         Users = Users.Add(NewUser);
+        CurrentUser = NewUser;
         NewUser = string.Empty;
     }
 
