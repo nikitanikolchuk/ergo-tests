@@ -96,13 +96,13 @@ public class DocumentationConverter(
         $"{trial + 1}." + '\t' +
         _formatValue(test.Sections[section].Trials[trial + offset].Value) + '\t' +
         _formatValue(test.Sections[section].Trials[trial + offset].SdScore) + '\t' +
-        normInterpretationConverter.Convert(test.Sections[section].Trials[trial + offset].SdScore);
+        normInterpretationConverter.ConvertFull(test.Sections[section].Trials[trial + offset].SdScore);
 
     private string _averageRowTemplate(Test test, int section) =>
         "průměr:" + '\t' +
         _formatValue(test.Sections[section].AverageValue) + '\t' +
         _formatValue(test.Sections[section].AverageSdScore) + '\t' +
-        normInterpretationConverter.Convert(test.Sections[section].AverageSdScore);
+        normInterpretationConverter.ConvertFull(test.Sections[section].AverageSdScore);
 
     private static string _formatValue(float? value) =>
         value is not null

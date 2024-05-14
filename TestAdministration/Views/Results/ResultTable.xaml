@@ -12,8 +12,6 @@
     d:DataContext="{d:DesignInstance viewModelResults:ResultTableViewModel}">
 
     <UserControl.Resources>
-        <system:Double x:Key="ColumnWidth">200</system:Double>
-
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
         <DataTemplate x:Key="TitleTemplate" DataType="system:String">
@@ -42,13 +40,13 @@
         <ui:ListView.View>
             <ui:GridView>
                 <ui:GridViewColumn
-                    Width="{StaticResource ColumnWidth}"
+                    Width="200"
                     HeaderTemplate="{StaticResource TitleTemplate}"
                     Header="{Binding Title}"
                     CellTemplate="{StaticResource LeftHeaderTemplate}" />
 
                 <ui:GridViewColumn
-                    Width="{StaticResource ColumnWidth}"
+                    Width="200"
                     HeaderTemplate="{StaticResource TopHeaderTemplate}"
                     Header="{Binding ValueType}">
 
@@ -74,7 +72,7 @@
                 </ui:GridViewColumn>
 
                 <ui:GridViewColumn
-                    Width="{StaticResource ColumnWidth}"
+                    Width="100"
                     HeaderTemplate="{StaticResource TopHeaderTemplate}"
                     Header="SD-skóre">
 
@@ -106,7 +104,7 @@
                 </ui:GridViewColumn>
 
                 <ui:GridViewColumn
-                    Width="{StaticResource ColumnWidth}"
+                    Width="300"
                     HeaderTemplate="{StaticResource TopHeaderTemplate}"
                     Header="Interpretace dle normy">
 

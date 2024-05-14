@@ -11,8 +11,6 @@
     d:DataContext="{d:DesignInstance viewModelResults:ResultsViewModel}">
 
     <UserControl.Resources>
-        <system:Double x:Key="ColumnWidth">200</system:Double>
-
         <DataTemplate x:Key="PatientHeaderTemplate" DataType="system:String">
             <ui:TextBlock
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
@@ -30,32 +28,35 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
 
-            <UniformGrid
-                x:Name="CheckmarkRow"
-                Margin="0,0,0,8"
-                Rows="1"
-                Columns="4">
-
-                <Border />
+            <Grid x:Name="CheckmarkRow" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
 
                 <CheckBox
+                    Grid.Column="1"
                     Content="Předchozí výsledky"
                     IsChecked="{Binding IsPreviousTestShown}" />
 
                 <CheckBox
+                    Grid.Column="2"
                     Content="SD-skóre"
                     IsChecked="{Binding IsSdScoreShown}" />
 
                 <CheckBox
+                    Grid.Column="3"
                     Content="Interpretace dle normy"
                     IsChecked="{Binding IsNormInterpretationShown}" />
-            </UniformGrid>
+            </Grid>
 
             <ui:ListView x:Name="PatientTable" ItemsSource="{Binding Patients}">
                 <ui:ListView.View>
                     <ui:GridView>
                         <ui:GridViewColumn
-                            Width="{StaticResource ColumnWidth}"
+                            Width="200"
                             DisplayMemberBinding="{Binding LeftHeader}">
 
                             <ui:GridViewColumn.HeaderTemplate>
@@ -70,19 +71,19 @@
                         </ui:GridViewColumn>
 
                         <ui:GridViewColumn
-                            Width="{StaticResource ColumnWidth}"
+                            Width="200"
                             DisplayMemberBinding="{Binding FullName}"
                             HeaderTemplate="{StaticResource PatientHeaderTemplate}"
                             Header="Jméno a příjmení" />
 
                         <ui:GridViewColumn
-                            Width="{StaticResource ColumnWidth}"
+                            Width="100"
                             DisplayMemberBinding="{Binding Age}"
                             HeaderTemplate="{StaticResource PatientHeaderTemplate}"
                             Header="Věk" />
 
                         <ui:GridViewColumn
-                            Width="{StaticResource ColumnWidth}"
+                            Width="300"
                             DisplayMemberBinding="{Binding DominantHand}"
                             HeaderTemplate="{StaticResource PatientHeaderTemplate}"
                             Header="Dominantní HK" />

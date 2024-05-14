@@ -44,20 +44,20 @@ public class ResultTableViewModel(
             headerList[i],
             trial.Value,
             trial.SdScore,
-            normInterpretationConverter.Convert(trial.SdScore),
+            normInterpretationConverter.ConvertShort(trial.SdScore),
             previousTestSection?.Trials[i].Value,
             previousTestSection?.Trials[i].SdScore,
-            normInterpretationConverter.Convert(previousTestSection?.Trials[i].SdScore)
+            normInterpretationConverter.ConvertShort(previousTestSection?.Trials[i].SdScore)
         )).ToList();
 
         var averagesRow = new ResultTableRow(
             "Průměr",
             testSection.AverageValue,
             testSection.AverageSdScore,
-            normInterpretationConverter.Convert(testSection.AverageSdScore),
+            normInterpretationConverter.ConvertShort(testSection.AverageSdScore),
             previousTestSection?.AverageValue,
             previousTestSection?.AverageSdScore,
-            normInterpretationConverter.Convert(previousTestSection?.AverageSdScore)
+            normInterpretationConverter.ConvertShort(previousTestSection?.AverageSdScore)
         );
 
         return rows.Append(averagesRow).ToList();
