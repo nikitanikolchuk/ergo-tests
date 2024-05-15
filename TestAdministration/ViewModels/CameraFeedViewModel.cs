@@ -66,7 +66,7 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(IsRecording));
     }
 
-    public void OnStopRecording() => _videoRecorderService.StopRecording();
+    public void OnStopRecording() => _videoRecorderService.StopCamera();
 
     private void _onNewFrameAvailable(BitmapSource bitmapSource) => CameraFeedImage = bitmapSource;
     private void _onRecordingTimeUpdated(TimeSpan time) => RecordingTime = time.ToString(@"mm\:ss");
