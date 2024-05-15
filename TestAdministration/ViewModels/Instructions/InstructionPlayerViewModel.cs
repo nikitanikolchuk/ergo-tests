@@ -37,6 +37,11 @@ public class InstructionPlayerViewModel : ViewModelBase
         timer.Start();
     }
 
+    /// <summary>
+    /// Occurs after a direct interaction with the audio player.
+    /// </summary>
+    public event Action? OnPlayStateChanged;
+
     public double ListenedPercentage
     {
         get => DurationSeconds != 0
@@ -70,12 +75,14 @@ public class InstructionPlayerViewModel : ViewModelBase
     {
         IsPlaying = true;
         _mediaPlayer.Play();
+        OnPlayStateChanged?.Invoke();
     }
 
     public void OnPause()
     {
         IsPlaying = false;
         _mediaPlayer.Pause();
+        OnPlayStateChanged?.Invoke();
     }
 
     public void OnStop()
