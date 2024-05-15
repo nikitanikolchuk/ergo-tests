@@ -14,6 +14,7 @@ namespace TestAdministration.ViewModels;
 public partial class MainScreenViewModel(
     ConfigurationService configurationService,
     AudioInstructionService audioInstructionService,
+    VideoRecorderService videoRecorderService,
     ITestStorage testStorage,
     TestingViewModelFactory testingViewModelFactory,
     SettingsViewModelFactory settingsViewModelFactory
@@ -76,7 +77,8 @@ public partial class MainScreenViewModel(
     public ICommand OnOpenResultsCommand => new RelayCommand<object?>(_ => _onOpenResultsSection());
     public ICommand OnOpenTextManualsCommand => new RelayCommand<object?>(_ => _onOpenTextManuals());
     public ICommand OnOpenVideoManualsCommand => new RelayCommand<object?>(_ => _onOpenVideoManuals());
-    public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ => _onOpenSettingsCommand());
+    public ICommand OnOpenAppManualCommand => new RelayCommand<object?>(_ => _onOpenAppManual());
+    public ICommand OnOpenSettingsCommand => new RelayCommand<object?>(_ => _onOpenSettings());
 
     private void _onStartTesting(TestType testType)
     {
@@ -94,13 +96,16 @@ public partial class MainScreenViewModel(
     private void _onOpenResultsSection() =>
         _navigate("Výsledky", () => new ResultsStorageViewModel(testStorage.DataPath));
 
+    private void _onOpenAppManual() =>
+        _navigate("Návod k použití", () => new AppManualViewModel());
+
     private void _onOpenTextManuals() =>
         _navigate("Textové manuály", () => new TextManualsViewModel());
 
     private void _onOpenVideoManuals() =>
         _navigate("Videomanuály", () => new VideoManualsViewModel());
 
-    private void _onOpenSettingsCommand() =>
+    private void _onOpenSettings() =>
         _navigate("Nastavení", settingsViewModelFactory.Create);
 
     /// <summary>
@@ -117,6 +122,7 @@ public partial class MainScreenViewModel(
         }
 
         audioInstructionService.Stop();
+        videoRecorderService.StopCamera();
         ContentHeader = contentHeader;
         CurrentViewModel = createViewModel();
     }

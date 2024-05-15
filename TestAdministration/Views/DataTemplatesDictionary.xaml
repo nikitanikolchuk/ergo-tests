@@ -32,6 +32,10 @@
         <views:ResultsStorage />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewModels:AppManualViewModel}">
+        <views:AppManual />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModels:TextManualsViewModel}">
         <views:TextManuals />
     </DataTemplate>

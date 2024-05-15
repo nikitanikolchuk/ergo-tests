@@ -134,7 +134,8 @@
 
             <ui:NavigationViewItem
                 Icon="{ui:SymbolIcon QuestionCircle24}"
-                Content="Návod k použití" />
+                Content="Návod k použití"
+                Command="{Binding OnOpenAppManualCommand}" />
 
             <ui:NavigationViewItem
                 Icon="{ui:SymbolIcon Settings24}"
