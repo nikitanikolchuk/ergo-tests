@@ -172,7 +172,7 @@ public class ResultsViewModel(
     private async void _onGetDocumentationText()
     {
         var text = documentationConverter.Convert(test);
-        Clipboard.SetText(text);
+        Clipboard.SetDataObject(text);
 
         var messageBox = new MessageBox
         {

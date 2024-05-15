@@ -30,8 +30,8 @@ public class VideoManualsViewModel : ViewModelBase
         {
             return;
         }
-        
-        Clipboard.SetText(email);
+
+        Clipboard.SetDataObject(email);
 
         var messageBox = new MessageBox
         {
