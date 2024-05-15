@@ -2,19 +2,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
-    xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Rules"
-    xmlns:viewModelInstructions="clr-namespace:TestAdministration.ViewModels.Instructions"
-    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Instructions.Nhpt"
-    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Instructions.Ppt"
-    xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Instructions.Bbt"
+    xmlns:viewModelTesting="clr-namespace:TestAdministration.ViewModels.Testing"
+    xmlns:viewModelInstructions="clr-namespace:TestAdministration.ViewModels.Testing.Instructions"
+    xmlns:viewModelInstructionsBbt="clr-namespace:TestAdministration.ViewModels.Testing.Instructions.Bbt"
+    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Testing.Instructions.Nhpt"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Testing.Instructions.Ppt"
+    xmlns:viewModelRules="clr-namespace:TestAdministration.ViewModels.Testing.Rules"
+    xmlns:viewModelResults="clr-namespace:TestAdministration.ViewModels.Testing.Results"
     xmlns:views="clr-namespace:TestAdministration.Views"
-    xmlns:viewRules="clr-namespace:TestAdministration.Views.Rules"
-    xmlns:viewInstructions="clr-namespace:TestAdministration.Views.Instructions"
-    xmlns:viewInstructionsNhpt="clr-namespace:TestAdministration.Views.Instructions.Nhpt"
-    xmlns:viewInstructionsPpt="clr-namespace:TestAdministration.Views.Instructions.Ppt"
-    xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Instructions.Bbt"
-    xmlns:viewModelResults="clr-namespace:TestAdministration.ViewModels.Results"
-    xmlns:viewResults="clr-namespace:TestAdministration.Views.Results">
+    xmlns:viewTesting="clr-namespace:TestAdministration.Views.Testing"
+    xmlns:viewInstructions="clr-namespace:TestAdministration.Views.Testing.Instructions"
+    xmlns:viewInstructionsBbt="clr-namespace:TestAdministration.Views.Testing.Instructions.Bbt"
+    xmlns:viewInstructionsNhpt="clr-namespace:TestAdministration.Views.Testing.Instructions.Nhpt"
+    xmlns:viewInstructionsPpt="clr-namespace:TestAdministration.Views.Testing.Instructions.Ppt"
+    xmlns:viewRules="clr-namespace:TestAdministration.Views.Testing.Rules"
+    xmlns:viewResults="clr-namespace:TestAdministration.Views.Testing.Results">
 
     <DataTemplate DataType="{x:Type viewModels:LoginScreenViewModel}">
         <views:LoginScreen />
@@ -48,20 +50,20 @@
         <views:Settings />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:TestingViewModel}">
-        <views:Testing />
+    <DataTemplate DataType="{x:Type viewModelTesting:TestingViewModel}">
+        <viewTesting:Testing />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:PatientChoiceViewModel}">
-        <views:PatientChoice />
+    <DataTemplate DataType="{x:Type viewModelTesting:PatientChoiceViewModel}">
+        <viewTesting:PatientChoice />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:NewPatientViewModel}">
-        <views:NewPatient />
+    <DataTemplate DataType="{x:Type viewModelTesting:NewPatientViewModel}">
+        <viewTesting:NewPatient />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:TestConductionViewModel}">
-        <views:TestConduction />
+    <DataTemplate DataType="{x:Type viewModelTesting:TestConductionViewModel}">
+        <viewTesting:TestConduction />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelInstructionsNhpt:NhptInstructionsDominantPracticeViewModel}">

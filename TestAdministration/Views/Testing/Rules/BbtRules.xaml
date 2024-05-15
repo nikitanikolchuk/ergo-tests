@@ -1,0 +1,252 @@
+<UserControl
+    x:Class="TestAdministration.Views.Testing.Rules.BbtRules"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelTesting="clr-namespace:TestAdministration.ViewModels.Testing"
+    xmlns:viewTesting="clr-namespace:TestAdministration.Views.Testing"
+    DataContext="{
+        Binding DataContext,
+        RelativeSource={RelativeSource AncestorType=viewTesting:TestConduction}
+    }"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelTesting:TestConductionViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="RulesDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel Margin="0,0,8,0">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}" TextDecorations="Underline">
+                Do celkového počtu přemístěných kostek se kostka ZAPOČÍTÁVÁ, pokud byly splněny VŠECHNY TYTO PODMÍNKY:
+            </Span>
+        </ui:TextBlock>
+
+        <ui:TextBlock Margin="0,0,0,8" Style="{StaticResource TestRuleTextStyle}">
+            - kostka byla přemístěna během <Bold>časového limitu</Bold> (<Bold>60 sekund</Bold> u 1.-3. pokusu BBT)
+            <LineBreak />
+            - kostka byla přemístěna
+            <Bold>z jedné přihrádky do druhé pomocí alespoň dvou prstů testované horní končetiny</Bold>
+            <LineBreak />
+            - testovaná osoba <Bold>dostala konečky prstů</Bold> manipulující s kostkou <Bold>přes přepážku</Bold>
+            <LineBreak />
+            - testovaná <Bold>ruka byla během manipulace s kostkou nad testovací krabicí</Bold>
+            <LineBreak />
+            - kostka
+            <Bold>
+                skončila ve druhé přihrádce nebo se alespoň dotkla kterékoliv části krabice na druhé straně přepážky
+            </Bold>
+            <LineBreak />
+            (kostka může skončit mimo testovací krabici)
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                <Underline>Kostka se ZAPOČÍTÁVÁ</Underline> i tehdy, pokud by:
+            </Span>
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Testovaná osoba se dotkla přepážky.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                se testovaná osoba <Bold>dotkla přepážky</Bold>
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Manipulace s kostkou byla provedena patologickým způsobem.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                byla manipulace s kostkou provedena <Bold>patologickým způsobem</Bold>
+            </ui:TextBlock>
+        </Grid>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}" TextDecorations="Underline">
+                Do celkového počtu přemístěných kostek se však NEPOČÍTÁ kostka, která:
+            </Span>
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kostka byla přemístěna s dopomocí jiné části těla, než je testovaná horní končetina.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                byla <Bold>přemístěna s dopomocí jiné části těla</Bold>, než je testovaná horní končetina
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kostka se odrazila od přepážky zpět do původní přihrádky (nebyla přemístěna přes přepážku).
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                se <Bold>odrazila od přepážky zpět do původní přihrádky</Bold> (nebyla přemístěna přes přepážku)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kostka byla přemístěna současně s další kostkou / s dalšími kostkami (Pokud bylo najednou přemístěno
+                    více kostek, započítává se z nich pouze jedna kostka.)
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                byla přemístěna současně s další kostkou / s dalšími kostkami (Pokud bylo najednou přemístěno více
+                kostek, započítává se z nich pouze jedna kostka.)
+            </ui:TextBlock>
+        </Grid>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Kostka byla přemístěna přes přepážku, ale nebyla uchopena samostatně těsně před jejím přemístěním do
+                    druhé přihrádky (Pokud tedy proband vzal dvě kostky najednou, přehodil pouze jednu z nich a s druhou
+                    se vrátil zpět nad původní přihrádku, drženou kostku nepustil a následně ji přehodil přes přepážku,
+                    započítáme pouze první kostku, druhou nikoliv.)
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                Kostka byla přemístěna přes přepážku, ale
+                <Bold>nebyla uchopena samostatně těsně před jejím přemístěním do druhé přihrádky</Bold>
+                (Pokud tedy proband vzal dvě kostky najednou, přehodil pouze jednu z nich a s druhou se vrátil zpět nad
+                původní přihrádku, drženou kostku nepustil a následně ji přehodil přes přepážku, započítáme pouze první
+                kostku, druhou nikoliv.)
+            </ui:TextBlock>
+        </Grid>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
+            Text="Během probíhajícího pokusu:" />
+
+        <ui:TextBlock Margin="0,0,0,8" Style="{StaticResource TestRuleTextStyle}">
+            - testující ani proband nemluví
+            <LineBreak />
+            - testující smí pouze rychle a stručně zodpovědět případný dotaz týkající se průběhu testování (např. slovy:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Pokračujte!“</Span>,
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Nemluvte!“</Span>,
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Ano.“</Span>,
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Ne.“</Span>)
+            <LineBreak />
+            - testovaná osoba si smí libovolně upravovat rozložení kostek v krabici během probíhajícího pokusu
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}"
+            Text="Mezi jednotlivými pokusy:" />
+
+        <ui:TextBlock Margin="0,0,0,8" Style="{StaticResource TestRuleTextStyle}">
+            - testující smí probandovi zodpovědět jeho dotazy
+            <LineBreak />
+            - testující smí probandovi mezi pokusy říct:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">
+                „Nezapomínejte, že kostka nebude započítána, pokud ji přemístíte, ale nedostanete se konečky vašich
+                prstů přes přepážku.“
+            </Span>
+            <LineBreak />
+            - testující smí probandovi doporučit, aby během probíhajících pokusů nemluvil
+        </ui:TextBlock>
+
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Pokus musí být <Underline>přerušen a anulován</Underline>, pokud:
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Grid.Column="0" Style="{StaticResource CopyButtonStyle}">
+                <ui:Button.CommandParameter>
+                    Výkon probanda během testování významně ovlivnily rušivé faktory prostředí.
+                </ui:Button.CommandParameter>
+            </ui:Button>
+
+            <ui:TextBlock Grid.Column="2" Style="{StaticResource TestRuleTextStyle}">
+                výkon probanda během testování významně ovlivní rušivé faktory prostředí
+            </ui:TextBlock>
+        </Grid>
+    </StackPanel>
+</UserControl>

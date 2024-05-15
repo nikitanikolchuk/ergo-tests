@@ -1,0 +1,132 @@
+<UserControl
+    x:Class="TestAdministration.Views.Testing.Results.ResultFilesBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModelResults="clr-namespace:TestAdministration.ViewModels.Testing.Results"
+    xmlns:viewResults="clr-namespace:TestAdministration.Views.Testing.Results"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelResults:ResultFilesBoxViewModel}">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+
+        <SolidColorBrush x:Key="VideoDashBrush" Color="{DynamicResource SystemFillColorAttention}" />
+
+        <Style x:Key="RemoveButtonStyle" TargetType="ui:Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ui:Button">
+                        <ui:SymbolIcon Symbol="Dismiss24" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border
+        x:Name="VideoDashBorder"
+        Padding="8"
+        CornerRadius="4"
+        BorderThickness="1">
+
+        <Border.BorderBrush>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Rectangle
+                        RadiusX="4"
+                        RadiusY="4"
+                        StrokeThickness="1"
+                        StrokeDashArray="10 5"
+                        Stroke="{StaticResource VideoDashBrush}"
+                        Width="{Binding ActualWidth, ElementName=VideoDashBorder}"
+                        Height="{Binding ActualHeight, ElementName=VideoDashBorder}" />
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{
+                    Binding IsEmpty,
+                    Converter={StaticResource VisibilityConverter}
+                }">
+
+                <!-- <ui:SymbolIcon -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     FontSize="32" -->
+                <!--     Symbol="ArrowUpload24" /> -->
+                <!-- -->
+                <!-- <ui:TextBlock -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     HorizontalAlignment="Center" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     Text="Přetáhněte sem" /> -->
+                <!-- -->
+                <!-- <ui:TextBlock -->
+                <!--     Margin="0,0,0,8" -->
+                <!--     HorizontalAlignment="Center" -->
+                <!--     Foreground="{DynamicResource TextFillColorPrimaryBrush}" -->
+                <!--     Text="Nebo" /> -->
+
+                <ui:Button
+                    Appearance="Primary"
+                    Content="Vyberte soubory"
+                    Command="{Binding OnAddFiles}" />
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{
+                    Binding IsNotEmpty,
+                    Converter={StaticResource VisibilityConverter}
+                }">
+
+                <ui:DynamicScrollViewer MaxHeight="100">
+                    <ui:ListView
+                        Margin="8,0"
+                        ItemsSource="{Binding FileNames}">
+
+                        <ui:ListView.ItemTemplate>
+                            <DataTemplate DataType="system:String">
+                                <DockPanel LastChildFill="False">
+                                    <ui:DynamicScrollViewer
+                                        DockPanel.Dock="Left"
+                                        Margin="0,0,16,0"
+                                        Width="320">
+
+                                        <ui:TextBlock Text="{Binding}" />
+                                    </ui:DynamicScrollViewer>
+
+                                    <ui:Button
+                                        DockPanel.Dock="Right"
+                                        Style="{StaticResource RemoveButtonStyle}"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Command="{
+                                            Binding DataContext.OnRemoveFile,
+                                            RelativeSource={RelativeSource AncestorType=viewResults:ResultFilesBox}
+                                        }"
+                                        CommandParameter="{Binding}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ui:ListView.ItemTemplate>
+                    </ui:ListView>
+                </ui:DynamicScrollViewer>
+
+                <ui:Button
+                    Margin="8,0"
+                    HorizontalAlignment="Stretch"
+                    Icon="{ui:SymbolIcon Add24}"
+                    Content="Přidat další"
+                    Command="{Binding OnAddFiles}" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

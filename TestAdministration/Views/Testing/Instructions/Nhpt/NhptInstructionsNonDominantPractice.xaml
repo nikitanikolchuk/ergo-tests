@@ -1,0 +1,79 @@
+<UserControl
+    x:Class="TestAdministration.Views.Testing.Instructions.Nhpt.NhptInstructionsNonDominantPractice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsNhpt="clr-namespace:TestAdministration.ViewModels.Testing.Instructions.Nhpt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsNhpt:NhptInstructionsNonDominantPracticeViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Testing/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap"
+            FontTypography="Subtitle"
+            Foreground="{DynamicResource TextControlForeground}">
+
+            Orientace NHPT pro testování
+            <Run Text="{Binding NonDominantHandAcronym,Mode=OneWay}" />
+        </ui:TextBlock>
+
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="1" Source="{Binding ImagePath}" />
+        </Grid>
+
+        <ui:TextBlock>
+            Po dokončení 3. pokusu
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>
+            tak, aby její
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                část se zásobníkem byla na straně nedominantní
+                (<Run Text="{Binding NonDominantHandGenitive, Mode=OneWay}" />)
+                ruky
+            </Span>
+            probanda.
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Střed desky zarovnejte</Span>
+            přibližně se středem trupu probanda. Vzdálenost desky od hrany stolu si libovolně nastaví proband.
+            <LineBreak />
+            Test zopakujte stejným způsobem pro levou ruku: Řekněte/přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding AudioInstruction,Mode=OneWay}" />
+            </Span>
+        </ui:TextBlock>
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FirstAudioInstructionViewModel}" />
+
+        <ui:TextBlock>
+            Pak řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
+            Během testu:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Rychleji!“</Span>
+            Ihned po umístění posledního kolíku do otvoru:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
+            <LineBreak />
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
+            provedené během zkušebního pokusu a
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zodpovězte</Span>
+            všechny případné dotazy.
+            <LineBreak />
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Zapište</Span>
+            čas i případné poznámky.
+        </ui:TextBlock>
+    </StackPanel>
+</UserControl>

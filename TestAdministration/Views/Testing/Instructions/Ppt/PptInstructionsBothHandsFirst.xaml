@@ -1,0 +1,97 @@
+<UserControl
+    x:Class="TestAdministration.Views.Testing.Instructions.Ppt.PptInstructionsBothHandsFirst"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModelInstructionsPpt="clr-namespace:TestAdministration.ViewModels.Testing.Instructions.Ppt"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModelInstructionsPpt:PptInstructionsBothHandsFirstViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Testing/Instructions/InstructionsDictionary.xaml" />
+    </UserControl.Resources>
+
+    <StackPanel Margin="{StaticResource ContentMargin}">
+        <ui:TextBlock>
+            Tento dílčí test testuje práci obou rukou zároveň. Začněte tím, že řeknete / přehrajete nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                <Run Text="{Binding AudioInstruction,Mode=OneWay}" />
+            </Span>
+            (Po dokončení zadání slovních instrukcí probandovi
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>
+            správné provedení tohoto subtestu pomocí
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                dvou párů kolíků. Všechny pak nechte v otvorech.
+            </Span>
+            )
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                Položte obě ruce po stranách desky. Nyní si vyzkoušejte umístit alespoň tři páry kolíků oběma rukama
+                najednou.“
+            </Span>
+        </ui:TextBlock>
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FirstAudioInstructionViewModel}" />
+
+        <ui:TextBlock>
+            Poté, co proband správně
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
+                umístil tři až čtyři páry kolíků
+            </Span>
+            , zapište si případné poznámky a řekněte / přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Stačí. Vyjměte zkušební kolíky a vraťte je zpět do příslušných zásobníků.“
+            </Span>
+        </ui:TextBlock>
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding SecondAudioInstructionViewModel}" />
+
+        <ui:TextBlock>
+            Poté řekněte / přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Až řeknu: „Teď!“, snažte se umístit co nejvíce kolíků oběma rukama najednou. Začněte horním otvorem v
+                obou řadách. Pracujte, co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách
+                desky. Jste připraven/a?“
+            </Span>
+        </ui:TextBlock>
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding ThirdAudioInstructionViewModel}" />
+
+        <ui:TextBlock>
+            Řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
+            Současně s vydáním pokynu „Teď!“
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 30 sekund</Span>.
+            <LineBreak />
+            Po uplynutí přesně 30 sekund, řekněte:
+            <Span Style="{StaticResource OralInstructionSpanStyle}">„Stop!“</Span>.
+            <LineBreak />
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Spočítejte</Span>
+            množství správně umístěných
+            <Span Style="{StaticResource PhysicalInstructionSpanStyle}">párů kolíků</Span>
+            (nikoliv celkový počet kolíků) a výsledek zaznamenejte. Využívejte prostor pro psaní poznámek z pozorování
+            výkonu probanda. Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+            <LineBreak />
+            Pak vyzvěte probanda / přehrajte nahrávku:
+            <LineBreak />
+            <Span Style="{StaticResource AudioInstructionSpanStyle}">
+                „Děkuji. Nyní, prosím, vraťte kolíky zpět do příslušných zásobníků.“
+            </Span>
+        </ui:TextBlock>
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding FourthAudioInstructionViewModel}" />
+    </StackPanel>
+</UserControl>
