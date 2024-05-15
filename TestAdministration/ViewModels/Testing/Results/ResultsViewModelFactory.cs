@@ -9,7 +9,7 @@ public class ResultsViewModelFactory(
     ITestStorage testStorage,
     NormInterpretationConverter normInterpretationConverter,
     DocumentationConverter documentationConverter,
-    AgeCalculatorService ageCalculatorService
+    IAgeCalculatorService ageCalculatorService
 )
 {
     public ResultsViewModel Create(Patient patient, Test test, Action<Patient, Test, List<string>> onSaveTest)

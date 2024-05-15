@@ -5,7 +5,7 @@ namespace TestAdministration.Models.Services;
 
 public class AgeCalculatorService(
     IDateTimeProvider dateTimeProvider
-)
+) : IAgeCalculatorService
 {
     public int Calculate(Patient patient)
     {

@@ -83,7 +83,7 @@ public partial class App
             .AddSingleton<ITestCalculator<NhptTestNormProvider>, TestCalculator<NhptTestNormProvider>>()
             .AddSingleton<ITestCalculator<PptTestNormProvider>, TestCalculator<PptTestNormProvider>>()
             .AddSingleton<ITestCalculator<BbtTestNormProvider>, TestCalculator<BbtTestNormProvider>>()
-            .AddSingleton<AgeCalculatorService>()
+            .AddSingleton<IAgeCalculatorService, AgeCalculatorService>()
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
             .AddSingleton<NhptTestNormProvider>()
             .AddSingleton<PptTestNormProvider>()

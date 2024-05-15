@@ -4,7 +4,7 @@ using TestAdministration.Models.Services;
 namespace TestAdministration.Models.TestBuilders.SectionBuilders.Calculators;
 
 public class TestCalculator<T>(
-    AgeCalculatorService ageCalculatorService,
+    IAgeCalculatorService ageCalculatorService,
     T normProvider
 ) : ITestCalculator<T> where T : ITestNormProvider
 {
