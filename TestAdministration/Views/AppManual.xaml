@@ -51,8 +51,9 @@
                 Text="Zobrazení informací" />
 
             <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Textových instrukcí a pravidel je ve většině případů více, než přiděleného místa, a pro zobrazení
-                dalších můžete <Bold>skrolovat</Bold>. Toto platí i pro <Bold>tabulky s výsledky</Bold>.
+                Textových instrukcí a pravidel je ve většině případů více než přiděleného místa a pro zobrazení
+                dalších můžete <Bold>skrolovat</Bold>. Toto platí i pro <Bold>tabulky s výsledky</Bold>. Na počítačích
+                s menšími monitory může být užitečná změna měřítka zobrazení v nastaveních Windows.
             </ui:TextBlock>
 
             <ui:TextBlock
@@ -60,8 +61,8 @@
                 Text="Spuštění zvukových instrukcí" />
 
             <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Zvukové instrukce je možné spouštět pomocí <Bold>mezerníku</Bold>. Stisknutí mezerníku po skončení přehrávání spustí
-                následující audiopřehrávač na této stránce.
+                Zvukové instrukce je možné spouštět pomocí <Bold>mezerníku</Bold>. Stisknutí mezerníku po skončení
+                přehrávání spustí následující audiopřehrávač na této stránce.
             </ui:TextBlock>
 
             <ui:TextBlock
@@ -83,8 +84,8 @@
                 Aplikace umožňuje nahrávání videozáznamu z testování. Pro výběr kamery a mikrofonu použijte stránku
                 <Bold>Nastavení</Bold>. Nahrávání se spouští kliknutím na odpovídající tlačítko na testovací stránce.
                 Nahrávání <Bold>může být opakovaně přerušováno</Bold> stejným tlačítkem a ve výsledku se uloží
-                <Bold>jeden videozáznam</Bold>. Aplikace také umožňuje přidání externích videozáznamů na konci testování. Přidané soubory se zkopírují
-                do podadresáře pacienta a budou přejmenovány.
+                <Bold>jeden videozáznam</Bold>. Aplikace také umožňuje přidání externích videozáznamů na konci
+                testování. Přidané soubory se zkopírují do podadresáře pacienta a budou přejmenovány.
             </ui:TextBlock>
 
             <ui:TextBlock
@@ -92,13 +93,13 @@
                 Text="Export výsledků" />
 
             <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Ukládání výsledků z testování přidává soubory do podadresáře pacienta v adresáři vybraném na přihlašovací
-                stránce. Takové podadresáře obsahují CSV soubory s <Bold>tabulkami</Bold>, které je možné otevřít v programu Microsoft
-                <Bold>Excel</Bold>, textové soubory, jejichž obsah je určen pro
-                <Bold>lékařskou dokumentaci</Bold> a <Bold>videozáznamy</Bold>. Tento adresář
-                je možné otevřít pomocí tlačítka <Bold>Výsledky</Bold> v levé části obrazovky. <Bold>Ruční změna</Bold>
-                CSV souboru <Bold>může způsobit problémy</Bold> pro jeho automatické načítání. V případě takové změny
-                udělejte <Bold>zálohu</Bold>.
+                Ukládání výsledků z testování přidává soubory do podadresáře pacienta v adresáři vybraném na
+                přihlašovací stránce. Takové podadresáře obsahují CSV soubory s <Bold>tabulkami</Bold>, které je možné
+                otevřít v programu Microsoft <Bold>Excel</Bold>, textové soubory, jejichž obsah je určen pro
+                <Bold>zdravotnickou dokumentaci</Bold> a <Bold>videozáznamy</Bold>. Tento adresář je možné otevřít pomocí
+                tlačítka <Bold>Výsledky</Bold> v levé části obrazovky. <Bold>Ruční změna</Bold> CSV souboru
+                <Bold>může způsobit problémy</Bold> pro jeho automatické načítání. V případě takové změny udělejte
+                <Bold>zálohu</Bold>.
             </ui:TextBlock>
         </StackPanel>
     </Border>

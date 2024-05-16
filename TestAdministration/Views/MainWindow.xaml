@@ -9,6 +9,7 @@
     Width="1100"
     Height="840"
     WindowStartupLocation="CenterScreen"
+    Icon="/Resources/Images/AppIcon.jpg"
     PreviewKeyDown="_onSpaceBarPressed"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"

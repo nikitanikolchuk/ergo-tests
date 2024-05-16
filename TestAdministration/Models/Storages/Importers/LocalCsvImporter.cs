@@ -22,7 +22,6 @@ public class LocalCsvImporter(
     BbtCsvConverter bbtConverter
 ) : ICsvImporter
 {
-    // TODO: move to config file
     private const string PatientFileName = "Pacient.csv";
 
     public Patient? ImportPatient(PatientDirectoryInfo patientDirectoryInfo)

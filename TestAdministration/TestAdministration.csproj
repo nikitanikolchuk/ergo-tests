@@ -7,6 +7,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
         <AssemblyName>Ergo Testy Jemné Motoriky</AssemblyName>
+        <ApplicationIcon>Resources\Images\AssemblyIcon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,9 +33,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Resources\Audio\**" CopyToOutputDirectory="Always"/>
-        <Content Include="Resources\ffmpeg\**" CopyToOutputDirectory="Always"/>
+        <Content Include="Resources\Audio\**" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always"/>
     </ItemGroup>
+
+    <Target Name="CopyFfmpegFiles" AfterTargets="Publish">
+        <ItemGroup>
+            <FfmpegFiles Include="Resources\ffmpeg\**"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(FfmpegFiles)" DestinationFolder="$(PublishDir)Resources\ffmpeg\%(RecursiveDir)"/>
+    </Target>
 
     <ItemGroup>
         <Page Update="Properties\DesignTimeResources.xaml">

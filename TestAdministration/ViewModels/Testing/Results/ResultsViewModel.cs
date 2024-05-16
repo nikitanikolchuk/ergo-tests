@@ -146,7 +146,7 @@ public class ResultsViewModel(
             normInterpretationConverter,
             test.Sections[4],
             previousTest?.Sections[4],
-            "Nedominantní HK",
+            "Kompletování",
             "Počet součástek"
         )
     ];

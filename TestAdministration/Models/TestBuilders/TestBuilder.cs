@@ -69,7 +69,18 @@ public class TestBuilder(
             throw new InvalidOperationException("All test values were already set");
         }
 
-        var trial = sectionBuilder.BuildTrial(value, note, CurrentSection, _patient);
+        TestTrial trial;
+        // TODO: remove after creating practice trial norms
+        // SD score isn't calculated for first practice trial
+        if (sectionBuilder is NhptTestSectionBuilder or BbtTestSectionBuilder && CurrentTrial == 0)
+        {
+            trial = new TestTrial(value, null, note);
+        }
+        else
+        {
+            trial = sectionBuilder.BuildTrial(value, note, CurrentSection, _patient);
+        }
+
         _trials.Last().Add(trial);
 
         if (!IsFinished && CurrentTrial == sectionBuilder.TrialCount)

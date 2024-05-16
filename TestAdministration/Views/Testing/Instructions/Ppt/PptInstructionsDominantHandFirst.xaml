@@ -37,7 +37,7 @@
                 TextWrapping="Wrap"
                 FontTypography="Subtitle"
                 Foreground="{DynamicResource TextControlForeground}"
-                Text="Výchozí pozice probanda u Purdue Pegboard Testu" />
+                Text="Výchozí pozice" />
 
             <Image
                 Grid.Row="1"
@@ -55,7 +55,7 @@
                 FontTypography="Subtitle"
                 Foreground="{DynamicResource TextControlForeground}">
 
-                Rozmístění součástek Purdue Pegboard Testu pro
+                Rozmístění součástek pro
                 <Run Text="{Binding DominantHandPlural,Mode=OneWay}" />
             </ui:TextBlock>
 
