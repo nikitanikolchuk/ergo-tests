@@ -7,13 +7,18 @@ public class PptTestNormProvider : ITestNormProvider
 {
     public bool IsInverted => false;
 
+    /// <summary>
+    /// Gets norm dictionary for Purdue Pegboard Test. Number of
+    /// Total section is -1 because of mismatch of section input
+    /// and output order.
+    /// </summary>
     public SortedDictionary<int, TestNorm> GetNormDictionary(int section, bool isMale) => section switch
     {
+        -1 => isMale ? MaleTotalNorms : FemaleTotalNorms,
         0 => isMale ? MaleDominantHandNorms : FemaleDominantHandNorms,
         1 => isMale ? MaleNonDominantHandNorms : FemaleNonDominantHandNorms,
         2 => isMale ? MaleBothHandsNorms : FemaleBothHandsNorms,
-        3 => isMale ? MaleTotalNorms : FemaleTotalNorms,
-        4 => isMale ? MaleAssemblyNorms : FemaleAssemblyNorms,
+        3 => isMale ? MaleAssemblyNorms : FemaleAssemblyNorms,
         _ => throw new ArgumentOutOfRangeException(
             nameof(section),
             section,

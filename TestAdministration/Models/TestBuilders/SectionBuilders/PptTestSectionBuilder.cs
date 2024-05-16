@@ -23,32 +23,35 @@ public class PptTestSectionBuilder(
     {
         var sumTrials = trials
             .Take(SectionCount - 1)
-            .Aggregate((l1, l2) => _trialSum(l1, l2, patient));
+            .Select(l => l.Select(t => t.Value).ToList())
+            .ToList()
+            .Aggregate(_valueSum)
+            .Select(value => BuildTrial(value, string.Empty, -1, patient))
+            .ToList();
         var totalTrials = new List<List<TestTrial>>(trials);
         totalTrials.Insert(TotalSection, sumTrials);
 
         return base.BuildSections(totalTrials, patient);
     }
 
-    private List<TestTrial> _trialSum(List<TestTrial> first, List<TestTrial> second, Patient patient)
+    private List<float?> _valueSum(List<float?> first, List<float?> second)
     {
         if (first.Count != TrialCount || second.Count != TrialCount)
         {
             throw new ArgumentException("Invalid number of trials in a PPT section");
         }
 
-        var trials = new List<TestTrial>(first);
+        var totals = new List<float?>(first);
         for (var i = 0; i < TrialCount; i++)
         {
-            if (second[i].Value == null)
+            if (second[i] is null)
             {
                 continue;
             }
 
-            var sum = trials[i].Value + second[i].Value ?? second[i].Value;
-            trials[i] = BuildTrial(sum, string.Empty, TotalSection, patient);
+            totals[i] = totals[i] + second[i] ?? second[i];
         }
 
-        return trials;
+        return totals;
     }
 }
