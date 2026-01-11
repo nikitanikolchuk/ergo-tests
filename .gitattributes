@@ -1,0 +1,2 @@
+TestAdministration/Resources/ffmpeg/bin/ffmpeg.exe filter=lfs diff=lfs merge=lfs -text
+TestAdministration/Resources/ffmpeg/bin/ffprobe.exe filter=lfs diff=lfs merge=lfs -text

@@ -62,7 +62,7 @@ public class PptTestSectionBuilderTests
     [Fact]
     public void BuildSections_ReturnsCorrectTestSections()
     {
-        const int totalSection = 3;
+        const int totalSection = -1;
         const float totalSdScore = 1.0f;
         var firstTrialList = new List<TestTrial>
         {

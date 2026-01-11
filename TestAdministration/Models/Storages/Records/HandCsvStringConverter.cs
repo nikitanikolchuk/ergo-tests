@@ -17,7 +17,7 @@ public class HandCsvStringConverter : ITypeConverter
     private const string Right = "pravá";
     private const string Both = "obě";
 
-    public string ConvertToString(object value, IWriterRow row, MemberMapData memberMapData)
+    public string ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
     {
         if (value is not Hand hand)
         {
@@ -38,7 +38,7 @@ public class HandCsvStringConverter : ITypeConverter
         };
     }
 
-    public object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData) =>
+    public object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData) =>
         text switch
         {
             None => Hand.None,

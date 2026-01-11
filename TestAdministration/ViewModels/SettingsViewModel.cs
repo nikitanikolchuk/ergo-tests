@@ -1,5 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Threading;
 using NAudio.Wave;
 using OpenCvSharp;
 using TestAdministration.Models.Services;
@@ -7,6 +12,7 @@ using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
+using Window = System.Windows.Window;
 
 namespace TestAdministration.ViewModels;
 
@@ -41,6 +47,23 @@ public class SettingsViewModel(
             var theme = value ? ApplicationTheme.Dark : ApplicationTheme.Light;
             configurationService.ApplicationTheme = theme;
             ApplicationThemeManager.Apply(theme);
+
+            // Force frame/backdrop redraw (fixes theme switching)
+            if (Application.Current.MainWindow is { } window)
+            {
+                window.Dispatcher.InvokeAsync(() =>
+                {
+                    WindowBackdrop.RemoveBackdrop(window);
+                    WindowBackdrop.RemoveBackground(window);
+                    WindowBackdrop.ApplyBackdrop(window, WindowBackdropType.Mica);
+                    WindowBackdrop.RemoveTitlebarBackground(window);
+
+                    window.ClearValue(Control.BackgroundProperty);
+
+                    _forceNonClientRefresh(window);
+                }, DispatcherPriority.ApplicationIdle);
+            }
+
             OnPropertyChanged();
         }
     }
@@ -122,4 +145,34 @@ public class SettingsViewModel(
         dialog.DataContext = this;
         _ = await contentDialogService.ShowAsync(dialog, CancellationToken.None);
     }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    private static void _forceNonClientRefresh(Window w)
+    {
+        var hWnd = new WindowInteropHelper(w).Handle;
+        if (hWnd == IntPtr.Zero)
+        {
+            return;
+        }
+
+        const uint SWP_NOSIZE = 0x0001;
+        const uint SWP_NOMOVE = 0x0002;
+        const uint SWP_NOZORDER = 0x0004;
+        const uint SWP_FRAMECHANGED = 0x0020;
+
+        const uint uFlags = SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED;
+
+        SetWindowPos(hWnd, IntPtr.Zero, 0, 0, 0, 0, uFlags);
+    }
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool SetWindowPos(
+        IntPtr hWnd,
+        IntPtr hWndInsertAfter,
+        int x,
+        int y,
+        int cx,
+        int cy,
+        uint uFlags
+    );
 }

@@ -37,7 +37,10 @@
         </Style>
     </UserControl.Resources>
 
-    <ui:NavigationView IsBackButtonVisible="Collapsed">
+    <ui:NavigationView 
+        IsBackButtonVisible="Collapsed"
+        IsTopSeparatorVisible="False"
+        IsFooterSeparatorVisible="False">
         <ui:NavigationView.PaneHeader>
             <StackPanel
                 DockPanel.Dock="Top"
@@ -152,7 +155,7 @@
                 Command="{Binding OnDisplayLoginScreenCommand}">
 
                 <ui:NavigationViewItem.Icon>
-                    <ui:SymbolIcon Symbol="ArrowExit20" FontSize="24" />
+                    <ui:SymbolIcon Symbol="ArrowExit20" />
                 </ui:NavigationViewItem.Icon>
 
                 <ui:NavigationViewItem.Foreground>
