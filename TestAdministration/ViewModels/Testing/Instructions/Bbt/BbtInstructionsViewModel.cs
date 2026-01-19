@@ -15,12 +15,8 @@ public class BbtInstructionsViewModel(
         get
         {
             var viewModel = _getViewModel();
-            var firstAudioPlayer = viewModel.FirstAudioInstructionViewModel;
-            audioService.SetPlayerActions(
-                firstAudioPlayer.OnResume,
-                firstAudioPlayer.OnPause,
-                firstAudioPlayer.OnStop
-            );
+            var firstAudioPlayerViewModel = viewModel.FirstAudioInstructionViewModel;
+            audioService.AudioPlayer = firstAudioPlayerViewModel.AudioPlayer;
 
             return (ViewModelBase)viewModel;
         }
@@ -40,15 +36,26 @@ public class BbtInstructionsViewModel(
             _getAudioResolver(testBuilder.CurrentSection, testBuilder.CurrentTrial),
             testBuilder.CurrentSection,
             testBuilder.CurrentTrial,
+            testBuilder.TotalTrialCount,
             patient.DominantHand
         )
     };
 
-    private AudioInstructionResolver _getAudioResolver(int section, int trial) => new(
-        audioService,
-        TestType.Bbt,
-        patient,
-        section,
-        trial
-    );
+    private AudioInstructionResolver _getAudioResolver(int section, int trial)
+    {
+        // If trial is 2/2 (excluding practice trial), choose the last audio
+        // "will repeat one last time" instead of "will repeat once more"
+        if (trial == 2 && testBuilder.TotalTrialCount == 3)
+        {
+            trial = 3;
+        }
+
+        return new AudioInstructionResolver(
+            audioService,
+            TestType.Bbt,
+            patient,
+            section,
+            trial
+        );
+    }
 }

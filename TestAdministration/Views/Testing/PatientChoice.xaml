@@ -11,7 +11,56 @@
     d:DataContext="{d:DesignInstance viewModelTesting:PatientChoiceViewModel}">
 
     <UserControl.Resources>
-        <converters:TableRowWidthConverter x:Key="TableRowWidthConverter" />
+        <ResourceDictionary>
+            <converters:TableRowWidthConverter x:Key="TableRowWidthConverter" />
+            <converters:IntEqualsConverter x:Key="IntEqualsConverter" />
+
+            <!-- ReSharper disable once Xaml.RedundantResource -->
+            <ui:ContentDialog
+                x:Key="TrialCountDialog"
+                Title="Nastavení testu"
+                PrimaryButtonText="Potvrdit"
+                CloseButtonText="Zrušit">
+
+                <StackPanel Margin="0,8,0,0">
+                    <ui:TextBlock Text="Vyberte počet pokusů:" Margin="0,0,0,8" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton
+                            Content="1"
+                            GroupName="tries"
+                            Margin="0,0,8,0"
+                            IsChecked="{
+                                Binding SelectedTrialCount,
+                                Mode=TwoWay,
+                                Converter={StaticResource IntEqualsConverter},
+                                ConverterParameter=1
+                            }" />
+                        
+                        <RadioButton
+                            Content="2"
+                            GroupName="tries"
+                            Margin="0,0,8,0"
+                            IsChecked="{
+                                Binding SelectedTrialCount,
+                                Mode=TwoWay,
+                                Converter={StaticResource IntEqualsConverter},
+                                ConverterParameter=2
+                            }" />
+                        
+                        <RadioButton
+                            Content="3"
+                            GroupName="tries"
+                            IsChecked="{
+                                Binding SelectedTrialCount,
+                                Mode=TwoWay,
+                                Converter={StaticResource IntEqualsConverter},
+                                ConverterParameter=3
+                            }" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:ContentDialog>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <StackPanel
@@ -39,7 +88,7 @@
             BorderThickness="1,0"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
             ItemsSource="{Binding Patients}"
-            SelectedItem="{Binding SelectedPatient}">
+            SelectedItem="{Binding SelectedPatient, Mode=TwoWay}">
 
             <ui:ListView.View>
                 <ui:GridView>

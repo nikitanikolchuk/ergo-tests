@@ -12,15 +12,21 @@ public interface ITestBuilder
     /// </summary>
     TestType Type { get; }
 
-    /// <value>
+    /// <summary>
     /// Number of current test section starting from 0.
-    /// </value>
+    /// </summary>
     int CurrentSection { get; }
 
-    /// <value>
+    /// <summary>
     /// Number of current test trial starting from 0.
-    /// </value>
+    /// </summary>
     int CurrentTrial { get; }
+
+    /// <summary>
+    /// Total trial count (including possible practice trial).
+    /// Should only be accessed after using <see cref="SetTrialCount"/>.
+    /// </summary>
+    int TotalTrialCount { get; }
 
     /// <value>
     /// Is true if all test values were added.
@@ -33,6 +39,13 @@ public interface ITestBuilder
     /// <param name="patient">The tested patient.</param>
     /// <returns>The updated builder instance.</returns>
     ITestBuilder SetPatient(Patient patient);
+
+    /// <summary>
+    /// Sets the trial count for the test (excluding practice trial).
+    /// </summary>
+    /// <param name="trialCount">The trial count.</param>
+    /// <returns>The updated builder instance.</returns>
+    ITestBuilder SetTrialCount(int trialCount);
 
     /// <summary>
     /// Sets tester's name.

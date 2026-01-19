@@ -18,10 +18,10 @@ public interface ITestSectionBuilder
     /// </value>
     public int SectionCount { get; }
 
-    /// <value>
-    /// Number of trials to be added in each section.
-    /// </value>
-    public int TrialCount { get; }
+    /// <summary>
+    /// Boolean flag for determining the number of trials in each section
+    /// </summary>
+    public bool HasPracticeTrial { get; }
 
     /// <summary>
     /// Creates a test trial from an added value. May be used by

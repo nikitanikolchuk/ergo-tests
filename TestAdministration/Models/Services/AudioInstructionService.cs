@@ -1,47 +1,20 @@
 using System.IO;
-using System.Windows.Media;
 using TestAdministration.Models.Data;
 
 namespace TestAdministration.Models.Services;
 
 public class AudioInstructionService
 {
-    private const string ResourcesPath = "pack://siteoforigin:,,,/Resources/Audio/";
-
     private bool _isPlaying;
-    private Action? _onResume;
-    private Action? _onPause;
-    private Action? _onStop;
 
-    public MediaPlayer Get(
-        TestType testType,
-        Hand dominantHand,
-        int section,
-        int trial,
-        int index,
-        bool? isMale = null
-    )
+    public AudioPlayer? AudioPlayer
     {
-        var test = testType.ToString().ToUpper();
-        var hand = dominantHand == Hand.Right ? "PHK" : "LHK";
-
-        string filePath;
-        if (isMale != null)
+        get;
+        set
         {
-            var gender = isMale.Value ? "m" : "z";
-            filePath = $"{test}/{hand}/{section}_{trial}_{index}_{gender}.mp3";
+            field = value;
+            _isPlaying = false;
         }
-        else
-        {
-            filePath = $"{test}/{hand}/{section}_{trial}_{index}.mp3";
-        }
-
-        var uri = new Uri(Path.Combine(ResourcesPath, filePath));
-
-        var mediaPlayer = new MediaPlayer();
-        mediaPlayer.Open(uri);
-
-        return mediaPlayer;
     }
 
     /// <summary>
@@ -49,7 +22,7 @@ public class AudioInstructionService
     /// </summary>
     public void Play()
     {
-        if (_onResume is null || _onPause is null)
+        if (AudioPlayer is null)
         {
             return;
         }
@@ -65,23 +38,12 @@ public class AudioInstructionService
     }
 
     /// <summary>
-    /// Sets the current audio player actions that account for
-    /// custom play/pause logic.
-    /// </summary>
-    public void SetPlayerActions(Action? onResume, Action? onPause, Action? onStop)
-    {
-        _onResume = onResume;
-        _onPause = onPause;
-        _onStop = onStop;
-    }
-
-    /// <summary>
     /// Resumes the current audio player if not null.
     /// </summary>
     public void Resume()
     {
         _isPlaying = true;
-        _onResume?.Invoke();
+        AudioPlayer?.OnResume.Invoke();
     }
 
     /// <summary>
@@ -90,7 +52,7 @@ public class AudioInstructionService
     public void Pause()
     {
         _isPlaying = false;
-        _onPause?.Invoke();
+        AudioPlayer?.OnPause.Invoke();
     }
 
     /// <summary>
@@ -100,7 +62,47 @@ public class AudioInstructionService
     public void Stop()
     {
         _isPlaying = false;
-        _onStop?.Invoke();
-        SetPlayerActions(null, null, null);
+        AudioPlayer?.OnStop.Invoke();
+        AudioPlayer = null;
+    }
+
+    /// <summary>
+    /// Resolve the absolute file path of an audio file. The pattern is
+    /// "{test}/{dominantHand}/{section}_{trial}_{index}(_{gender})(_{trialCount}).mp3"
+    /// </summary>
+    public static string GetFilePath(
+        TestType testType,
+        Hand dominantHand,
+        int section,
+        int trial,
+        int index,
+        bool? isMale = null,
+        int? trialCount = null
+    )
+    {
+        var test = testType.ToString().ToUpper();
+        var hand = dominantHand == Hand.Right ? "PHK" : "LHK";
+
+        List<object> fileNameParts = [section, trial, index];
+
+        if (isMale is not null)
+        {
+            var gender = isMale.Value ? "m" : "z";
+            fileNameParts.Add(gender);
+        }
+
+        if (trialCount is not null)
+        {
+            fileNameParts.Add(trialCount.Value);
+        }
+
+        return Path.Combine(
+            AppContext.BaseDirectory,
+            "Resources",
+            "Audio",
+            test,
+            hand,
+            string.Join("_", fileNameParts) + ".mp3"
+        );
     }
 }

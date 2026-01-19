@@ -38,9 +38,6 @@ public partial class TestConductionViewModel : ViewModelBase
     private readonly Action<Patient, Test> _onShowResults;
 
     private float? _currentValue;
-    private string _currentValueString = string.Empty;
-    private int _annulationCount;
-    private string _currentNote = string.Empty;
 
     public TestConductionViewModel(
         IContentDialogService contentDialogService,
@@ -50,6 +47,7 @@ public partial class TestConductionViewModel : ViewModelBase
         IDateTimeProvider dateTimeProvider,
         string tester,
         Patient patient,
+        int trialCount,
         TestType testType,
         Action<Patient, Test> onShowResults
     )
@@ -61,6 +59,7 @@ public partial class TestConductionViewModel : ViewModelBase
         _testBuilder = testBuilderFactory.Create(testType)
             .SetTester(tester)
             .SetPatient(_patient)
+            .SetTrialCount(trialCount)
             .SetDate(_dateTimeProvider.Today)
             .SetStartTime(_dateTimeProvider.Now);
         _onShowResults = onShowResults;
@@ -77,18 +76,18 @@ public partial class TestConductionViewModel : ViewModelBase
 
     public string CurrentValue
     {
-        get => _currentValueString;
+        get;
         set
         {
             if (value == string.Empty)
             {
                 _currentValue = null;
-                _currentValueString = value;
+                field = value;
                 OnPropertyChanged();
                 return;
             }
 
-            if (!FloatRegex().Match(value).Success)
+            if (!FloatRegex().IsMatch(value))
             {
                 return;
             }
@@ -96,7 +95,7 @@ public partial class TestConductionViewModel : ViewModelBase
             try
             {
                 _currentValue = float.Parse(value, CultureInfo.GetCultureInfo(Culture));
-                _currentValueString = value;
+                field = value;
             }
             catch (FormatException)
             {
@@ -105,20 +104,20 @@ public partial class TestConductionViewModel : ViewModelBase
 
             OnPropertyChanged();
         }
-    }
+    } = string.Empty;
 
     public bool IsValueReadOnly => AnnulationCount >= MaxAnnulations;
     public string AnnulationProgress => $"{AnnulationCount}/{MaxAnnulations}";
 
     public string CurrentNote
     {
-        get => _currentNote;
+        get;
         set
         {
-            _currentNote = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
+    } = string.Empty;
 
     public ViewModelBase RulesViewModel { get; }
     public CameraFeedViewModel CameraFeedViewModel { get; }
@@ -138,10 +137,10 @@ public partial class TestConductionViewModel : ViewModelBase
 
     private int AnnulationCount
     {
-        get => _annulationCount;
+        get;
         set
         {
-            _annulationCount = value;
+            field = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(IsValueReadOnly));
             OnPropertyChanged(nameof(AnnulationProgress));

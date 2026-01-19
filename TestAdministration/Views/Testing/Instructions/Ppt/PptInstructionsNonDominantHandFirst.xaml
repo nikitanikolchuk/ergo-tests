@@ -71,7 +71,7 @@
             <LineBreak />
             Spočítejte množství správně umístěných kolíků levou rukou do otvorů a výsledek zaznamenejte do záznamového
             formuláře do Skóre nedominantní ruky. Využívejte prostor pro psaní poznámek z pozorování výkonu probanda.
-            Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+            <Run Text="{Binding FollowTheSameWay, Mode=OneWay}" />
             <LineBreak />
             Pak vyzvěte probanda / přehrajte nahrávku:
             <LineBreak />

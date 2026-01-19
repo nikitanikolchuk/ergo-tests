@@ -4,17 +4,18 @@ public class PptInstructionsBothHandsRegularViewModel : ViewModelBase, IInstruct
 {
     public PptInstructionsBothHandsRegularViewModel(
         AudioInstructionResolver audioResolver,
-        int trial
+        int trial,
+        int trialCount
     )
     {
         FirstAudioInstruction =
-            trial == 1
+            trial != trialCount - 1
                 ? "„Teď ještě jednou zopakujeme to samé oběma rukama najednou. Instrukce zůstávají stejné. Pracujte co" +
                   " nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“"
                 : "„Teď ještě naposledy zopakujeme to samé oběma rukama najednou. Instrukce zůstávají stejné. Pracujte" +
                   " co nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“";
         SecondAudioInstructionViewModel = audioResolver.Get(1);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
     }
 
     public string FirstAudioInstruction { get; }

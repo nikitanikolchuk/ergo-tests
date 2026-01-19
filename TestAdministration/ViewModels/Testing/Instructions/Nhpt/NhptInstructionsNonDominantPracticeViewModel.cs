@@ -6,8 +6,13 @@ public class NhptInstructionsNonDominantPracticeViewModel : ViewModelBase, IInst
 {
     private const string ResourcesPath = "/Resources/Images";
 
-    public NhptInstructionsNonDominantPracticeViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    public NhptInstructionsNonDominantPracticeViewModel(
+        AudioInstructionResolver audioResolver,
+        Hand dominantHand,
+        int totalTrialCount
+    )
     {
+        TrialCount = totalTrialCount - 1;
         NonDominantHandGenitive = dominantHand == Hand.Right ? "levé" : "pravé";
         NonDominantHandInstrumental = dominantHand == Hand.Right ? "levou" : "pravou";
 
@@ -20,6 +25,7 @@ public class NhptInstructionsNonDominantPracticeViewModel : ViewModelBase, IInst
 
     public string NonDominantHandAcronym { get; }
     public string ImagePath { get; }
+    public int TrialCount { get; }
     public string NonDominantHandGenitive { get; }
 
     public string AudioInstruction =>

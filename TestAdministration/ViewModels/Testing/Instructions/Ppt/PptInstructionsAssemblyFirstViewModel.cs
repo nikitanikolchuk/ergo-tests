@@ -4,16 +4,26 @@ namespace TestAdministration.ViewModels.Testing.Instructions.Ppt;
 
 public class PptInstructionsAssemblyFirstViewModel : ViewModelBase, IInstructionsPageViewModel
 {
-    public PptInstructionsAssemblyFirstViewModel(AudioInstructionResolver audioResolver, Hand dominantHand)
+    public PptInstructionsAssemblyFirstViewModel(
+        AudioInstructionResolver audioResolver,
+        Hand dominantHand,
+        int trialCount
+    )
     {
         DominantHandMasculine = dominantHand == Hand.Right ? "pravého" : "levého";
         DominantHandFeminine = dominantHand == Hand.Right ? "pravé" : "levé";
         NonDominantHandInstrumental = dominantHand == Hand.Right ? "levou" : "pravou";
         DominantHandInstrumental = dominantHand == Hand.Right ? "pravou" : "levou";
+        FollowTheSameWay = trialCount switch
+        {
+            1 => string.Empty,
+            2 => "Stejným způsobem postupujte i u druhého pokusu tohoto subtestu.",
+            _ => "Stejným způsobem postupujte i u dalších pokusů tohoto subtestu."
+        };
         FourthAudioInstructionViewModel = audioResolver.Get(3);
-        ThirdAudioInstructionViewModel = audioResolver.Get(2, true, FourthAudioInstructionViewModel);
-        SecondAudioInstructionViewModel = audioResolver.Get(1, false, ThirdAudioInstructionViewModel);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, false, SecondAudioInstructionViewModel);
+        ThirdAudioInstructionViewModel = audioResolver.Get(2, true, nextPlayer: FourthAudioInstructionViewModel);
+        SecondAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, nextPlayer: SecondAudioInstructionViewModel);
     }
 
     public string FirstAudioInstruction =>
@@ -34,6 +44,8 @@ public class PptInstructionsAssemblyFirstViewModel : ViewModelBase, IInstruction
         $"Až řeknu: „Teď!“, začněte vytvářet co nejvíce kompletů. Začněte horním otvorem v {DominantHandFeminine}" +
         $" řadě. Pracujte co nejrychleji, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky. Jste" +
         $" připraven/a?“";
+
+    public string FollowTheSameWay { get; }
 
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }

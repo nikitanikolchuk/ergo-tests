@@ -15,7 +15,7 @@ public class BbtInstructionsDominantPracticeViewModel : ViewModelBase, IInstruct
         ImagePath = $"{ResourcesPath}/Bbt{imageSuffix}.jpg";
         
         SecondAudioInstructionViewModel = audioResolver.Get(1, true);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
     }
 
     public string DominantHandAcronym { get; }

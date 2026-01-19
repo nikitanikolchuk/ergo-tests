@@ -81,7 +81,8 @@
             množství správně umístěných
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">párů kolíků</Span>
             (nikoliv celkový počet kolíků) a výsledek zaznamenejte. Využívejte prostor pro psaní poznámek z pozorování
-            výkonu probanda. Stejným způsobem postupujte i u dalších pokusů tohoto subtestu.
+            výkonu probanda.
+            <Run Text="{Binding FollowTheSameWay, Mode=OneWay}" />
             <LineBreak />
             Pak vyzvěte probanda / přehrajte nahrávku:
             <LineBreak />

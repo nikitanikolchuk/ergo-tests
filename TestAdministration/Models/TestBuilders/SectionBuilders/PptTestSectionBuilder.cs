@@ -17,14 +17,13 @@ public class PptTestSectionBuilder(
 
     public override TestType Type => TestType.Ppt;
     public override int SectionCount => 4;
-    public override int TrialCount => 3;
+    public override bool HasPracticeTrial => false;
 
     public override ImmutableList<TestSection> BuildSections(List<List<TestTrial>> trials, Patient patient)
     {
         var sumTrials = trials
             .Take(SectionCount - 1)
             .Select(l => l.Select(t => t.Value).ToList())
-            .ToList()
             .Aggregate(_valueSum)
             .Select(value => BuildTrial(value, string.Empty, -1, patient))
             .ToList();
@@ -34,15 +33,15 @@ public class PptTestSectionBuilder(
         return base.BuildSections(totalTrials, patient);
     }
 
-    private List<float?> _valueSum(List<float?> first, List<float?> second)
+    private static List<float?> _valueSum(List<float?> first, List<float?> second)
     {
-        if (first.Count != TrialCount || second.Count != TrialCount)
+        if (first.Count != second.Count)
         {
             throw new ArgumentException("Invalid number of trials in a PPT section");
         }
 
         var totals = new List<float?>(first);
-        for (var i = 0; i < TrialCount; i++)
+        for (var i = 0; i < first.Count; i++)
         {
             if (second[i] is null)
             {

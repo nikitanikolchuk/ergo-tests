@@ -9,6 +9,7 @@ namespace TestAdministration.Tests.Models.TestBuilders;
 public class TestBuilderTests
 {
     private const string Tester = "Tester";
+    private const int DefaultTrialCount = 3;
 
     private readonly Mock<ITestSectionBuilder> _mockSectionBuilder;
     private readonly Patient _patient;
@@ -21,7 +22,7 @@ public class TestBuilderTests
         _mockSectionBuilder = new Mock<ITestSectionBuilder>();
         _mockSectionBuilder.SetupGet(sectionBuilder => sectionBuilder.Type).Returns(TestType.Nhpt);
         _mockSectionBuilder.SetupGet(sectionBuilder => sectionBuilder.SectionCount).Returns(2);
-        _mockSectionBuilder.SetupGet(sectionBuilder => sectionBuilder.TrialCount).Returns(4);
+        _mockSectionBuilder.SetupGet(sectionBuilder => sectionBuilder.HasPracticeTrial).Returns(true);
 
         _patient = new Patient(
             "Id",
@@ -92,6 +93,7 @@ public class TestBuilderTests
         var test = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetDate(_date)
             .SetStartTime(_startTime)
             .SetEndTime(_endTime)
@@ -194,10 +196,272 @@ public class TestBuilderTests
     }
 
     [Fact]
+    public void Build_BuildsCorrectly_WhenTrialCountIsOne()
+    {
+        const int trialCount = 1;
+        var trials = new List<List<TestTrial>>
+        {
+            new()
+            {
+                new TestTrial(10f, null, "Note1"),
+                new TestTrial(15f, null, "Note2")
+            },
+            new()
+            {
+                new TestTrial(15f, null, "Note3"),
+                new TestTrial(20f, null, "Note4")
+            }
+        };
+        var sections = new List<TestSection>
+        {
+            new(15f, null, trials[0].ToImmutableList()),
+            new(20f, null, trials[1].ToImmutableList())
+        }.ToImmutableList();
+        var expectedTest = new Test(
+            TestType.Nhpt,
+            Tester,
+            _date,
+            _startTime,
+            _endTime,
+            sections
+        );
+        _mockSectionBuilder
+            .Setup(sectionBuilder =>
+                sectionBuilder.BuildTrial(
+                    It.IsAny<float?>(),
+                    It.IsAny<string>(),
+                    It.IsAny<int>(),
+                    _patient
+                )
+            )
+            .Returns((float? value, string note, int _, Patient _) =>
+                new TestTrial(value, null, note)
+            );
+        _mockSectionBuilder
+            .Setup(sectionBuilder =>
+                sectionBuilder.BuildSections(It.IsAny<List<List<TestTrial>>>(), _patient)
+            )
+            .Returns(sections);
+
+        var test = new TestBuilder(_mockSectionBuilder.Object)
+            .SetTester(Tester)
+            .SetPatient(_patient)
+            .SetTrialCount(trialCount)
+            .SetDate(_date)
+            .SetStartTime(_startTime)
+            .SetEndTime(_endTime)
+            .AddValue(trials[0][0].Value, trials[0][0].Note)
+            .AddValue(trials[0][1].Value, trials[0][1].Note)
+            .AddValue(trials[1][0].Value, trials[1][0].Note)
+            .AddValue(trials[1][1].Value, trials[1][1].Note)
+            .Build();
+
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[0][0].Value,
+                trials[0][0].Note,
+                0,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[0][1].Value,
+                trials[0][1].Note,
+                0,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[1][0].Value,
+                trials[1][0].Note,
+                1,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[1][1].Value,
+                trials[1][1].Note,
+                1,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                It.IsAny<float?>(),
+                It.IsAny<string>(),
+                It.IsAny<int>(),
+                _patient
+            ),
+            Times.Exactly(4)
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildSections(It.IsAny<List<List<TestTrial>>>(), _patient),
+            Times.Once
+        );
+        Assert.Equal(expectedTest, test);
+    }
+
+    [Fact]
+    public void Build_BuildsCorrectly_WhenTrialCountIsTwo()
+    {
+        const int trialCount = 2;
+        var trials = new List<List<TestTrial>>
+        {
+            new()
+            {
+                new TestTrial(10f, null, "Note1"),
+                new TestTrial(15f, null, "Note2"),
+                new TestTrial(20f, null, "Note3")
+            },
+            new()
+            {
+                new TestTrial(15f, null, "Note4"),
+                new TestTrial(20f, null, "Note5"),
+                new TestTrial(25f, null, "Note6")
+            }
+        };
+        var sections = new List<TestSection>
+        {
+            new(17.5f, null, trials[0].ToImmutableList()),
+            new(22.5f, null, trials[1].ToImmutableList())
+        }.ToImmutableList();
+        var expectedTest = new Test(
+            TestType.Nhpt,
+            Tester,
+            _date,
+            _startTime,
+            _endTime,
+            sections
+        );
+        _mockSectionBuilder
+            .Setup(sectionBuilder =>
+                sectionBuilder.BuildTrial(
+                    It.IsAny<float?>(),
+                    It.IsAny<string>(),
+                    It.IsAny<int>(),
+                    _patient
+                )
+            )
+            .Returns((float? value, string note, int _, Patient _) =>
+                new TestTrial(value, null, note)
+            );
+        _mockSectionBuilder
+            .Setup(sectionBuilder =>
+                sectionBuilder.BuildSections(It.IsAny<List<List<TestTrial>>>(), _patient)
+            )
+            .Returns(sections);
+
+        var test = new TestBuilder(_mockSectionBuilder.Object)
+            .SetTester(Tester)
+            .SetPatient(_patient)
+            .SetTrialCount(trialCount)
+            .SetDate(_date)
+            .SetStartTime(_startTime)
+            .SetEndTime(_endTime)
+            .AddValue(trials[0][0].Value, trials[0][0].Note)
+            .AddValue(trials[0][1].Value, trials[0][1].Note)
+            .AddValue(trials[0][2].Value, trials[0][2].Note)
+            .AddValue(trials[1][0].Value, trials[1][0].Note)
+            .AddValue(trials[1][1].Value, trials[1][1].Note)
+            .AddValue(trials[1][2].Value, trials[1][2].Note)
+            .Build();
+
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[0][0].Value,
+                trials[0][0].Note,
+                0,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[0][1].Value,
+                trials[0][1].Note,
+                0,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[0][2].Value,
+                trials[0][2].Note,
+                0,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[1][0].Value,
+                trials[1][0].Note,
+                1,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[1][1].Value,
+                trials[1][1].Note,
+                1,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                trials[1][2].Value,
+                trials[1][2].Note,
+                1,
+                _patient
+            ),
+            Times.Once
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildTrial(
+                It.IsAny<float?>(),
+                It.IsAny<string>(),
+                It.IsAny<int>(),
+                _patient
+            ),
+            Times.Exactly(6)
+        );
+        _mockSectionBuilder.Verify(
+            sectionBuilder => sectionBuilder.BuildSections(It.IsAny<List<List<TestTrial>>>(), _patient),
+            Times.Once
+        );
+        Assert.Equal(expectedTest, test);
+    }
+
+    [Fact]
     public void Build_ThrowsInvalidOperationException_WhenPatientNotSet()
     {
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
+            .SetTrialCount(DefaultTrialCount)
+            .SetDate(_date)
+            .SetStartTime(_startTime)
+            .SetEndTime(_endTime);
+
+        Assert.Throws<InvalidOperationException>(() => testBuilder.Build());
+    }
+
+    [Fact]
+    public void Build_ThrowsInvalidOperationException_WhenTrialCountNotSet()
+    {
+        var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
+            .SetTester(Tester)
+            .SetPatient(_patient)
             .SetDate(_date)
             .SetStartTime(_startTime)
             .SetEndTime(_endTime);
@@ -210,6 +474,7 @@ public class TestBuilderTests
     {
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetDate(_date)
             .SetStartTime(_startTime)
             .SetEndTime(_endTime);
@@ -223,6 +488,7 @@ public class TestBuilderTests
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetStartTime(_startTime)
             .SetEndTime(_endTime);
 
@@ -235,6 +501,7 @@ public class TestBuilderTests
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetDate(_date)
             .SetEndTime(_endTime);
 
@@ -247,6 +514,7 @@ public class TestBuilderTests
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetDate(_date)
             .SetStartTime(_startTime);
 
@@ -259,6 +527,7 @@ public class TestBuilderTests
         var testBuilder = new TestBuilder(_mockSectionBuilder.Object)
             .SetTester(Tester)
             .SetPatient(_patient)
+            .SetTrialCount(DefaultTrialCount)
             .SetDate(_date)
             .SetStartTime(_startTime)
             .SetEndTime(_endTime);

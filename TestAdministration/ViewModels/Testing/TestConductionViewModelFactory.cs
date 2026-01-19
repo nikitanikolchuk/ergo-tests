@@ -15,8 +15,9 @@ public class TestConductionViewModelFactory(
     IDateTimeProvider dateTimeProvider
 )
 {
-    public Testing.TestConductionViewModel Create(
+    public TestConductionViewModel Create(
         Patient patient,
+        int trialCount,
         TestType testType,
         Action<Patient, Test> onShowResults
     ) => new(
@@ -27,6 +28,7 @@ public class TestConductionViewModelFactory(
         dateTimeProvider,
         configurationService.CurrentUser,
         patient,
+        trialCount,
         testType,
         onShowResults
     );

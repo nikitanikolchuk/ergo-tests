@@ -36,7 +36,7 @@
         </Grid>
 
         <ui:TextBlock>
-            Po dokončení 3. pokusu
+            Po dokončení <Run Text="{Binding TrialCount, Mode=OneWay}" /> pokusu
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>
             tak, aby její
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">

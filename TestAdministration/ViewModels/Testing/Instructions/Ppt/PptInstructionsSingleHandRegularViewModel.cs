@@ -8,7 +8,8 @@ public class PptInstructionsSingleHandRegularViewModel : ViewModelBase, IInstruc
         AudioInstructionResolver audioResolver,
         int section,
         int trial,
-        Hand dominantHand
+        Hand dominantHand,
+        int trialCount
     )
     {
         DominantHand = dominantHand == Hand.Right ? "pravou" : "levou";
@@ -24,13 +25,13 @@ public class PptInstructionsSingleHandRegularViewModel : ViewModelBase, IInstruc
         }
 
         TopAudioInstruction =
-            trial == 1
+            trial != trialCount - 1
                 ? $"„Teď ještě jednou zopakujeme to samé s vaší {CurrentHand} rukou. Instrukce zůstávají stejné." +
                   $" Pracujte co nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“"
                 : $"„Teď ještě naposledy zopakujeme to samé s vaší {CurrentHand} rukou. Instrukce zůstávají stejné." +
                   $" Pracujte co nejrychleji. Položte obě ruce po stranách desky. Jste připraven/a?“";
         SecondAudioInstructionViewModel = audioResolver.Get(1);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, true, SecondAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
     }
 
     public string TopAudioInstruction { get; }

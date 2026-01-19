@@ -14,7 +14,7 @@ public abstract class AbstractTestSectionBuilder<T>(
 {
     public abstract TestType Type { get; }
     public abstract int SectionCount { get; }
-    public abstract int TrialCount { get; }
+    public abstract bool HasPracticeTrial { get; }
 
     public TestTrial BuildTrial(float? value, string note, int section, Patient patient)
     {
@@ -39,12 +39,13 @@ public abstract class AbstractTestSectionBuilder<T>(
             }
         ).ToImmutableList();
 
-    private static float? _nullableAverage(IEnumerable<float?> values)
+    private float? _nullableAverage(IEnumerable<float?> values)
     {
         var nonNullValues = values
-            .TakeLast(3)
-            .Where(v => v != null)
+            .Skip(HasPracticeTrial ? 1 : 0)
+            .OfType<float>()
             .ToList();
+
         return nonNullValues.Count > 0 ? nonNullValues.Average() : null;
     }
 }

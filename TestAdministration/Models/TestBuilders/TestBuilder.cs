@@ -12,24 +12,38 @@ public class TestBuilder(
     ITestSectionBuilder sectionBuilder
 ) : ITestBuilder
 {
+    private const int MaxTrialCount = 3;
+
+    private readonly int _maxTotalTrialCount = MaxTrialCount + (sectionBuilder.HasPracticeTrial ? 1 : 0);
+    private readonly List<List<TestTrial>> _trials = [[]];
+
     private Patient? _patient;
+    private int? _totalTrialCount;
     private string? _tester;
     private DateOnly? _date;
     private TimeOnly? _startTime;
     private TimeOnly? _endTime;
-    private readonly List<List<TestTrial>> _trials = [[]];
 
     public TestType Type => sectionBuilder.Type;
     public int CurrentSection => _trials.Count - 1;
     public int CurrentTrial => _trials.Last().Count;
 
+    public int TotalTrialCount =>
+        _totalTrialCount ?? throw new InvalidOperationException("The trial count was not set");
+
     public bool IsFinished =>
         _trials.Count == sectionBuilder.SectionCount &&
-        CurrentTrial == sectionBuilder.TrialCount;
+        CurrentTrial == TotalTrialCount;
 
     public ITestBuilder SetPatient(Patient patient)
     {
         _patient = patient;
+        return this;
+    }
+
+    public ITestBuilder SetTrialCount(int trialCount)
+    {
+        _totalTrialCount = trialCount + (sectionBuilder.HasPracticeTrial ? 1 : 0);
         return this;
     }
 
@@ -83,7 +97,7 @@ public class TestBuilder(
 
         _trials.Last().Add(trial);
 
-        if (!IsFinished && CurrentTrial == sectionBuilder.TrialCount)
+        if (!IsFinished && CurrentTrial == TotalTrialCount)
         {
             _trials.Add([]);
         }
@@ -118,6 +132,11 @@ public class TestBuilder(
             throw new InvalidOperationException("The tested patient was not set");
         }
 
+        if (_totalTrialCount == null)
+        {
+            throw new InvalidOperationException("The trial count was not set");
+        }
+
         if (_tester == null)
         {
             throw new InvalidOperationException("Tester's name was not set");
@@ -141,6 +160,15 @@ public class TestBuilder(
         while (!IsFinished)
         {
             AddValue(null, string.Empty);
+        }
+
+        foreach (var sectionTrials in _trials)
+        {
+            while (sectionTrials.Count < _maxTotalTrialCount)
+            {
+                var emptyTrial = new TestTrial(null, null, string.Empty);
+                sectionTrials.Add(emptyTrial);
+            }
         }
 
         var sections = sectionBuilder.BuildSections(_trials, _patient);

@@ -12,5 +12,5 @@ public class NhptTestSectionBuilder(
 {
     public override TestType Type => TestType.Nhpt;
     public override int SectionCount => 2;
-    public override int TrialCount => 4;
+    public override bool HasPracticeTrial => true;
 }
