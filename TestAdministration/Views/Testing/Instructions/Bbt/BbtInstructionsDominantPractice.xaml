@@ -35,7 +35,7 @@
             <Image Grid.Column="1" Source="{Binding ImagePath}" />
         </Grid>
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Probandovi přečtěte následující pokyny/přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -55,7 +55,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Přemístěte
                 <Span TextDecorations="Underline">tři kostky</Span>
@@ -77,7 +77,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Odpovězte</Span>
             na všechny případné dotazy.
             <LineBreak />

@@ -11,6 +11,11 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <Style
+        x:Key="InstructionTextStyle"
+        TargetType="ui:TextBlock"
+        BasedOn="{StaticResource {x:Type ui:TextBlock}}" />
+
     <Style x:Key="AudioInstructionSpanStyle" TargetType="Span">
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="FontStyle" Value="Italic" />
@@ -27,7 +32,7 @@
         <Setter Property="Background" Value="#FAFF19" />
         <Setter Property="Foreground" Value="#E4000000" />
     </Style>
-    
+
     <Style x:Key="ScoringInstructionSpanStyle" TargetType="Span">
         <Setter Property="Background" Value="#16FF0D" />
         <Setter Property="Foreground" Value="#E4000000" />

@@ -35,7 +35,7 @@
             <Image Grid.Column="1" Source="{Binding ImagePath}" />
         </Grid>
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Po dokončení <Run Text="{Binding TrialCount, Mode=OneWay}" /> pokusu
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">testovací desku otočte</Span>
             tak, aby její
@@ -59,7 +59,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Pak řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             Během testu:

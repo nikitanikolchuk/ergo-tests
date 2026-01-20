@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Tento dílčí test testuje práci obou rukou zároveň. Začněte tím, že řeknete / přehrajete nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -38,7 +38,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté, co proband správně
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 umístil tři až čtyři páry kolíků
@@ -54,7 +54,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -68,7 +68,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding ThirdAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“

@@ -35,7 +35,7 @@
             <Image Grid.Column="1" Source="{Binding ImagePath}" />
         </Grid>
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Otočte testovací krabici tak, aby byla přihrádka se všemi kostkami na straně testované levé horní
                 končetiny.
@@ -61,7 +61,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Jste připraven/a?“</Span>
             (<Span Style="{StaticResource PhysicalInstructionSpanStyle}">počkejte 3 sekundy</Span>)

@@ -35,7 +35,7 @@
             <Image Grid.Column="1" Source="{Binding ImagePath}" />
         </Grid>
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Run Text="{Binding TopText,Mode=OneWay}" />
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -47,7 +47,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Pak probandovi
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>,
             jak dáváte postupně všech devět kolíků do otvorů, zatímco si desku přidržujete druhou rukou. Při ukázce
@@ -62,7 +62,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Pak
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">předveďte</Span>,
             jak postupně vyndaváte všech devět kolíků z otvorů a dáváte je zpět do zásobníku, zatímco si
@@ -78,7 +78,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding ThirdAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Stopky spusťte</Span>

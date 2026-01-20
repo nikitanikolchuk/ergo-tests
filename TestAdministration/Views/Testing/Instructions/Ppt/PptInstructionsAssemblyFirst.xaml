@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">
                 Předvádějte následující úkon a zároveň říkejte / přehrajte nahrávku:
             </Span>
@@ -40,7 +40,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Zdůrazněte, že by obě ruce měly pracovat po celou dobu zároveň: první zvedá kolík, druhá podložku, první
             trubičku a tak dále. Před zahájením testu by proband měl sestavit čtyři nebo pět úplných kompletů, aby bylo
             jisté, že proband plně porozuměl systému
@@ -65,7 +65,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -77,7 +77,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding ThirdAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“

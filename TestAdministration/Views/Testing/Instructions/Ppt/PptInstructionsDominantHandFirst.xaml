@@ -66,7 +66,7 @@
                 Source="{Binding ImagePath}" />
         </Grid>
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Vyzvěte probanda, ať se posadí ke stolu na pevnou židli. Sami se posaďte naproti němu. Výšku stolu nastavte
             tak, aby na něm mohl mít položenou alespoň polovinu předloktí za vzpřímeného sedu. Desku umístěte na stůl
             tak, aby
@@ -99,7 +99,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span FontWeight="Bold" TextDecorations="Underline">
                 Poznámka pro předvádění ukázek ve všech subtestech:
             </Span>
@@ -128,7 +128,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
             provedené při umisťování kolíků a
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zodpovězte</Span>
@@ -148,7 +148,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding ThirdAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -160,7 +160,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FourthAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“

@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Začněte tím, že řeknete / přehrajete nahrávku a
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">zároveň ukážete</Span>:
             <LineBreak />
@@ -34,7 +34,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté, co proband
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">umístil tři nebo čtyři kolíky</Span>
             a je zřejmé, že zadání porozuměl, zapište si případné poznámky a řekněte / přehrajte nahrávku:
@@ -48,7 +48,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding SecondAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -60,7 +60,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding ThirdAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
             <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“

@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Dále řekněte / přehrajte nahrávku:
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">
@@ -26,7 +26,7 @@
             Margin="{StaticResource AudioPlayerMargin}"
             Content="{Binding FirstAudioInstructionViewModel}" />
 
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte: <Span Style="{StaticResource OralInstructionSpanStyle}">„Teď!“</Span>.
             Současně s vydáním pokynu „Teď!“
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">spusťte odpočítávání 30 sekund</Span>.
