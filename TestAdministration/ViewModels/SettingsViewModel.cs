@@ -141,7 +141,13 @@ public class SettingsViewModel(
 
         using var cameraFeedViewModel = new CameraFeedViewModel(videoRecorderService);
         CameraFeedViewModel = cameraFeedViewModel;
-        CameraFeedViewModel.OnStartCamera();
+
+        var startSuccessful = await CameraFeedViewModel.OnStartCamera();
+        if (!startSuccessful)
+        {
+            return;            
+        }
+
         dialog.DataContext = this;
         _ = await contentDialogService.ShowAsync(dialog, CancellationToken.None);
     }

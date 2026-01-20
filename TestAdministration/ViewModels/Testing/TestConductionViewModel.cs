@@ -132,7 +132,7 @@ public partial class TestConductionViewModel : ViewModelBase
     public ICommand OnAddValue => new RelayCommand<object?>(_ => _onAddValue());
     public ICommand OnRemoveValue => new RelayCommand<object?>(_ => _onRemoveValue());
     public ICommand OnAppendNote => new RelayCommand<string>(_onAppendNote);
-    public ICommand OnPauseRecording => new RelayCommand<object?>(_ => CameraFeedViewModel.OnPauseRecording());
+    public ICommand OnPauseRecording => new RelayCommand<object?>(async void (_) => await CameraFeedViewModel.OnPauseRecording());
     public ICommand OnFinishTestingEarly => new RelayCommand<object?>(_ => _onFinishTestingEarly());
 
     private int AnnulationCount

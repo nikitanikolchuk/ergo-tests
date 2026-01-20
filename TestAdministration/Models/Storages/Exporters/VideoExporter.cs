@@ -62,11 +62,11 @@ public class VideoExporter(
         var surname = patient.Surname.ToUpper().Replace(" ", "-");
         var name = patient.Name.ToUpper().Replace(" ", "-");
         var testType = test.Type.ToString().ToUpper();
-        var date = test.Date.ToString("yyyy_MM_dd");
+        var timestamp = test.Date.ToDateTime(test.StartTime).ToString("yyyy-MM-dd_HH-mm-ss");
         var letterSuffix = letter is not null ? $"_{letter}" : string.Empty;
         var fileExtension = Path.GetExtension(filePath);
 
-        return _removeDiacritics($"{surname}_{name}_{testType}_{date}{letterSuffix}{fileExtension}");
+        return _removeDiacritics($"{surname}_{name}_{testType}_{timestamp}{letterSuffix}{fileExtension}");
     }
 
     private static string _removeDiacritics(string str)

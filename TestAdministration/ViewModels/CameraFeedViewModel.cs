@@ -1,5 +1,6 @@
 using System.Windows.Media.Imaging;
 using TestAdministration.Models.Services;
+using Wpf.Ui.Controls;
 
 namespace TestAdministration.ViewModels;
 
@@ -10,9 +11,6 @@ namespace TestAdministration.ViewModels;
 public class CameraFeedViewModel : ViewModelBase, IDisposable
 {
     private readonly VideoRecorderService _videoRecorderService;
-
-    private BitmapSource? _cameraFeedImage;
-    private string _recordingTime = "00:00";
 
     public CameraFeedViewModel(VideoRecorderService videoRecorderService)
     {
@@ -25,10 +23,10 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
 
     public BitmapSource? CameraFeedImage
     {
-        get => _cameraFeedImage;
+        get;
         private set
         {
-            _cameraFeedImage = value;
+            field = value;
             OnPropertyChanged();
         }
     }
@@ -37,23 +35,45 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
 
     public string RecordingTime
     {
-        get => _recordingTime;
+        get;
         private set
         {
-            _recordingTime = value;
+            field = value;
             OnPropertyChanged();
         }
+    } = "00:00";
+
+    public async Task<bool> OnStartCamera()
+    {
+        var startSuccessful = _videoRecorderService.StartCamera();
+
+        if (!startSuccessful)
+        {
+            var messageBox = new MessageBox
+            {
+                Title = "Chyba",
+                Content = "Nahrávání se nepodařilo spustit. " +
+                          "Zkontrolujte připojení kamery nebo v nastavení zvolte jinou.",
+                CloseButtonText = "Zavřít"
+            };
+
+            await messageBox.ShowDialogAsync();
+        }
+
+        return startSuccessful;
     }
 
-    public void OnStartCamera() => _videoRecorderService.StartCamera();
-
-    public void OnPauseRecording()
+    public async Task OnPauseRecording()
     {
         if (!_videoRecorderService.IsRecording)
         {
             if (!_videoRecorderService.IsCameraRunning)
             {
-                _videoRecorderService.StartCamera();
+                var startSuccessful = await OnStartCamera();
+                if (!startSuccessful)
+                {
+                    return;
+                }
             }
 
             _videoRecorderService.StartRecording();
@@ -69,11 +89,12 @@ public class CameraFeedViewModel : ViewModelBase, IDisposable
     public void OnStopRecording() => _videoRecorderService.StopCamera();
 
     private void _onNewFrameAvailable(BitmapSource bitmapSource) => CameraFeedImage = bitmapSource;
-    private void _onRecordingTimeUpdated(TimeSpan time) => RecordingTime = time.ToString(@"mm\:ss");
 
     public void Dispose()
     {
         _videoRecorderService.StopCamera();
         GC.SuppressFinalize(this);
     }
+
+    private void _onRecordingTimeUpdated(TimeSpan time) => RecordingTime = time.ToString(@"mm\:ss");
 }

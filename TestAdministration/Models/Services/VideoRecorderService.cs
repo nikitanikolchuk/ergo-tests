@@ -45,14 +45,14 @@ public class VideoRecorderService(
     public bool IsRecording { get; private set; }
     public bool IsPaused { get; private set; }
 
-    public void StartCamera()
+    public bool StartCamera()
     {
         if (IsCameraRunning)
         {
             StopRecording();
             _deleteTempRecording();
             _deleteTempMediaFiles();
-            return;
+            return true;
         }
 
         _deleteTempRecording();
@@ -61,7 +61,7 @@ public class VideoRecorderService(
         _capture = new VideoCapture();
         if (!_capture.Open(configurationService.CameraId))
         {
-            return;
+            return false;
         }
 
         IsCameraRunning = true;
@@ -105,6 +105,8 @@ public class VideoRecorderService(
             },
             cancellationToken
         );
+        
+        return true;
     }
 
     public void StopCamera()
