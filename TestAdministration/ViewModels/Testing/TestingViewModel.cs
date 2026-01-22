@@ -1,3 +1,4 @@
+using System.Windows;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages;
 using TestAdministration.ViewModels.Testing.Results;
@@ -12,34 +13,42 @@ public class TestingViewModel : ViewModelBase
 {
     private readonly IContentDialogService _contentDialogService;
     private readonly ITestStorage _testStorage;
+    private readonly LayoutStateViewModel _layoutState;
     private readonly TestConductionViewModelFactory _testConductionViewModelFactory;
     private readonly ResultsViewModelFactory _resultsViewModelFactory;
     private readonly TestType _testType;
-
-    private ViewModelBase _currentViewModel;
+    private readonly Action<Visibility> _setHeaderVisibility;
 
     public TestingViewModel(
         IContentDialogService contentDialogService,
         ITestStorage testStorage,
+        LayoutStateViewModel layoutStateViewModel,
         TestConductionViewModelFactory testConductionViewModelFactory,
         ResultsViewModelFactory resultsViewModelFactory,
-        TestType testType
+        TestType testType,
+        Action<Visibility> setHeaderVisibility
     )
     {
         _contentDialogService = contentDialogService;
+        _layoutState = layoutStateViewModel;
         _testConductionViewModelFactory = testConductionViewModelFactory;
         _resultsViewModelFactory = resultsViewModelFactory;
         _testStorage = testStorage;
         _testType = testType;
-        _currentViewModel = new PatientChoiceViewModel(_contentDialogService, _testStorage, _onStartTesting, _onOpenAddPatient);
+        _setHeaderVisibility = setHeaderVisibility;
+        
+        _layoutState.OnLayoutUpdated += _updateHeaderVisibility;
+
+        CurrentViewModel = new PatientChoiceViewModel(_contentDialogService, _testStorage, _onStartTesting, _onOpenAddPatient);
     }
 
     public ViewModelBase CurrentViewModel
     {
-        get => _currentViewModel;
+        get;
         private set
         {
-            _currentViewModel = value;
+            field = value;
+            _updateHeaderVisibility(_layoutState.IsCompactLayout);
             OnPropertyChanged();
         }
     }
@@ -65,5 +74,13 @@ public class TestingViewModel : ViewModelBase
     {
         _testStorage.AddTest(patient, test, videoFilePaths);
         _onOpenPatientChoice();
+    }
+
+    private void _updateHeaderVisibility(bool isCompactLayout)
+    {
+        var headerVisibility = isCompactLayout && CurrentViewModel is TestConductionViewModel
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+        _setHeaderVisibility(headerVisibility);
     }
 }

@@ -12,7 +12,8 @@ public class TestConductionViewModelFactory(
     AudioInstructionService audioInstructionService,
     VideoRecorderService videoRecorderService,
     ITestBuilderFactory testBuilderFactory,
-    IDateTimeProvider dateTimeProvider
+    IDateTimeProvider dateTimeProvider,
+    LayoutStateViewModel layoutStateViewModel
 )
 {
     public TestConductionViewModel Create(
@@ -26,6 +27,7 @@ public class TestConductionViewModelFactory(
         videoRecorderService,
         testBuilderFactory,
         dateTimeProvider,
+        layoutStateViewModel,
         configurationService.CurrentUser,
         patient,
         trialCount,

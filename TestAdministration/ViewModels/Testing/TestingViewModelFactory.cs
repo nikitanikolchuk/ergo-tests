@@ -1,3 +1,4 @@
+using System.Windows;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Storages;
 using TestAdministration.ViewModels.Testing.Results;
@@ -12,15 +13,18 @@ namespace TestAdministration.ViewModels.Testing;
 public class TestingViewModelFactory(
     IContentDialogService contentDialogService,
     ITestStorage testStorage,
+    LayoutStateViewModel layoutStateViewModel,
     TestConductionViewModelFactory testConductionViewModelFactory,
     ResultsViewModelFactory resultsViewModelFactory
 )
 {
-    public TestingViewModel Create(TestType testType) => new(
+    public TestingViewModel Create(TestType testType, Action<Visibility> setHeaderVisibility) => new(
         contentDialogService,
         testStorage,
+        layoutStateViewModel,
         testConductionViewModelFactory,
         resultsViewModelFactory,
-        testType
+        testType,
+        setHeaderVisibility
     );
 }

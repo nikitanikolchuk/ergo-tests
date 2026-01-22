@@ -13,13 +13,13 @@ namespace TestAdministration.ViewModels;
 public class MainWindowViewModel(
     IContentDialogService contentDialogService,
     AudioInstructionService audioInstructionService,
+    LayoutStateViewModel layoutStateViewModel,
     LoginScreenViewModel loginScreenViewModel,
     MainScreenViewModel mainScreenViewModel
 ) : ViewModelBase
 {
-    private ViewModelBase _screenViewModel = loginScreenViewModel;
-
     public IContentDialogService ContentDialogService => contentDialogService;
+    public LayoutStateViewModel LayoutState => layoutStateViewModel;
 
     /// <summary>
     /// View model with an associated view that fills the whole
@@ -27,13 +27,13 @@ public class MainWindowViewModel(
     /// </summary>
     public ViewModelBase ScreenViewModel
     {
-        get => _screenViewModel;
+        get;
         private set
         {
-            _screenViewModel = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
+    } = loginScreenViewModel;
 
     public ICommand OnDisplayMainScreenCommand => new RelayCommand<object?>(_ => _onDisplayMainScreen());
     public ICommand OnDisplayLoginScreenCommand => new RelayCommand<object?>(_ => _onDisplayLoginScreen());

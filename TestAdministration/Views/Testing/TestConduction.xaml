@@ -34,6 +34,24 @@
                     <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
                 </ui:TextBlock>
             </ui:ContentDialog>
+            
+            <Style 
+                x:Key="AdaptiveTitleTextStyle" 
+                TargetType="ui:TextBlock" 
+                BasedOn="{StaticResource {x:Type ui:TextBlock}}">
+
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+
+                <Style.Triggers>
+                    <DataTrigger
+                        Binding="{Binding LayoutState.IsCompactLayout}"
+                        Value="True">
+
+                        <Setter Property="FontSize" Value="28" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
 
             <Style x:Key="IconButtonStyle" TargetType="ui:Button">
                 <Setter Property="Template">
@@ -83,7 +101,19 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border Padding="8" Margin="54,80">
+    <Border Padding="8">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Margin" Value="54, 80, 54, 40" />
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LayoutState.IsCompactLayout}" Value="True">
+                        <Setter Property="Margin" Value="26,20" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -99,14 +129,12 @@
 
             <StackPanel Grid.Row="0" Grid.Column="0">
                 <ui:TextBlock
+                    Style="{StaticResource AdaptiveTitleTextStyle}"
                     Margin="0,0,0,8"
-                    FontTypography="TitleLarge"
-                    Foreground="{DynamicResource TextControlForeground}"
                     Text="{Binding TitleViewModel.CurrentSection}" />
 
                 <ui:TextBlock
-                    FontTypography="TitleLarge"
-                    Foreground="{DynamicResource TextControlForeground}"
+                    Style="{StaticResource AdaptiveTitleTextStyle}"
                     Text="{Binding TitleViewModel.CurrentTrial}" />
             </StackPanel>
 
@@ -336,11 +364,22 @@
             </Border>
 
             <StackPanel Grid.Row="0" Grid.Column="2">
-                <ui:TextBlock
-                    Margin="0,0,0,16"
-                    FontTypography="TitleLarge"
-                    Foreground="{DynamicResource TextControlForeground}"
-                    Text="Pravidla" />
+                <ui:TextBlock Text="Pravidla">
+                    <ui:TextBlock.Style>
+                        <Style TargetType="ui:TextBlock" BasedOn="{StaticResource AdaptiveTitleTextStyle}">
+                            <Setter Property="Margin" Value="0,0,0,16" />
+
+                            <Style.Triggers>
+                                <DataTrigger 
+                                    Binding="{Binding LayoutState.IsCompactLayout}" 
+                                    Value="True">
+                                    
+                                    <Setter Property="Margin" Value="0,0,0,8" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ui:TextBlock.Style>
+                </ui:TextBlock>
 
                 <ui:InfoBar
                     IsOpen="True"

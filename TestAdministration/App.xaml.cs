@@ -58,6 +58,7 @@ public partial class App
 
     private static IServiceCollection _configureServices() =>
         new ServiceCollection()
+            .AddSingleton<LayoutStateViewModel>()
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<LoginScreenViewModel>()
             .AddSingleton<ConfigurationService>()

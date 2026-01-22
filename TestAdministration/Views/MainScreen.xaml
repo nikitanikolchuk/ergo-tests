@@ -168,7 +168,9 @@
             <ui:TextBlock
                 Margin="56,44,0,0"
                 FontTypography="Title"
-                Text="{Binding ContentHeader}" />
+                Text="{Binding ContentHeader}"
+                Visibility="{Binding ContentHeaderVisibility}">
+            </ui:TextBlock>
         </ui:NavigationView.Header>
 
         <ui:NavigationView.ContentOverlay>

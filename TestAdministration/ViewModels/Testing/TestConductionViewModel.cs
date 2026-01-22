@@ -45,6 +45,7 @@ public partial class TestConductionViewModel : ViewModelBase
         VideoRecorderService videoRecorderService,
         ITestBuilderFactory testBuilderFactory,
         IDateTimeProvider dateTimeProvider,
+        LayoutStateViewModel layoutStateViewModel,
         string tester,
         Patient patient,
         int trialCount,
@@ -55,6 +56,7 @@ public partial class TestConductionViewModel : ViewModelBase
         _contentDialogService = contentDialogService;
         _audioInstructionService = audioInstructionService;
         _dateTimeProvider = dateTimeProvider;
+        LayoutState = layoutStateViewModel;
         _patient = patient;
         _testBuilder = testBuilderFactory.Create(testType)
             .SetTester(tester)
@@ -70,6 +72,7 @@ public partial class TestConductionViewModel : ViewModelBase
         RulesViewModel = _getRulesViewModel(testType);
     }
 
+    public LayoutStateViewModel LayoutState { get; }
     public TestConductionTitleViewModel TitleViewModel { get; }
     public IInstructionsViewModel InstructionsViewModel { get; }
     public string ValuePlaceholderText => _getValuePlaceholderText(_testBuilder.Type, _testBuilder.CurrentSection);

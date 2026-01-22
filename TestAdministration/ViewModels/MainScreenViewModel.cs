@@ -1,11 +1,13 @@
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using TestAdministration.Models.Data;
 using TestAdministration.Models.Services;
 using TestAdministration.Models.Storages;
 using TestAdministration.ViewModels.Testing;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
+using MessageBoxResult = Wpf.Ui.Controls.MessageBoxResult;
 
 namespace TestAdministration.ViewModels;
 
@@ -23,9 +25,6 @@ public partial class MainScreenViewModel(
 {
     [GeneratedRegex(@"\s+")]
     private static partial Regex WhitespaceRegex();
-
-    private string _contentHeader = string.Empty;
-    private ViewModelBase _currentViewModel = new InitContentViewModel();
 
     public string CurrentUser => configurationService.CurrentUser;
 
@@ -56,23 +55,33 @@ public partial class MainScreenViewModel(
 
     public string ContentHeader
     {
-        get => _contentHeader;
+        get;
         set
         {
-            _contentHeader = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
+    } = string.Empty;
+
+    public Visibility ContentHeaderVisibility
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged();
+        }
+    } = Visibility.Visible;
 
     public ViewModelBase CurrentViewModel
     {
-        get => _currentViewModel;
+        get;
         set
         {
-            _currentViewModel = value;
+            field = value;
             OnPropertyChanged();
         }
-    }
+    } = new InitContentViewModel();
 
     public ICommand OnStartTestingCommand => new RelayCommand<TestType>(_onStartTesting);
     public ICommand OnOpenResultsCommand => new RelayCommand<object?>(_ => _onOpenResultsSection());
@@ -91,7 +100,8 @@ public partial class MainScreenViewModel(
             _ => string.Empty
         };
 
-        _navigate(contentHeader, () => testingViewModelFactory.Create(testType));
+        var setHeaderVisibility = (Visibility v) => { ContentHeaderVisibility = v; };
+        _navigate(contentHeader, () => testingViewModelFactory.Create(testType, setHeaderVisibility));
     }
 
     private void _onOpenResultsSection() =>
@@ -124,8 +134,9 @@ public partial class MainScreenViewModel(
 
         audioInstructionService.Stop();
         videoRecorderService.StopCamera();
-        ContentHeader = contentHeader;
         CurrentViewModel = createViewModel();
+        ContentHeader = contentHeader;
+        ContentHeaderVisibility = Visibility.Visible;
     }
 
     private async Task<bool> _confirmNavigation()
