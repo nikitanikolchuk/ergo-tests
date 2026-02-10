@@ -37,7 +37,8 @@
         </Style>
     </UserControl.Resources>
 
-    <ui:NavigationView 
+    <ui:NavigationView
+        IsPaneOpen="{Binding IsNavPaneOpen}"
         IsBackButtonVisible="Collapsed"
         IsTopSeparatorVisible="False"
         IsFooterSeparatorVisible="False">

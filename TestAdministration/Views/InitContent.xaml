@@ -5,24 +5,28 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
     mc:Ignorable="d"
     d:DesignWidth="1600"
-    d:DesignHeight="1048">
+    d:DesignHeight="1048"
+    d:DataContext="{d:DesignInstance viewModels:InitContentViewModel}">
 
     <StackPanel VerticalAlignment="Center">
-        <ui:Image
-            Margin="0,0,0,32"
-            CornerRadius="4"
-            Height="600"
-            Source="/Resources/Images/InitScreen.jpg" />
-
         <ui:TextBlock
+            Margin="0,0,0,32"
             Width="600"
             FontTypography="TitleLarge"
             FontWeight="SemiBold"
             Foreground="{DynamicResource TextControlForeground}"
             TextWrapping="Wrap"
-            TextAlignment="Center"
-            Text="Ergo Testy Jemné Motoriky" />
+            TextAlignment="Center">
+            
+            Ergo Testy Jemné Motoriky v<Run Text="{Binding AppVersion, Mode=OneWay}" />
+        </ui:TextBlock>
+
+        <ui:Image
+            CornerRadius="4"
+            Height="500"
+            Source="/Resources/Images/InitScreen.jpg" />
     </StackPanel>
 </UserControl>

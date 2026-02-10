@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <StackPanel Margin="{StaticResource ContentMargin}">
-        <ui:TextBlock>
+        <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Run Text="{Binding TopText,Mode=OneWay}" />
             <LineBreak />
             <Span Style="{StaticResource AudioInstructionSpanStyle}">

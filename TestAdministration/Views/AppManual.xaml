@@ -2,7 +2,14 @@
     x:Class="TestAdministration.Views.AppManual"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestAdministration.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:AppManualViewModel}"
+    d:DesignWidth="1920"
+    d:DesignHeight="1080">
 
     <UserControl.Resources>
         <Style
@@ -36,71 +43,85 @@
         BorderThickness="1"
         BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
-        <StackPanel>
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Administrace účtů" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="MaxHeight" Value="700" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Aplikace umožňuje nastavování účtů testujících: jejich přidání, odstranění a výběr aktuálního. Tyto účty
-                se používají pouze pro zaznamenávání výsledků a zapisují se do tabulek.
-            </ui:TextBlock>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LayoutState.IsCompactLayout}" Value="True">
+                            <Setter Property="MaxHeight" Value="500" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
 
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Zobrazení informací" />
+            <StackPanel>
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Administrace účtů" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Textových instrukcí a pravidel je ve většině případů více než přiděleného místa a pro zobrazení
-                dalších můžete <Bold>skrolovat</Bold>. Toto platí i pro <Bold>tabulky s výsledky</Bold>. Na počítačích
-                s menšími monitory může být užitečná změna měřítka zobrazení v nastaveních Windows.
-            </ui:TextBlock>
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Aplikace umožňuje nastavování účtů testujících: jejich přidání, odstranění a výběr aktuálního. Tyto účty
+                    se používají pouze pro zaznamenávání výsledků a zapisují se do tabulek.
+                </ui:TextBlock>
 
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Spuštění zvukových instrukcí" />
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Zobrazení informací" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Zvukové instrukce je možné spouštět pomocí <Bold>mezerníku</Bold>. Stisknutí mezerníku po skončení
-                přehrávání spustí následující audiopřehrávač na této stránce.
-            </ui:TextBlock>
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Textových instrukcí a pravidel je ve většině případů více než přiděleného místa a pro zobrazení
+                    dalších můžete <Bold>skrolovat</Bold>. Toto platí i pro <Bold>tabulky s výsledky</Bold>. Na počítačích
+                    s menšími monitory může být užitečná změna měřítka zobrazení v nastaveních Windows.
+                </ui:TextBlock>
 
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Zaznamenávání výsledků" />
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Spuštění zvukových instrukcí" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Aplikace umožňuje zápis naměřených hodnot během testování. SD-skóre se z toho počítá automaticky na
-                základě pohlaví a věku pacienta (pokud je mu alespoň 20 let). <Bold>Třetí anulování</Bold> jednoho
-                pokusu <Bold>blokuje</Bold> možnost zápisu hodnoty. <Bold>Předčasné ukončení</Bold> testování vyplňuje
-                prázdné hodnoty pro zbytek testu.
-            </ui:TextBlock>
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Zvukové instrukce je možné spouštět pomocí <Bold>mezerníku</Bold>. Stisknutí mezerníku po skončení
+                    přehrávání spustí následující audiopřehrávač na této stránce.
+                </ui:TextBlock>
 
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Nahrávání videozáznamu" />
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Zaznamenávání výsledků" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Aplikace umožňuje nahrávání videozáznamu z testování. Pro výběr kamery a mikrofonu použijte stránku
-                <Bold>Nastavení</Bold>. Nahrávání se spouští kliknutím na odpovídající tlačítko na testovací stránce.
-                Nahrávání <Bold>může být opakovaně přerušováno</Bold> stejným tlačítkem a ve výsledku se uloží
-                <Bold>jeden videozáznam</Bold>. Aplikace také umožňuje přidání externích videozáznamů na konci
-                testování. Přidané soubory se zkopírují do podadresáře pacienta a budou přejmenovány.
-            </ui:TextBlock>
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Aplikace umožňuje zápis naměřených hodnot během testování. SD-skóre se z toho počítá automaticky na
+                    základě pohlaví a věku pacienta (pokud je mu alespoň 20 let). <Bold>Třetí anulování</Bold> jednoho
+                    pokusu <Bold>blokuje</Bold> možnost zápisu hodnoty. <Bold>Předčasné ukončení</Bold> testování vyplňuje
+                    prázdné hodnoty pro zbytek testu.
+                </ui:TextBlock>
 
-            <ui:TextBlock
-                Style="{StaticResource SectionTextBlockStyle}"
-                Text="Export výsledků" />
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Nahrávání videozáznamu" />
 
-            <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
-                Ukládání výsledků z testování přidává soubory do podadresáře pacienta v adresáři vybraném na
-                přihlašovací stránce. Takové podadresáře obsahují CSV soubory s <Bold>tabulkami</Bold>, které je možné
-                otevřít v programu Microsoft <Bold>Excel</Bold>, textové soubory, jejichž obsah je určen pro
-                <Bold>zdravotnickou dokumentaci</Bold> a <Bold>videozáznamy</Bold>. Tento adresář je možné otevřít pomocí
-                tlačítka <Bold>Výsledky</Bold> v levé části obrazovky. <Bold>Ruční změna</Bold> CSV souboru
-                <Bold>může způsobit problémy</Bold> pro jeho automatické načítání. V případě takové změny udělejte
-                <Bold>zálohu</Bold>.
-            </ui:TextBlock>
-        </StackPanel>
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Aplikace umožňuje nahrávání videozáznamu z testování. Pro výběr kamery a mikrofonu použijte stránku
+                    <Bold>Nastavení</Bold>. Nahrávání se spouští kliknutím na odpovídající tlačítko na testovací stránce.
+                    Nahrávání <Bold>může být opakovaně přerušováno</Bold> stejným tlačítkem a ve výsledku se uloží
+                    <Bold>jeden videozáznam</Bold>. Aplikace také umožňuje přidání externích videozáznamů na konci
+                    testování. Přidané soubory se zkopírují do podadresáře pacienta a budou přejmenovány.
+                </ui:TextBlock>
+
+                <ui:TextBlock
+                    Style="{StaticResource SectionTextBlockStyle}"
+                    Text="Export výsledků" />
+
+                <ui:TextBlock Style="{StaticResource RegularTextBlockStyle}">
+                    Ukládání výsledků z testování přidává soubory do podadresáře pacienta v adresáři vybraném na
+                    přihlašovací stránce. Takové podadresáře obsahují CSV soubory s <Bold>tabulkami</Bold>, které je možné
+                    otevřít v programu Microsoft <Bold>Excel</Bold>, textové soubory, jejichž obsah je určen pro
+                    <Bold>zdravotnickou dokumentaci</Bold> a <Bold>videozáznamy</Bold>. Tento adresář je možné otevřít pomocí
+                    tlačítka <Bold>Výsledky</Bold> v levé části obrazovky. <Bold>Ruční změna</Bold> CSV souboru
+                    <Bold>může způsobit problémy</Bold> pro jeho automatické načítání. V případě takové změny udělejte
+                    <Bold>zálohu</Bold>.
+                </ui:TextBlock>
+            </StackPanel>
+        </ScrollViewer>
     </Border>
 </UserControl>

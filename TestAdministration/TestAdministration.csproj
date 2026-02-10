@@ -8,7 +8,7 @@
         <UseWPF>true</UseWPF>
         <AssemblyName>Ergo Testy Jemné Motoriky v1.1.0</AssemblyName>
         <ApplicationIcon>Resources\Images\AssemblyIcon.ico</ApplicationIcon>
-        <FileVersion>1.1.0</FileVersion>
+        <Version>1.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>

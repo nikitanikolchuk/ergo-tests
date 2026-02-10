@@ -248,8 +248,7 @@ public partial class TestConductionViewModel : ViewModelBase
 
     private void _resetContent()
     {
-        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentSection));
-        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTrial));
+        TitleViewModel.OnPropertyChanged(nameof(TitleViewModel.CurrentTitle));
         _audioInstructionService.Stop();
         InstructionsViewModel.OnPropertyChanged(nameof(InstructionsViewModel.CurrentViewModel));
         OnPropertyChanged(nameof(ValuePlaceholderText));

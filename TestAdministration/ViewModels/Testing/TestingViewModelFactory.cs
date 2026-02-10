@@ -18,13 +18,14 @@ public class TestingViewModelFactory(
     ResultsViewModelFactory resultsViewModelFactory
 )
 {
-    public TestingViewModel Create(TestType testType, Action<Visibility> setHeaderVisibility) => new(
+    public TestingViewModel Create(TestType testType, Action<bool> setIsNavPaneOpen, Action<Visibility> setHeaderVisibility) => new(
         contentDialogService,
         testStorage,
         layoutStateViewModel,
         testConductionViewModelFactory,
         resultsViewModelFactory,
         testType,
+        setIsNavPaneOpen,
         setHeaderVisibility
     );
 }

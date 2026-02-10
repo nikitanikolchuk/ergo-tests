@@ -20,7 +20,8 @@ public partial class MainScreenViewModel(
     VideoRecorderService videoRecorderService,
     ITestStorage testStorage,
     TestingViewModelFactory testingViewModelFactory,
-    SettingsViewModelFactory settingsViewModelFactory
+    SettingsViewModelFactory settingsViewModelFactory,
+    LayoutStateViewModel layoutState
 ) : ViewModelBase
 {
     [GeneratedRegex(@"\s+")]
@@ -52,6 +53,16 @@ public partial class MainScreenViewModel(
             return $"{names[0][0]}{names[1][0]}";
         }
     }
+
+    public bool IsNavPaneOpen
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged();
+        }
+    } = true;
 
     public string ContentHeader
     {
@@ -100,15 +111,19 @@ public partial class MainScreenViewModel(
             _ => string.Empty
         };
 
+        var setIsNavPaneOpen = (bool isNavPaneOpen) => { IsNavPaneOpen = isNavPaneOpen; };
         var setHeaderVisibility = (Visibility v) => { ContentHeaderVisibility = v; };
-        _navigate(contentHeader, () => testingViewModelFactory.Create(testType, setHeaderVisibility));
+        _navigate(
+            contentHeader,
+            () => testingViewModelFactory.Create(testType, setIsNavPaneOpen, setHeaderVisibility)
+        );
     }
 
     private void _onOpenResultsSection() =>
         _navigate("Výsledky", () => new ResultsStorageViewModel(testStorage.DataPath));
 
     private void _onOpenAppManual() =>
-        _navigate("Návod k použití", () => new AppManualViewModel());
+        _navigate("Návod k použití", () => new AppManualViewModel(layoutState));
 
     private void _onOpenTextManuals() =>
         _navigate("Textové manuály", () => new TextManualsViewModel());

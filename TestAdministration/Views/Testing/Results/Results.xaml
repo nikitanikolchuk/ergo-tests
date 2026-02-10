@@ -108,28 +108,28 @@
 
             <StackPanel
                 Grid.Row="2"
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Center">
 
                 <ui:Button
-                    x:Name="DocumentationButton"
-                    Margin="0,0,32,0"
+                    x:Name="SaveButton"
+                    Margin="0,0,0,8"
+                    HorizontalAlignment="Stretch"
+                    Appearance="Primary"
+                    Icon="{ui:SymbolIcon Save24}"
+                    Content="Uložit výsledky a ukončit"
+                    Command="{Binding OnSaveTest}" />
+
+                <ui:Button
+                    Width="{Binding ActualWidth, ElementName=SaveButton}"
                     Icon="{ui:SymbolIcon Document24}"
                     Content="Text do dokumentace"
                     Command="{Binding OnGetDocumentationText}" />
-
-                <ui:Button
-                    Width="{Binding ActualWidth,ElementName=DocumentationButton}"
-                    Appearance="Primary"
-                    Icon="{ui:SymbolIcon Save24}"
-                    Content="Uložit a ukončit"
-                    Command="{Binding OnSaveTest}" />
             </StackPanel>
 
             <UniformGrid
                 Grid.Row="3"
-                Height="404"
+                Height="396"
                 Rows="2"
                 Columns="1">
 

@@ -23,7 +23,7 @@
                 CloseButtonText="Zrušit">
 
                 <StackPanel Margin="0,8,0,0">
-                    <ui:TextBlock Text="Vyberte počet pokusů:" Margin="0,0,0,8" />
+                    <ui:TextBlock Text="Kolik pokusů jednotlivých subtestů chcete provádět?" Margin="0,0,0,8" />
 
                     <StackPanel Orientation="Horizontal">
                         <RadioButton

@@ -34,13 +34,13 @@
                     <Span Style="{StaticResource OralInstructionSpanStyle}">„A zpět… rychleji!“</Span>
                 </ui:TextBlock>
             </ui:ContentDialog>
-            
-            <Style 
-                x:Key="AdaptiveTitleTextStyle" 
-                TargetType="ui:TextBlock" 
+
+            <Style
+                x:Key="AdaptiveTitleTextStyle"
+                TargetType="ui:TextBlock"
                 BasedOn="{StaticResource {x:Type ui:TextBlock}}">
 
-                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontSize" Value="36" />
                 <Setter Property="FontWeight" Value="SemiBold" />
 
                 <Style.Triggers>
@@ -48,7 +48,7 @@
                         Binding="{Binding LayoutState.IsCompactLayout}"
                         Value="True">
 
-                        <Setter Property="FontSize" Value="28" />
+                        <Setter Property="FontSize" Value="20" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -127,16 +127,11 @@
                 <ColumnDefinition Width="*" SharedSizeGroup="ContentGroup" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0">
-                <ui:TextBlock
-                    Style="{StaticResource AdaptiveTitleTextStyle}"
-                    Margin="0,0,0,8"
-                    Text="{Binding TitleViewModel.CurrentSection}" />
-
-                <ui:TextBlock
-                    Style="{StaticResource AdaptiveTitleTextStyle}"
-                    Text="{Binding TitleViewModel.CurrentTrial}" />
-            </StackPanel>
+            <ui:TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource AdaptiveTitleTextStyle}"
+                Text="{Binding TitleViewModel.CurrentTitle}" />
 
             <Border
                 x:Name="LeftPanel"
@@ -363,41 +358,35 @@
                 </Grid>
             </Border>
 
-            <StackPanel Grid.Row="0" Grid.Column="2">
-                <ui:TextBlock Text="Pravidla">
-                    <ui:TextBlock.Style>
-                        <Style TargetType="ui:TextBlock" BasedOn="{StaticResource AdaptiveTitleTextStyle}">
-                            <Setter Property="Margin" Value="0,0,0,16" />
+            <ui:TextBlock 
+                Grid.Row="0" 
+                Grid.Column="2"
+                Style="{StaticResource AdaptiveTitleTextStyle}"
+                Text="Pravidla" />
 
-                            <Style.Triggers>
-                                <DataTrigger 
-                                    Binding="{Binding LayoutState.IsCompactLayout}" 
-                                    Value="True">
-                                    
-                                    <Setter Property="Margin" Value="0,0,0,8" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ui:TextBlock.Style>
-                </ui:TextBlock>
+            <Grid Grid.Row="2" Grid.Column="2" Height="{Binding ActualHeight, ElementName=LeftPanel}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
                 <ui:InfoBar
+                    Grid.Row="0"
                     IsOpen="True"
                     IsClosable="False"
                     Message="Klikněte na jedno z tlačítek pro přidání odpovídající poznámky" />
-            </StackPanel>
 
-            <Border
-                Grid.Row="2"
-                Grid.Column="2"
-                Height="{Binding ActualHeight, ElementName=LeftPanel}"
-                Padding="16"
-                CornerRadius="4"
-                BorderThickness="1"
-                BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                <Border
+                    Grid.Row="2"
+                    Padding="16"
+                    CornerRadius="4"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}">
 
-                <ui:DynamicScrollViewer Content="{Binding RulesViewModel}" />
-            </Border>
+                    <ui:DynamicScrollViewer Content="{Binding RulesViewModel}" />
+                </Border>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

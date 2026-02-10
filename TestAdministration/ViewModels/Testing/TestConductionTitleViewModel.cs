@@ -13,13 +13,22 @@ public class TestConductionTitleViewModel(
     Hand dominantHand
 ) : ViewModelBase
 {
-    public string CurrentSection => _getSectionName(testBuilder.CurrentSection, dominantHand);
-    public string CurrentTrial => _getTrialName(testBuilder.Type, testBuilder.CurrentTrial);
+    public string CurrentTitle => _getTitle();
 
-    private static string _getSectionName(int section, Hand dominantHand) => section switch
+    private string _getTitle()
     {
-        0 => $"Dominantní ruka - {_getDominantHandString(dominantHand)}",
-        1 => $"Nedominantní ruka - {_getNonDominantHandString(dominantHand)}",
+        var test = testBuilder.Type.ToString().ToUpper();
+        var section = _getSectionName(testBuilder.CurrentSection);
+        var hand = _getDominantHandString(dominantHand);
+        var trial = _getTrialName(testBuilder.Type, testBuilder.CurrentTrial);
+
+        return $"{test} – {section} (dom. {hand}): {trial}";
+    }
+
+    private static string _getSectionName(int section) => section switch
+    {
+        0 => "Dominantní ruka",
+        1 => "Nedominantní ruka",
         2 => "Obě ruce",
         3 => "Kompletování",
         _ => throw new ArgumentOutOfRangeException(
@@ -34,19 +43,6 @@ public class TestConductionTitleViewModel(
         Hand.None => throw new ArgumentException("Invalid value of dominant hand"),
         Hand.Left => "LHK",
         Hand.Right => "PHK",
-        Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),
-        _ => throw new InvalidEnumArgumentException(
-            nameof(dominantHand),
-            Convert.ToInt32(dominantHand),
-            typeof(Hand)
-        )
-    };
-
-    private static string _getNonDominantHandString(Hand dominantHand) => dominantHand switch
-    {
-        Hand.None => throw new ArgumentException("Invalid value of dominant hand"),
-        Hand.Left => "PHK",
-        Hand.Right => "LHK",
         Hand.Both => throw new ArgumentException("Invalid value of dominant hand"),
         _ => throw new InvalidEnumArgumentException(
             nameof(dominantHand),
