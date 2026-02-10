@@ -31,6 +31,7 @@ public class NhptInstructionsDominantPracticeViewModel : ViewModelBase, IInstruc
         ThirdAudioInstructionViewModel = audioResolver.Get(2, true);
         SecondAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: ThirdAudioInstructionViewModel);
         FirstAudioInstructionViewModel = audioResolver.Get(0, trialCount: trialCount, nextPlayer: SecondAudioInstructionViewModel);
+        VolumeCheckAudioInstructionViewModel = audioResolver.GetVolumeCheck(FirstAudioInstructionViewModel);
     }
 
     public string TopText =>
@@ -47,6 +48,7 @@ public class NhptInstructionsDominantPracticeViewModel : ViewModelBase, IInstruc
     public string DominantHandAcronym { get; }
     public string ImagePath { get; }
 
+    public InstructionPlayerViewModel VolumeCheckAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }

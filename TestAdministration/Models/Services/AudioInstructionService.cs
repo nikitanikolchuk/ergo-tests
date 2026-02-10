@@ -5,6 +5,12 @@ namespace TestAdministration.Models.Services;
 
 public class AudioInstructionService
 {
+    /// <summary>
+    /// Common file for all test types, used for checking the audio volume.
+    /// </summary>
+    public static string VolumeCheckFilePath =>
+        Path.Combine(AppContext.BaseDirectory, "Resources", "Audio", "volume.mp3");
+
     private bool _isPlaying;
 
     public AudioPlayer? AudioPlayer

@@ -35,6 +35,14 @@
             <Image Grid.Column="1" Source="{Binding ImagePath}" />
         </Grid>
 
+        <ui:TextBlock 
+            Style="{StaticResource InstructionTextStyle}"
+            Text="Nejprve nastavte hlasitost reproduktorů tak, aby to vyhovovalo vám i testované osobě." />
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding VolumeCheckAudioInstructionViewModel}" />
+
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Probandovi přečtěte následující pokyny/přehrajte nahrávku:
             <LineBreak />

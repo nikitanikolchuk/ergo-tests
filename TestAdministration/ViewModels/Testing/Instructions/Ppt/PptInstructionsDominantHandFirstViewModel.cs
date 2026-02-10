@@ -35,6 +35,7 @@ public class PptInstructionsDominantHandFirstViewModel : ViewModelBase, IInstruc
         ThirdAudioInstructionViewModel = audioResolver.Get(2, nextPlayer: FourthAudioInstructionViewModel);
         SecondAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: ThirdAudioInstructionViewModel);
         FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
+        VolumeCheckAudioInstructionViewModel = audioResolver.GetVolumeCheck(FirstAudioInstructionViewModel);
     }
 
     public string DominantHandInstrumental { get; }
@@ -54,6 +55,7 @@ public class PptInstructionsDominantHandFirstViewModel : ViewModelBase, IInstruc
         $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
         $" Jste připraven/a?“";
 
+    public InstructionPlayerViewModel VolumeCheckAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }

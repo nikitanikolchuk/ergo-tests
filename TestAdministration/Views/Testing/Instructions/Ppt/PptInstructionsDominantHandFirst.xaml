@@ -66,6 +66,14 @@
                 Source="{Binding ImagePath}" />
         </Grid>
 
+        <ui:TextBlock 
+            Style="{StaticResource InstructionTextStyle}"
+            Text="Nejprve nastavte hlasitost reproduktorů tak, aby to vyhovovalo vám i testované osobě." />
+
+        <ContentPresenter
+            Margin="{StaticResource AudioPlayerMargin}"
+            Content="{Binding VolumeCheckAudioInstructionViewModel}" />
+
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Vyzvěte probanda, ať se posadí ke stolu na pevnou židli. Sami se posaďte naproti němu. Výšku stolu nastavte
             tak, aby na něm mohl mít položenou alespoň polovinu předloktí za vzpřímeného sedu. Desku umístěte na stůl

@@ -17,6 +17,9 @@ public class AudioInstructionResolver(
     int trial
 )
 {
+    public InstructionPlayerViewModel GetVolumeCheck(InstructionPlayerViewModel? nextPlayer = null) =>
+        new(audioService, AudioInstructionService.VolumeCheckFilePath, nextPlayer);
+
     public InstructionPlayerViewModel Get(
         int index,
         bool isGendered = false,
