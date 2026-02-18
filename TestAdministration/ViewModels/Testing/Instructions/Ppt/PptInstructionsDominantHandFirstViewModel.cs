@@ -30,12 +30,12 @@ public class PptInstructionsDominantHandFirstViewModel : ViewModelBase, IInstruc
         var imageSuffix = dominantHand == Hand.Right ? "Right" : "Left";
         ImagePath = $"{ResourcesPath}/Ppt{imageSuffix}.jpg";
 
-        FifthAudioInstructionViewModel = audioResolver.Get(4);
-        FourthAudioInstructionViewModel = audioResolver.Get(3, true, nextPlayer: FifthAudioInstructionViewModel);
-        ThirdAudioInstructionViewModel = audioResolver.Get(2, nextPlayer: FourthAudioInstructionViewModel);
-        SecondAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: ThirdAudioInstructionViewModel);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
-        VolumeCheckAudioInstructionViewModel = audioResolver.GetVolumeCheck(FirstAudioInstructionViewModel);
+        SixthAudioInstructionViewModel = audioResolver.Get(4);
+        FifthAudioInstructionViewModel = audioResolver.Get(3, true, nextPlayer: SixthAudioInstructionViewModel);
+        FourthAudioInstructionViewModel = audioResolver.Get(2, nextPlayer: FifthAudioInstructionViewModel);
+        ThirdAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: FourthAudioInstructionViewModel);
+        SecondAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.GetVolumeCheck(SecondAudioInstructionViewModel);
     }
 
     public string DominantHandInstrumental { get; }
@@ -55,12 +55,12 @@ public class PptInstructionsDominantHandFirstViewModel : ViewModelBase, IInstruc
         $" otvorem. Pracujte co nejrychleji dokážete, dokud neřeknu: „Stop!“. Položte obě ruce po stranách desky." +
         $" Jste připraven/a?“";
 
-    public InstructionPlayerViewModel VolumeCheckAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FourthAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FifthAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel SixthAudioInstructionViewModel { get; }
 
     private string UppercaseDominantHandInstrumental { get; }
     private string DominantHandGenitive { get; }

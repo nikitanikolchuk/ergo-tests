@@ -41,7 +41,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding VolumeCheckAudioInstructionViewModel}" />
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Run Text="{Binding TopText,Mode=OneWay}" />
@@ -53,7 +53,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding FirstAudioInstructionViewModel}" />
+            Content="{Binding SecondAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Pak probandovi
@@ -68,7 +68,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding SecondAudioInstructionViewModel}" />
+            Content="{Binding ThirdAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Pak
@@ -84,7 +84,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding ThirdAudioInstructionViewModel}" />
+            Content="{Binding FourthAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:

@@ -14,15 +14,15 @@ public class BbtInstructionsDominantPracticeViewModel : ViewModelBase, IInstruct
         var imageSuffix = dominantHand == Hand.Right ? "Right" : "Left";
         ImagePath = $"{ResourcesPath}/Bbt{imageSuffix}.jpg";
         
-        SecondAudioInstructionViewModel = audioResolver.Get(1, true);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: SecondAudioInstructionViewModel);
-        VolumeCheckAudioInstructionViewModel = audioResolver.GetVolumeCheck(FirstAudioInstructionViewModel);
+        ThirdAudioInstructionViewModel = audioResolver.Get(1, true);
+        SecondAudioInstructionViewModel = audioResolver.Get(0, true, nextPlayer: ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.GetVolumeCheck(SecondAudioInstructionViewModel);
     }
 
     public string DominantHandAcronym { get; }
     public string ImagePath { get; }
     public string DominantHand { get; }
-    public InstructionPlayerViewModel VolumeCheckAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
 }

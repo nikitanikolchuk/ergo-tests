@@ -28,10 +28,10 @@ public class NhptInstructionsDominantPracticeViewModel : ViewModelBase, IInstruc
         var imageSuffix = dominantHand == Hand.Right ? "Right" : "Left";
         ImagePath = $"{ResourcesPath}/Nhpt{imageSuffix}.jpg";
 
-        ThirdAudioInstructionViewModel = audioResolver.Get(2, true);
-        SecondAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: ThirdAudioInstructionViewModel);
-        FirstAudioInstructionViewModel = audioResolver.Get(0, trialCount: trialCount, nextPlayer: SecondAudioInstructionViewModel);
-        VolumeCheckAudioInstructionViewModel = audioResolver.GetVolumeCheck(FirstAudioInstructionViewModel);
+        FourthAudioInstructionViewModel = audioResolver.Get(2, true);
+        ThirdAudioInstructionViewModel = audioResolver.Get(1, nextPlayer: FourthAudioInstructionViewModel);
+        SecondAudioInstructionViewModel = audioResolver.Get(0, trialCount: trialCount, nextPlayer: ThirdAudioInstructionViewModel);
+        FirstAudioInstructionViewModel = audioResolver.GetVolumeCheck(SecondAudioInstructionViewModel);
     }
 
     public string TopText =>
@@ -48,10 +48,10 @@ public class NhptInstructionsDominantPracticeViewModel : ViewModelBase, IInstruc
     public string DominantHandAcronym { get; }
     public string ImagePath { get; }
 
-    public InstructionPlayerViewModel VolumeCheckAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel FirstAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel SecondAudioInstructionViewModel { get; }
     public InstructionPlayerViewModel ThirdAudioInstructionViewModel { get; }
+    public InstructionPlayerViewModel FourthAudioInstructionViewModel { get; }
 
     private string DominantHand { get; }
     private string NonDominantHand { get; }

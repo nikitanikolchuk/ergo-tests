@@ -72,7 +72,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding VolumeCheckAudioInstructionViewModel}" />
+            Content="{Binding FirstAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Vyzvěte probanda, ať se posadí ke stolu na pevnou židli. Sami se posaďte naproti němu. Výšku stolu nastavte
@@ -105,7 +105,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding FirstAudioInstructionViewModel}" />
+            Content="{Binding SecondAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span FontWeight="Bold" TextDecorations="Underline">
@@ -134,7 +134,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding SecondAudioInstructionViewModel}" />
+            Content="{Binding ThirdAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             <Span Style="{StaticResource PhysicalInstructionSpanStyle}">Opravte veškeré chyby</Span>
@@ -154,7 +154,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding ThirdAudioInstructionViewModel}" />
+            Content="{Binding FourthAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Poté, co proband dokončí tento úkol, řekněte / přehrajte nahrávku:
@@ -166,7 +166,7 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding FourthAudioInstructionViewModel}" />
+            Content="{Binding FifthAudioInstructionViewModel}" />
 
         <ui:TextBlock Style="{StaticResource InstructionTextStyle}">
             Řekněte:
@@ -194,6 +194,6 @@
 
         <ContentPresenter
             Margin="{StaticResource AudioPlayerMargin}"
-            Content="{Binding FifthAudioInstructionViewModel}" />
+            Content="{Binding SixthAudioInstructionViewModel}" />
     </StackPanel>
 </UserControl>
